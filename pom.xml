@@ -11,7 +11,7 @@
 	
 	<properties>
 	    <eclipselink-version>2.5.0</eclipselink-version>
-		<glassfish-home>/home/vinicius/dev/tools/glassfish/</glassfish-home>
+		<glassfish-home>/home/livraria/dev/tools/glassfish/</glassfish-home>
 		<javaee-api-version>7.0</javaee-api-version>
 		<javase-api-version>1.7</javase-api-version>
 		<junit-version>4.11</junit-version>
