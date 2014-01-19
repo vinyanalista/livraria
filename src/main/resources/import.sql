@@ -1,0 +1,1 @@
+-- Quaisquer registros que devem ser inseridos no banco de dados durante a instalação da aplicação devem ser colocados aqui 

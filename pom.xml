@@ -1,41 +1,113 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>br.com.ufs</groupId>
+	<groupId>br.ufs</groupId>
 	<artifactId>livraria</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>livraria Maven Webapp</name>
+	<name>Livraria</name>
 	<url>http://maven.apache.org</url>
+	
+	<properties>
+	    <eclipselink-version>2.5.0</eclipselink-version>
+		<glassfish-home>/home/vinicius/dev/tools/glassfish/</glassfish-home>
+		<javaee-api-version>7.0</javaee-api-version>
+		<javase-api-version>1.7</javase-api-version>
+		<junit-version>4.11</junit-version>
+		<maven-compiler-plugin-version>2.5.1</maven-compiler-plugin-version>
+		<maven-glassfish-plugin-version>2.1</maven-glassfish-plugin-version>
+		<maven-war-plugin-version>2.2</maven-war-plugin-version>
+		<postgresql-version>9.3-1100-jdbc41</postgresql-version>
+		<!-- <primefaces-version>4.0</primefaces-version> -->
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
+	</properties>
+	
 	<dependencies>
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
-			<version>7.0</version>
+			<version>${javaee-api-version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>org.eclipse.persistence.jpa</artifactId>
+			<version>${eclipselink-version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>${postgresql-version}</version>
+		</dependency>
+		<!-- <dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
-			<version>4.0</version>
+			<version>${primefaces-version}</version>
+		</dependency> -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit-version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	<repositories>
+	
+	<!-- <repositories>
 		<repository>
 			<id>prime-repo</id>
 			<name>PrimeFaces Maven Repository</name>
 			<url>http://repository.primefaces.org</url>
 			<layout>default</layout>
 		</repository>
-	</repositories>
+	</repositories> -->
+	
 	<build>
 		<finalName>livraria</finalName>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.4</version>
+				<version>${maven-compiler-plugin-version}</version>
+				<inherited>true</inherited>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>${javase-api-version}</source>
+					<optimize>true</optimize>
+					<target>${javase-api-version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>${maven-war-plugin-version}</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.glassfish.maven.plugin</groupId>
+				<artifactId>maven-glassfish-plugin</artifactId>
+				<version>${maven-glassfish-plugin-version}</version>
+				<configuration>
+					<glassfishDirectory>${glassfish-home}</glassfishDirectory>
+					<user>admin</user>
+					<adminPassword>123456</adminPassword>
+					<domain>
+						<name>livraria</name>
+						<adminPort>4848</adminPort>
+						<httpPort>8080</httpPort>
+					</domain>
+					<autocreate>true</autocreate>
+					<components>
+						<component>
+							<name>${project.artifactId}</name>
+							<artifact>${project.build.directory}/${project.build.finalName}.war</artifact>
+						</component>
+					</components>
+					<debug>true</debug>
+			        <echo>true</echo>
 				</configuration>
 			</plugin>
 		</plugins>
