@@ -1,11 +1,354 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
-      
-	<h:head />
-	<h:body>
-		<p:clock autoSync="true" />
-		<p:editor value="HELLO WORLD" />
-	</h:body>
-      
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/WEB-INF/template_cliente.xhtml">
+	<ui:define name="titulo">SIGELI - Página Inicial</ui:define>
+	<ui:define name="conteudo">
+		<div class="well well-small">
+			<h4>
+				Featured Products <small class="pull-right">200+ featured
+					products</small>
+			</h4>
+			<div class="row-fluid">
+				<div id="featured" class="carousel slide">
+					<div class="carousel-inner">
+						<div class="item">
+							<ul class="thumbnails">
+								<li class="span3">
+									<div class="thumbnail">
+										<i class="tag"></i> <a href="product_details.html"><img
+											src="#{resource['cliente:images/products/b1.jpg']}" alt="" /></a>
+										<div class="caption">
+											<h5>Product name</h5>
+											<h4>
+												<a class="btn" href="product_details.html">VIEW</a> <span
+													class="pull-right">$222.00</span>
+											</h4>
+										</div>
+									</div>
+								</li>
+								<li class="span3">
+									<div class="thumbnail">
+										<i class="tag"></i> <a href="product_details.html"><img
+											src="#{resource['cliente:images/products/b2.jpg']}" alt="" /></a>
+										<div class="caption">
+											<h5>Product name</h5>
+											<h4>
+												<a class="btn" href="product_details.html">VIEW</a> <span
+													class="pull-right">$222.00</span>
+											</h4>
+										</div>
+									</div>
+								</li>
+								<li class="span3">
+									<div class="thumbnail">
+										<i class="tag"></i> <a href="product_details.html"><img
+											src="#{resource['cliente:images/products/b3.jpg']}" alt="" /></a>
+										<div class="caption">
+											<h5>Product name</h5>
+											<h4>
+												<a class="btn" href="product_details.html">VIEW</a> <span
+													class="pull-right">$222.00</span>
+											</h4>
+										</div>
+									</div>
+								</li>
+								<li class="span3">
+									<div class="thumbnail">
+										<i class="tag"></i> <a href="product_details.html"><img
+											src="#{resource['cliente:images/products/b4.jpg']}" alt="" /></a>
+										<div class="caption">
+											<h5>Product name</h5>
+											<h4>
+												<a class="btn" href="product_details.html">VIEW</a> <span
+													class="pull-right">$222.00</span>
+											</h4>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="item active">
+							<ul class="thumbnails">
+								<li class="span3">
+									<div class="thumbnail">
+										<i class="tag"></i> <a href="product_details.html"><img
+											src="#{resource['cliente:images/products/5.jpg']}" alt="" /></a>
+										<div class="caption">
+											<h5>Product name</h5>
+											<h4>
+												<a class="btn" href="product_details.html">VIEW</a> <span
+													class="pull-right">$222.00</span>
+											</h4>
+										</div>
+									</div>
+								</li>
+								<li class="span3">
+									<div class="thumbnail">
+										<i class="tag"></i> <a href="product_details.html"><img
+											src="#{resource['cliente:images/products/6.jpg']}" alt="" /></a>
+										<div class="caption">
+											<h5>Product name</h5>
+											<h4>
+												<a class="btn" href="product_details.html">VIEW</a> <span
+													class="pull-right">$222.00</span>
+											</h4>
+										</div>
+									</div>
+								</li>
+								<li class="span3">
+									<div class="thumbnail">
+										<a href="product_details.html"><img
+											src="#{resource['cliente:images/products/7.jpg']}" alt="" /></a>
+										<div class="caption">
+											<h5>Product name</h5>
+											<h4>
+												<a class="btn" href="product_details.html">VIEW</a> <span
+													class="pull-right">$222.00</span>
+											</h4>
+										</div>
+									</div>
+								</li>
+								<li class="span3">
+									<div class="thumbnail">
+										<a href="product_details.html"><img
+											src="#{resource['cliente:images/products/8.jpg']}" alt="" /></a>
+										<div class="caption">
+											<h5>Product name</h5>
+											<h4>
+												<a class="btn" href="product_details.html">VIEW</a> <span
+													class="pull-right">$222.00</span>
+											</h4>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="item">
+							<ul class="thumbnails">
+								<li class="span3">
+									<div class="thumbnail">
+										<a href="product_details.html"><img
+											src="#{resource['cliente:images/products/9.jpg']}" alt="" /></a>
+										<div class="caption">
+											<h5>Product name</h5>
+											<h4>
+												<a class="btn" href="product_details.html">VIEW</a> <span
+													class="pull-right">$222.00</span>
+											</h4>
+										</div>
+									</div>
+								</li>
+								<li class="span3">
+									<div class="thumbnail">
+										<a href="product_details.html"><img
+											src="#{resource['cliente:images/products/10.jpg']}" alt="" /></a>
+										<div class="caption">
+											<h5>Product name</h5>
+											<h4>
+												<a class="btn" href="product_details.html">VIEW</a> <span
+													class="pull-right">$222.00</span>
+											</h4>
+										</div>
+									</div>
+								</li>
+								<li class="span3">
+									<div class="thumbnail">
+										<a href="product_details.html"><img
+											src="#{resource['cliente:images/products/11.jpg']}" alt="" /></a>
+										<div class="caption">
+											<h5>Product name</h5>
+											<h4>
+												<a class="btn" href="product_details.html">VIEW</a> <span
+													class="pull-right">$222.00</span>
+											</h4>
+										</div>
+									</div>
+								</li>
+								<li class="span3">
+									<div class="thumbnail">
+										<a href="product_details.html"><img
+											src="#{resource['cliente:images/products/1.jpg']}" alt="" /></a>
+										<div class="caption">
+											<h5>Product name</h5>
+											<h4>
+												<a class="btn" href="product_details.html">VIEW</a> <span
+													class="pull-right">$222.00</span>
+											</h4>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="item">
+							<ul class="thumbnails">
+								<li class="span3">
+									<div class="thumbnail">
+										<a href="product_details.html"><img
+											src="#{resource['cliente:images/products/2.jpg']}" alt="" /></a>
+										<div class="caption">
+											<h5>Product name</h5>
+											<h4>
+												<a class="btn" href="product_details.html">VIEW</a> <span
+													class="pull-right">$222.00</span>
+											</h4>
+										</div>
+									</div>
+								</li>
+								<li class="span3">
+									<div class="thumbnail">
+										<a href="product_details.html"><img
+											src="#{resource['cliente:images/products/3.jpg']}" alt="" /></a>
+										<div class="caption">
+											<h5>Product name</h5>
+											<h4>
+												<a class="btn" href="product_details.html">VIEW</a> <span
+													class="pull-right">$222.00</span>
+											</h4>
+										</div>
+									</div>
+								</li>
+								<li class="span3">
+									<div class="thumbnail">
+										<a href="product_details.html"><img
+											src="#{resource['cliente:images/products/4.jpg']}" alt="" /></a>
+										<div class="caption">
+											<h5>Product name</h5>
+											<h4>
+												<a class="btn" href="product_details.html">VIEW</a> <span
+													class="pull-right">$222.00</span>
+											</h4>
+										</div>
+									</div>
+								</li>
+								<li class="span3">
+									<div class="thumbnail">
+										<a href="product_details.html"><img
+											src="#{resource['cliente:images/products/5.jpg']}" alt="" /></a>
+										<div class="caption">
+											<h5>Product name</h5>
+											<h4>
+												<a class="btn" href="product_details.html">VIEW</a> <span
+													class="pull-right">$222.00</span>
+											</h4>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<a class="left carousel-control" href="#featured" data-slide="prev">&lt;</a>
+					<a class="right carousel-control" href="#featured"
+						data-slide="next">&gt;</a>
+				</div>
+			</div>
+		</div>
+		<h4>Latest Products</h4>
+		<ul class="thumbnails">
+			<li class="span3">
+				<div class="thumbnail">
+					<a href="product_details.html"><img
+						src="#{resource['cliente:images/products/6.jpg']}" alt="" /></a>
+					<div class="caption">
+						<h5>Product name</h5>
+						<p>Lorem Ipsum is simply dummy text.</p>
+
+						<h4 style="text-align: center">
+							<a class="btn" href="product_details.html"> <i
+								class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
+								class="icon-shopping-cart"></i></a> <a class="btn btn-primary"
+								href="#">$222.00</a>
+						</h4>
+					</div>
+				</div>
+			</li>
+			<li class="span3">
+				<div class="thumbnail">
+					<a href="product_details.html"><img
+						src="#{resource['cliente:images/products/7.jpg']}" alt="" /></a>
+					<div class="caption">
+						<h5>Product name</h5>
+						<p>Lorem Ipsum is simply dummy text.</p>
+						<h4 style="text-align: center">
+							<a class="btn" href="product_details.html"> <i
+								class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
+								class="icon-shopping-cart"></i></a> <a class="btn btn-primary"
+								href="#">$222.00</a>
+						</h4>
+					</div>
+				</div>
+			</li>
+			<li class="span3">
+				<div class="thumbnail">
+					<a href="product_details.html"><img
+						src="#{resource['cliente:images/products/8.jpg']}" alt="" /></a>
+					<div class="caption">
+						<h5>Product name</h5>
+						<p>Lorem Ipsum is simply dummy text.</p>
+						<h4 style="text-align: center">
+							<a class="btn" href="product_details.html"> <i
+								class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
+								class="icon-shopping-cart"></i></a> <a class="btn btn-primary"
+								href="#">$222.00</a>
+						</h4>
+					</div>
+				</div>
+			</li>
+			<li class="span3">
+				<div class="thumbnail">
+					<a href="product_details.html"><img
+						src="#{resource['cliente:images/products/9.jpg']}" alt="" /></a>
+					<div class="caption">
+						<h5>Product name</h5>
+						<p>Lorem Ipsum is simply dummy text.</p>
+						<h4 style="text-align: center">
+							<a class="btn" href="product_details.html"> <i
+								class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
+								class="icon-shopping-cart"></i></a> <a class="btn btn-primary"
+								href="#">$222.00</a>
+						</h4>
+					</div>
+				</div>
+			</li>
+			<li class="span3">
+				<div class="thumbnail">
+					<a href="product_details.html"><img
+						src="#{resource['cliente:images/products/10.jpg']}" alt="" /></a>
+					<div class="caption">
+						<h5>Product name</h5>
+						<p>Lorem Ipsum is simply dummy text.</p>
+						<h4 style="text-align: center">
+							<a class="btn" href="product_details.html"> <i
+								class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
+								class="icon-shopping-cart"></i></a> <a class="btn btn-primary"
+								href="#">$222.00</a>
+						</h4>
+					</div>
+				</div>
+			</li>
+			<li class="span3">
+				<div class="thumbnail">
+					<a href="product_details.html"><img
+						src="#{resource['cliente:images/products/11.jpg']}" alt="" /></a>
+					<div class="caption">
+						<h5>Product name</h5>
+						<p>Lorem Ipsum is simply dummy text.</p>
+						<h4 style="text-align: center">
+							<a class="btn" href="product_details.html"> <i
+								class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
+								class="icon-shopping-cart"></i></a> <a class="btn btn-primary"
+								href="#">$222.00</a>
+						</h4>
+					</div>
+				</div>
+			</li>
+		</ul>
+
+
+
+	</ui:define>
+</ui:composition>
 </html>
