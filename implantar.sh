@@ -5,5 +5,4 @@ echo -e "***********************************************************************
 mvn clean compile package install
 mvn glassfish:undeploy
 mvn glassfish:deploy
-mvn glassfish:redeploy
 echo -e "\nA aplicacao ja pode ser acessada pelo endereco http://localhost:8080/livraria/"

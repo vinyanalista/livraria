@@ -3,10 +3,8 @@ package br.ufs.livraria.dao;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.ejb.Stateless;
 import javax.persistence.*;
 
-@Stateless
 public abstract class DAO<Entidade> implements Serializable {
 	protected static final long serialVersionUID = 1L;
 
