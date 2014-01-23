@@ -8,8 +8,12 @@ import javax.persistence.*;
 @Entity
 public class Fornecedor implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
+	@GeneratedValue
+	private Integer id;
+
+	@Column(unique = true)
 	private String cnpj;
 
 	private String telefone;
@@ -20,6 +24,7 @@ public class Fornecedor implements Serializable {
 	@JoinColumn(name = "endereco_id", nullable = false)
 	private Endereco endereco;
 
+	@Column(nullable = false)
 	private String nome;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fornecedor", cascade = { CascadeType.REMOVE })
@@ -28,6 +33,10 @@ public class Fornecedor implements Serializable {
 	public Fornecedor() {
 	}
 
+	public Integer getId() {
+		return id;
+	}
+	
 	public String getCnpj() {
 		return cnpj;
 	}
@@ -52,6 +61,10 @@ public class Fornecedor implements Serializable {
 		return compras;
 	}
 
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
