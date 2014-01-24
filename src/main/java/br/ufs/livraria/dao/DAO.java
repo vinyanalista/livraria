@@ -35,5 +35,7 @@ public abstract class DAO<Entidade> implements Serializable {
 						+ " entidade", classeDaEntidade).getResultList();
 	}
 
-	public abstract void remover(Entidade entidade);
+	public void remover(int id){
+		entityManager.remove(entityManager.find(classeDaEntidade, id));
+	};
 }
