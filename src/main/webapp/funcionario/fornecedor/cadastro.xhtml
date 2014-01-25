@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<f:metadata>
+	<f:viewParam name="id" value="#{fornecedorMB.idDoFornecedor}" />
+	<f:viewAction action="#{fornecedorMB.carregarFornecedor}"/>
+</f:metadata>
+<ui:composition template="/WEB-INF/template_funcionario.xhtml">
+	<ui:define name="titulo">SIGELI - Acesso do Funcionário - Fornecedor - Cadastro</ui:define>
+	<ui:define name="main-bar">
+		<h3>
+			<i class="fa fa-truck"></i>Fornecedor
+		</h3>
+	</ui:define>
+	<ui:define name="conteudo">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="box">
+					<header>
+					<div class="icons">
+						<i class="fa fa-edit"></i>
+					</div>
+					<h5>
+						<h:outputText value="Cadastrar"
+							rendered="#{fornecedorMB.cadastro}" />
+						<h:outputText value="Editar"
+							rendered="#{not fornecedorMB.cadastro}" />
+					</h5>
+					</header>
+					<div id="collapse2" class="body in" style="height: auto;">
+						<form jsf:id="form" class="form-horizontal inline-validate">
+							<h:messages/>
+							<h4>Identificação</h4>
+							<div class="form-group">
+								<label class="control-label col-lg-4" for="nome">Nome</label>
+								<div class="col-lg-8">
+									<input jsf:id="nome" name="nome" jsf:value="#{fornecedorMB.fornecedor.nome}"
+										type="text" placeholder="Nome"
+										class="form-control required" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label col-lg-4" for="cnpj">CNPJ</label>
+								<div class="col-lg-8">
+									<input jsf:id="cnpj" name="cnpj" jsf:value="#{fornecedorMB.fornecedor.cnpj}"
+										type="text" placeholder="CNPJ"
+										class="form-control required" />
+								</div>
+							</div>
+
+							<h4>Contato</h4>
+
+							<div class="form-group">
+								<label class="control-label col-lg-4" for="telefone">Telefone</label>
+								<div class="col-lg-8">
+									<input jsf:id="telefone" name="telefone"
+										jsf:value="#{fornecedorMB.fornecedor.telefone}" type="text"
+										placeholder="Telefone" class="form-control"
+										data-mask="(99) 9999-9999" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label col-lg-4" for="email">E-mail</label>
+								<div class="col-lg-8">
+									<input jsf:id="email" name="email"
+										jsf:value="#{fornecedorMB.fornecedor.email}" type="text"
+										placeholder="E-mail"
+										class="form-control email" />
+								</div>
+							</div>
+
+							<h4>Endereço</h4>
+
+							<div class="form-group">
+								<label class="control-label col-lg-4" for="logradouro">Logradouro</label>
+								<div class="col-lg-8">
+									<input jsf:id="logradouro" name="logradouro"
+										jsf:value="#{fornecedorMB.fornecedor.endereco.logradouro}"
+										type="text" placeholder="Logradouro" class="form-control" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label col-lg-4" for="numero">Número</label>
+								<div class="col-lg-8">
+									<input jsf:id="numero" name="numero"
+										jsf:value="#{fornecedorMB.fornecedor.endereco.numero}" type="text"
+										placeholder="Número"
+										class="form-control digits" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label col-lg-4" for="bairro">Bairro</label>
+								<div class="col-lg-8">
+									<input jsf:id="bairro" name="bairro"
+										jsf:value="#{fornecedorMB.fornecedor.endereco.bairro}" type="text"
+										placeholder="Bairro" class="form-control" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label col-lg-4" for="cidade">Cidade</label>
+								<div class="col-lg-8">
+									<input jsf:id="cidade" name="cidade"
+										jsf:value="#{fornecedorMB.fornecedor.endereco.cidade}" type="text"
+										placeholder="Cidade" class="form-control" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label col-lg-4" for="estado">Estado</label>
+								<div class="col-lg-8">
+									<input jsf:id="estado" name="estado"
+										jsf:value="#{fornecedorMB.fornecedor.endereco.estado}" type="text"
+										placeholder="Estado" class="form-control" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label col-lg-4" for="cep">CEP</label>
+								<div class="col-lg-8">
+									<input jsf:id="cep" name="cep"
+										jsf:value="#{fornecedorMB.fornecedor.endereco.cep}" type="text"
+										placeholder="CEP" class="form-control" data-mask="99999-999" />
+								</div>
+							</div>
+							<div class="form-actions no-margin-bottom">
+								<button jsf:id="cancelar" class="btn btn-default" jsf:action="index.jsf" jsf:immediate="true">Cancelar</button>
+								<button jsf:id="salvar" class="btn btn-primary" jsf:action="#{fornecedorMB.salvar()}">Salvar</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<h:outputStylesheet library="funcionario" name="css/funcionario.css" />
+		<h:outputScript library="funcionario" name="js/funcionario.js" />
+	</ui:define>
+</ui:composition>
+</html>

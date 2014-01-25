@@ -31,6 +31,7 @@ public class Fornecedor implements Serializable {
 	private List<Compra> compras;
 	
 	public Fornecedor() {
+		endereco = new Endereco();
 	}
 
 	public Integer getId() {

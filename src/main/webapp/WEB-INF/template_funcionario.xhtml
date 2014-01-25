@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
   xmlns:f="http://java.sun.com/jsf/core"
   xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:jsf="http://xmlns.jcp.org/jsf"
   xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -25,7 +27,12 @@
     <!-- Metis core stylesheet -->
     <h:outputStylesheet library="funcionario" name="css/main.css" />
     <h:outputStylesheet library="funcionario" name="css/theme.css" />
-
+    
+    <h:outputStylesheet library="funcionario" name="lib/validationengine/css/validationEngine.jquery.css" />
+    <h:outputStylesheet library="funcionario" name="lib/jqueryui/1.10.3/themes/flick/jquery-ui.css" />
+    <h:outputStylesheet library="funcionario" name="lib/datatables/css/demo_page.css" />
+    <h:outputStylesheet library="funcionario" name="lib/datatables/css/DT_bootstrap.css" />
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,6 +44,20 @@
 
     <!--Modernizr 3.0-->
     <h:outputScript library="funcionario" name="lib/modernizr-build.min.js" />
+    
+    <h:outputScript library="funcionario" name="lib/jquery.min.js" />
+    <h:outputScript library="funcionario" name="lib/bootstrap/js/bootstrap.min.js" />
+    <h:outputScript library="funcionario" name="lib/jqueryui/1.10.3/jquery-ui.min.js" />
+    <h:outputScript library="funcionario" name="lib/validationengine/js/jquery.validationEngine.js" />
+    <h:outputScript library="funcionario" name="lib/validationengine/js/languages/jquery.validationEngine-pt_BR.js" />
+    <h:outputScript library="funcionario" name="lib/jquery-validation-1.11.1/dist/jquery.validate.min.js" />
+    <h:outputScript library="funcionario" name="lib/jquery-validation-1.11.1/localization/messages_pt_BR.js" />
+    <h:outputScript library="funcionario" name="lib/datatables/jquery.dataTables.js" />
+	<h:outputScript library="funcionario" name="lib/datatables/DT_bootstrap.js" />
+	<h:outputScript library="funcionario" name="lib/tablesorter/js/jquery.tablesorter.min.js" />
+  <h:outputScript library="funcionario" name="lib/jasny/js/jasny-bootstrap.min.js" />
+	<h:outputScript library="funcionario" name="js/main.js" />
+	<h:outputScript library="funcionario" name="js/comum.js" />
   </h:head>
   <h:body>
     <div id="wrap">
@@ -129,9 +150,8 @@
           </div>
 
           <!-- ."main-bar -->
-          <div class="main-bar">
-            <h3>
-              <i class="fa fa-home"></i>Metis</h3>
+          <div class="main-bar">  
+            <ui:insert name="main-bar" />
           </div><!-- /.main-bar -->
         </header>
 
@@ -175,6 +195,26 @@
               <li class="">
                 <a href="alterne.html">
                   <i class="fa fa-angle-right"></i>&nbsp;Alternative Style
+                </a> 
+              </li>
+            </ul>
+          </li>
+          
+          <li class="">
+            <a href="javascript:;">
+              <i class="fa fa-truck"></i>
+              <span class="link-title">Fornecedor</span> 
+              <span class="fa arrow"></span> 
+            </a> 
+            <ul>
+              <li class="">
+                <a href="#{request.contextPath}/funcionario/fornecedor/index.jsf">
+                  <i class="fa fa-angle-right"></i>&nbsp;Consultar
+                </a> 
+              </li>
+              <li class="">
+                <a href="#{request.contextPath}/funcionario/fornecedor/cadastro.jsf">
+                  <i class="fa fa-angle-right"></i>&nbsp;Cadastrar
                 </a> 
               </li>
             </ul>
@@ -358,11 +398,8 @@
       <div id="content">
         <div class="outer">
           <div class="inner">
-            <div class="col-lg-12">
-                <ui:insert name="conteudo" />  
-            </div>
+               <ui:insert name="conteudo" />  
           </div>
-
           <!-- end .inner -->
         </div>
 
@@ -395,10 +432,5 @@
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal --><!-- /#helpModal -->
-
-    <h:outputScript library="funcionario" name="lib/jquery.min.js" />
-    <h:outputScript library="funcionario" name="lib/bootstrap/js/bootstrap.min.js" />
-    <!--<h:outputScript library="funcionario" name="js/style-switcher.js" />-->
-    <h:outputScript library="funcionario" name="js/main.min.js" />
   </h:body>
 </html>

@@ -17,11 +17,14 @@
 		<junit-version>4.11</junit-version>
 		<maven-compiler-plugin-version>2.5.1</maven-compiler-plugin-version>
 		<maven-glassfish-plugin-version>2.1</maven-glassfish-plugin-version>
+		<maven-surefire-plugin-version>2.16</maven-surefire-plugin-version>
 		<maven-war-plugin-version>2.2</maven-war-plugin-version>
 		<postgresql-version>9.3-1100-jdbc41</postgresql-version>
 		<!-- <primefaces-version>4.0</primefaces-version> -->
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
+		<skip-tests>false</skip-tests>
+		<!-- <wildfly-maven-plugin-version>1.0.0.Beta1</wildfly-maven-plugin-version> -->
 	</properties>
 	
 	<dependencies>
@@ -80,6 +83,14 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven-surefire-plugin-version}</version>
+				<configuration>
+					<skipTests>${skip-tests}</skipTests>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>${maven-war-plugin-version}</version>
 				<configuration>
@@ -110,6 +121,11 @@
 			        <echo>true</echo>
 				</configuration>
 			</plugin>
+			<!-- <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>${wildfly-maven-plugin-version}</version>
+            </plugin> -->
 		</plugins>
 	</build>
 </project>
