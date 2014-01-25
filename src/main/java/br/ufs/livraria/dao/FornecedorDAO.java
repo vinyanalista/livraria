@@ -12,7 +12,6 @@ public class FornecedorDAO extends DAO<Fornecedor> {
 		super(Fornecedor.class);
 	}
 
-	@Override
 	public void remover(Fornecedor fornecedor) {
 		entityManager.remove(entityManager.find(Fornecedor.class,
 				fornecedor.getId()));
