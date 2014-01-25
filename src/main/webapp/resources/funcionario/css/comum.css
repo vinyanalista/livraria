@@ -1,0 +1,15 @@
+.actions {
+	display: table;
+	margin: auto;
+}
+
+.actions a {
+	color: #333;
+	float: left;
+	margin-right: 10px;
+	text-decoration: none;
+}
+
+#mensagens, #mensagens_jsf {
+	margin-top: 10px;
+}

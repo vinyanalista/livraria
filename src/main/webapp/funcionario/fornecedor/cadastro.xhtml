@@ -34,7 +34,6 @@
 					</header>
 					<div id="collapse2" class="body in" style="height: auto;">
 						<form jsf:id="form" class="form-horizontal inline-validate">
-							<h:messages/>
 							<h4>Identificação</h4>
 							<div class="form-group">
 								<label class="control-label col-lg-4" for="nome">Nome</label>
@@ -133,7 +132,7 @@
 								</div>
 							</div>
 							<div class="form-actions no-margin-bottom">
-								<button jsf:id="cancelar" class="btn btn-default" jsf:action="index.jsf" jsf:immediate="true">Cancelar</button>
+								<a jsf:id="cancelar" class="btn btn-default" jsf:action="index.jsf" jsf:immediate="true">Cancelar</a>
 								<button jsf:id="salvar" class="btn btn-primary" jsf:action="#{fornecedorMB.salvar()}">Salvar</button>
 							</div>
 						</form>

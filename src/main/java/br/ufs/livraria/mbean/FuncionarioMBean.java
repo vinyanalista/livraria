@@ -15,7 +15,7 @@ public class FuncionarioMBean {
 	@ManagedProperty("#{FuncionarioDAO}")
 	private FuncionarioDAO dao = new FuncionarioDAO();
 	
-	public int idFuncionarioSelected;
+	private int idFuncionarioSelected;
 	
 
 
