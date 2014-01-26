@@ -399,51 +399,17 @@
       <div id="content">
         <div class="outer">
           <div class="inner">
-					<div id="mensagens" jsf:rendered="#{!mensagensMB.vazio}">
-						<ui:repeat var="mensagem" value="#{mensagensMB.listaDeMensagens}">
-							<c:choose>
-								<c:when test="#{mensagem.tipo == MensagemTipo.SUCCESSO}">
-			                    	<c:set var="estiloDoAlerta" value="alert-success"/>
-			                    </c:when>
-			                    <c:when test="#{mensagem.tipo == MensagemTipo.INFO}">
-			                        <c:set var="estiloDoAlerta" value="alert-info"/>
-			                    </c:when>
-			                    <c:when test="#{mensagem.tipo == MensagemTipo.ADVERTENCIA}">
-			                        <c:set var="estiloDoAlerta" value="alert-warning"/>
-			                    </c:when>
-			                    <c:when test="#{mensagem.tipo== MensagemTipo.ERRO}">
-			                        <c:set var="estiloDoAlerta" value="alert-danger"/>
-			                    </c:when>
-							</c:choose>
-							<div class="alert #{estiloDoAlerta}">
-								<button type="button" class="close" data-dismiss="alert">&times;</button>
-								<h:outputText value="#{mensagem.conteudo}" />
-							</div>
-						</ui:repeat>
-					</div>
-					<div id="mensagens_jsf" jsf:rendered="#{!empty facesContext.messageList}">
-						<ui:repeat var="message" value="#{facesContext.messageList}">
-							<c:choose>
-								<c:when test="#{message.severity == FacesMessage.SEVERITY_INFO}">
-			                    	<c:set var="messageStyleClass" value="alert-info"/>
-			                    </c:when>
-			                    <c:when test="#{message.severity == FacesMessage.SEVERITY_WARN}">
-			                        <c:set var="messageStyleClass" value="alert-warning"/>
-			                    </c:when>
-			                    <c:when test="#{message.severity == FacesMessage.SEVERITY_ERROR}">
-			                        <c:set var="messageStyleClass" value="alert-danger"/>
-			                    </c:when>
-			                    <c:when test="#{message.severity == FacesMessage.SEVERITY_FATAL}">
-			                        <c:set var="messageStyleClass" value="alert-danger"/>
-			                    </c:when>
-							</c:choose>
-							<div class="alert #{messageStyleClass}">
-								<button type="button" class="close" data-dismiss="alert">&times;</button>
-								<h:outputText value="#{message.severity} - #{message.summary}" />
-							</div>
-						</ui:repeat>
-					</div>
-					<ui:insert name="conteudo" />  
+				<div id="mensagens">
+					<c:forEach items="#{mensagensMB.listaDeMensagens}" var="mensagem">
+						<div class="alert #{mensagem.tipo.classe}">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<h:outputText value="#{mensagem.conteudo}" />
+							<h:outputText value="Olá" />
+						</div>
+					</c:forEach>
+				</div>
+				<h:messages />
+				<ui:insert name="conteudo" />  
           </div>
           <!-- end .inner -->
         </div>

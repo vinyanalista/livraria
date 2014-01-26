@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import br.ufs.livraria.enumeration.MensagemTipo;
@@ -15,8 +17,6 @@ import br.ufs.livraria.modelo.Mensagem;
 public class MensagensMB implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private boolean vazio;
-	
 	private List<Mensagem> listaDeMensagens;
 	
 	public MensagensMB() {
@@ -25,7 +25,6 @@ public class MensagensMB implements Serializable {
 	
 	public void adicionarMensagem(Mensagem mensagem) {
 		listaDeMensagens.add(mensagem);
-		vazio = false;
 	}
 	
 	public void adicionarMensagem(MensagemTipo tipo, String conteudo) {
@@ -34,15 +33,24 @@ public class MensagensMB implements Serializable {
 	
 	private void esvaziar() {
 		listaDeMensagens = new ArrayList<Mensagem>();
-		vazio = true;
-	}
-	
-	public boolean isVazio() {
-		return vazio;
 	}
 	
 	public List<Mensagem> getListaDeMensagens() {
-		List<Mensagem> listaDeMensagens = this.listaDeMensagens;
+		List<Mensagem> listaDeMensagens = new ArrayList<Mensagem>();
+		for (FacesMessage facesMessage : FacesContext.getCurrentInstance().getMessageList()) {
+			MensagemTipo tipo;
+			if (facesMessage.getSeverity().getOrdinal() == FacesMessage.SEVERITY_WARN.getOrdinal()) {
+				tipo = MensagemTipo.ADVERTENCIA;
+			} else if (facesMessage.getSeverity().getOrdinal() == FacesMessage.SEVERITY_ERROR.getOrdinal()) {
+				tipo = MensagemTipo.ERRO;
+			} else if (facesMessage.getSeverity().getOrdinal() == FacesMessage.SEVERITY_FATAL.getOrdinal()) {
+				tipo = MensagemTipo.ERRO;
+			} else {
+				tipo = MensagemTipo.INFO;
+			}
+			listaDeMensagens.add(new Mensagem(tipo, facesMessage.getSummary()));
+		}
+		listaDeMensagens.addAll(this.listaDeMensagens);
 		esvaziar();
 		return listaDeMensagens;
 	}

@@ -6,10 +6,6 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<f:metadata>
-	<f:viewParam name="id" value="#{fornecedorMB.idDoFornecedor}" />
-	<f:viewAction action="#{fornecedorMB.carregarFornecedor}"/>
-</f:metadata>
 <ui:composition template="/WEB-INF/template_funcionario.xhtml">
 	<ui:define name="titulo">SIGELI - Acesso do Funcionário - Fornecedor - Cadastro</ui:define>
 	<ui:define name="main-bar">
@@ -29,12 +25,16 @@
 						<h:outputText value="Cadastrar"
 							rendered="#{fornecedorMB.cadastro}" />
 						<h:outputText value="Editar"
-							rendered="#{not fornecedorMB.cadastro}" />
+							rendered="#{!fornecedorMB.cadastro}" />
 					</h5>
 					</header>
 					<div id="collapse2" class="body in" style="height: auto;">
 						<form jsf:id="form" class="form-horizontal inline-validate">
+							<input type="hidden" value="#{fornecedorMB.fornecedor.id}" jsf:rendered="#{!fornecedorMB.cadastro}" />
+							<input type="hidden" value="#{fornecedorMB.fornecedor.endereco.id}" jsf:rendered="#{!fornecedorMB.cadastro}" />
+							
 							<h4>Identificação</h4>
+							
 							<div class="form-group">
 								<label class="control-label col-lg-4" for="nome">Nome</label>
 								<div class="col-lg-8">
@@ -131,9 +131,11 @@
 										placeholder="CEP" class="form-control" data-mask="99999-999" />
 								</div>
 							</div>
+							
 							<div class="form-actions no-margin-bottom">
 								<a jsf:id="cancelar" class="btn btn-default" jsf:action="index.jsf" jsf:immediate="true">Cancelar</a>
-								<button jsf:id="salvar" class="btn btn-primary" jsf:action="#{fornecedorMB.salvar()}">Salvar</button>
+								<button jsf:id="inserir" class="btn btn-primary" jsf:action="#{fornecedorMB.inserir()}" jsf:rendered="#{fornecedorMB.cadastro}">Salvar</button>
+								<button jsf:id="atualizar" class="btn btn-primary" jsf:action="#{fornecedorMB.atualizar()}" jsf:rendered="#{!fornecedorMB.cadastro}">Salvar</button>
 							</div>
 						</form>
 					</div>

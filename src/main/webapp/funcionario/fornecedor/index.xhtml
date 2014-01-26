@@ -4,6 +4,7 @@
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <ui:composition template="/WEB-INF/template_funcionario.xhtml">
 	<ui:define name="titulo">SIGELI - Acesso do Funcionário - Fornecedor</ui:define>
@@ -23,30 +24,36 @@
 					<h5>Consultar</h5>
 					</header>
 					<div id="collapse4" class="body">
-						<table id="dataTable"
-							class="table table-bordered table-condensed table-hover table-striped">
-							<thead>
-								<tr>
-									<th>Nome</th>
-									<th>CNPJ</th>
-									<th>Ações</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="#{fornecedorMB.fornecedores}" var="fornecedor">
+						<h:form>
+							<table id="dataTable"
+								class="table table-bordered table-condensed table-hover table-striped">
+								<thead>
 									<tr>
-										<td><h:outputText value="#{fornecedor.nome}" /></td>
-										<td><h:outputText value="#{fornecedor.cnpj}" /></td>
-										<td>
-											<div class="actions">
-												<a class="fa fa-pencil" href="cadastro.jsf?id=#{fornecedor.id}" title="Editar" data-toggle="tooltip"></a>
-												<a class="glyphicon glyphicon-remove" href="#{fornecedorMB.excluir(fornecedor.id)}" title="Excluir" data-toggle="tooltip"></a>
-											</div>
-										</td>
+										<th>Nome</th>
+										<th>CNPJ</th>
+										<th>Ações</th>
 									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
+								</thead>
+								<tbody>
+									<c:forEach items="#{fornecedorMB.listaDeFornecedores}" var="fornecedor">
+										<tr>
+											<td><h:outputText value="#{fornecedor.nome}" /></td>
+											<td><h:outputText value="#{fornecedor.cnpj}" /></td>
+											<td>
+												<div class="actions">
+													<a class="fa fa-pencil" jsf:action="cadastro.jsf" title="Editar" data-toggle="tooltip">
+														<f:setPropertyActionListener value="#{fornecedor.id}" target="#{fornecedorMB.id}"/>
+													</a>
+													<a class="glyphicon glyphicon-remove" jsf:action="#{fornecedorMB.excluir()}" title="Excluir" data-toggle="tooltip">
+														<f:setPropertyActionListener value="#{fornecedor.id}" target="#{fornecedorMB.id}"/>
+													</a>
+												</div>
+											</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</h:form>
 					</div>
 				</div>
 			</div>
