@@ -4,11 +4,10 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
 	version="2.1">
 	<persistence-unit name="livraria" transaction-type="JTA">
-		<jta-data-source>java:app/jdbc/livraria</jta-data-source>
+		<jta-data-source>java:jboss/datasources/livraria</jta-data-source>
 		<properties>
 			<property name="javax.persistence.schema-generation.database.action"
 				value="none" />
-			<property name="eclipselink.logging.level" value="INFO" />
 		</properties>
 	</persistence-unit>
 
@@ -34,7 +33,6 @@
 				value="drop-and-create" />
 			<property name="javax.persistence.sql-load-script-source"
 				value="import.sql" />
-			<property name="eclipselink.logging.level" value="INFO" />
 		</properties>
 	</persistence-unit>
 </persistence>
