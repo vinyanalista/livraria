@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 
 import br.ufs.livraria.bean.LoginInfo;
 import br.ufs.livraria.dao.UsuarioDAO;
-import br.ufs.livraria.modelo.Cliente;
 import br.ufs.livraria.modelo.Usuario;
 
 @Named
@@ -35,11 +34,9 @@ public class LoginMB implements Serializable {
 	
 	public String login() {
 		try {
-			if (/*usuarioDAO.verificarCredenciais(email, senha)*/ true) {
+			if (usuarioDAO.verificarCredenciais(email, senha)) {
 				addMessage("Login efetuado com sucesso", FacesMessage.SEVERITY_INFO);
-//				Usuario usuario = usuarioDAO.getByEmail(email);
-				Usuario usuario = new Cliente();
-				usuario.setNome("Gabriel");
+				Usuario usuario = usuarioDAO.getByEmail(email);
 				loginInfo.setUsuarioLogado(usuario);
 				return "index.jsf?faces-redirect=true";
 			} else {
