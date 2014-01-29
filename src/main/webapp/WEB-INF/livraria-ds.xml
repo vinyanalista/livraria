@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources xmlns="http://www.jboss.org/ironjacamar/schema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jboss.org/ironjacamar/schema http://docs.jboss.org/ironjacamar/schema/datasources_1_0.xsd">
+	<datasource jndi-name="java:jboss/datasources/livraria"
+		enabled="true" use-java-context="true"  pool-name="embeddedConnPool">
+		<connection-url>jdbc:postgresql://localhost:5432/livraria
+		</connection-url>
+		<driver>postgresql-9.3-1100-jdbc41.jar</driver>
+		<driver-class>org.postgresql.Driver</driver-class>
+		<security>
+			<user-name>postgres</user-name>
+			<password>postgres</password>
+		</security>
+	</datasource>
+</datasources>

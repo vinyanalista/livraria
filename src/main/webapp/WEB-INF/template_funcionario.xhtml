@@ -61,6 +61,7 @@
 	<h:outputScript library="javax.faces" name="jsf.js" target="head" />
 	<h:outputScript library="funcionario" name="js/comum.js" />
   </h:head>
+  <ui:debug hotkey="x" rendered="#{facesContext.application.projectStage == 'Development'}" />
   <h:body>
     <div id="wrap">
       <div id="top">
