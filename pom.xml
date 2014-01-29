@@ -196,8 +196,15 @@
 								<id>deploy</id>
 								<phase>install</phase>
 								<goals>
-									<goal>deploy</goal>
+									<goal>deploy-only</goal>
 								</goals>
+								<configuration>
+									<beforeDeployment>
+										<commands>
+											<command>deploy --force ${project.build.directory}/${project.build.finalName}/WEB-INF/lib/postgresql-${postgresql-version}.jar</command>
+										</commands>
+									</beforeDeployment>
+								</configuration>
 							</execution>
 						</executions>
 					</plugin>

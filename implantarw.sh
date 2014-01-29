@@ -1,5 +1,6 @@
 #!/bin/bash
-# Antes de executar esse script, iniciar o servidor e fazer deploy do driver JDBC do PostgreSQL
+# Antes de executar esse script, iniciar o servidor via:
+# $ sh ~/dev/tools/wildfly/bin/standalone.sh
 echo "*******************************************************************************"
 echo "Livraria"
 echo -e "*******************************************************************************\n"
