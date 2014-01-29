@@ -42,10 +42,10 @@
 											<td>
 												<div class="actions">
 													<a class="fa fa-pencil" jsf:action="cadastro.jsf" title="Editar" data-toggle="tooltip">
-														<f:setPropertyActionListener value="#{fornecedor.id}" target="#{fornecedorMB.id}"/>
+														<f:setPropertyActionListener target="#{fornecedorMB.fornecedor}" value="#{fornecedor}" />
 													</a>
 													<a class="glyphicon glyphicon-remove" jsf:action="#{fornecedorMB.excluir()}" title="Excluir" data-toggle="tooltip">
-														<f:setPropertyActionListener value="#{fornecedor.id}" target="#{fornecedorMB.id}"/>
+														<f:setPropertyActionListener target="#{fornecedorMB.fornecedor}" value="#{fornecedor}" />
 													</a>
 												</div>
 											</td>
