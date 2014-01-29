@@ -28,15 +28,15 @@
 							<thead>
 								<tr>
 									<th>Nome</th>
-									<th>CNPJ</th>
+									<th>Permissão</th>
 									<th>Ações</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="#{FuncionarioMB.Funcionarioes}" var="Funcionario">
+								<c:forEach items="#{FuncionarioMB.funcionarios}" var="Funcionario">
 									<tr>
 										<td><h:outputText value="#{Funcionario.nome}" /></td>
-										<td><h:outputText value="#{Funcionario.cnpj}" /></td>
+										<td><h:outputText value="#{Funcionario.permissao}" /></td>
 										<td>
 											<div class="actions">
 												<a class="fa fa-pencil" href="cadastro.jsf?id=#{Funcionario.id}" title="Editar" data-toggle="tooltip"></a>
