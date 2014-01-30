@@ -19,7 +19,7 @@
 	<h:outputStylesheet library="cliente" name="css/bootstrap-responsive.min.css" />
 	<h:outputStylesheet library="cliente" name="css/font-awesome.css" />
 	<!-- Google-code-prettify -->
-	<h:outputStylesheet library="js" name="google-code-prettify/prettify.css" />
+	<h:outputStylesheet library="cliente" name="js/google-code-prettify/prettify.css" />
 	
 	<h:outputStylesheet library="cliente" name="css/comum.css" />
 	<!-- fav and touch icons -->
@@ -36,6 +36,7 @@
 	<h:outputScript library="javax.faces" name="jsf.js" target="head" />
 	<h:outputScript library="cliente" name="js/comum.js" />
 </h:head>
+<ui:debug hotkey="x" rendered="#{facesContext.application.projectStage == 'Development'}" />
 <h:body>
 	<div id="header">
 		<div class="container">
@@ -45,15 +46,18 @@
 				</div>
 				<div class="span6">
 					<div class="pull-right">
-						<a href="product_summary.html"><span class="">Fr</span></a> <a
-							href="product_summary.html"><span class="">Es</span></a> <span
-							class="btn btn-mini">En</span> <a href="product_summary.html"><span>&pound;</span></a>
-						<span class="btn btn-mini">$155.00</span> <a
-							href="product_summary.html"><span class="">$</span></a> <a
-							href="product_summary.html"><span
-							class="btn btn-mini btn-primary"><i
-								class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your
-								cart </span> </a>
+						<a href="#{request.contextPath}/carrinho.jsf">
+							<span class="btn btn-mini btn-primary">
+								<i class="icon-shopping-cart icon-white"></i>
+								<h:outputText value="Sem itens no carrinho" rendered="#{carrinhoMB.quantidadeDeItens == 0}" />
+								<h:outputText value="#{carrinhoMB.quantidadeDeItens} itens no carrinho" rendered="#{carrinhoMB.quantidadeDeItens > 0}" />
+							</span>
+						</a>
+						<span class="btn btn-mini">
+							<h:outputText value="#{carrinhoMB.valorTotal}">
+								<f:convertNumber locale="pt_BR" type="currency" />
+							</h:outputText>
+						</span>
 					</div>
 				</div>
 			</div>
@@ -118,7 +122,7 @@
 		</div>
 	</div>
 	<!-- Header End====================================================================== -->
-	<div id="carouselBlk">
+	<!-- <div id="carouselBlk">
 		<div id="myCarousel" class="carousel slide">
 			<div class="carousel-inner">
 				<div class="item active">
@@ -200,16 +204,23 @@
 			<a class="right carousel-control" href="#myCarousel"
 				data-slide="next">&rsaquo;</a>
 		</div>
-	</div>
+	</div> -->
 	<div id="mainBody">
 		<div class="container">
 			<div class="row">
 				<!-- Sidebar ================================================== -->
 				<div id="sidebar" class="span3">
 					<div class="well well-small">
-						<a id="myCart" href="product_summary.html"><img
-							src="#{resource['cliente:images/ico-cart.png']}" alt="cart" />3 Items in
-							your cart <span class="badge badge-warning pull-right">$155.00</span></a>
+						<a id="myCart" href="#{request.contextPath}/carrinho.jsf">
+							<img src="#{resource['cliente:images/ico-cart.png']}" alt="cart" />
+							<h:outputText value="Sem itens no carrinho" rendered="#{carrinhoMB.quantidadeDeItens == 0}" />
+							<h:outputText value="#{carrinhoMB.quantidadeDeItens} itens no carrinho" rendered="#{carrinhoMB.quantidadeDeItens > 0}" />
+							<span class="badge badge-warning pull-right" jsf:rendered="#{carrinhoMB.quantidadeDeItens > 0}">
+								<h:outputText value="#{carrinhoMB.valorTotal}">
+									<f:convertNumber locale="pt_BR" type="currency" />
+								</h:outputText>
+							</span>
+						</a>
 					</div>
 					<ul id="sideManu" class="nav nav-tabs nav-stacked">
 						<li class="subMenu open"><a> ELECTRONICS [230]</a>
