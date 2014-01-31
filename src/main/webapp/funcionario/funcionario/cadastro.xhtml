@@ -6,15 +6,11 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<f:metadata>
-	<f:viewParam name="id" value="#{FuncionarioMB.idDoFuncionario}" />
-	<f:viewAction action="#{FuncionarioMB.carregarFuncionario}"/>
-</f:metadata>
 <ui:composition template="/WEB-INF/template_funcionario.xhtml">
 	<ui:define name="titulo">SIGELI - Acesso do Funcionário - Funcionario - Cadastro</ui:define>
 	<ui:define name="main-bar">
 		<h3>
-			<i class="fa fa-truck"></i>Funcionario
+			<i class="fa fa-"></i>Funcionario
 		</h3>
 	</ui:define>
 	<ui:define name="conteudo">
@@ -28,27 +24,53 @@
 					<h5>
 						<h:outputText value="Cadastrar"
 							rendered="#{FuncionarioMB.cadastro}" />
-						<h:outputText value="Editar"
-							rendered="#{not FuncionarioMB.cadastro}" />
+						<h:outputText value="Editar" rendered="#{!FuncionarioMB.cadastro}" />
 					</h5>
 					</header>
 					<div id="collapse2" class="body in" style="height: auto;">
 						<form jsf:id="form" class="form-horizontal inline-validate">
+							<input type="hidden" jsf:value="#{FuncionarioMB.funcionario.id}"
+								jsf:rendered="#{!FuncionarioMB.cadastro}" /> <input
+								type="hidden"
+								jsf:value="#{FuncionarioMB.funcionario.endereco.id}"
+								jsf:rendered="#{!FuncionarioMB.cadastro}" />
+
 							<h4>Identificação</h4>
+
 							<div class="form-group">
 								<label class="control-label col-lg-4" for="nome">Nome</label>
 								<div class="col-lg-8">
-									<input jsf:id="nome" name="nome" jsf:value="#{FuncionarioMB.Funcionario.nome}"
-										type="text" placeholder="Nome"
-										class="form-control required" />
+									<input jsf:id="nome" name="nome"
+										jsf:value="#{FuncionarioMB.funcionario.nome}" type="text"
+										placeholder="Nome" class="form-control required" />
 								</div>
 							</div>
 
 							<div class="form-group">
-								<label class="control-label col-lg-4" for="cnpj">CNPJ</label>
+								<label class="control-label col-lg-4" for="cpf">CPF</label>
 								<div class="col-lg-8">
-									<input jsf:id="cnpj" name="cnpj" jsf:value="#{FuncionarioMB.Funcionario.cnpj}"
-										type="text" placeholder="CNPJ"
+									<input jsf:id="cpf" name="cpf"
+										jsf:value="#{FuncionarioMB.funcionario.cpf}" type="text"
+										placeholder="CPF" class="form-control required" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label col-lg-4" for="rg">RG</label>
+								<div class="col-lg-8">
+									<input jsf:id="rg" name="rg"
+										jsf:value="#{FuncionarioMB.funcionario.rg}" type="text"
+										placeholder="RG" class="form-control required" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label col-lg-4" for="dataNascimento">Data
+									de Nascimento</label>
+								<div class="col-lg-8">
+									<input jsf:id="dataNascimento" name="dataNascimento"
+										jsf:value="#{FuncionarioMB.funcionario.dataNascimento}"
+										type="text" placeholder="dd\mm\yyyy"
 										class="form-control required" />
 								</div>
 							</div>
@@ -59,8 +81,8 @@
 								<label class="control-label col-lg-4" for="telefone">Telefone</label>
 								<div class="col-lg-8">
 									<input jsf:id="telefone" name="telefone"
-										jsf:value="#{FuncionarioMB.Funcionario.telefone}" type="text"
-										placeholder="Telefone" class="form-control"
+										jsf:value="#{FuncionarioMB.funcionario.telefone}" type="text"
+										placeholder="Telefone" class="form-control required"
 										data-mask="(99) 9999-9999" />
 								</div>
 							</div>
@@ -69,9 +91,8 @@
 								<label class="control-label col-lg-4" for="email">E-mail</label>
 								<div class="col-lg-8">
 									<input jsf:id="email" name="email"
-										jsf:value="#{FuncionarioMB.Funcionario.email}" type="text"
-										placeholder="E-mail"
-										class="form-control email" />
+										jsf:value="#{FuncionarioMB.funcionario.email}" type="text"
+										placeholder="E-mail" class="form-control email required" />
 								</div>
 							</div>
 
@@ -81,8 +102,9 @@
 								<label class="control-label col-lg-4" for="logradouro">Logradouro</label>
 								<div class="col-lg-8">
 									<input jsf:id="logradouro" name="logradouro"
-										jsf:value="#{FuncionarioMB.Funcionario.endereco.logradouro}"
-										type="text" placeholder="Logradouro" class="form-control" />
+										jsf:value="#{FuncionarioMB.funcionario.endereco.logradouro}"
+										type="text" placeholder="Logradouro"
+										class="form-control required" />
 								</div>
 							</div>
 
@@ -90,9 +112,9 @@
 								<label class="control-label col-lg-4" for="numero">Número</label>
 								<div class="col-lg-8">
 									<input jsf:id="numero" name="numero"
-										jsf:value="#{FuncionarioMB.Funcionario.endereco.numero}" type="text"
-										placeholder="Número"
-										class="form-control digits" />
+										jsf:value="#{FuncionarioMB.funcionario.endereco.numero}"
+										type="text" placeholder="Número"
+										class="form-control digits required" />
 								</div>
 							</div>
 
@@ -100,8 +122,8 @@
 								<label class="control-label col-lg-4" for="bairro">Bairro</label>
 								<div class="col-lg-8">
 									<input jsf:id="bairro" name="bairro"
-										jsf:value="#{FuncionarioMB.Funcionario.endereco.bairro}" type="text"
-										placeholder="Bairro" class="form-control" />
+										jsf:value="#{FuncionarioMB.funcionario.endereco.bairro}"
+										type="text" placeholder="Bairro" class="form-control required" />
 								</div>
 							</div>
 
@@ -109,8 +131,8 @@
 								<label class="control-label col-lg-4" for="cidade">Cidade</label>
 								<div class="col-lg-8">
 									<input jsf:id="cidade" name="cidade"
-										jsf:value="#{FuncionarioMB.Funcionario.endereco.cidade}" type="text"
-										placeholder="Cidade" class="form-control" />
+										jsf:value="#{FuncionarioMB.funcionario.endereco.cidade}"
+										type="text" placeholder="Cidade" class="form-control required" />
 								</div>
 							</div>
 
@@ -118,8 +140,8 @@
 								<label class="control-label col-lg-4" for="estado">Estado</label>
 								<div class="col-lg-8">
 									<input jsf:id="estado" name="estado"
-										jsf:value="#{FuncionarioMB.Funcionario.endereco.estado}" type="text"
-										placeholder="Estado" class="form-control" />
+										jsf:value="#{FuncionarioMB.funcionario.endereco.estado}"
+										type="text" placeholder="Estado" class="form-control required" />
 								</div>
 							</div>
 
@@ -127,14 +149,82 @@
 								<label class="control-label col-lg-4" for="cep">CEP</label>
 								<div class="col-lg-8">
 									<input jsf:id="cep" name="cep"
-										jsf:value="#{FuncionarioMB.Funcionario.endereco.cep}" type="text"
-										placeholder="CEP" class="form-control" data-mask="99999-999" />
+										jsf:value="#{FuncionarioMB.funcionario.endereco.cep}"
+										type="text" placeholder="CEP" class="form-control required"
+										data-mask="99999-999" />
 								</div>
 							</div>
-							<div class="form-actions no-margin-bottom">
-								<a jsf:id="cancelar" class="btn btn-default" jsf:action="index.jsf" jsf:immediate="true">Cancelar</a>
-								<button jsf:id="salvar" class="btn btn-primary" jsf:action="#{FuncionarioMB.salvar()}">Salvar</button>
+
+							<h4>Segurança</h4>
+
+
+
+							<div class="form-group">
+								<label class="control-label col-lg-4"> Permissão </label>
+								<div class="col-lg-8">
+									<div class="checkbox">
+										<label>
+											<div class="radio">
+												<span class="checked"> <input class="uniform"
+													type="radio" value="option1" name="optionsRadios"></input>
+												</span>
+											</div> Administrador
+										</label>
+									</div>
+									<div class="checkbox">
+										<label>
+											<div class="radio">
+												<span> <input class="uniform" type="radio"
+													checked="checked" value="option2" name="optionsRadios"></input>
+												</span>
+											</div> Funcionario
+										</label>
+									</div>
+								</div>
 							</div>
+
+
+
+
+
+
+
+
+
+							<div class="form-group">
+								<label class="control-label col-lg-4" for="senha1">Senha</label>
+								<div class="col-lg-8">
+									<input jsf:id="senha1" name="senha1"
+										jsf:value="#{FuncionarioMB.senha1}" type="password"
+										placeholder="Senha" class="form-control required" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label col-lg-4" for="senha2">Confirmação
+									de Senha</label>
+								<div class="col-lg-8">
+									<input jsf:id="senha2" name="senha2"
+										jsf:value="#{FuncionarioMB.senha2}" type="password"
+										placeholder="Senha" class="form-control required" />
+								</div>
+							</div>
+
+
+
+
+
+							<div class="form-actions no-margin-bottom">
+								<a jsf:id="cancelar" class="btn btn-default"
+									jsf:action="index.jsf" jsf:immediate="true">Cancelar</a>
+								<button jsf:id="inserir" class="btn btn-primary"
+									jsf:action="#{FuncionarioMB.inserir()}"
+									jsf:rendered="#{FuncionarioMB.cadastro}">Salvar</button>
+								<button jsf:id="atualizar" class="btn btn-primary"
+									jsf:action="#{FuncionarioMB.atualizar()}"
+									jsf:rendered="#{!FuncionarioMB.cadastro}">Salvar</button>
+							</div>
+
 						</form>
 					</div>
 				</div>

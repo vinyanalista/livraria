@@ -42,7 +42,9 @@
 		<div class="container">
 			<div id="welcomeLine" class="row">
 				<div class="span6">
-					Welcome!<strong> User</strong>
+				    <h:panelGroup rendered="#{loginInfo.loggedIn}">
+					   Bem-vindo,<strong> #{loginInfo.usuarioLogado.nome}</strong>
+					</h:panelGroup>
 				</div>
 				<div class="span6">
 					<div class="pull-right">
@@ -87,35 +89,47 @@
 						<li class=""><a href="special_offer.html">Specials Offer</a></li>
 						<li class=""><a href="normal.html">Delivery</a></li>
 						<li class=""><a href="contact.html">Contact</a></li>
-						<li class=""><a href="#login" role="button"
-							data-toggle="modal" style="padding-right: 0"><span
-								class="btn btn-large btn-success">Login</span></a>
-							<div id="login" class="modal hide fade in" tabindex="-1"
-								role="dialog" aria-labelledby="login" aria-hidden="false">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">×</button>
-									<h3>Login Block</h3>
+						<h:panelGroup rendered="#{not loginInfo.loggedIn}">
+							<li class=""><a href="#login" role="button"
+								data-toggle="modal" style="padding-right: 0"><span
+									class="btn btn-large btn-success">Login</span></a>
+								<div id="login" class="modal hide fade in" tabindex="-1"
+									role="dialog" aria-labelledby="login" aria-hidden="false">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-hidden="true">×</button>
+										<h3>Login</h3>
+									</div>
+									<div class="modal-body">
+										<form class="form-horizontal loginFrm" method="post" jsf:id="testeForm">
+										   <h:messages globalOnly="true" errorClass="alert-danger" infoClass="alert-success"/>
+											<div class="control-group">
+												<input type="text" id="inputEmail" placeholder="Email" jsf:value="#{loginMB.email}" jsf:id="inputEmail" jsf:required="true">
+												 <f:validator validatorId="emailValidator" />
+												</input>
+												<h:message for="inputEmail" errorClass="alert-danger" infoClass="alert-info" />
+											</div>
+											<div class="control-group">
+												<input type="password" id="inputPassword" jsf:id="inputPassword"
+													placeholder="Senha" jsf:value="#{loginMB.senha}" jsf:required="true"/>
+											    <h:message for="inputPassword" errorClass="alert-danger" infoClass="alert-info" />
+											</div>
+											<h:commandButton styleClass="btn btn-success" value="Login" action="#{loginMB.login}">
+											  <f:ajax event="action" execute="@form" render="@form"/>
+											</h:commandButton>
+	                                        <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
+										</form>
+									</div>
 								</div>
-								<div class="modal-body">
-									<form class="form-horizontal loginFrm">
-										<div class="control-group">
-											<input type="text" id="inputEmail" placeholder="Email" />
-										</div>
-										<div class="control-group">
-											<input type="password" id="inputPassword"
-												placeholder="Password" />
-										</div>
-										<div class="control-group">
-											<label class="checkbox"> <input type="checkbox" />
-												Remember me
-											</label>
-										</div>
-									</form>
-									<button type="submit" class="btn btn-success">Sign in</button>
-									<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-								</div>
-							</div></li>
+							</li>
+						</h:panelGroup>
+						<h:panelGroup rendered="#{loginInfo.loggedIn}">
+                            <li class="">
+                                <h:form>
+                                    <h:commandLink action="#{loginMB.logout}" value="Logout" styleClass="btn btn-small btn-primary"/>
+                                </h:form>
+                            </li>
+                        </h:panelGroup>
 					</ul>
 				</div>
 			</div>
