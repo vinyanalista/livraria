@@ -5,7 +5,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 
 import br.ufs.livraria.modelo.Livro;
-import br.ufs.livraria.modelo.Usuario;
 
 @Stateless
 public class LivroDAO extends DAO<Livro> {

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -13,7 +13,7 @@ import br.ufs.livraria.enumeration.MensagemTipo;
 import br.ufs.livraria.modelo.Livro;
 
 @Named
-@RequestScoped
+@SessionScoped
 public class LivroMB implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -22,31 +22,21 @@ public class LivroMB implements Serializable {
 	@EJB
 	private LivroDAO livroDao;
 	
-	private Integer id;
-	
 	@Inject
 	private MensagensMB mensagensMb;
 	
 	public LivroMB() {
 		livro = new Livro();
-		id = null;
 	}
 	
 	/* Getters e setters */
 	
-	public Livro getFornecedor() {
+	public Livro getLivro() {
 		return livro;
 	}
 
-	public Integer getId() {
-		return id;
-	}
-	
-	public void setId(Integer id) {
-		this.id = id;
-		if (id != null) {
-			livro = livroDao.buscar(id);
-		}
+	public void setLivro(Livro livro) {
+		this.livro = livro;
 	}
 	
 	public List<Livro> getListaDeLivros() {
@@ -68,7 +58,7 @@ public class LivroMB implements Serializable {
 	
 	public String excluir() {
 		try {
-			livroDao.remover(id);
+			livroDao.remover(livro.getId());
 			mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO, "O livro foi excluído com sucesso!");
 			return "index.jsf?faces-redirect=true";
 		} catch (Exception e) {
@@ -91,7 +81,7 @@ public class LivroMB implements Serializable {
 	/* Outros */
 	
 	public boolean isCadastro() {
-		return id == null;
+		return (livro.getId() == null);
 	}
 	
 }
