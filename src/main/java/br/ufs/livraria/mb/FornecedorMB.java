@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -13,7 +13,7 @@ import br.ufs.livraria.enumeration.MensagemTipo;
 import br.ufs.livraria.modelo.Fornecedor;
 
 @Named
-@RequestScoped
+@SessionScoped
 public class FornecedorMB implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -22,14 +22,11 @@ public class FornecedorMB implements Serializable {
 	@EJB
 	private FornecedorDAO fornecedorDao;
 	
-	private Integer id;
-	
 	@Inject
 	private MensagensMB mensagensMb;
 	
 	public FornecedorMB() {
 		fornecedor = new Fornecedor();
-		id = null;
 	}
 	
 	/* Getters e setters */
@@ -37,18 +34,11 @@ public class FornecedorMB implements Serializable {
 	public Fornecedor getFornecedor() {
 		return fornecedor;
 	}
+	
+	public void setFornecedor(Fornecedor fornecedor) {
+		this.fornecedor = fornecedor;
+	}
 
-	public Integer getId() {
-		return id;
-	}
-	
-	public void setId(Integer id) {
-		this.id = id;
-		if (id != null) {
-			fornecedor = fornecedorDao.buscar(id);
-		}
-	}
-	
 	public List<Fornecedor> getListaDeFornecedores() {
 		return fornecedorDao.listar();
 	}
@@ -68,7 +58,7 @@ public class FornecedorMB implements Serializable {
 	
 	public String excluir() {
 		try {
-			fornecedorDao.remover(id);
+			fornecedorDao.remover(fornecedor);
 			mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO, "O fornecedor foi excluído com sucesso!");
 			return "index.jsf?faces-redirect=true";
 		} catch (Exception e) {
@@ -91,7 +81,7 @@ public class FornecedorMB implements Serializable {
 	/* Outros */
 	
 	public boolean isCadastro() {
-		return id == null;
+		return (fornecedor.getId() == null);
 	}
 	
 }

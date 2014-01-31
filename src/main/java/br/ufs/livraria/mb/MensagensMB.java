@@ -31,7 +31,7 @@ public class MensagensMB implements Serializable {
 		adicionarMensagem(new Mensagem(tipo, conteudo));
 	}
 	
-	private void esvaziar() {
+	public void esvaziar() {
 		listaDeMensagens = new ArrayList<Mensagem>();
 	}
 	
@@ -51,7 +51,6 @@ public class MensagensMB implements Serializable {
 			listaDeMensagens.add(new Mensagem(tipo, facesMessage.getSummary()));
 		}
 		listaDeMensagens.addAll(this.listaDeMensagens);
-		esvaziar();
 		return listaDeMensagens;
 	}
 }

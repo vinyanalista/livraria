@@ -56,10 +56,12 @@
     <h:outputScript library="funcionario" name="lib/datatables/jquery.dataTables.js" />
 	<h:outputScript library="funcionario" name="lib/datatables/DT_bootstrap.js" />
 	<h:outputScript library="funcionario" name="lib/tablesorter/js/jquery.tablesorter.min.js" />
-  <h:outputScript library="funcionario" name="lib/jasny/js/jasny-bootstrap.min.js" />
+	<h:outputScript library="funcionario" name="lib/jasny/js/jasny-bootstrap.min.js" />
 	<h:outputScript library="funcionario" name="js/main.js" />
+	<h:outputScript library="javax.faces" name="jsf.js" target="head" />
 	<h:outputScript library="funcionario" name="js/comum.js" />
   </h:head>
+  <ui:debug hotkey="x" rendered="#{facesContext.application.projectStage == 'Development'}" />
   <h:body>
     <div id="wrap">
       <div id="top">
@@ -400,15 +402,13 @@
         <div class="outer">
           <div class="inner">
 				<div id="mensagens">
-					<c:forEach items="#{mensagensMB.listaDeMensagens}" var="mensagem">
-						<div class="alert #{mensagem.tipo.classe}">
+					<c:forEach items="${mensagensMB.listaDeMensagens}" var="mensagem">
+						<div class="alert ${mensagem.tipo.classe}">
 							<button type="button" class="close" data-dismiss="alert">&times;</button>
-							<h:outputText value="#{mensagem.conteudo}" />
-							<h:outputText value="Olá" />
+							<h:outputText value="${mensagem.conteudo}" />
 						</div>
 					</c:forEach>
 				</div>
-				<h:messages />
 				<ui:insert name="conteudo" />  
           </div>
           <!-- end .inner -->

@@ -8,5 +8,9 @@
     <application>
         <message-bundle>Messages</message-bundle>
     </application>
+    
+    <lifecycle>
+        <phase-listener>br.ufs.livraria.util.JSFPhaseListener</phase-listener>
+    </lifecycle>
 
 </faces-config>
