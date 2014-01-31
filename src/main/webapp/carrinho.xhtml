@@ -10,16 +10,19 @@
 	<ui:define name="titulo">SIGELI - Carrinho</ui:define>
 	<ui:define name="conteudo">
 		<ul class="breadcrumb">
-			<li><a href="index.html">Home</a> <span class="divider">/</span></li>
-			<li class="active">SHOPPING CART</li>
+			<li><a href="index.jsf">Página inicial</a> <span class="divider">/</span></li>
+			<li class="active">Carrinho</li>
 		</ul>
 		<h3>
-			SHOPPING CART [ <small>3 Item(s) </small>]<a href="products.html"
+			Carrinho [ <small>
+				<h:outputText value="Sem itens " rendered="#{carrinhoMB.quantidadeDeItens == 0}" />
+				<h:outputText value="#{carrinhoMB.quantidadeDeItens} itens" rendered="#{carrinhoMB.quantidadeDeItens > 0}" />
+			</small> ]<a href="index.jsf"
 				class="btn btn-large pull-right"><i class="icon-arrow-left"></i>
-				Continue Shopping </a>
+				Continuar comprando</a>
 		</h3>
 		<hr class="soft" />
-		<table class="table table-bordered">
+		<!-- <table class="table table-bordered">
 			<tr>
 				<th>I AM ALREADY REGISTERED</th>
 			</tr>
@@ -54,17 +57,15 @@
 					</form>
 				</td>
 			</tr>
-		</table>
+		</table> -->
 
 		<table class="table table-bordered">
 			<thead>
 				<tr>
-					<th>Product</th>
-					<th>Description</th>
-					<th>Quantity/Update</th>
-					<th>Price</th>
-					<th>Discount</th>
-					<th>Tax</th>
+					<th>Capa</th>
+					<th>Livro</th>
+					<th>Quantidade</th>
+					<th>Preço</th>
 					<th>Total</th>
 				</tr>
 			</thead>
@@ -88,10 +89,8 @@
 								</button>
 						</div>
 					</td>
-					<td>$120.00</td>
-					<td>$25.00</td>
-					<td>$15.00</td>
-					<td>$110.00</td>
+					<td>R$ 120,00</td>
+					<td>R$ 110,00</td>
 				</tr>
 				<tr>
 					<td><img width="60" src="#{resource['cliente:images/products/8.jpg']}" alt="" /></td>
@@ -111,10 +110,8 @@
 								</button>
 						</div>
 					</td>
-					<td>$7.00</td>
-					<td>--</td>
-					<td>$1.00</td>
-					<td>$8.00</td>
+					<td>R$ 7,00</td>
+					<td>R$ 8,00</td>
 				</tr>
 				<tr>
 					<td><img width="60" src="#{resource['cliente:images/products/3.jpg']}" alt="" /></td>
@@ -134,35 +131,19 @@
 								</button>
 						</div>
 					</td>
-					<td>$120.00</td>
-					<td>$25.00</td>
-					<td>$15.00</td>
-					<td>$110.00</td>
-				</tr>
-
-				<tr>
-					<td colspan="6" style="text-align: right">Total Price:</td>
-					<td>$228.00</td>
+					<td>R$ 120,00</td>
+					<td>R$ 110,00</td>
 				</tr>
 				<tr>
-					<td colspan="6" style="text-align: right">Total Discount:</td>
-					<td>$50.00</td>
-				</tr>
-				<tr>
-					<td colspan="6" style="text-align: right">Total Tax:</td>
-					<td>$31.00</td>
-				</tr>
-				<tr>
-					<td colspan="6" style="text-align: right"><strong>TOTAL
-							($228 - $50 + $31) =</strong></td>
+					<td colspan="4" style="text-align: right"><strong>Valor total da compra:</strong></td>
 					<td class="label label-important" style="display: block"><strong>
-							$155.00 </strong></td>
+							R$ 155,00 </strong></td>
 				</tr>
 			</tbody>
 		</table>
 
 
-		<table class="table table-bordered">
+		<!-- <table class="table table-bordered">
 			<tbody>
 				<tr>
 					<td>
@@ -180,9 +161,9 @@
 				</tr>
 
 			</tbody>
-		</table>
+		</table> -->
 
-		<table class="table table-bordered">
+		<!-- <table class="table table-bordered">
 			<tr>
 				<th>ESTIMATE YOUR SHIPPING</th>
 			</tr>
@@ -210,10 +191,10 @@
 					</form>
 				</td>
 			</tr>
-		</table>
-		<a href="products.html" class="btn btn-large"><i
-			class="icon-arrow-left"></i> Continue Shopping </a>
-		<a href="login.html" class="btn btn-large pull-right">Next <i
+		</table> -->
+		<a href="index.jsf" class="btn btn-large"><i
+			class="icon-arrow-left"></i> Continuar comprando </a>
+		<a href="finalizar_compra.jsf" class="btn btn-large pull-right">Finalizar compra <i
 			class="icon-arrow-right"></i></a>
 	</ui:define>
 </ui:composition>
