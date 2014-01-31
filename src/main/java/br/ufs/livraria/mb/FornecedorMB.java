@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -13,7 +13,7 @@ import br.ufs.livraria.enumeration.MensagemTipo;
 import br.ufs.livraria.modelo.Fornecedor;
 
 @Named
-@RequestScoped
+@SessionScoped
 public class FornecedorMB implements Serializable {
 	private static final long serialVersionUID = 1L;
 

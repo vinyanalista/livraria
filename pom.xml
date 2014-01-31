@@ -114,7 +114,7 @@
 			<properties>
 				<application-server>glassfish</application-server>
 				<eclipselink-version>2.5.0</eclipselink-version>
-				<glassfish-home>/home/livraria/dev/tools/glassfish/</glassfish-home>
+				<glassfish-home>/home/livraria/dev/tools/glassfish/glassfish</glassfish-home>
 				<maven-glassfish-plugin-version>2.1</maven-glassfish-plugin-version>
 			</properties>
 			<dependencies>
@@ -136,11 +136,10 @@
 							<user>admin</user>
 							<adminPassword>123456</adminPassword>
 							<domain>
-								<name>livraria</name>
+								<name>domain1</name>
 								<adminPort>4848</adminPort>
 								<httpPort>8080</httpPort>
 							</domain>
-							<autocreate>true</autocreate>
 							<components>
 								<component>
 									<name>${project.artifactId}</name>
