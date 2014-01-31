@@ -31,6 +31,8 @@ public abstract class Usuario implements Serializable {
 	@JoinColumn(nullable = false)
 	protected Endereco endereco;
 
+	private String senha;
+
 	public Usuario() {
 	}
 	
@@ -96,6 +98,14 @@ public abstract class Usuario implements Serializable {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public String getSenha() {
+		return this.senha;
+	}
+	
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 }

@@ -539,12 +539,12 @@ $('#dimension-switch').bootstrapSwitch('setSizeClass', 'switch-large');
 function formValidation() {
     "use strict";
     /*----------- BEGIN validationEngine CODE -------------------------*/
-    $('#popup-validation').validationEngine();
+    $('.popup-validation').validationEngine();
     /*----------- END validationEngine CODE -------------------------*/
 
     /*----------- BEGIN validate CODE -------------------------*/
-    $('#inline-validate').validate({
-        rules: {
+    $('.inline-validate').validate({
+        /*rules: {
             required: "required",
             email: {
                 required: true,
@@ -584,7 +584,7 @@ function formValidation() {
                 required: true,
                 max: 16
             }
-        },
+        },*/
         errorClass: 'help-block col-lg-6',
         errorElement: 'span',
         highlight: function(element, errorClass, validClass) {
@@ -596,8 +596,8 @@ function formValidation() {
     });
 
 
-    $('#block-validate').validate({
-        rules: {
+    $('.block-validate').validate({
+        /* rules: {
             required2: "required",
             email2: {
                 required: true,
@@ -629,7 +629,7 @@ function formValidation() {
                 required: true,
                 range: [5, 16]
             }
-        },
+        }, */
         errorClass: 'help-block',
         errorElement: 'span',
         highlight: function(element, errorClass, validClass) {

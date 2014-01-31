@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
-public abstract class DAO<Entidade> implements Serializable {
+public class DAO<Entidade> implements Serializable {
 	protected static final long serialVersionUID = 1L;
 
 	@PersistenceContext(unitName = "livraria")
@@ -35,7 +35,7 @@ public abstract class DAO<Entidade> implements Serializable {
 						+ " entidade", classeDaEntidade).getResultList();
 	}
 
-	public void remover(int id){
+	public void remover(Integer id){
 		entityManager.remove(entityManager.find(classeDaEntidade, id));
 	};
 }

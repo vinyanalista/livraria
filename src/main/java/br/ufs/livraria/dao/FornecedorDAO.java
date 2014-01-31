@@ -16,5 +16,4 @@ public class FornecedorDAO extends DAO<Fornecedor> {
 		entityManager.remove(entityManager.find(Fornecedor.class,
 				fornecedor.getId()));
 	}
-
 }

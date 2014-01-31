@@ -20,7 +20,7 @@ public class Fornecedor implements Serializable {
 
 	private String email;
 
-	@OneToOne(cascade = { CascadeType.REMOVE })
+	@OneToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "endereco_id", nullable = false)
 	private Endereco endereco;
 
@@ -31,6 +31,7 @@ public class Fornecedor implements Serializable {
 	private List<Compra> compras;
 	
 	public Fornecedor() {
+		endereco = new Endereco();
 	}
 
 	public Integer getId() {
