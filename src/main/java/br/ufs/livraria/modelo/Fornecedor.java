@@ -3,7 +3,16 @@ package br.ufs.livraria.modelo;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class Fornecedor implements Serializable {
@@ -13,18 +22,22 @@ public class Fornecedor implements Serializable {
 	@GeneratedValue
 	private Integer id;
 
-	@Column(unique = true)
+	@Column(unique = true, length = 14)
+//	@Pattern(regexp = "[0-9]*")
 	private String cnpj;
 
+	@Column(length = 15)
+//	@Pattern(regexp = "[0-9]*")
 	private String telefone;
 
+	@Column(length = 50)
 	private String email;
 
 	@OneToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "endereco_id", nullable = false)
 	private Endereco endereco;
 
-	@Column(nullable = false)
+	@Column(length = 50, nullable = false)
 	private String nome;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fornecedor", cascade = { CascadeType.REMOVE })

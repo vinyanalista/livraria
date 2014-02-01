@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/WEB-INF/template_cliente.xhtml">
+	<ui:define name="titulo">SIGELI - Acesso do Cliente - Histórico</ui:define>
+	<ui:define name="main-bar">
+		<h3>
+			<i class="fa fa-truck"></i>Meu Histórico de Compras
+		</h3>
+	</ui:define>
+	<ui:define name="conteudo">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="box">
+					<header>
+					<div class="icons">
+						<i class="fa fa-table"></i>
+					</div>
+					<section id="navbar">
+  							<div class="navbar">
+    							<div class="navbar-inner">
+      								<div class="container">
+        								<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          									<span class="icon-bar"></span>
+          									<span class="icon-bar"></span>
+          									<span class="icon-bar"></span>
+        								</a>
+        								<div class="nav-collapse">
+          									<ul class="nav">
+            									<li><a href="/livraria/">Home</a></li>
+            									<li><a href="/livraria/produtos">Produtos</a></li>
+            									<li><a href="/livraria/carrinho">Meu Carrinho</a></li>
+            									<li class="active"><a href="">Meus Pedidos</a></li>
+          									</ul>
+          								<form class="navbar-search pull-right" action="#">
+            								<input class="search-query span2" placeholder="Pesquisar" type="text"/>
+          								</form>
+        							</div><!-- /.nav-collapse -->
+      							</div>
+    						</div><!-- /navbar-inner -->
+  						</div><!-- /navbar -->
+					</section>
+					<h5>Histórico de Compras</h5>
+					</header>
+					<div id="collapse4" class="body">
+						<div id="grids">
+							<ul class="nav nav-tabs" id="myTab">
+								<li class="active"><a href="#todos" data-toggle="tab">Todos</a></li>
+							  	<li class=""><a href="#confirmados" data-toggle="tab">Confirmados</a></li>
+							  	<li class=""><a href="#andamento" data-toggle="tab">Em Andamento</a></li>
+							  	<li class=""><a href="#cancelados" data-toggle="tab">Cancelados</a></li>
+							</ul>
+ 
+						<div class="tab-content">
+						  	<div class="tab-pane" id="todos">
+							  	<div class="row-fluid">
+									<h:form>
+										<table id="dataTable"
+											class="table table-bordered table-condensed table-hover table-striped">
+											<thead>
+												<tr>
+													<th>Livro</th>
+													<th>Quantidade</th>
+													<th>Preço por Unidade</th>
+													<th>Preço Total</th>
+													<th>Situação</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach items="#{HistoricoClienteMB.listaDeVendas}" var="venda">
+													<c:forEach items="#{venda.listaItens}" var="item">
+														<tr>
+															<td><h:outputText value="#{item.livro.titulo}" /></td>
+															<td><h:outputText value="#{item.quantidade}" /></td>
+															<td><h:outputText value="#{item.livro.preco}" /></td>
+															<td><h:outputText value="#{item.preco}" /></td>
+															<td><h:outputText value="#{venda.pagamento.status}" /></td>
+														</tr>
+													</c:forEach>
+												</c:forEach>
+											</tbody>
+										</table>
+									</h:form>
+  								</div>
+  							</div>
+  							<div class="tab-pane" id="confirmados">
+  								<div class="row-fluid">
+	  								<h:form>
+										<table id="dataTable"
+											class="table table-bordered table-condensed table-hover table-striped">
+											<thead>
+												<tr>
+													<th>Livro</th>
+													<th>Quantidade</th>
+													<th>Preço por Unidade</th>
+													<th>Preço Total</th>
+													<th>Situação</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach items="#{HistoricoClienteMB.listaDeVendasConfirmadas}" var="venda">
+													<c:forEach items="#{venda.listaItens}" var="item">
+														<tr>
+															<td><h:outputText value="#{item.livro.titulo}" /></td>
+															<td><h:outputText value="#{item.quantidade}" /></td>
+															<td><h:outputText value="#{item.livro.preco}" /></td>
+															<td><h:outputText value="#{item.preco}" /></td>
+															<td><h:outputText value="Confirmada" /></td>
+														</tr>
+													</c:forEach>
+												</c:forEach>
+											</tbody>
+										</table>
+									</h:form>
+  								</div>
+  							</div>
+  							<div class="tab-pane" id="andamento">
+  								<div class="row-fluid">
+									<h:form>
+										<table id="dataTable"
+											class="table table-bordered table-condensed table-hover table-striped">
+											<thead>
+												<tr>
+													<th>Livro</th>
+													<th>Quantidade</th>
+													<th>Preço por Unidade</th>
+													<th>Preço Total</th>
+													<th>Situação</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach items="#{HistoricoClienteMB.listaDeVendasEmAndamento}" var="venda">
+													<c:forEach items="#{venda.listaItens}" var="item">
+														<tr>
+															<td><h:outputText value="#{item.livro.titulo}" /></td>
+															<td><h:outputText value="#{item.quantidade}" /></td>
+															<td><h:outputText value="#{item.livro.preco}" /></td>
+															<td><h:outputText value="#{item.preco}" /></td>
+															<td><h:outputText value="Em Andamento" /></td>
+														</tr>
+													</c:forEach>
+												</c:forEach>
+											</tbody>
+										</table>
+									</h:form>
+	 							</div>
+  							</div>
+  								<div class="tab-pane active" id="canceladas">
+  									<div class="row-fluid">
+										<h:form>
+										<table id="dataTable"
+											class="table table-bordered table-condensed table-hover table-striped">
+											<thead>
+												<tr>
+													<th>Livro</th>
+													<th>Quantidade</th>
+													<th>Preço por Unidade</th>
+													<th>Preço Total</th>
+													<th>Situação</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach items="#{HistoricoClienteMB.listaDeVendasCanceladas}" var="venda">
+													<c:forEach items="#{venda.listaItens}" var="item">
+														<tr>
+															<td><h:outputText value="#{item.livro.titulo}" /></td>
+															<td><h:outputText value="#{item.quantidade}" /></td>
+															<td><h:outputText value="#{item.livro.preco}" /></td>
+															<td><h:outputText value="#{item.preco}" /></td>
+															<td><h:outputText value="Cancelada" /></td>
+														</tr>
+													</c:forEach>
+												</c:forEach>
+											</tbody>
+										</table>
+									</h:form>
+  									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<h:outputStylesheet library="funcionario" name="css/funcionario.css" />
+		<h:outputScript library="funcionario" name="js/funcionario.js" />
+	</ui:define>
+</ui:composition>
+</html>

@@ -2,7 +2,10 @@ package br.ufs.livraria.modelo;
 
 import java.io.Serializable;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class Endereco implements Serializable {
@@ -13,10 +16,19 @@ public class Endereco implements Serializable {
 	private Integer id;
 
 	private String logradouro;
+	
+	@Column(length = 50)
 	private String bairro;
+	
 	private Integer numero;
+	
+	@Column(length = 50)
 	private String cidade;
+	
+	@Column(length = 50)
 	private String estado;
+	
+	@Column(length = 50)
 	private String cep;
 	
 	public Endereco() {

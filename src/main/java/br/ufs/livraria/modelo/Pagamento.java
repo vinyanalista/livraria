@@ -3,7 +3,12 @@ package br.ufs.livraria.modelo;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Pagamento implements Serializable {
@@ -14,6 +19,8 @@ public class Pagamento implements Serializable {
 	private Integer id;
 
 	private Boolean aprovado;
+	
+	@Column(length = 2)
 	private Integer tipo;
 	
 	@Temporal(TemporalType.TIMESTAMP)

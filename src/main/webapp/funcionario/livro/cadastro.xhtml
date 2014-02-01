@@ -136,7 +136,7 @@
 								<label class="control-label col-lg-4" for="estoque">Quantidade em estoque</label>
 								<div class="col-lg-8">
 									<input 	jsf:id="estoque" name="estoque"
-											jsf:value="#{LivroMB.livro.quantidade_estoque}" type="text" placeholder="Quantidade em estoque" class="form-control digits required" 
+											jsf:value="#{LivroMB.livro.estoque}" type="text" placeholder="Quantidade em estoque" class="form-control digits required" 
 									/>
 								</div>
 							</div>
@@ -188,9 +188,6 @@
 								<button jsf:id="inserir" class="btn btn-primary" jsf:action="#{livroMB.inserir()}" jsf:rendered="#{livroMB.cadastro}">Salvar</button>
 								<button jsf:id="atualizar" class="btn btn-primary" jsf:action="#{livroMB.atualizar()}" jsf:rendered="#{!livroMB.cadastro}">Atualizar</button>
 							</div>
-
-							</div>
-
 						</form>
 					</div>
 				</div>

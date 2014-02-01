@@ -2,7 +2,10 @@ package br.ufs.livraria.modelo;
 
 import java.io.Serializable;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class Livro implements Serializable {
@@ -12,15 +15,33 @@ public class Livro implements Serializable {
 	@GeneratedValue
 	private Integer id;
 
+	@Column(length = 50)
 	private String titulo;
+	
 	private String sinopse;
+	
+	@Column(length = 2)
 	private Integer edicao;
+	
+	@Column(length = 4)
 	private Integer ano;
+	
+	@Column(length = 13)
 	private String isbn;
+	
+	@Column(length = 4)
 	private Integer estoque;
+	
+	@Column(length = 50)
 	private String genero;
+	
+	@Column(length = 50)
 	private String autor;
+	
+	@Column(length = 50)
 	private String editora;
+	
+	@Column(precision = 4, scale = 2)
 	private Float preco;
 
 	public Livro() {

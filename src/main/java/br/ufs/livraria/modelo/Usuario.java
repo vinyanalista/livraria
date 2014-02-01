@@ -3,7 +3,20 @@ package br.ufs.livraria.modelo;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -16,15 +29,25 @@ public abstract class Usuario implements Serializable {
 	@GeneratedValue
 	protected Integer id;
 
+	@Column(length = 50)
 	protected String nome;
+	
+	@Column(length = 11)
+	@Pattern(regexp = "[0-9]*")
 	protected String cpf;
+	
+	@Column(length = 20)
 	protected String rg;
 	
 	@Column(name = "data_nascimento")
 	@Temporal(TemporalType.DATE)
 	protected Date dataNascimento;
 	
+	@Column(length = 15)
+	@Pattern(regexp = "[0-9]*")
 	protected String telefone;
+	
+	@Column(length = 50)
 	protected String email;
 
 	@OneToOne
