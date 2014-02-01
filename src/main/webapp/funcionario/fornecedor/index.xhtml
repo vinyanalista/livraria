@@ -41,12 +41,8 @@
 											<td><h:outputText value="#{fornecedor.cnpj}" /></td>
 											<td>
 												<div class="actions">
-													<a class="fa fa-pencil" jsf:action="cadastro.jsf" title="Editar" data-toggle="tooltip">
-														<f:setPropertyActionListener target="#{fornecedorMB.fornecedor}" value="#{fornecedor}" />
-													</a>
-													<a class="glyphicon glyphicon-remove" jsf:action="#{fornecedorMB.excluir()}" title="Excluir" data-toggle="tooltip">
-														<f:setPropertyActionListener target="#{fornecedorMB.fornecedor}" value="#{fornecedor}" />
-													</a>
+													<a class="fa fa-pencil" href="cadastro.jsf?id=#{fornecedor.id}" title="Editar" data-toggle="tooltip"></a>
+													<a class="glyphicon glyphicon-remove" jsf:action="#{fornecedorMB.excluir(fornecedor.id)}" title="Excluir" data-toggle="tooltip"></a>
 												</div>
 											</td>
 										</tr>
