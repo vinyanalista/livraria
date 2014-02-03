@@ -107,9 +107,11 @@
                 </a> 
               </div>
               <div class="btn-group">
-                <a href="login.jsf" data-toggle="tooltip" data-original-title="Logout" data-placement="bottom" class="btn btn-metis-1 btn-sm">
-                  <i class="fa fa-power-off"></i>
-                </a> 
+                <h:form>
+	                <a data-toggle="tooltip" data-original-title="Logout" data-placement="bottom" class="btn btn-metis-1 btn-sm" jsf:action="#{loginMB.logout}">
+	                  <i class="fa fa-power-off"></i>
+	                </a> 
+                </h:form>
               </div>
             </div>
           </div><!-- /.topnav -->
@@ -162,21 +164,12 @@
       </div><!-- /#top -->
       <div id="left">
         <div class="media user-media">
-          <a class="user-link" href="">
-            <img class="media-object img-thumbnail user-img" alt="User Picture" src="#{resource['funcionario:img/user.gif']}"/>
-            <span class="label label-danger user-label">16</span> 
-          </a> 
-          <div class="media-body">
-            <h5 class="media-heading">Archie</h5>
+          <h:panelGroup styleClass="media-body" rendered="#{loginInfo.loggedIn}">
+            <h5 class="media-heading">#{loginInfo.usuarioLogado.nome}</h5>
             <ul class="list-unstyled user-info">
-              <li> <a href="">Administrator</a>  </li>
-              <li>Last Access :
-                    <br/>
-                <small>
-                  <i class="fa fa-calendar"></i>&nbsp;16 Mar 16:32</small> 
-              </li>
+                <li>#{loginInfo.usuarioLogado.permissao eq 0 ? 'Administrador' : 'Funcionário'}</li>
             </ul>
-          </div>
+          </h:panelGroup>
         </div>
 
         <!-- #menu -->
