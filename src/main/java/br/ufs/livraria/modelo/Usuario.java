@@ -54,6 +54,7 @@ public abstract class Usuario implements Serializable {
 	@JoinColumn(nullable = false)
 	protected Endereco endereco;
 
+	@Column(length = 40)
 	private String senha;
 
 	public Usuario() {
