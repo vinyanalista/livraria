@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import br.ufs.livraria.bean.LoginInfo;
 import br.ufs.livraria.dao.UsuarioDAO;
+import br.ufs.livraria.modelo.Cliente;
 import br.ufs.livraria.modelo.Usuario;
 
 @Named
@@ -54,12 +55,17 @@ public class LoginMB implements Serializable {
 	}
 	
 	public String logout() {
+		Usuario usuarioLogado = loginInfo.getUsuarioLogado();
 		loginInfo.setUsuarioLogado(null);
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		if (session != null) {
 			session.invalidate();
 		}
-		return "index.jsf?faces-redirect=true";
+		if (usuarioLogado instanceof Cliente) {
+			return "/index.jsf?faces-redirect=true";
+		} else {
+			return "/funcionario/login.jsf?faces-redirect=true";
+		}
 	}
 	
 	public String getEmail() {
