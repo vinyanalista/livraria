@@ -6,6 +6,10 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
+<f:metadata>
+	<!-- TODO Apenas para fins de protótipo! Remover!  -->
+	<f:viewAction action="#{carrinhoMB.inicializar}"/>
+</f:metadata>	
 <ui:composition template="/WEB-INF/template_cliente.xhtml">
 	<ui:define name="titulo">SIGELI - Carrinho</ui:define>
 	<ui:define name="conteudo">
@@ -58,7 +62,7 @@
 				</td>
 			</tr>
 		</table> -->
-
+		
 		<table class="table table-bordered">
 			<thead>
 				<tr>
@@ -70,78 +74,52 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td><img width="60" src="#{resource['cliente:images/products/4.jpg']}" alt="" /></td>
-					<td>MASSA AST<br />Color : black, Material : metal
-					</td>
-					<td>
-						<div class="input-append">
-							<input class="span1" style="max-width: 34px" placeholder="1"
-								id="appendedInputButtons" size="16" type="text" /><button
-									class="btn" type="button">
-									<i class="icon-minus"></i>
-								</button>
-								<button class="btn" type="button">
-									<i class="icon-plus"></i>
-								</button>
-								<button class="btn btn-danger" type="button">
-									<i class="icon-remove icon-white"></i>
-								</button>
-						</div>
-					</td>
-					<td>R$ 120,00</td>
-					<td>R$ 110,00</td>
-				</tr>
-				<tr>
-					<td><img width="60" src="#{resource['cliente:images/products/8.jpg']}" alt="" /></td>
-					<td>MASSA AST<br />Color : black, Material : metal
-					</td>
-					<td>
-						<div class="input-append">
-							<input class="span1" style="max-width: 34px" placeholder="1"
-								size="16" type="text" /><button class="btn" type="button">
-									<i class="icon-minus"></i>
-								</button>
-								<button class="btn" type="button">
-									<i class="icon-plus"></i>
-								</button>
-								<button class="btn btn-danger" type="button">
-									<i class="icon-remove icon-white"></i>
-								</button>
-						</div>
-					</td>
-					<td>R$ 7,00</td>
-					<td>R$ 8,00</td>
-				</tr>
-				<tr>
-					<td><img width="60" src="#{resource['cliente:images/products/3.jpg']}" alt="" /></td>
-					<td>MASSA AST<br />Color : black, Material : metal
-					</td>
-					<td>
-						<div class="input-append">
-							<input class="span1" style="max-width: 34px" placeholder="1"
-								size="16" type="text" /><button class="btn" type="button">
-									<i class="icon-minus"></i>
-								</button>
-								<button class="btn" type="button">
-									<i class="icon-plus"></i>
-								</button>
-								<button class="btn btn-danger" type="button">
-									<i class="icon-remove icon-white"></i>
-								</button>
-						</div>
-					</td>
-					<td>R$ 120,00</td>
-					<td>R$ 110,00</td>
-				</tr>
+				<c:forEach items="#{carrinhoMB.itens}" var="item">
+					<tr>
+						<td>
+							<!-- TODO Apenas para fins de protótipo! Exibir capa do livro! -->
+							<img width="60" src="#{resource['cliente:images/products/4.jpg']}" alt="" />
+						</td>
+						<td><h:outputText value="#{item.livro.titulo}" /></td>
+						<td>
+							<div class="input-append">
+								<h:form prependId="false">
+									<input class="span1" style="max-width: 34px" value="#{item.quantidade}"
+										id="appendedInputButtons" size="16" type="text" readonly="readonly" />
+									<h:commandButton class="btn" action="#{carrinhoMB.adicionar(item.livro)}">
+										<i class="icon-minus"></i>
+									</h:commandButton>
+									<h:commandButton class="btn" action="#{carrinhoMB.remover(item.livro)}">
+										<i class="icon-plus"></i>
+									</h:commandButton>
+									<h:commandButton class="btn btn-danger" action="#{carrinhoMB.removerTodos(item.livro)}">
+										<i class="icon-remove icon-white"></i>
+									</h:commandButton>
+								</h:form>
+							</div>
+						</td>
+						<td>
+							<h:outputText value="#{item.livro.preco}">
+								<f:convertNumber locale="pt_BR" type="currency" />
+							</h:outputText>
+						</td>
+						<td>
+							<h:outputText value="#{item.livro.preco * item.quantidade}">
+								<f:convertNumber locale="pt_BR" type="currency" />
+							</h:outputText>
+						</td>
+					</tr>
+				</c:forEach>
 				<tr>
 					<td colspan="4" style="text-align: right"><strong>Valor total da compra:</strong></td>
-					<td class="label label-important" style="display: block"><strong>
-							R$ 155,00 </strong></td>
+					<td class="label label-success" style="display: block"><strong>
+						<h:outputText value="#{carrinhoMB.valorTotal}">
+							<f:convertNumber locale="pt_BR" type="currency" />
+						</h:outputText>
+					</strong></td>
 				</tr>
 			</tbody>
 		</table>
-
 
 		<!-- <table class="table table-bordered">
 			<tbody>
@@ -192,9 +170,10 @@
 				</td>
 			</tr>
 		</table> -->
+		
 		<a href="index.jsf" class="btn btn-large"><i
 			class="icon-arrow-left"></i> Continuar comprando </a>
-		<a href="finalizar_compra.jsf" class="btn btn-large pull-right">Finalizar compra <i
+		<a href="finalizar_compra.jsf" class="btn btn-large btn-success pull-right">Finalizar compra <i
 			class="icon-arrow-right"></i></a>
 	</ui:define>
 </ui:composition>
