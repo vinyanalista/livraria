@@ -86,15 +86,15 @@
 								<h:form prependId="false">
 									<input class="span1" style="max-width: 34px" value="#{item.quantidade}"
 										id="appendedInputButtons" size="16" type="text" readonly="readonly" />
-									<h:commandButton class="btn" action="#{carrinhoMB.adicionar(item.livro)}">
+									<h:commandLink class="btn" action="#{carrinhoMB.remover(item.livro)}">
 										<i class="icon-minus"></i>
-									</h:commandButton>
-									<h:commandButton class="btn" action="#{carrinhoMB.remover(item.livro)}">
+									</h:commandLink>
+									<h:commandLink class="btn" action="#{carrinhoMB.adicionar(item.livro)}">
 										<i class="icon-plus"></i>
-									</h:commandButton>
-									<h:commandButton class="btn btn-danger" action="#{carrinhoMB.removerTodos(item.livro)}">
+									</h:commandLink>
+									<h:commandLink class="btn btn-danger btn-remover-todos" action="#{carrinhoMB.removerTodos(item.livro)}">
 										<i class="icon-remove icon-white"></i>
-									</h:commandButton>
+									</h:commandLink>
 								</h:form>
 							</div>
 						</td>
@@ -175,6 +175,13 @@
 			class="icon-arrow-left"></i> Continuar comprando </a>
 		<a href="finalizar_compra.jsf" class="btn btn-large btn-success pull-right">Finalizar compra <i
 			class="icon-arrow-right"></i></a>
+		<style>
+			.btn-remover-todos {
+				-webkit-border-radius: 0 4px 4px 0 !important;
+				-moz-border-radius: 0 4px 4px 0 !important;
+				border-radius: 0 4px 4px 0 !important;
+			}
+		</style>
 	</ui:define>
 </ui:composition>
 </html>

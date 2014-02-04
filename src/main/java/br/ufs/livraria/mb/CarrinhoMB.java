@@ -20,6 +20,9 @@ public class CarrinhoMB implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private List<ItemLivro> itens;
+
+	// TODO Apenas para fins de protótipo! Remover!
+	private Livro livroDeTeste;
 	
 	@EJB
 	private LivroDAO livroDao;
@@ -54,6 +57,8 @@ public class CarrinhoMB implements Serializable {
 			item3.setPreco(livro3.getPreco());
 			item3.setQuantidade(3);
 			itens.add(item3);
+
+			livroDeTeste = livroDao.buscar(4);
 		}
 	}
 	
@@ -69,6 +74,7 @@ public class CarrinhoMB implements Serializable {
 		if (!livroJaExistia) {
 			ItemLivro novoItem = new ItemLivro();
 			novoItem.setLivro(livro);
+			novoItem.setPreco(livro.getPreco());
 			novoItem.setQuantidade(1);
 			itens.add(novoItem);
 			// TODO As tags <b></b> estão sendo impressas
@@ -79,6 +85,10 @@ public class CarrinhoMB implements Serializable {
 	
 	public List<ItemLivro> getItens() {
 		return itens;
+	}
+
+	public Livro getLivroDeTeste() {
+		return livroDeTeste;
 	}
 	
 	public Integer getQuantidadeDeItens() {
@@ -96,6 +106,9 @@ public class CarrinhoMB implements Serializable {
 	public String remover(Livro livro) {
 		for (ItemLivro item : itens) {
 			if (item.getLivro().equals(livro)) {
+				if (item.getQuantidade() == 1) {
+					return removerTodos(item);
+				}
 				item.setQuantidade(item.getQuantidade() - 1);
 				mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO, "Um exemplar do livro <b>" + livro.getTitulo() + "</b> foi removido do carrinho!");
 				break;
@@ -107,11 +120,15 @@ public class CarrinhoMB implements Serializable {
 	public String removerTodos(Livro livro) {
 		for (ItemLivro item : itens) {
 			if (item.getLivro().equals(livro)) {
-				itens.remove(item);
-				mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO, "O livro <b>" + livro.getTitulo() + "</b> foi removido do carrinho!");
-				break;
+				return removerTodos(item);
 			}
 		}
+		return "carrinho.jsf?faces-redirect=true";
+	}
+
+	private String removerTodos(ItemLivro item) {
+		itens.remove(item);
+		mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO, "O livro <b>" + item.getLivro().getTitulo() + "</b> foi removido do carrinho!");
 		return "carrinho.jsf?faces-redirect=true";
 	}
 }

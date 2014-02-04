@@ -6,6 +6,10 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
+<f:metadata>
+	<!-- TODO Apenas para fins de protótipo! Remover!  -->
+	<f:viewAction action="#{carrinhoMB.inicializar}"/>
+</f:metadata>	
 <ui:composition template="/WEB-INF/template_cliente.xhtml">
 	<ui:define name="titulo">SIGELI - Página Inicial</ui:define>
 	<ui:define name="conteudo">
@@ -247,21 +251,29 @@
 				</div>
 			</div>
 		</div>
-		<h4>Latest Products</h4>
+		<h4>Últimos lançamentos</h4>
 		<ul class="thumbnails">
+			<!-- TODO Apenas para fins de protótipo! -->
 			<li class="span3">
 				<div class="thumbnail">
 					<a href="product_details.html"><img
 						src="#{resource['cliente:images/products/6.jpg']}" alt="" /></a>
 					<div class="caption">
-						<h5>Product name</h5>
-						<p>Lorem Ipsum is simply dummy text.</p>
+						<h5><h:outputText value="#{carrinhoMB.livroDeTeste.titulo}" /></h5>
+						<p>Aqui pode vir um pedaço da sinopse do livro.</p>
 
 						<h4 style="text-align: center">
-							<a class="btn" href="product_details.html"> <i
-								class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
-								class="icon-shopping-cart"></i></a> <a class="btn btn-primary"
-								href="#">$222.00</a>
+							<h:form prependId="false">
+								<a class="btn" href="livro.jsf?id=#{carrinhoMB.livroDeTeste.id}">
+									<i class="icon-zoom-in"></i>
+								</a>
+								<a class="btn" jsf:action="#{carrinhoMB.adicionar(carrinhoMB.livroDeTeste)}">Adicionar ao <i class="icon-shopping-cart"></i></a>
+								<a class="btn btn-primary" href="livro.jsf?id=#{carrinhoMB.livroDeTeste.id}">
+									<h:outputText value="#{carrinhoMB.livroDeTeste.preco}">
+										<f:convertNumber locale="pt_BR" type="currency" />
+									</h:outputText>
+								</a>
+							</h:form>
 						</h4>
 					</div>
 				</div>
@@ -275,7 +287,7 @@
 						<p>Lorem Ipsum is simply dummy text.</p>
 						<h4 style="text-align: center">
 							<a class="btn" href="product_details.html"> <i
-								class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
+								class="icon-zoom-in"></i></a> <a class="btn" href="#">Adicionar ao <i
 								class="icon-shopping-cart"></i></a> <a class="btn btn-primary"
 								href="#">$222.00</a>
 						</h4>
@@ -291,7 +303,7 @@
 						<p>Lorem Ipsum is simply dummy text.</p>
 						<h4 style="text-align: center">
 							<a class="btn" href="product_details.html"> <i
-								class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
+								class="icon-zoom-in"></i></a> <a class="btn" href="#">Adicionar ao <i
 								class="icon-shopping-cart"></i></a> <a class="btn btn-primary"
 								href="#">$222.00</a>
 						</h4>
@@ -307,7 +319,7 @@
 						<p>Lorem Ipsum is simply dummy text.</p>
 						<h4 style="text-align: center">
 							<a class="btn" href="product_details.html"> <i
-								class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
+								class="icon-zoom-in"></i></a> <a class="btn" href="#">Adicionar ao <i
 								class="icon-shopping-cart"></i></a> <a class="btn btn-primary"
 								href="#">$222.00</a>
 						</h4>
@@ -323,7 +335,7 @@
 						<p>Lorem Ipsum is simply dummy text.</p>
 						<h4 style="text-align: center">
 							<a class="btn" href="product_details.html"> <i
-								class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
+								class="icon-zoom-in"></i></a> <a class="btn" href="#">Adicionar ao <i
 								class="icon-shopping-cart"></i></a> <a class="btn btn-primary"
 								href="#">$222.00</a>
 						</h4>
@@ -339,7 +351,7 @@
 						<p>Lorem Ipsum is simply dummy text.</p>
 						<h4 style="text-align: center">
 							<a class="btn" href="product_details.html"> <i
-								class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
+								class="icon-zoom-in"></i></a> <a class="btn" href="#">Adicionar ao <i
 								class="icon-shopping-cart"></i></a> <a class="btn btn-primary"
 								href="#">$222.00</a>
 						</h4>
@@ -347,9 +359,6 @@
 				</div>
 			</li>
 		</ul>
-
-
-
 	</ui:define>
 </ui:composition>
 </html>
