@@ -25,12 +25,32 @@ public class HistoricoClienteMB implements Serializable {
 	
 	private Cliente cliente;
 	
+	private Integer idCliente;
+	
+	public Integer getIdCliente() {
+		return idCliente;
+	}
+	
+	public void setIdCliente(Integer idCliente) {
+		this.idCliente = idCliente;
+	}
+	
 	public Cliente getCliente() {
 		return cliente;
 	}
 	
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+	
+	public void carregarCliente() {
+		if (idCliente == null) {
+			cliente = new Cliente();
+		} else {
+			cliente = clienteDao.buscar(idCliente);
+			if (cliente == null)
+				cliente = new Cliente();
+		}
 	}
 	
 	public List<Venda> getListaDeVendas() {
@@ -41,9 +61,9 @@ public class HistoricoClienteMB implements Serializable {
 		return vendaDao.aprovados(cliente);
 	}
 	
-	/*public List<Venda> getListaDeVendasEmAndamento() {
+	public List<Venda> getListaDeVendasEmAndamento() {
 		return vendaDao.emAndamento(cliente);
-	}*/
+	}
 	
 	public List<Venda> getListaDeVendasCanceladas() {
 		return vendaDao.negados(cliente);

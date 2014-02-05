@@ -12,3 +12,46 @@ INSERT INTO livro (id, ano, autor, edicao, editora, estoque, genero, isbn, preco
 INSERT INTO livro (id, ano, autor, edicao, editora, estoque, genero, isbn, preco, sinopse, titulo) VALUES (3, 2005, 'Sierra Kathy', 1, 'Alta Books', 5, 'Informática', '9788576081739', 139, 'Use a Cabeça Java é uma experiência completa de aprendizado em programação orientada a objetos (OO) e Java.', 'Use a Cabeça Java');
 INSERT INTO livro (id, ano, autor, edicao, editora, estoque, genero, isbn, preco, sinopse, titulo) VALUES (2, 2013, 'Ricardo Lecheta', 3, 'Novatec', 30, 'Informática', '9788575223444', 123, 'O Android é a plataforma open-source criada pelo Google para o desenvolvimento de aplicações para dispositivos móveis. É a nova sensação do momento e está revolucionando o desenvolvimento de aplicações.', 'Google Android');
 INSERT INTO livro (id, ano, autor, edicao, editora, estoque, genero, isbn, preco, sinopse, titulo) VALUES (1, 2010, 'Deitel', 8, 'Prentice Hall', 10, 'Informática', '9788576055631', 312, 'A oitava edição de Java - como programar, lançada pela Pearson Education, chega ao mercado com novo design e um traço inovador.', 'Java - Como Programar');
+
+-- Endere�os
+INSERT INTO endereco (id, bairro, cep, cidade, estado, logradouro, numero) VALUES (1, 'Algum', '49000000', 'Fict�cia', 'Sergipe', 'rua Frei lim�o', '45');
+
+-- Usu�rios
+INSERT INTO usuario (id, tipo, cpf, data_nascimento, email, nome, rg, senha, telefone, endereco_id) VALUES (1, 2, '12345678911', '1990/08/04', 'usuario@email.com', 'Usuario', '73284902', 'muito dificil', '7937282920', 1);
+
+-- Clientes
+INSERT INTO cliente (id, data_cadastro) VALUES (1, '2013/11/03');
+
+-- Movimenta��es
+INSERT INTO movimentacao (id, tipo, data) VALUES (1, 2, '2013/11/03');
+INSERT INTO movimentacao (id, tipo, data) VALUES (2, 2, '2013/11/04');
+INSERT INTO movimentacao (id, tipo, data) VALUES (3, 2, '2013/11/05');
+INSERT INTO movimentacao (id, tipo, data) VALUES (4, 2, '2013/11/06');
+INSERT INTO movimentacao (id, tipo, data) VALUES (5, 2, '2013/11/07');
+
+
+-- Itens de Livros
+INSERT INTO itemlivro (id, preco, quantidade, movimentacao_id, livro_id) VALUES (1, 312, 1, 1, 1);
+INSERT INTO itemlivro (id, preco, quantidade, movimentacao_id, livro_id) VALUES (2, 246, 2, 1, 2);
+INSERT INTO itemlivro (id, preco, quantidade, movimentacao_id, livro_id) VALUES (3, 417, 3, 2, 3);
+INSERT INTO itemlivro (id, preco, quantidade, movimentacao_id, livro_id) VALUES (4, 170, 1, 2, 4);
+INSERT INTO itemlivro (id, preco, quantidade, movimentacao_id, livro_id) VALUES (5, 410, 1, 3, 5);
+INSERT INTO itemlivro (id, preco, quantidade, movimentacao_id, livro_id) VALUES (6, 79.80, 2, 3, 6);
+INSERT INTO itemlivro (id, preco, quantidade, movimentacao_id, livro_id) VALUES (7, 71.70, 3, 4, 7);
+INSERT INTO itemlivro (id, preco, quantidade, movimentacao_id, livro_id) VALUES (8, 47.80, 2, 4, 8);
+INSERT INTO itemlivro (id, preco, quantidade, movimentacao_id, livro_id) VALUES (9, 25, 1, 5, 9);
+INSERT INTO itemlivro (id, preco, quantidade, movimentacao_id, livro_id) VALUES (10, 406.50, 15, 5, 10);
+
+-- Pagamentos
+INSERT INTO pagamento(id, aprovado, data, tipo) VALUES (1, 'TRUE', '2014/01/02', 3);
+INSERT INTO pagamento(id, aprovado, data, tipo) VALUES (2, 'TRUE', '2014/01/03', 1);
+INSERT INTO pagamento(id, aprovado, data, tipo) VALUES (3, 'FALSE', '2014/01/04', 5);
+INSERT INTO pagamento(id, aprovado, data, tipo) VALUES (4, 'TRUE', '2014/01/05', 2);
+INSERT INTO pagamento(id, data, tipo) VALUES (5, '2014/01/06', 1);
+
+-- Vendas
+INSERT INTO venda(id, cliente_id, pagamento_id) VALUES (1, 1, 1);
+INSERT INTO venda(id, cliente_id, pagamento_id) VALUES (2, 1, 2);
+INSERT INTO venda(id, cliente_id, pagamento_id) VALUES (3, 1, 3);
+INSERT INTO venda(id, cliente_id, pagamento_id) VALUES (4, 1, 4);
+INSERT INTO venda(id, cliente_id, pagamento_id) VALUES (5, 1, 5);

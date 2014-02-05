@@ -22,7 +22,7 @@ public class Venda extends Movimentacao implements Serializable {
 	public Cliente getCliente() {
 		return cliente;
 	}
-
+	
 	public Pagamento getPagamento() {
 		return pagamento;
 	}
