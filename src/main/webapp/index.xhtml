@@ -256,10 +256,15 @@
 			<!-- TODO Apenas para fins de protótipo! -->
 			<li class="span3">
 				<div class="thumbnail">
-					<a href="product_details.html"><img
-						src="#{resource['cliente:images/products/6.jpg']}" alt="" /></a>
+					<a href="livro.jsf?id=#{carrinhoMB.livroDeTeste.id}">
+						<img src="#{resource['cliente:images/products/6.jpg']}" alt="" />
+					</a>
 					<div class="caption">
-						<h5><h:outputText value="#{carrinhoMB.livroDeTeste.titulo}" /></h5>
+						<h5>
+							<a href="livro.jsf?id=#{carrinhoMB.livroDeTeste.id}">
+								<h:outputText value="#{carrinhoMB.livroDeTeste.titulo}" />
+							</a>
+						</h5>
 						<p>Aqui pode vir um pedaço da sinopse do livro.</p>
 
 						<h4 style="text-align: center">
