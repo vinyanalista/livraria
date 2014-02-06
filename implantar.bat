@@ -5,7 +5,6 @@ echo Livraria
 echo *******************************************************************************
 echo.
 call mvn clean compile package
-call mvn glassfish:start-domain
 call mvn glassfish:undeploy
 call mvn glassfish:deploy
 echo.
