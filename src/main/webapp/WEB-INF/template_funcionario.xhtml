@@ -183,7 +183,7 @@
 					<c:forEach items="${mensagensMB.listaDeMensagens}" var="mensagem">
 						<div class="alert ${mensagem.tipo.classe}">
 							<button type="button" class="close" data-dismiss="alert">&times;</button>
-							<h:outputText value="${mensagem.conteudo}" />
+							<h:outputText value="${mensagem.conteudo}" escape="false" />
 						</div>
 					</c:forEach>
 				</div>

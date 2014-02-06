@@ -41,4 +41,8 @@ public class LivroDAO extends DAO<Livro> {
 		return entityManager.createQuery("select l from Livro l where l.estoque <= " + estoqueEscasso).getResultList();
 	}
 	
+	public List<Livro> maisVendidos(){
+		return entityManager.createQuery("SELECT livro FROM Livro livro", Livro.class).getResultList();
+	}
+	
 }
