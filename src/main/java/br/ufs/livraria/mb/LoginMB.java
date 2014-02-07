@@ -27,6 +27,8 @@ public class LoginMB implements Serializable {
 	private String email;
 	private String senha;
 	
+	private String urlRetorno;
+	
 	@EJB
 	private UsuarioDAO usuarioDAO;
 	
@@ -39,7 +41,11 @@ public class LoginMB implements Serializable {
 				addMessage("Login efetuado com sucesso", FacesMessage.SEVERITY_INFO);
 				Usuario usuario = usuarioDAO.getByEmail(email);
 				loginInfo.setUsuarioLogado(usuario);
-				return "index.jsf?faces-redirect=true";
+				if (urlRetorno == null) {
+					return "index.jsf?faces-redirect=true";
+				} else {
+					return urlRetorno;
+				}
 			} else {
 				addMessage("Usuário ou senha inválidos", FacesMessage.SEVERITY_ERROR);
 			}
@@ -82,6 +88,14 @@ public class LoginMB implements Serializable {
 	
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	
+	public String getUrlRetorno() {
+		return urlRetorno;
+	}
+	
+	public void setUrlRetorno(String urlRetorno) {
+		this.urlRetorno = urlRetorno;
 	}
 	
 	private void addMessage(String message, Severity severity) {
