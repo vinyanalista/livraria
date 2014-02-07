@@ -110,21 +110,10 @@
 								</div>
 							</div>
 							
-							<div class="form-group">
-								<label class="control-label col-lg-4" for="data">Data da Compra</label>
-								<div class="col-lg-8">
-									<input jsf:id="dataCompra" name="dataCompra"
-										jsf:value="#{compraMB.compra.data}"
-										type="text" placeholder="dd/mm/yyyy"
-										class="form-control required">
-										<f:convertDateTime pattern="dd/mm/yyyy"/>
-									</input>
-								</div>
-							</div>
-
 							<div class="form-actions no-margin-bottom">
-								<a jsf:id="cancelar" class="btn btn-default" jsf:action="index.jsf" jsf:immediate="true">Cancelar</a>
-								<h:commandButton styleClass="btn btn-primary" action="#{compraMB.salvar}" value="#{compraMB.cadastro ? 'Salvar' : 'Atualizar'}"/> 
+								<h:commandButton styleClass="btn btn-default" action="index.jsf?faces-redirect=true" immediate="true" value="#{compraMB.cadastro ? 'Cancelar' : 'Voltar'}" />
+								<h:commandButton styleClass="btn btn-primary" action="#{compraMB.salvar}" value="Salvar" rendered="#{compraMB.cadastro}"
+									onclick="return confirm('Após o cadastro não será possível editar ou excluir a compra. Deseja continuar?')"/> 
 							</div>
 						</form>
 					</div>
