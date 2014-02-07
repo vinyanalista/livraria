@@ -3,20 +3,11 @@ package br.ufs.livraria.modelo;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
-public class Pagamento implements Serializable {
+public class Pagamento extends Entidade implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue
-	private Integer id;
 
 	private Boolean aprovado;
 	
@@ -29,10 +20,6 @@ public class Pagamento implements Serializable {
 	public Pagamento() {
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
 	public Boolean getAprovado() {
 		return aprovado;
 	}
@@ -43,10 +30,6 @@ public class Pagamento implements Serializable {
 
 	public Date getData() {
 		return data;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public void setAprovado(Boolean aprovado) {

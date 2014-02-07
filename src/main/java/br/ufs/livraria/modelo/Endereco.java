@@ -2,18 +2,11 @@ package br.ufs.livraria.modelo;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-public class Endereco implements Serializable {
+public class Endereco extends Entidade implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue
-	private Integer id;
 
 	private String logradouro;
 	
@@ -32,10 +25,6 @@ public class Endereco implements Serializable {
 	private String cep;
 	
 	public Endereco() {
-	}
-
-	public Integer getId() {
-		return id;
 	}
 
 	public String getLogradouro() {
@@ -60,10 +49,6 @@ public class Endereco implements Serializable {
 
 	public String getCep() {
 		return cep;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public void setLogradouro(String logradouro) {

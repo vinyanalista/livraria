@@ -2,22 +2,11 @@ package br.ufs.livraria.modelo;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
-public class ItemLivro implements Serializable {
+public class ItemLivro extends Entidade implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue
-	private Integer id;
 
 	@Column(length = 4)
 	private Integer quantidade;
@@ -35,10 +24,6 @@ public class ItemLivro implements Serializable {
 	public ItemLivro() {
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
 	public Integer getQuantidade() {
 		return quantidade;
 	}
@@ -53,10 +38,6 @@ public class ItemLivro implements Serializable {
 
 	public Movimentacao getMovimentacao() {
 		return movimentacao;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public void setQuantidade(Integer quantidade) {

@@ -3,31 +3,15 @@ package br.ufs.livraria.modelo;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.INTEGER)
 @DiscriminatorValue("0")
-public abstract class Usuario implements Serializable {
+public abstract class Usuario extends Entidade implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue
-	protected Integer id;
 
 	@Column(length = 50)
 	protected String nome;
@@ -59,10 +43,6 @@ public abstract class Usuario implements Serializable {
 
 	public Usuario() {
 	}
-	
-	public Integer getId() {
-		return id;
-	}
 
 	public String getNome() {
 		return nome;
@@ -90,10 +70,6 @@ public abstract class Usuario implements Serializable {
 
 	public Endereco getEndereco() {
 		return endereco;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public void setNome(String nome) {
