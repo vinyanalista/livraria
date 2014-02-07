@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<f:metadata>
+	<f:viewParam name="id" value="#{compraMB.id}" />
+</f:metadata>
+<ui:composition template="/WEB-INF/template_funcionario.xhtml">
+	<ui:define name="titulo">SIGELI - Acesso do Funcionário - Compra - Cadastro</ui:define>
+	<ui:define name="main-bar">
+		<h3>
+			<i class="fa fa-book"></i>Compra
+		</h3>
+	</ui:define>
+	<ui:define name="conteudo">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="box">
+					<header>
+					<div class="icons">
+						<i class="fa fa-edit"></i>
+					</div>
+					<h5>
+						<h:outputText value="Cadastrar"
+							rendered="#{compraMB.cadastro}" />
+						<h:outputText value="Editar" rendered="#{not compraMB.cadastro}" />
+					</h5>
+					</header>
+					<div id="collapse2" class="body in" style="height: auto;">
+						<form jsf:id="form" class="form-horizontal inline-validate">
+							<h4>Informações</h4>
+							
+							<div class="form-group">
+								<label class="control-label col-lg-4">Fornecedor</label>
+								<div class="col-lg-8">
+									<table id="dataTableFornecedor"
+										class="table table-bordered table-condensed table-hover table-striped">
+										<thead>
+											<tr>
+												<th />
+												<th>Nome</th>
+												<th>CNPJ</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach items="#{fornecedorMB.listaDeFornecedores}" var="fornecedor">
+												<tr>
+													<td>
+														<h:selectBooleanCheckbox value="#{compraMB.fornecedorCheckMap[fornecedor.cnpj]}">
+															<f:ajax event="change" execute="@this" listener="#{compraMB.setFornecedor(fornecedor)}" 
+																render="@form"/>
+														</h:selectBooleanCheckbox>
+													</td>
+													<td><h:outputText value="#{fornecedor.nome}" /></td>
+													<td><h:outputText value="#{fornecedor.cnpj}" /></td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label col-lg-4">Livro</label>
+								<div class="col-lg-8">
+									<table id="dataTableLivro"
+										class="table table-bordered table-condensed table-hover table-striped">
+										<thead>
+											<tr>
+												<th />
+												<th>Título</th>
+												<th>Autor</th>
+												<th>Edição</th>
+												<th>Quantidade</th>
+												<th>Preço</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach items="#{livroMB.listaDeLivros}" var="livro">
+												<tr>
+													<td>
+														<h:selectBooleanCheckbox value="#{compraMB.livroCheckMap[livro.id]}">
+															<f:ajax event="change" execute="@this" render="@form" 
+																listener="#{compraMB.prepareItemLivro(livro)}" />
+														</h:selectBooleanCheckbox>
+													</td>
+													<td><h:outputText value="#{livro.titulo}" /></td>
+													<td><h:outputText value="#{livro.autor}" /></td>
+													<td><h:outputText value="#{livro.edicao}&ordf;" /></td>
+													<td>
+														<h:inputText value="#{compraMB.itemLivroMap[livro.id].quantidade}" required="true" rendered="#{compraMB.itemLivroMap.containsKey(livro.id)}">
+															<f:ajax event="change" execute="@this" />
+														</h:inputText>
+														<h:outputText rendered="#{not (compraMB.itemLivroMap.containsKey(livro.id))}" value="-" />
+													</td>
+													<td>
+														<h:inputText value="#{compraMB.itemLivroMap[livro.id].preco}" required="true" rendered="#{compraMB.itemLivroMap.containsKey(livro.id)}">
+															<f:ajax event="change" execute="@this" />
+														</h:inputText>
+														<h:outputText rendered="#{not (compraMB.itemLivroMap.containsKey(livro.id))}" value="-" />
+													</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label class="control-label col-lg-4" for="data">Data da Compra</label>
+								<div class="col-lg-8">
+									<input jsf:id="dataCompra" name="dataCompra"
+										jsf:value="#{compraMB.compra.data}"
+										type="text" placeholder="dd/mm/yyyy"
+										class="form-control required">
+										<f:convertDateTime pattern="dd/mm/yyyy"/>
+									</input>
+								</div>
+							</div>
+
+							<div class="form-actions no-margin-bottom">
+								<a jsf:id="cancelar" class="btn btn-default" jsf:action="index.jsf" jsf:immediate="true">Cancelar</a>
+								<h:commandButton styleClass="btn btn-primary" action="#{compraMB.salvar}" value="#{compraMB.cadastro ? 'Salvar' : 'Atualizar'}"/> 
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<h:outputStylesheet library="funcionario" name="css/funcionario.css" />
+		<h:outputScript library="funcionario" name="js/funcionario.js" />
+	</ui:define>
+</ui:composition>
+</html>
