@@ -1,7 +1,7 @@
 package br.ufs.livraria.mb;
 
 import java.io.Serializable;
-import java.text.MessageFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,20 +62,15 @@ public class CompraMB implements Serializable {
 	
 	public String salvar() {
 		try {
-			boolean cadastro = isCadastro();
-			if (cadastro) {
-				compraDAO.inserir(compra);
-			} else {
-				compraDAO.atualizar(compra);
-			}
+			compra.setData(new Date());
+			compraDAO.inserir(compra);
 			for (ItemLivro itemLivro : itemLivroMap.values()) {
 				itemLivroDAO.inserir(itemLivro);
 				Livro livro = itemLivro.getLivro();
 				livro.setEstoque(livro.getEstoque() + itemLivro.getQuantidade());
 				livroDAO.atualizar(livro);
 			}
-			mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO,
-					MessageFormat.format("A compra foi {0} com sucesso!", cadastro ? "cadastrada" : "atualizada"));
+			mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO, "A compra foi cadastrada com sucesso!");
 			return "index.jsf?faces-redirect=true";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -83,10 +78,6 @@ public class CompraMB implements Serializable {
 					"Ocorreu um erro durante o processamento da solicitação.");
 			return "cadastro.jsf";
 		}
-	}
-	
-	public void excluir() {
-		compraDAO.remover(compra.getId());
 	}
 	
 	public Compra getCompra() {
