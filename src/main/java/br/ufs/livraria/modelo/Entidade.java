@@ -8,10 +8,10 @@ import javax.persistence.*;
 public abstract class Entidade implements Serializable {
 	private static final long serialVersionUID = 1L;
         
-        @Id
+    @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-
+    protected Integer id;
+    
 	public Integer getId() {
 		return id;
 	}
