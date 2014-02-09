@@ -58,7 +58,7 @@ public class LivroMB implements Serializable {
 	
 	public String excluir() {
 		try {
-			livroDao.remover(livro.getId());
+			livroDao.remover(livro); // TODO Verificar
 			mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO, "O livro foi excluído com sucesso!");
 			return "index.jsf?faces-redirect=true";
 		} catch (Exception e) {

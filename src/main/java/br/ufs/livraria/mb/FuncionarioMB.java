@@ -77,9 +77,9 @@ public class FuncionarioMB implements Serializable {
 		}
 	}
 
-	public String excluir() {
+	public String excluir(Funcionario funcionario) {
 		try {
-			funcionarioDao.remover(id);
+			funcionarioDao.remover(funcionario); // TODO Verificar
 			mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO,
 					"O Funcionario foi excluído com sucesso!");
 			return "index.jsf?faces-redirect=true";
