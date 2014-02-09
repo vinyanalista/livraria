@@ -5,15 +5,17 @@ import java.util.List;
 
 import javax.persistence.*;
 
-public class DAO<Entidade> implements Serializable {
+import br.ufs.livraria.modelo.Entidade;
+
+public class DAO<E extends Entidade> implements Serializable {
 	protected static final long serialVersionUID = 1L;
 
 	@PersistenceContext(unitName = "livraria")
 	protected EntityManager entityManager;
 
-	private final Class<Entidade> classeDaEntidade;
+	private final Class<E> classeDaEntidade;
 
-	public DAO(Class<Entidade> classeDaEntidade) {
+	public DAO(Class<E> classeDaEntidade) {
 		this.classeDaEntidade = classeDaEntidade;
 	}
 
@@ -21,7 +23,7 @@ public class DAO<Entidade> implements Serializable {
 		entityManager.merge(entidade);
 	}
 
-	public Entidade buscar(Integer id) {
+	public E buscar(Integer id) {
 		return entityManager.find(classeDaEntidade, id);
 	}
 
@@ -29,13 +31,13 @@ public class DAO<Entidade> implements Serializable {
 		entityManager.persist(entidade);
 	}
 
-	public List<Entidade> listar() {
+	public List<E> listar() {
 		return entityManager.createQuery(
 				"SELECT entidade FROM " + classeDaEntidade.getSimpleName()
 						+ " entidade", classeDaEntidade).getResultList();
 	}
 
-	public void remover(Integer id){
-		entityManager.remove(entityManager.find(classeDaEntidade, id));
-	};
+	public void remover(Entidade entidade){
+		entityManager.remove(entityManager.find(classeDaEntidade, entidade.getId()));
+	}
 }

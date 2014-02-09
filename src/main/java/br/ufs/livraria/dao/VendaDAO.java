@@ -15,10 +15,6 @@ public class VendaDAO extends DAO<Venda>{
 		super(Venda.class);
 	}
 	
-	public void remover(Venda venda) {
-		entityManager.remove(entityManager.find(Venda.class, venda.getId()));
-	}
-	
 	public List<Venda> listar(Cliente cliente) {
 		return entityManager.createQuery(
 				"SELECT v FROM Venda v WHERE v.cliente.id = :cliente", Venda.class)
