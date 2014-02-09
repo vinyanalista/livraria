@@ -128,5 +128,14 @@ public class Livro extends Entidade implements Serializable {
 		}
 		return false;
 	}
+	
+	public String getSinopseCurta() {
+		if (sinopse == null || sinopse.isEmpty()) {
+			return "";
+		}
+		final int TAMANHO_MAXIMO = 100;
+		int tamanho = (sinopse.length() < TAMANHO_MAXIMO) ? sinopse.length() : TAMANHO_MAXIMO - 3;
+		return sinopse.substring(0, tamanho) + ((sinopse.length() > TAMANHO_MAXIMO) ? "..." : "");
+	}
 
 }

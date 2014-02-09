@@ -42,7 +42,16 @@ public class LivroDAO extends DAO<Livro> {
 	}
 	
 	public List<Livro> maisVendidos(){
-		return entityManager.createQuery("SELECT livro FROM Livro livro", Livro.class).getResultList();
+		String query = "SELECT livro FROM Livro livro";
+		query += " LEFT JOIN ItemLivro itemlivro ON itemlivro.livro = livro";
+		query += " INNER JOIN Venda venda ON venda = itemlivro.movimentacao";
+		query += " GROUP BY livro";
+		query += " ORDER BY SUM(itemlivro.quantidade) DESC, livro.titulo";
+		return entityManager.createQuery(query, Livro.class).setMaxResults(8).getResultList();
+	}
+	
+	public List<Livro> ultimosLancamentos(){
+		return entityManager.createQuery("SELECT livro FROM Livro livro ORDER BY livro.id DESC", Livro.class).setMaxResults(6).getResultList();
 	}
 	
 }

@@ -227,8 +227,8 @@
 					<div class="well well-small">
 						<a id="myCart" href="#{request.contextPath}/carrinho.jsf">
 							<img src="#{resource['cliente:images/ico-cart.png']}" alt="cart" />
-							<h:outputText value="Sem itens no carrinho" rendered="#{carrinhoMB.quantidadeDeItens == 0}" />
-							<h:outputText value="#{carrinhoMB.quantidadeDeItens} itens no carrinho" rendered="#{carrinhoMB.quantidadeDeItens > 0}" />
+							<h:outputText value="Sem itens" rendered="#{carrinhoMB.quantidadeDeItens == 0}" />
+							<h:outputText value="#{carrinhoMB.quantidadeDeItens} itens" rendered="#{carrinhoMB.quantidadeDeItens > 0}" />
 							<span class="badge badge-warning pull-right" jsf:rendered="#{carrinhoMB.quantidadeDeItens > 0}">
 								<h:outputText value="#{carrinhoMB.valorTotal}">
 									<f:convertNumber locale="pt_BR" type="currency" />

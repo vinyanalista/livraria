@@ -57,7 +57,7 @@ public class RelatorioMB implements Serializable {
 	
 	public String excluir() {
 		try {
-			vendaDao.remover(venda.getId());
+			vendaDao.remover(venda);
 			mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO, "O registro de venda foi excluído com sucesso!");
 			return "index.jsf?faces-redirect=true";
 		} catch (Exception e) {
