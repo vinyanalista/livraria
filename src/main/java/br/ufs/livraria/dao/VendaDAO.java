@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 
 import br.ufs.livraria.modelo.Cliente;
 import br.ufs.livraria.modelo.Venda;
+import java.util.Date;
 
 @Stateless
 public class VendaDAO extends DAO<Venda>{
@@ -28,6 +29,13 @@ public class VendaDAO extends DAO<Venda>{
 				"SELECT v FROM Venda v WHERE v.pagamento.aprovado = TRUE", Venda.class)
 				.getResultList();
 	}
+	
+	//Compras com Pagamentos Aprovados por Período
+		public List<Venda> aprovados(Date data1, Date data2) {
+			return entityManager.createQuery(
+					"SELECT v FROM Venda v WHERE v.pagamento.date BETWEEN date1 AND date2", Venda.class)
+					.getResultList();
+		}
 	
 	//Compras com Pagamentos Negados
 	public List<Venda> negados() {

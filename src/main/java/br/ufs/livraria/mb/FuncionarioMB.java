@@ -52,7 +52,7 @@ public class FuncionarioMB implements Serializable {
 		}
 	}
 
-	public List<Funcionario> getListaDeFuncionarioes() {
+	public List<Funcionario> getListaDeFuncionarios() {
 		return funcionarioDao.listar();
 	}
 
