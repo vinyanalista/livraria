@@ -42,6 +42,7 @@ public abstract class Usuario extends Entidade implements Serializable {
 	private String senha;
 
 	public Usuario() {
+		endereco = new Endereco();
 	}
 
 	public String getNome() {

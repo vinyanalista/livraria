@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<f:metadata>
+	<f:viewParam name="id" value="#{clienteMB.id}" />
+<!-- 	<f:viewAction action="#{clienteMB.carregarFornecedor}"/> -->
+</f:metadata>
+<ui:composition template="/WEB-INF/template_cliente.xhtml">
+	<ui:define name="titulo">SIGELI - Página Inicial</ui:define>
+	<ui:define name="conteudo">
+		
+		<div class="span9">
+    <ul class="breadcrumb">
+		<li><a href="index.html">Home</a> <span class="divider">/</span></li>
+		<li class="active">Cadastro</li>
+    </ul>
+	<h3> Cadastro</h3>	
+	<div class="well">
+	<form jsf:id="form" class="form-horizontal inline-validate" jsf:prependId="false">
+		<h4>Informação Pessoal</h4>
+		<div class="control-group">
+			<label class="control-label" for="nome">Nome<sup>*</sup></label>
+			<div class="controls">
+			  <input jsf:id="nome" name="nome" jsf:value="#{clienteMB.cliente.nome}"
+										type="text" placeholder="Nome"
+										class="form-control required" />
+			</div>
+		 </div>
+		<div class="control-group">
+		<label class="control-label" for="email">Email<sup>*</sup></label>
+		<div class="controls">
+			  <input jsf:id="email" name="email" jsf:value="#{clienteMB.cliente.email}"
+										type="text" placeholder="Email"
+										class="form-control required" />
+		</div>
+	  </div>	  
+		<div class="control-group">
+		<label class="control-label" for="senha1">Senha <sup>*</sup></label>
+		<div class="controls">
+		  	<input jsf:id="senha1" name="senha1" jsf:value="#{clienteMB.senha1}"
+										type="text" placeholder="Senha"
+										class="form-control required" />
+		</div>
+	  	</div>
+	  	<div class="control-group">
+		<label class="control-label" for="senha2">Confirmação da Senha <sup>*</sup></label>
+		<div class="controls">
+		  	<input jsf:id="senha2" name="senha2" jsf:value="#{clienteMB.senha2}"
+										type="text" placeholder="Senha"
+										class="form-control required" />
+		</div>
+	  	</div>	  
+		<div class="control-group">
+		<label class="control-label">Data de Nascimento <sup>*</sup></label>
+		<div class="controls">
+		  	<input jsf:id="dataNascimento" name="dataNascimento"
+										jsf:value="#{clienteMB.cliente.dataNascimento}" type="text"
+										placeholder="dd/mm/yyyy"
+										class="form-control required">
+				<f:convertDateTime locale="pt_BR" />
+			</input>
+		</div>
+	  </div>
+
+		<h4>Endereco</h4>
+		<div class="control-group">
+			<label class="control-label" for="logradouro">Logradouro<sup>*</sup></label>
+			<div class="controls">
+				<input jsf:id="logradouro" name="logradouro"
+										jsf:value="#{clienteMB.cliente.endereco.logradouro}" type="text"
+										placeholder="Logradouro"
+										 class="form-control"/>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label" for="numero">Número</label>
+			<div class="controls">
+			  <input jsf:id="numero" name="numero"
+										jsf:value="#{clienteMB.cliente.endereco.numero}" type="text"
+										placeholder="Número"
+										 class="form-control digits"/>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label" for="bairro">Bairro<sup>*</sup></label>
+			<div class="controls">
+			  <input jsf:id="bairro" name="bairro"
+										jsf:value="#{clienteMB.cliente.endereco.bairro}" type="text"
+										placeholder="Bairro"
+										 class="form-control"/>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label" for="cidade">Cidade<sup>*</sup></label>
+			<div class="controls">
+			  <input jsf:id="cidade" name="cidade"
+										jsf:value="#{clienteMB.cliente.endereco.cidade}" type="text"
+										placeholder="Cidade"
+										 class="form-control"/>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label" for="estado">Estado<sup>*</sup></label>
+			<div class="controls">
+			  <input jsf:id="Estado" name="estado"
+										jsf:value="#{clienteMB.cliente.endereco.estado}" type="text"
+										placeholder="Estado"
+										 class="form-control"/> 
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label" for="cep">CEP<sup>*</sup></label>
+			<div class="controls">
+			  			  <input jsf:id="cep" name="cep"
+										jsf:value="#{clienteMB.cliente.endereco.cep}" type="text"
+										placeholder="CEP"
+										 class="form-control"  data-mask="99999-999"/> 
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label" for="telefone">Telefone<sup>*</sup></label>
+			<div class="controls">
+			  <input jsf:id="telefone" name="telefone"
+										jsf:value="#{clienteMB.cliente.telefone}" type="text"
+										placeholder="Telefone" 
+										class="form-control" data-mask="(99) 9999-9999"/>
+			</div>
+		</div>
+		
+	<p><sup>*</sup>Campo Obrigatório	</p>
+		<div class="form-actions no-margin-bottom">
+			<a jsf:id="cancelar" class="btn btn-default" jsf:action="index.jsf" jsf:immediate="true">Cancelar</a>
+			<button jsf:id="inserir" class="btn btn-primary" jsf:action="#{clienteMB.inserir()}" jsf:rendered="#{clienteMB.cadastro}">Salvar</button>
+			<button jsf:id="atualizar" class="btn btn-primary" jsf:action="#{clienteMB.atualizar()}" jsf:rendered="#{!fornecedorMB.cadastro}">Salvar</button>
+		</div>		
+	</form>
+</div>
+</div>
+
+<h:outputStylesheet library="funcionario" name="css/funcionario.css" />
+<h:outputScript library="funcionario" name="js/funcionario.js" />
+</ui:define>
+</ui:composition>
+</html>
