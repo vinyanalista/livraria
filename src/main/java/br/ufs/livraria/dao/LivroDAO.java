@@ -33,14 +33,6 @@ public class LivroDAO extends DAO<Livro> {
 		return estoqueAnterior - qtd;
 	}
 	
-	public List<Livro> buscarPadrao(String padrao){
-		return entityManager.createQuery("select l from Livro l where l.titulo = "+padrao).getResultList();
-	}
-	
-	public List<Livro> livrosEscassos(){
-		return entityManager.createQuery("select l from Livro l where l.estoque <= " + estoqueEscasso).getResultList();
-	}
-	
 	public List<Livro> maisVendidos(){
 		String query = "SELECT livro FROM Livro livro";
 		query += " LEFT JOIN ItemLivro itemlivro ON itemlivro.livro = livro";
@@ -52,6 +44,48 @@ public class LivroDAO extends DAO<Livro> {
 	
 	public List<Livro> ultimosLancamentos(){
 		return entityManager.createQuery("SELECT livro FROM Livro livro ORDER BY livro.id DESC", Livro.class).setMaxResults(6).getResultList();
+	}
+	
+	public List<Livro> buscarLivro(String padrao){
+		return entityManager.createQuery(
+				"SELECT livro FROM Livro livro WHERE l.titulo  like '%padrao%'", Livro.class)
+				.setParameter("padrao", padrao)
+				.getResultList();
+	}
+	
+	public List<Livro> livrosEscassos(){
+		return entityManager.createQuery(
+				"SELECT livro FROM Livro livro WHERE l.estoque <= " + estoqueEscasso, Livro.class)
+				.getResultList();
+	}
+	
+	public List<Livro> buscaPorCategoria(String categoria){
+		return entityManager.createQuery(
+				"SELECT livro FROM Livro livro WHERE l.categoria = categoria", Livro.class)
+				.setParameter("categoria", categoria)
+				.getResultList();
+	}
+	
+	public List<Livro> buscaLivroPorEditora(String editora){
+		return entityManager.createQuery(
+				"SELECT livro FROM Livro livro WHERE l.editora  like '%editora%'", Livro.class)
+				.setParameter("editora", editora)
+				.getResultList();
+	}
+	
+	public List<Livro> buscaLivroPorAno(int ano){
+		return entityManager.createQuery(
+				"SELECT livro FROM Livro livro WHERE l.ano = ano", Livro.class)
+				.setParameter("ano", ano)
+				.getResultList();
+	}
+	
+	public List<Livro> buscaLivroPorPreco(float precoMin,float precoMax){
+		return entityManager.createQuery(
+				"SELECT livro FROM Livro livro WHERE l.preco BETWEEN precoMin AND precoMax", Livro.class)
+				.setParameter("precoMin", precoMin)
+				.setParameter("precoMax", precoMax)
+				.getResultList();
 	}
 	
 }
