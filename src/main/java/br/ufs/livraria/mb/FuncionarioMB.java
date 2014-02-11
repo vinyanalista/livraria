@@ -4,16 +4,18 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import org.apache.commons.codec.digest.DigestUtils;
 
 import br.ufs.livraria.dao.FuncionarioDAO;
 import br.ufs.livraria.enumeration.MensagemTipo;
 import br.ufs.livraria.modelo.Funcionario;
 
 @Named
-@RequestScoped
+@ViewScoped
 public class FuncionarioMB implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -61,6 +63,7 @@ public class FuncionarioMB implements Serializable {
 	public String atualizar() {
 		try {
 			if (senhasIguais()) {
+				funcionario.setSenha(DigestUtils.sha1Hex(senha1));
 				funcionarioDao.atualizar(funcionario);
 				mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO,
 						"O Funcionario foi atualizado com sucesso!");
@@ -93,6 +96,7 @@ public class FuncionarioMB implements Serializable {
 	public String inserir() {
 		try {
 			if (senhasIguais()) {
+				funcionario.setSenha(DigestUtils.sha1Hex(senha1));
 				funcionarioDao.inserir(funcionario);
 				mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO,
 						"O Funcionario foi cadastrado com sucesso!");
