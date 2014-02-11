@@ -1,15 +1,17 @@
 package br.ufs.livraria.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.Stateless;
 
 import br.ufs.livraria.modelo.Cliente;
 import br.ufs.livraria.modelo.Venda;
+
 import java.util.Date;
 
 @Stateless
-public class VendaDAO extends DAO<Venda>{
+public class VendaDAO extends DAO<Venda> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public VendaDAO() {

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<f:metadata>
+	<f:viewParam name="filtro" value="#{buscarMB.filtro}" />
+	<f:viewParam name="genero" value="#{buscarMB.genero}" />
+	<f:viewParam name="ordenacao" value="#{buscarMB.ordenacao}" />
+	<f:viewParam name="por" value="#{buscarMB.por}" />
+	<f:viewAction action="#{buscarMB.processar}" />
+	<!-- TODO Apenas para fins de protótipo! Remover!  -->
+	<f:viewAction action="#{carrinhoMB.inicializar}" />
+</f:metadata>
+<ui:composition template="/WEB-INF/template_cliente.xhtml">
+	<ui:define name="titulo">SIGELI - Busca de produtos</ui:define>
+	<ui:define name="conteudo">
+		<ul class="breadcrumb">
+			<li><a href="index.jsf">Página inicial</a> <span class="divider">/</span></li>
+			<li class="active">Busca de livros</li>
+		</ul>
+		<h3>
+			<h:outputText value="#{buscarMB.tituloDaPagina}" />
+			<h:panelGroup rendered="#{not empty buscarMB.lista}">
+				<small class="pull-right">
+					<h:outputText value="A busca retornou #{buscarMB.lista.size()} livros" />
+				</small>
+			</h:panelGroup>
+		</h3>
+		<form class="form-horizontal span6">
+			<div class="control-group">
+				<input name="filtro" type="hidden" value="#{buscarMB.filtro}" />
+				<input name="genero" type="hidden" value="#{buscarMB.genero}" />
+				<input name="por" type="hidden" value="#{buscarMB.por}" />
+				<label class="control-label alignL">Ordenar por </label> <select name="ordenacao">
+					<c:forEach items="#{buscarMB.opcoesBuscaOrdenacao}" var="opcao">
+						<option value="#{opcao.value}">#{opcao.label}</option>
+					</c:forEach>
+				</select>
+			</div>
+		</form>
+
+		<div id="myTab" class="pull-right">
+			<a href="#listView" data-toggle="tab">
+				<span class="btn btn-large"><i class="icon-list"></i></span>
+			</a>
+			<a href="#blockView" data-toggle="tab">
+				<span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span>
+			</a>
+		</div>
+		<br class="clr" />
+		
+		<div class="tab-content">
+		
+			<div class="tab-pane" id="listView">
+				<c:forEach items="#{buscarMB.lista}" var="livro" varStatus="status">
+					<div class="row">
+						<div class="span2">
+							<a href="livro.jsf?id=#{livro.id}">
+								<!-- TODO Apenas para fins de protótipo! Exibir capa do livro! -->
+								<img src="#{resource['cliente:images/products/6.jpg']}" alt="" />
+							</a>
+						</div>
+						<div class="span4">
+							<h3>
+								<a href="livro.jsf?id=#{livro.id}">
+									<h:outputText value="#{livro.titulo}" />
+								</a>
+							</h3>
+							<h5><h:outputText value="#{livro.autor}" /></h5>
+							<p><h:outputText value="#{livro.sinopseCurta}" /></p>
+							<a class="btn btn-small pull-right" href="livro.jsf?id=#{livro.id}">Leia mais</a>
+							<br class="clr" />
+						</div>
+						<div class="span3 alignR">
+							<form class="form-horizontal qtyFrm" jsf:prependId="false">
+								<h3><a href="livro.jsf?id=#{livro.id}">
+									<h:outputText value="#{livro.preco}">
+										<f:convertNumber locale="pt_BR" type="currency" />
+									</h:outputText>
+								</a></h3>
+								<br />
+								<a jsf:action="#{carrinhoMB.adicionar(livro)}" class="btn btn-large btn-primary"> Adicionar <i class=" icon-shopping-cart"></i></a>
+								<a href="livro.jsf?id=#{livro.id}" class="btn btn-large"><i class="icon-zoom-in"></i></a>
+							</form>
+						</div>
+					</div>
+					<hr class="soft" />
+				</c:forEach>
+			</div>
+
+			<div class="tab-pane  active" id="blockView">
+				<ul class="thumbnails">
+					<c:forEach items="#{buscarMB.lista}" var="livro" varStatus="status">
+						<c:choose>
+						    <c:when test="#{status.count % 3 == 1}">
+						        <c:set var="liClass" value="clear span3"/>
+						    </c:when>
+						    <c:otherwise>
+						        <c:set var="liClass" value="span3"/>
+						    </c:otherwise>
+						</c:choose>
+						<li class="#{liClass}">
+							<div class="thumbnail">
+								<!-- TODO Apenas para fins de protótipo! Exibir capa do livro! -->
+								<a href="livro.jsf?id=#{livro.id}">
+									<img src="#{resource['cliente:images/products/6.jpg']}" alt="" />
+								</a>
+								<div class="caption">
+									<h5>
+										<a href="livro.jsf?id=#{livro.id}">
+											<h:outputText value="#{livro.titulo}" />
+										</a>
+									</h5>
+									<p><h:outputText value="#{livro.sinopseCurta}" /></p>
+									<h4 style="text-align: center">
+										<form jsf:prependId="false">
+											<a class="btn" href="livro.jsf?id=#{livro.id}">
+												<i class="icon-zoom-in"></i>
+											</a>
+											<a class="btn" jsf:action="#{carrinhoMB.adicionar(livro)}">Adicionar <i class="icon-shopping-cart"></i></a>
+											<a class="btn btn-primary" href="livro.jsf?id=#{livro.id}">
+												<h:outputText value="#{livro.preco}">
+													<f:convertNumber locale="pt_BR" type="currency" />
+												</h:outputText>
+											</a>
+										</form>
+									</h4>
+								</div>
+							</div>
+						</li>
+					</c:forEach>
+				</ul>
+			</div>
+			
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

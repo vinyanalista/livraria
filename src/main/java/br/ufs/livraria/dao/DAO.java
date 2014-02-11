@@ -8,7 +8,7 @@ import javax.persistence.*;
 import br.ufs.livraria.modelo.Entidade;
 
 public class DAO<E extends Entidade> implements Serializable {
-	protected static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
 	@PersistenceContext(unitName = "livraria")
 	protected EntityManager entityManager;
@@ -19,7 +19,7 @@ public class DAO<E extends Entidade> implements Serializable {
 		this.classeDaEntidade = classeDaEntidade;
 	}
 
-	public void atualizar(Entidade entidade) {
+	public void atualizar(E entidade) {
 		entityManager.merge(entidade);
 	}
 
@@ -27,7 +27,7 @@ public class DAO<E extends Entidade> implements Serializable {
 		return entityManager.find(classeDaEntidade, id);
 	}
 
-	public void inserir(Entidade entidade) {
+	public void inserir(E entidade) {
 		entityManager.persist(entidade);
 	}
 
@@ -37,7 +37,7 @@ public class DAO<E extends Entidade> implements Serializable {
 						+ " entidade", classeDaEntidade).getResultList();
 	}
 
-	public void remover(Entidade entidade){
+	public void remover(E entidade){
 		entityManager.remove(entityManager.find(classeDaEntidade, entidade.getId()));
 	}
 }

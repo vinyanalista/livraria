@@ -1,5 +1,7 @@
 package br.ufs.livraria.dao;
 
+import java.io.Serializable;
+
 import javax.ejb.Stateless;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -7,7 +9,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import br.ufs.livraria.modelo.Usuario;
 
 @Stateless
-public class UsuarioDAO extends DAO<Usuario> {
+public class UsuarioDAO extends DAO<Usuario> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	

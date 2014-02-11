@@ -1,13 +1,17 @@
 package br.ufs.livraria.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.Stateless;
 
+import br.ufs.livraria.enumeration.BuscaFiltro;
+import br.ufs.livraria.enumeration.BuscaOrdenacao;
+import br.ufs.livraria.enumeration.Genero;
 import br.ufs.livraria.modelo.Livro;
 
 @Stateless
-public class LivroDAO extends DAO<Livro> {
+public class LivroDAO extends DAO<Livro> implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private static final int estoqueEscasso = 5;
@@ -52,6 +56,44 @@ public class LivroDAO extends DAO<Livro> {
 	
 	public List<Livro> ultimosLancamentos(){
 		return entityManager.createQuery("SELECT livro FROM Livro livro ORDER BY livro.id DESC", Livro.class).setMaxResults(6).getResultList();
+	}
+	
+	public List<Livro> buscar(String por, BuscaFiltro filtro, BuscaOrdenacao ordenacao, Genero genero) {
+		StringBuilder query = new StringBuilder("SELECT livro FROM Livro livro WHERE");
+		if ((por != null) && (!por.isEmpty())) {
+			switch (filtro) {
+			case AUTOR:
+			case SINOPSE:
+			case TUDO:
+				// TODO Verificar demais casos
+			case TITULO:
+			default:
+				query.append(" livro.titulo");
+				break;
+			}
+			query.append(" LIKE '%").append(por).append("%'");
+		}
+		// TODO Busca por gênero
+		if (ordenacao != null) {
+			query.append(" ORDER BY");
+			switch (ordenacao) {
+			case ESTOQUE:
+				query.append(" livro.quantidade DESC");
+				break;
+			case MENOR_PRECO:
+				query.append(" livro.preco ASC");
+				break;
+			case TITULO_A_Z:
+				query.append(" livro.titulo ASC");
+				break;
+			case TITULO_Z_A:
+				query.append(" livro.titulo DESC");
+				break;
+			default:
+				break;
+			}
+		}
+		return entityManager.createQuery(query.toString(), Livro.class).getResultList();
 	}
 	
 }

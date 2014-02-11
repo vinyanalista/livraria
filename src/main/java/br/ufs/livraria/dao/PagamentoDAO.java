@@ -1,11 +1,12 @@
 package br.ufs.livraria.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import br.ufs.livraria.modelo.Pagamento;
 import br.ufs.livraria.modelo.Usuario;
 
-public class PagamentoDAO extends DAO<Pagamento> {
+public class PagamentoDAO extends DAO<Pagamento> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

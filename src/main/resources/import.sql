@@ -23,11 +23,12 @@ INSERT INTO livro (id, ano, autor, edicao, editora, estoque, genero, isbn, preco
 ALTER SEQUENCE livro_id_seq RESTART WITH 17;
 
 -- Endereços
-INSERT INTO endereco (id, bairro, cep, cidade, estado, logradouro, numero) VALUES (1, 'Algum', '49000000', 'Fict�cia', 'Sergipe', 'rua Frei lim�o', '45');
+INSERT INTO endereco (id, bairro, cep, cidade, estado, logradouro, numero) VALUES (1, 'Algum', '49000000', 'Fictícia', 'Sergipe', 'rua Frei limão', '45');
 ALTER SEQUENCE endereco_id_seq RESTART WITH 2;
 
 -- Usuários
-INSERT INTO usuario (id, tipo, cpf, data_nascimento, email, nome, rg, senha, telefone, endereco_id) VALUES (1, 2, '12345678911', '1990/08/04', 'usuario@email.com', 'Usuario', '73284902', 'muito dificil', '7937282920', 1);
+-- 7c4a8d09ca3762af61e59520943dc26494f8941b = SHA1 para 123456
+INSERT INTO usuario (id, tipo, cpf, data_nascimento, email, nome, rg, senha, telefone, endereco_id) VALUES (1, 2, '12345678911', '1990/08/04', 'usuario@email.com', 'Usuario', '73284902', '7c4a8d09ca3762af61e59520943dc26494f8941b', '7937282920', 1);
 ALTER SEQUENCE usuario_id_seq RESTART WITH 2;
 
 -- Clientes

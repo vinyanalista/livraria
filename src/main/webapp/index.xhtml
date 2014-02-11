@@ -98,6 +98,7 @@
 				</c:choose>
 				<li class="#{liClass}">
 					<div class="thumbnail">
+						<!-- TODO Apenas para fins de protótipo! Exibir capa do livro! -->
 						<a href="livro.jsf?id=#{livro.id}">
 							<img src="#{resource['cliente:images/products/6.jpg']}" alt="" />
 						</a>
@@ -113,7 +114,7 @@
 									<a class="btn" href="livro.jsf?id=#{livro.id}">
 										<i class="icon-zoom-in"></i>
 									</a>
-									<a class="btn" jsf:action="#{carrinhoMB.adicionar(livro)}">Adicionar ao <i class="icon-shopping-cart"></i></a>
+									<a class="btn" jsf:action="#{carrinhoMB.adicionar(livro)}">Adicionar <i class="icon-shopping-cart"></i></a>
 									<a class="btn btn-primary" href="livro.jsf?id=#{livro.id}">
 										<h:outputText value="#{livro.preco}">
 											<f:convertNumber locale="pt_BR" type="currency" />

@@ -1,5 +1,6 @@
 package br.ufs.livraria.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -10,7 +11,7 @@ import br.ufs.livraria.modelo.Usuario;
 
 
 @Stateless
-public class CompraDAO extends DAO<Compra> {
+public class CompraDAO extends DAO<Compra> implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	public CompraDAO() {
