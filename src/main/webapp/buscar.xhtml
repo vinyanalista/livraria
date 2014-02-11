@@ -30,20 +30,24 @@
 				</small>
 			</h:panelGroup>
 		</h3>
-		<form class="form-horizontal span6">
+		<div class="alert alert-info" jsf:rendered="#{empty buscarMB.lista}">
+			Infelizmente sua busca não trouxe resultados. Tente mudar os critérios de busca.
+		</div>
+		<form class="form-horizontal span6" id="form_ordenacao" jsf:prependId="false" jsf:rendered="#{not empty buscarMB.lista}" method="get">
 			<div class="control-group">
-				<input name="filtro" type="hidden" value="#{buscarMB.filtro}" />
-				<input name="genero" type="hidden" value="#{buscarMB.genero}" />
 				<input name="por" type="hidden" value="#{buscarMB.por}" />
-				<label class="control-label alignL">Ordenar por </label> <select name="ordenacao">
+				<input name="filtro" type="hidden" value="#{buscarMB.filtro}" />
+				<label class="control-label alignL">Ordenar por </label> <select name="ordenacao" id="ordenacao">
 					<c:forEach items="#{buscarMB.opcoesBuscaOrdenacao}" var="opcao">
-						<option value="#{opcao.value}">#{opcao.label}</option>
+						<option value="#{opcao.value}" jsf:rendered="#{buscarMB.ordenacao != opcao.value}">#{opcao.label}</option>
+						<option value="#{opcao.value}" selected="selected" jsf:rendered="#{buscarMB.ordenacao == opcao.value}">#{opcao.label}</option>
 					</c:forEach>
 				</select>
+				<input name="genero" type="hidden" value="#{buscarMB.genero}" />
 			</div>
 		</form>
 
-		<div id="myTab" class="pull-right">
+		<div id="myTab" class="pull-right" jsf:rendered="#{not empty buscarMB.lista}">
 			<a href="#listView" data-toggle="tab">
 				<span class="btn btn-large"><i class="icon-list"></i></span>
 			</a>
@@ -51,9 +55,10 @@
 				<span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span>
 			</a>
 		</div>
-		<br class="clr" />
+
+		<br class="clr" jsf:rendered="#{not empty buscarMB.lista}" />
 		
-		<div class="tab-content">
+		<div class="tab-content" jsf:rendered="#{not empty buscarMB.lista}">
 		
 			<div class="tab-pane" id="listView">
 				<c:forEach items="#{buscarMB.lista}" var="livro" varStatus="status">
@@ -61,7 +66,7 @@
 						<div class="span2">
 							<a href="livro.jsf?id=#{livro.id}">
 								<!-- TODO Apenas para fins de protótipo! Exibir capa do livro! -->
-								<img src="#{resource['cliente:images/products/6.jpg']}" alt="" />
+								<img src="#{resource['cliente:images/livro.jpg']}" alt="" />
 							</a>
 						</div>
 						<div class="span4">
@@ -107,7 +112,7 @@
 							<div class="thumbnail">
 								<!-- TODO Apenas para fins de protótipo! Exibir capa do livro! -->
 								<a href="livro.jsf?id=#{livro.id}">
-									<img src="#{resource['cliente:images/products/6.jpg']}" alt="" />
+									<img src="#{resource['cliente:images/livro.jpg']}" alt="" />
 								</a>
 								<div class="caption">
 									<h5>
@@ -137,6 +142,13 @@
 			</div>
 			
 		</div>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#ordenacao').change(function(){
+					$('#form_ordenacao').submit();
+				});
+			});
+		</script>
 	</ui:define>
 </ui:composition>
 </html>

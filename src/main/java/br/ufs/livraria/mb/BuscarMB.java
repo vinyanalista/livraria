@@ -20,6 +20,11 @@ import br.ufs.livraria.modelo.Livro;
 public class BuscarMB implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	private static final Integer DEFAULT_FILTRO = BuscaFiltro.TUDO.getValue();
+	private static final Integer DEFAULT_GENERO = null;
+	private static final Integer DEFAULT_ORDENACAO = BuscaOrdenacao.TITULO_A_Z.getValue();
+	private static final String DEFAULT_POR = "";
+
 	private Integer filtro;
 	private Integer genero;
 	private Integer ordenacao;
@@ -36,6 +41,10 @@ public class BuscarMB implements Serializable {
 	private MensagensMB mensagensMb;
 	
 	public BuscarMB() {
+		filtro = DEFAULT_FILTRO;
+		genero = DEFAULT_GENERO;
+		ordenacao = DEFAULT_ORDENACAO;
+		por = DEFAULT_POR;
 	}
 	
 	/* Getters e setters */
@@ -94,20 +103,57 @@ public class BuscarMB implements Serializable {
 	
 	/* Ações */
 	
-	public String montarUri() {
-		return null;
-	}
-	
 	public void processar() {
 		// TODO Apenas para fins de teste! Remover!
 		System.out.println("******************************************************************************************************");
-		System.out.println("PARAMETROS DA BUSCA:\nPor: " + por + "\nFiltro: " + filtro + "\nGênero: " + genero + "\nOrdenação: " + ordenacao);
+		System.out.println("BUSCAR MB\nPor: " + por + "\nFiltro: " + filtro + "\nGênero: " + genero + "\nOrdenação: " + ordenacao);
 		System.out.println("******************************************************************************************************");
+
 		// TODO Implementar geração dos resultados da busca
-		lista = livroDao.buscar(por, null, null, null);
-		if (lista.isEmpty()) {
-			mensagensMb.adicionarMensagem(MensagemTipo.INFO, "Infelizmente sua busca não trouxe resultados. Tente mudar os critérios de busca.");
+
+		String por = (this.por != null) ? this.por : DEFAULT_POR;
+
+		BuscaFiltro filtro;
+		if (this.filtro == null) {
+			this.filtro = DEFAULT_FILTRO;
 		}
+		switch (this.filtro) {
+			case 2:
+				filtro = BuscaFiltro.TITULO;
+				break;
+			case 3:
+				filtro = BuscaFiltro.AUTOR;
+				break;
+			case 4:
+				filtro = BuscaFiltro.SINOPSE;
+				break;
+			case 1:
+			default:
+				filtro = BuscaFiltro.TUDO;
+				break;
+		}
+
+		BuscaOrdenacao ordenacao;
+		if (this.ordenacao == null) {
+			this.ordenacao = DEFAULT_ORDENACAO;
+		}
+		switch (this.ordenacao) {
+			case 2:
+				ordenacao = BuscaOrdenacao.TITULO_Z_A;
+				break;
+			case 3:
+				ordenacao = BuscaOrdenacao.ESTOQUE;
+				break;
+			case 4:
+				ordenacao = BuscaOrdenacao.MENOR_PRECO;
+				break;
+			case 1:
+			default:
+				ordenacao = BuscaOrdenacao.TITULO_A_Z;
+				break;
+		}
+
+		lista = livroDao.buscar(por, filtro, ordenacao, null);
 	}
 	
 }

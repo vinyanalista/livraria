@@ -59,14 +59,21 @@ public class LivroDAO extends DAO<Livro> implements Serializable {
 	}
 	
 	public List<Livro> buscar(String por, BuscaFiltro filtro, BuscaOrdenacao ordenacao, Genero genero) {
+		// TODO Apenas para fins de teste! Remover!
+		System.out.println("******************************************************************************************************");
+		System.out.println("LIVRO DAO\nPor: " + por + "\nFiltro: " + filtro + "\nGênero: " + genero + "\nOrdenação: " + ordenacao);
+		System.out.println("******************************************************************************************************");
+
 		StringBuilder query = new StringBuilder("SELECT livro FROM Livro livro WHERE");
 		if ((por != null) && (!por.isEmpty())) {
 			switch (filtro) {
+			case TITULO:
+				query.append(" livro.titulo");
+				break;
+			// TODO Verificar demais casos
 			case AUTOR:
 			case SINOPSE:
 			case TUDO:
-				// TODO Verificar demais casos
-			case TITULO:
 			default:
 				query.append(" livro.titulo");
 				break;

@@ -34,6 +34,12 @@
 	<link rel="apple-touch-icon-precomposed"
 		href="#{resource['cliente:images/ico/apple-touch-icon-57-precomposed.png']}" />
 	<!-- <style type="text/css" id="enject"></style> -->
+	
+	<h:outputScript library="cliente" name="js/jquery.js" />
+	<h:outputScript library="cliente" name="js/bootstrap.min.js" />
+	<h:outputScript library="cliente" name="js/google-code-prettify/prettify.js" />
+	<h:outputScript library="cliente" name="js/bootshop.js" />
+	<h:outputScript library="cliente" name="js/jquery.lightbox-0.5.js" />
 	<h:outputScript library="javax.faces" name="jsf.js" target="head" />
 	<h:outputScript library="cliente" name="js/comum.js" />
 </h:head>
@@ -47,7 +53,7 @@
 					   Bem-vindo, <strong>#{loginInfo.usuarioLogado.nome}</strong>!
 					</h:panelGroup>
 					<h:panelGroup rendered="#{!loginInfo.loggedIn}">
-					   Bem-vindo, <strong>visitante</strong>, <a href="#login" role="button" data-toggle="modal">faça login</a> ou <a href="cadastro.jsf">registre-se</a>!
+					   Bem-vindo, <strong>visitante</strong>! <a href="#login" role="button" data-toggle="modal">Faça login</a> ou <a href="cadastro.jsf">registre-se</a>!
 					</h:panelGroup>
 				</div>
 				<div id="login" class="modal hide fade in" tabindex="-1"
@@ -100,11 +106,12 @@
 				<div class="navbar-inner">
 					<a class="brand" href="#{request.contextPath}/index.jsf"><img
 						src="#{resource['cliente:images/logo.png']}" alt="Bootsshop" /></a>
-					<form class="form-inline navbar-search" method="get" action="buscar.jsf">
-						<input name="por" id="srchFld" class="srchTxt" type="text" />
+					<form class="form-inline navbar-search" method="get" action="buscar.jsf" jsf:prependId="false">
+						<input name="por" id="srchFld" class="srchTxt" type="text" value="#{buscarMB.por}" required="required" />
 						<select name="filtro" class="srchTxt">
 							<c:forEach items="#{buscarMB.opcoesBuscaFiltro}" var="opcao">
-								<option value="#{opcao.value}">#{opcao.label}</option>
+								<option value="#{opcao.value}" jsf:rendered="#{buscarMB.filtro != opcao.value}">#{opcao.label}</option>
+								<option value="#{opcao.value}" selected="selected" jsf:rendered="#{buscarMB.filtro == opcao.value}">#{opcao.label}</option>
 							</c:forEach>
 						</select>
 						<button type="submit" id="submitButton" class="btn btn-primary">Buscar</button>
@@ -220,7 +227,7 @@
 						</c:forEach>
 					</ul>
 					<br />
-					<div class="thumbnail">
+					<!-- <div class="thumbnail">
 						<img src="#{resource['cliente:images/products/panasonic.jpg']}"
 							alt="Bootshop panasonoc New camera" />
 						<div class="caption">
@@ -254,7 +261,7 @@
 						<div class="caption">
 							<h5>Payment Methods</h5>
 						</div>
-					</div>
+					</div> -->
 				</div>
 				<!-- Sidebar end=============================================== -->
 				<div class="span9">
@@ -311,11 +318,5 @@
 		</div>
 		<!-- Container End -->
 	</div>
-	<!-- Placed at the end of the document so the pages load faster ============================================= -->
-	<h:outputScript library="cliente" name="js/jquery.js" />
-	<h:outputScript library="cliente" name="js/bootstrap.min.js" />
-	<h:outputScript library="cliente" name="js/google-code-prettify/prettify.js" />
-	<h:outputScript library="cliente" name="js/bootshop.js" />
-	<h:outputScript library="cliente" name="js/jquery.lightbox-0.5.js" />
 </h:body>
 </html>
