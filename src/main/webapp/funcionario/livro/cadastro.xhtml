@@ -6,11 +6,15 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
+<f:metadata>
+	<f:viewParam name="id" value="#{livroMB.id}" />
+	<f:viewAction action="#{livroMB.carregar()}"/>
+</f:metadata>
 <ui:composition template="/WEB-INF/template_funcionario.xhtml">
 	<ui:define name="titulo">SIGELI - Acesso do Funcionário - Livro - Cadastro</ui:define>
 	<ui:define name="main-bar">
 		<h3>
-			<i class="fa fa-book"></i>Livro
+			<i class="fa fa-truck"></i>Livro
 		</h3>
 	</ui:define>
 	<ui:define name="conteudo">
@@ -23,21 +27,22 @@
 					</div>
 					<h5>
 						<h:outputText value="Cadastrar"
-							rendered="#{FuncionarioMB.cadastro}" />
-						<h:outputText value="Editar" rendered="#{!FuncionarioMB.cadastro}" />
+							rendered="#{livroMB.cadastro}" />
+						<h:outputText value="Editar"
+							rendered="#{!livroMB.cadastro}" />
 					</h5>
 					</header>
 					<div id="collapse2" class="body in" style="height: auto;">
-						<form jsf:id="form" class="form-horizontal inline-validate">
-							<input type="hidden" jsf:value="#{LivroMB.livro.id}" jsf:rendered="#{!LivroMB.cadastro}" /> 							
-							
+						<form jsf:id="form" class="form-horizontal inline-validate" jsf:prependId="false">
+							<input jsf:id="id" name="id" jsf:value="#{livroMB.livro.id}" type="hidden" jsf:rendered="#{!livroMB.cadastro}" jsf:converter="javax.faces.Integer" />
+						
 							<h4>Informações</h4>
 							
 							<div class="form-group">
-								<label class="control-label col-lg-4" for="titutlo">Título</label>
+								<label class="control-label col-lg-4" for="titulo">Título</label>
 								<div class="col-lg-8">
 									<input  jsf:id="titulo" name="titulo"
-											jsf:value="#{LivroMB.livro.titulo}" type="text" placeholder="Título do livro" class="form-control required" 
+											jsf:value="#{livroMB.livro.titulo}" type="text" placeholder="Título do livro" class="form-control required" 
 									/>
 								</div>
 							</div>
@@ -46,7 +51,7 @@
 								<label class="control-label col-lg-4" for="autor">Autor</label>
 								<div class="col-lg-8">
 									<input 	jsf:id="autor" name="autor"
-											jsf:value="#{LivroMB.livro.autor}" type="text" laceholder="Autor" class="form-control required" 
+											jsf:value="#{livroMB.livro.autor}" type="text" placeholder="Autor" class="form-control required" 
 									/>
 								</div>
 							</div>
@@ -55,7 +60,7 @@
 								<label class="control-label col-lg-4" for="editora">Editora</label>
 								<div class="col-lg-8">
 									<input 	jsf:id="editora" name="editora"
-											jsf:value="#{LivroMB.livro.editora}" type="text" placeholder="Editora" class="form-control required" 
+											jsf:value="#{livroMB.livro.editora}" type="text" placeholder="Editora" class="form-control required" 
 									/>
 								</div>
 							</div>
@@ -64,7 +69,7 @@
 								<label class="control-label col-lg-4" for="edicao">Edição</label>
 								<div class="col-lg-8">
 									<input  jsf:id="edicao" name="edicao"
-											jsf:value="#{LivroMB.livro.edicao}" type="text" placeholder="Edição" class="form-control required" 
+											jsf:value="#{livroMB.livro.edicao}" type="text" placeholder="Edição" class="form-control required" 
 									/>
 								</div>
 							</div>
@@ -73,7 +78,7 @@
 								<label class="control-label col-lg-4" for="ano">Ano</label>
 								<div class="col-lg-8">
 									<input jsf:id="ano" name="ano"
-										jsf:value="#{LivroMB.livro.email}" type="text" placeholder="Ano" class="form-control required" 
+										jsf:value="#{livroMB.livro.ano}" type="text" placeholder="Ano" class="form-control required" 
 									/>
 								</div>
 							</div>
@@ -81,26 +86,9 @@
 							<div class="form-group">
 								<label class="control-label col-lg-4" for="genero">Gênero</label>
 								<div class="col-lg-8">
-									<select class="form-control">
-									    <option>Administração</option>
-									    <option>Agropecuária</option>
-									    <option>Artes</option>
-									    <option>Ciências biológicas</option>
-									    <option>Ciências Exatas</option>
-									    <option>Ciências Humanas e Sociais</option>
-									    <option>Contabilidade</option>
-									    <option>Cursos e idiomas</option>
-									    <option>Didáticos</option>
-									    <option>Direito</option>
-									    <option>Economia</option>
-									    <option>Informática</option>
-									    <option>Literatura Estrangeira</option>
-									    <option>Literatura Infanto-Juvenil</option>
-									    <option>Literatura Nacional</option>
-									    <option>Medicina</option>
-									    <option>Religião</option>
-									    <option>Turismo</option>
-									</select>
+									<input  jsf:id="genero" name="genero"
+											jsf:value="#{livroMB.livro.genero}" type="text" placeholder="Gênero" class="form-control required"
+									/>
 								</div>
 							</div>
 							
@@ -109,7 +97,7 @@
 								<label class="control-label col-lg-4" for="isbn">ISBN</label>
 								<div class="col-lg-8">
 									<input  jsf:id="isbn" name="isbn"
-											jsf:value="#{LivroMB.livro.isbn}" type="text" placeholder="000-00-00000-00-0" class="form-control isbn required" data-mask="999-99-99999-99-9"
+											jsf:value="#{livroMB.livro.isbn}" type="text" placeholder="000-00-00000-00-0" class="form-control required" data-mask="999-99-99999-99-9"
 									/>
 								</div>
 							</div>
@@ -127,7 +115,7 @@
 								<label class="control-label col-lg-4" for="preco">Preço</label>
 								<div class="col-lg-8">
 									<input 	jsf:id="preco" name="preco"
-											jsf:value="#{LivroMB.livro.preco}" 	type="text" placeholder="Preço" class="form-control required" 
+											jsf:value="#{livroMB.livro.preco}" 	type="text" placeholder="Preço" class="form-control required" 
 									/>
 								</div>
 							</div>
@@ -136,50 +124,8 @@
 								<label class="control-label col-lg-4" for="estoque">Quantidade em estoque</label>
 								<div class="col-lg-8">
 									<input 	jsf:id="estoque" name="estoque"
-											jsf:value="#{LivroMB.livro.estoque}" type="text" placeholder="Quantidade em estoque" class="form-control digits required" 
+											jsf:value="#{livroMB.livro.estoque}" type="text" placeholder="Quantidade em estoque" class="form-control required" 
 									/>
-								</div>
-							</div>
-
-							<h4>Segurança</h4>
-
-							<div class="form-group">
-								<label class="control-label col-lg-4"> Permissão </label>
-								<div class="col-lg-8">
-									<div class="checkbox">
-										<label>
-											<div class="radio">
-												<span class="checked"> 
-													<input class="uniform" type="radio" value="option1" name="optionsRadios"></input>
-												</span>
-											</div> Administrador
-										</label>
-									</div>
-									<div class="checkbox">
-										<label>
-											<div class="radio">
-												<span> <input class="uniform" type="radio"
-													checked="checked" value="option2" name="optionsRadios"></input>
-												</span>
-											</div> Funcionario
-										</label>
-									</div>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="control-label col-lg-4" for="senha1">Senha</label>
-								<div class="col-lg-8">
-									<input 	jsf:id="senha1" name="senha1"
-											jsf:value="#{LivroMB.senha1}" type="password" placeholder="Senha" class="form-control required" />
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="control-label col-lg-4" for="senha2">Confirmação de Senha</label>
-								<div class="col-lg-8">
-									<input 	jsf:id="senha2" name="senha2"
-											jsf:value="#{LivroMB.senha2}" type="password" placeholder="Senha" class="form-control required" />
 								</div>
 							</div>
 
