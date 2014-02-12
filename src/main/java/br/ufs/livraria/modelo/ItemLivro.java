@@ -17,7 +17,7 @@ public class ItemLivro extends Entidade implements Serializable {
 	@JoinColumn(nullable = false)
 	private Movimentacao movimentacao;
 
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(nullable = false)
 	private Livro livro;
 	

@@ -7,9 +7,10 @@ import javax.persistence.*;
 public class Livro extends Entidade implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Column(length = 50)
+	@Column(length = 50, nullable = false)
 	private String titulo;
 	
+	@Column(length = 255)
 	private String sinopse;
 
 	@Column(length = 2)
@@ -18,7 +19,7 @@ public class Livro extends Entidade implements Serializable {
 	@Column(length = 4)
 	private Integer ano;
 	
-	@Column(length = 13)
+	@Column(length = 17)
 	private String isbn;
 	
 	@Column(length = 4)
@@ -33,7 +34,7 @@ public class Livro extends Entidade implements Serializable {
 	@Column(length = 50)
 	private String editora;
 	
-	@Column(precision = 4, scale = 2)
+	@Column(precision = 4, scale = 2, nullable = false)
 	private Float preco;
 
 	public Livro() {

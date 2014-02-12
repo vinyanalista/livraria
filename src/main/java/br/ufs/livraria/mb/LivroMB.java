@@ -8,7 +8,7 @@ import br.ufs.livraria.dao.DAO;
 import br.ufs.livraria.dao.LivroDAO;
 import br.ufs.livraria.enumeration.CrudOperacaoTipo;
 import br.ufs.livraria.enumeration.MensagemTipo;
-import br.ufs.livraria.modelo.Livro;;
+import br.ufs.livraria.modelo.Livro;
 
 @Named
 @ViewScoped
