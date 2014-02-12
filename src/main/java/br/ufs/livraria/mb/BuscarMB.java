@@ -1,9 +1,11 @@
 package br.ufs.livraria.mb;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -35,7 +37,7 @@ public class BuscarMB implements Serializable {
 	@EJB
 	private LivroDAO livroDao;
 	
-	private String tituloDaPagina = "Resultados da busca por Mario Puzo";
+	private String tituloDaPagina;
 	
 	@Inject
 	private MensagensMB mensagensMb;
@@ -104,14 +106,17 @@ public class BuscarMB implements Serializable {
 	/* Ações */
 	
 	public void processar() {
-		// TODO Apenas para fins de teste! Remover!
-		System.out.println("******************************************************************************************************");
-		System.out.println("BUSCAR MB\nPor: " + por + "\nFiltro: " + filtro + "\nGênero: " + genero + "\nOrdenação: " + ordenacao);
-		System.out.println("******************************************************************************************************");
-
-		// TODO Implementar geração dos resultados da busca
-
-		String por = (this.por != null) ? this.por : DEFAULT_POR;
+		if ((por == null) || (por.isEmpty())) {
+			mensagensMb.adicionarMensagem(MensagemTipo.ERRO, "Requisição inválida");
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return;
+		}
+		
+		tituloDaPagina = "Resultados da busca por " + por;
 
 		BuscaFiltro filtro;
 		if (this.filtro == null) {

@@ -85,7 +85,7 @@ public class LivroDAO extends DAO<Livro> implements Serializable {
 			query.append(" ORDER BY");
 			switch (ordenacao) {
 			case ESTOQUE:
-				query.append(" livro.quantidade DESC");
+				query.append(" livro.estoque DESC");
 				break;
 			case MENOR_PRECO:
 				query.append(" livro.preco ASC");

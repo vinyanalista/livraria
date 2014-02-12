@@ -12,8 +12,6 @@
 	<f:viewParam name="ordenacao" value="#{buscarMB.ordenacao}" />
 	<f:viewParam name="por" value="#{buscarMB.por}" />
 	<f:viewAction action="#{buscarMB.processar}" />
-	<!-- TODO Apenas para fins de protótipo! Remover!  -->
-	<f:viewAction action="#{carrinhoMB.inicializar}" />
 </f:metadata>
 <ui:composition template="/WEB-INF/template_cliente.xhtml">
 	<ui:define name="titulo">SIGELI - Busca de produtos</ui:define>
@@ -75,7 +73,11 @@
 									<h:outputText value="#{livro.titulo}" />
 								</a>
 							</h3>
-							<h5><h:outputText value="#{livro.autor}" /></h5>
+							<h5><h:outputLink value="buscar.jsf">
+								<h:outputText value="#{livro.autor}" />
+							    <f:param name="por" value="#{livro.autor}" />
+							    <f:param name="filtro" value="3" />
+							</h:outputLink></h5>
 							<p><h:outputText value="#{livro.sinopseCurta}" /></p>
 							<a class="btn btn-small pull-right" href="livro.jsf?id=#{livro.id}">Leia mais</a>
 							<br class="clr" />
@@ -144,6 +146,8 @@
 		</div>
 		<script type="text/javascript">
 			$(document).ready(function(){
+				$('#form_ordenacao input[name="javax.faces.ViewState"]').remove();
+				
 				$('#ordenacao').change(function(){
 					$('#form_ordenacao').submit();
 				});

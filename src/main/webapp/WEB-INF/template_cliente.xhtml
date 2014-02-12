@@ -106,7 +106,7 @@
 				<div class="navbar-inner">
 					<a class="brand" href="#{request.contextPath}/index.jsf"><img
 						src="#{resource['cliente:images/logo.png']}" alt="Bootsshop" /></a>
-					<form class="form-inline navbar-search" method="get" action="buscar.jsf" jsf:prependId="false">
+					<form class="form-inline navbar-search" id="form_busca" method="get" action="buscar.jsf" jsf:prependId="false">
 						<input name="por" id="srchFld" class="srchTxt" type="text" value="#{buscarMB.por}" required="required" />
 						<select name="filtro" class="srchTxt">
 							<c:forEach items="#{buscarMB.opcoesBuscaFiltro}" var="opcao">

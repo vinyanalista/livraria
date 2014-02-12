@@ -6,10 +6,6 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<f:metadata>
-	<!-- TODO Apenas para fins de protótipo! Remover!  -->
-	<f:viewAction action="#{carrinhoMB.inicializar}"/>
-</f:metadata>	
 <ui:composition template="/WEB-INF/template_cliente.xhtml">
 	<ui:define name="titulo">SIGELI - Carrinho</ui:define>
 	<ui:define name="conteudo">
@@ -82,7 +78,14 @@
 								<img width="60" src="#{resource['cliente:images/livro.jpg']}" alt="" />
 							</a>
 						</td>
-						<td><a href="livro.jsf?id=#{item.livro.id}"><h:outputText value="#{item.livro.titulo}" /></a></td>
+						<td>
+							<a href="livro.jsf?id=#{item.livro.id}"><h:outputText value="#{item.livro.titulo}" /></a><br />
+							<small><h:outputLink value="buscar.jsf">
+								<h:outputText value="#{item.livro.autor}" />
+							    <f:param name="por" value="#{item.livro.autor}" />
+							    <f:param name="filtro" value="3" />
+							</h:outputLink></small>
+						</td>
 						<td>
 							<div class="input-append">
 								<h:form prependId="false">

@@ -25,3 +25,7 @@
 		}
 	}
 }); */
+
+$(document).ready(function(){
+	$('#form_busca input[name="javax.faces.ViewState"]').remove();
+});
