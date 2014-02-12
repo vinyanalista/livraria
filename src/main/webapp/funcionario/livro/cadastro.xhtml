@@ -33,7 +33,7 @@
 					</h5>
 					</header>
 					<div id="collapse2" class="body in" style="height: auto;">
-						<form jsf:id="form" class="form-horizontal inline-validate" jsf:prependId="false">
+						<form jsf:id="form" class="form-horizontal inline-validate" jsf:prependId="false" enctype="multipart/form-data">
 							<input jsf:id="id" name="id" jsf:value="#{livroMB.livro.id}" type="hidden" jsf:rendered="#{!livroMB.cadastro}" jsf:converter="javax.faces.Integer" />
 							
 							<div class="form-group">
@@ -54,6 +54,14 @@
 								</div>
 							</div>
 
+							<div class="form-group">
+								<label class="control-label col-lg-4" for="capa">Capa</label>
+								<div class="col-lg-8">
+									<h:inputFile id="capa" name="capa" value="#{livroMB.capa}" styleClass="form-control" />
+								</div>
+							</div>
+
+							
 							<div class="form-group">
 								<label class="control-label col-lg-4" for="editora">Editora</label>
 								<div class="col-lg-8">

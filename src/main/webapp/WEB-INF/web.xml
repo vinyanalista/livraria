@@ -13,6 +13,14 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.jsf</url-pattern>
 	</servlet-mapping>
+	<servlet>
+	    <servlet-name>LivroCapaServlet</servlet-name>
+	    <servlet-class>br.ufs.livraria.servlet.LivroCapaServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>LivroCapaServlet</servlet-name>
+	    <url-pattern>/capa</url-pattern>
+	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.jsf</welcome-file>
 	</welcome-file-list>

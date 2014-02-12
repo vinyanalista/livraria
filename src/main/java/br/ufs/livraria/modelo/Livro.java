@@ -37,6 +37,8 @@ public class Livro extends Entidade implements Serializable {
 	@Column(precision = 4, scale = 2, nullable = false)
 	private Float preco;
 
+	private byte[] capa;
+
 	public Livro() {
 	}
 
@@ -80,6 +82,10 @@ public class Livro extends Entidade implements Serializable {
 		return preco;
 	}
 
+	public byte[] getCapa() {
+		return capa;
+	}
+
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
@@ -118,6 +124,10 @@ public class Livro extends Entidade implements Serializable {
 	
 	public void setPreco(Float preco) {
 		this.preco = preco;
+	}
+
+	public void setCapa(byte[] capa) {
+		this.capa = capa;
 	}
 	
 	@Override
