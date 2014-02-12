@@ -1,7 +1,6 @@
 package br.ufs.livraria.modelo;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
 
 @Entity
@@ -12,7 +11,7 @@ public class Livro extends Entidade implements Serializable {
 	private String titulo;
 	
 	private String sinopse;
-	
+
 	@Column(length = 2)
 	private Integer edicao;
 	

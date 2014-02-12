@@ -1,28 +1,27 @@
 package br.ufs.livraria.mb;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.apache.commons.codec.digest.DigestUtils;
-
-import br.ufs.livraria.dao.FuncionarioDAO;
+import br.ufs.livraria.dao.ClienteDAO;
 import br.ufs.livraria.enumeration.MensagemTipo;
-import br.ufs.livraria.modelo.Funcionario;
+import br.ufs.livraria.modelo.Cliente;
 
 @Named
-@ViewScoped
-public class FuncionarioMB implements Serializable {
+@RequestScoped
+public class ClienteMB implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Funcionario funcionario;
+	private Cliente Cliente;
 
 	@EJB
-	private FuncionarioDAO funcionarioDao;
+	private ClienteDAO ClienteDao;
 
 	private Integer id;
 
@@ -32,15 +31,63 @@ public class FuncionarioMB implements Serializable {
 	private String senha1;
 	private String senha2;
 
-	public FuncionarioMB() {
-		funcionario = new Funcionario();
+	public ClienteMB() {
+		Cliente = new Cliente();
 		id = null;
 	}
 
+	public List<Cliente> getListaDeClientes() {
+		return ClienteDao.listar();
+	}
+
+	/* Ações */
+
+	public String atualizar() {
+		try {
+			if (senhasIguais()) {
+				Cliente.setSenha(senha1);
+				ClienteDao.atualizar(Cliente);
+				mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO,
+						"O Cliente foi atualizado com sucesso!");
+				return "index.jsf?faces-redirect=true";
+			} else {
+				mensagensMb.adicionarMensagem(MensagemTipo.ERRO,
+						"A senha não confere");
+				return null;
+			}
+		} catch (Exception excecao) {
+			mensagensMb.adicionarMensagem(MensagemTipo.ERRO,
+					"Ocorreu um erro durante o processamento da solicitação.");
+			return "cadastro.jsf";
+		}
+	}
+
+	public String inserir() {
+		try {
+			if (senhasIguais()) {
+				Cliente.setSenha(senha1);
+				Cliente.setDataCadastro(new Date());
+				ClienteDao.inserir(Cliente);
+				mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO,
+						"O Cliente foi cadastrado com sucesso!");
+				return "login.jsf?faces-redirect=true";
+			} else {
+				mensagensMb.adicionarMensagem(MensagemTipo.ERRO,
+						"A senha não confere");
+				return null;
+			}
+
+		} catch (Exception excecao) {
+			mensagensMb.adicionarMensagem(MensagemTipo.ERRO,
+					"Ocorreu um erro durante o processamento da solicitação.");
+			return "cadastro.jsf";
+		}
+	}
+	
 	/* Getters e setters */
 
-	public Funcionario getFuncionario() {
-		return funcionario;
+	public Cliente getCliente() {
+		return Cliente;
 	}
 
 	public Integer getId() {
@@ -50,71 +97,9 @@ public class FuncionarioMB implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 		if (id != null) {
-			funcionario = funcionarioDao.buscar(id);
+			Cliente = ClienteDao.buscar(id);
 		}
 	}
-
-	public List<Funcionario> getListaDeFuncionarios() {
-		return funcionarioDao.listar();
-	}
-
-	/* Ações */
-
-	public String atualizar() {
-		try {
-			if (senhasIguais()) {
-				funcionario.setSenha(DigestUtils.sha1Hex(senha1));
-				funcionarioDao.atualizar(funcionario);
-				mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO,
-						"O Funcionario foi atualizado com sucesso!");
-				return "index.jsf?faces-redirect=true";
-			} else {
-				mensagensMb.adicionarMensagem(MensagemTipo.ERRO,
-						"A senha não confere");
-				return null;
-			}
-		} catch (Exception excecao) {
-			mensagensMb.adicionarMensagem(MensagemTipo.ERRO,
-					"Ocorreu um erro durante o processamento da solicitação.");
-			return "cadastro.jsf";
-		}
-	}
-
-	public String excluir(Funcionario funcionario) {
-		try {
-			funcionarioDao.remover(funcionario); // TODO Verificar
-			mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO,
-					"O Funcionario foi excluído com sucesso!");
-			return "index.jsf?faces-redirect=true";
-		} catch (Exception e) {
-			mensagensMb.adicionarMensagem(MensagemTipo.ERRO,
-					"Ocorreu um erro durante o processamento da solicitação.");
-			return "index.jsf";
-		}
-	}
-
-	public String inserir() {
-		try {
-			if (senhasIguais()) {
-				funcionario.setSenha(DigestUtils.sha1Hex(senha1));
-				funcionarioDao.inserir(funcionario);
-				mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO,
-						"O Funcionario foi cadastrado com sucesso!");
-				return "index.jsf?faces-redirect=true";
-			} else {
-				mensagensMb.adicionarMensagem(MensagemTipo.ERRO,
-						"A senha não confere");
-				return null;
-			}
-
-		} catch (Exception excecao) {
-			mensagensMb.adicionarMensagem(MensagemTipo.ERRO,
-					"Ocorreu um erro durante o processamento da solicitação.");
-			return "cadastro.jsf";
-		}
-	}
-
-	/* Outros */
 
 	private boolean senhasIguais() {
 		return senha1.equals(senha2);

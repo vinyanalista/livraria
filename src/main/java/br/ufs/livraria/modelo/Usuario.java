@@ -3,7 +3,18 @@ package br.ufs.livraria.modelo;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Pattern;
 
 @Entity
@@ -28,13 +39,12 @@ public abstract class Usuario extends Entidade implements Serializable {
 	protected Date dataNascimento;
 	
 	@Column(length = 15)
-	@Pattern(regexp = "[0-9]*")
 	protected String telefone;
 	
 	@Column(length = 50)
 	protected String email;
 
-	@OneToOne
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, orphanRemoval = true)
 	@JoinColumn(nullable = false)
 	protected Endereco endereco;
 
@@ -42,6 +52,7 @@ public abstract class Usuario extends Entidade implements Serializable {
 	private String senha;
 
 	public Usuario() {
+		endereco = new Endereco();
 	}
 
 	public String getNome() {

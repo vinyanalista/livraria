@@ -10,7 +10,7 @@
 	<ui:define name="titulo">SIGELI - Acesso do Funcionário - Livro</ui:define>
 	<ui:define name="main-bar">
 		<h3>
-			<i class="fa fa-book"></i>Livro
+			<i class="fa fa-truck"></i>Livro
 		</h3>
 	</ui:define>
 	<ui:define name="conteudo">
@@ -36,19 +36,15 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="#{livroMB.listaDeLivros}" var="livro">
+									<c:forEach items="#{livroMB.listar()}" var="livro">
 										<tr>
 											<td><h:outputText value="#{livro.titulo}" /></td>
 											<td><h:outputText value="#{livro.autor}" /></td>
-											<td><h:outputText value="#{livro.edicao}&ordf;" /></td>
+											<td><h:outputText value="#{livro.edicao}" /></td>
 											<td>
 												<div class="actions">
-													<a class="fa fa-pencil" jsf:action="cadastro.jsf" title="Editar" data-toggle="tooltip">
-														<f:setPropertyActionListener target="#{livroMB.livro}" value="#{livro}" />
-													</a>
-													<a class="glyphicon glyphicon-remove" jsf:action="#{livroMB.excluir()}" title="Excluir" data-toggle="tooltip">
-														<f:setPropertyActionListener target="#{livroMB.livro}" value="#{livro}" />
-													</a>
+													<a class="fa fa-pencil" href="cadastro.jsf?id=#{livro.id}" title="Editar" data-toggle="tooltip"></a>
+													<a class="glyphicon glyphicon-remove" jsf:action="#{livroMB.excluir(livro)}" title="Excluir" data-toggle="tooltip"></a>
 												</div>
 											</td>
 										</tr>
