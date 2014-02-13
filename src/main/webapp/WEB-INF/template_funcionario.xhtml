@@ -7,6 +7,7 @@
   xmlns:jsf="http://xmlns.jcp.org/jsf"
   xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
   xmlns:ui="http://java.sun.com/jsf/facelets">
+<f:view contentType="text/html; charset=ISO-8859-1">
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
     <title><ui:insert name="titulo" /></title>
@@ -111,7 +112,7 @@
                 </a> 
               </div> -->
               <div class="btn-group">
-                <h:form>
+                <h:form acceptcharset="ISO-8859-1">
 	                <a data-toggle="tooltip" data-original-title="Logout" data-placement="bottom" class="btn btn-metis-1 btn-sm" jsf:action="#{loginMB.logout}">
 	                  <i class="fa fa-power-off"></i>
 	                </a> 
@@ -226,4 +227,5 @@
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal --><!-- /#helpModal -->
   </h:body>
+</f:view>
 </html>

@@ -7,6 +7,7 @@
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
+<f:view contentType="text/html; charset=ISO-8859-1">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title><ui:insert name="titulo" /></title>
@@ -65,7 +66,7 @@
 						<h3>Login</h3>
 					</div>
 					<div class="modal-body">
-						<form class="form-horizontal loginFrm" method="post" jsf:id="testeForm">
+						<form class="form-horizontal loginFrm" method="post" jsf:id="testeForm" jsf:acceptcharset="ISO-8859-1">
 						   <h:messages globalOnly="true" errorClass="alert-danger" infoClass="alert-success"/>
 							<div class="control-group">
 								<input type="text" id="inputEmail" placeholder="Email" jsf:value="#{loginMB.email}" jsf:id="inputEmail" jsf:required="true">
@@ -107,7 +108,7 @@
 				<div class="navbar-inner">
 					<a class="brand" href="#{request.contextPath}/index.jsf"><img
 						src="#{resource['cliente:images/logo.png']}" alt="Bootsshop" /></a>
-					<form class="form-inline navbar-search" id="form_busca" method="get" action="buscar.jsf" jsf:prependId="false">
+					<form class="form-inline navbar-search" id="form_busca" method="get" action="buscar.jsf" jsf:prependId="false" jsf:acceptcharset="ISO-8859-1">
 						<input name="por" id="srchFld" class="srchTxt" type="text" value="#{buscarMB.por}" required="required" />
 						<select name="filtro" class="srchTxt">
 							<c:forEach items="#{buscarMB.opcoesBuscaFiltro}" var="opcao">
@@ -320,4 +321,5 @@
 		<!-- Container End -->
 	</div>
 </h:body>
+</f:view>
 </html>
