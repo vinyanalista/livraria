@@ -13,13 +13,20 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.ufs.livraria.bean.ControleAcessoFuncionario;
 import br.ufs.livraria.bean.LoginInfo;
+import br.ufs.livraria.modelo.Funcionario;
 
-@WebFilter(urlPatterns = {"/*"})
+@WebFilter(urlPatterns = {
+		"/funcionario/*",
+})
 public class LoginFilter implements Filter {
 
 	@Inject
 	private LoginInfo loginInfo;
+	
+	@Inject
+	private ControleAcessoFuncionario controleAcessoFuncionario;
 	
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -28,7 +35,7 @@ public class LoginFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
-		if (false && !isLoginUri(httpRequest.getRequestURI()) && isPaginaFuncionario(httpRequest.getRequestURI()) && !loginInfo.isLoggedIn()) {
+		if (!isLoginUri(httpRequest.getRequestURI()) && (!loginInfo.isLoggedIn() || !controleAcessoFuncionario.possuiPermissao((Funcionario) loginInfo.getUsuarioLogado(), httpRequest.getRequestURI()))) {
 			HttpServletResponse httpResponse = (HttpServletResponse) response;
 			StringBuilder uriLogin = new StringBuilder(httpRequest.getContextPath());
 			uriLogin.append("/funcionario/login.jsf?faces-redirect=true");
@@ -41,10 +48,6 @@ public class LoginFilter implements Filter {
 
 	@Override
 	public void destroy() {
-	}
-	
-	private boolean isPaginaFuncionario(String uri) {
-		return uri.startsWith("/livraria/funcionario/");
 	}
 	
 	private boolean isLoginUri(String uri) {

@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <body>
 	<ui:composition>
@@ -27,7 +28,8 @@
               </li>
             </ul>
           </li> -->
-			<li class=""><a href="javascript:;"> <i class="fa fa-truck"></i>
+			<li class="" jsf:rendered="#{controleAcessoFuncionario.possuiPermissao(loginInfo.usuarioLogado, request.contextPath.concat('/funcionario/fornecedor/'))}">
+			     <a href="javascript:;"> <i class="fa fa-truck"></i>
 					<span class="link-title">Fornecedor</span> <span class="fa arrow"></span>
 			</a>
 				<ul>
@@ -40,7 +42,8 @@
 							<i class="fa fa-angle-right"></i>&nbsp;Cadastrar
 					</a></li>
 				</ul></li>
-			<li class=""><a href="javascript:;"> <i class="fa fa-user"></i>
+			<li class="" jsf:rendered="#{controleAcessoFuncionario.possuiPermissao(loginInfo.usuarioLogado, request.contextPath.concat('/funcionario/funcionario/'))}">
+			<a href="javascript:;"> <i class="fa fa-user"></i>
 					<span class="link-title">Funcionário</span> <span class="fa arrow"></span>
 			</a>
 				<ul>
@@ -53,7 +56,8 @@
 							<i class="fa fa-angle-right"></i>&nbsp;Cadastrar
 					</a></li>
 				</ul></li>
-			<li class=""><a href="javascript:;"> <i class="fa fa-book"></i>
+			<li class="" jsf:rendered="#{controleAcessoFuncionario.possuiPermissao(loginInfo.usuarioLogado, request.contextPath.concat('/funcionario/livro/'))}">
+			<a href="javascript:;"> <i class="fa fa-book"></i>
 					<span class="link-title">Livro</span> <span class="fa arrow"></span>
 			</a>
 				<ul>
@@ -66,7 +70,7 @@
 							<i class="fa fa-angle-right"></i>&nbsp;Cadastrar
 					</a></li>
 				</ul></li>
-			<li class=""><a href="javascript:;"> <i class="fa fa-book"></i>
+			<li class="" jsf:rendered="#{controleAcessoFuncionario.possuiPermissao(loginInfo.usuarioLogado, request.contextPath.concat('/funcionario/compra/'))}"><a href="javascript:;"> <i class="fa fa-book"></i>
 					<span class="link-title">Compra</span> <span class="fa arrow"></span>
 			</a>
 				<ul>
@@ -79,7 +83,7 @@
 							<i class="fa fa-angle-right"></i>&nbsp;Cadastrar
 					</a></li>
 				</ul></li>
-			<li class=""><a href="javascript:;"> <i class="fa fa-table"></i>
+			<li class="" jsf:rendered="#{controleAcessoFuncionario.possuiPermissao(loginInfo.usuarioLogado, request.contextPath.concat('/funcionario/relatorio/'))}"><a href="javascript:;"> <i class="fa fa-table"></i>
 					<span class="link-title">Relatório</span> <span class="fa arrow"></span>
 			</a>
 				<ul>
