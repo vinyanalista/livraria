@@ -73,9 +73,8 @@
 				<c:forEach items="#{carrinhoMB.itens}" var="item">
 					<tr>
 						<td>
-							<!-- TODO Apenas para fins de protótipo! Exibir capa do livro! -->
 							<a href="livro.jsf?id=#{item.livro.id}">
-								<img width="60" src="#{resource['cliente:images/livro.jpg']}" alt="" />
+								<img width="60" src="#{request.contextPath}/capa?id=#{item.livro.id}" alt="" />
 							</a>
 						</td>
 						<td>
@@ -189,6 +188,9 @@
 				-webkit-border-radius: 0 4px 4px 0 !important;
 				-moz-border-radius: 0 4px 4px 0 !important;
 				border-radius: 0 4px 4px 0 !important;
+			}
+			table td {
+				vertical-align: middle !important;
 			}
 		</style>
 	</ui:define>

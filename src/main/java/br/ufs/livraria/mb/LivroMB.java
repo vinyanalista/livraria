@@ -34,11 +34,13 @@ public class LivroMB extends Crud<Livro> implements Serializable {
 
 	private String atribuirCapa() {
 		try {
-            InputStream is = capa.getInputStream();
-            byte[] bytes = IOUtils.toByteArray(is);
-            livro.setCapa(bytes);
+            if (capa != null) {
+				InputStream is = capa.getInputStream();
+	            byte[] bytes = IOUtils.toByteArray(is);
+	            livro.setCapa(bytes);
+            }
             return null;
-        } catch (IOException excecao){
+        } catch (Exception excecao){
             mensagensMb.adicionarMensagem(MensagemTipo.ERRO, "Houve um erro ao tentar fazer upload da capa.");
             return "cadastro.jsf";
         }

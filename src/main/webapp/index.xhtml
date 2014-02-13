@@ -21,9 +21,8 @@
 								<c:forEach items="#{indexMB.maisVendidos()}" var="livro" varStatus="status" begin="0" end="3">
 									<li class="span3">
 										<div class="thumbnail">
-											<!-- TODO Apenas para fins de protótipo! Exibir capa do livro! -->
 											<a href="livro.jsf?id=#{livro.id}">
-												<img src="#{resource['cliente:images/livro.jpg']}" alt="" />
+												<img src="#{request.contextPath}/capa?id=#{livro.id}" alt="" />
 											</a>
 											<div class="caption">
 												<h5>
@@ -50,9 +49,8 @@
 								<c:forEach items="#{indexMB.maisVendidos()}" var="livro" varStatus="status" begin="4" end="7">
 									<li class="span3">
 										<div class="thumbnail">
-											<!-- TODO Apenas para fins de protótipo! Exibir capa do livro! -->
 											<a href="livro.jsf?id=#{livro.id}">
-												<img src="#{resource['cliente:images/livro.jpg']}" alt="" />
+												<img src="#{request.contextPath}/capa?id=#{livro.id}" alt="" />
 											</a>
 											<div class="caption">
 												<h5>
@@ -94,9 +92,8 @@
 				</c:choose>
 				<li class="#{liClass}">
 					<div class="thumbnail">
-						<!-- TODO Apenas para fins de protótipo! Exibir capa do livro! -->
 						<a href="livro.jsf?id=#{livro.id}">
-							<img src="#{resource['cliente:images/livro.jpg']}" alt="" />
+							<img src="#{request.contextPath}/capa?id=#{livro.id}" alt="" />
 						</a>
 						<div class="caption">
 							<h5>

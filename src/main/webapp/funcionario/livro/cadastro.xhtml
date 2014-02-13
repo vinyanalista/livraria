@@ -57,7 +57,12 @@
 							<div class="form-group">
 								<label class="control-label col-lg-4" for="capa">Capa</label>
 								<div class="col-lg-8">
-									<h:inputFile id="capa" name="capa" value="#{livroMB.capa}" styleClass="form-control" />
+									<img id="capa_atual" src="#{request.contextPath}/capa?id=-1" alt="" jsf:rendered="#{livroMB.cadastro}" />
+									<img id="capa_atual" src="#{request.contextPath}/capa?id=#{livroMB.livro.id}" alt="" jsf:rendered="#{!livroMB.cadastro}" />
+									<div id="upload_capa">
+										<h:inputFile id="capa" name="capa" value="#{livroMB.capa}" styleClass="form-control" />
+										<p class="help-block">Você só precisa enviar uma capa se desejar substituir a capa atual, exibida ao lado.</p>
+									</div>
 								</div>
 							</div>
 
@@ -127,14 +132,7 @@
 								</div>
 							</div>
 
-							<div class="form-group">
-								<label class="control-label col-lg-4" for="estoque">Quantidade em estoque</label>
-								<div class="col-lg-8">
-									<input 	jsf:id="estoque" name="estoque"
-											jsf:value="#{livroMB.livro.estoque}" type="text" placeholder="Quantidade em estoque" class="form-control required digits" 
-									/>
-								</div>
-							</div>
+							<input type="hidden" jsf:id="estoque" name="estoque" jsf:value="#{livroMB.livro.estoque}" jsf:rendered="#{!livroMB.cadastro}" />
 
 							<div class="form-actions no-margin-bottom">
 								<a jsf:id="cancelar" class="btn btn-default" jsf:action="index.jsf" jsf:immediate="true">Cancelar</a>
@@ -147,6 +145,17 @@
 			</div>
 		</div>
 		<h:outputStylesheet library="funcionario" name="css/funcionario.css" />
+		<style>
+		#capa_atual {
+			float: left;
+			max-width: 160px;
+			max-height: 160px;
+		}
+		#upload_capa {
+			float: left;
+			margin-left: 10px;
+		}
+		</style>
 		<h:outputScript library="funcionario" name="js/funcionario.js" />
 	</ui:define>
 </ui:composition>
