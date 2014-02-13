@@ -14,7 +14,7 @@ public abstract class Movimentacao extends Entidade implements Serializable {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	protected Date data;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "movimentacao")
 	@JoinColumn(name = "movimentacao_id")
 	protected List<ItemLivro> listaItens;
 	

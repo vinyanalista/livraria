@@ -69,3 +69,12 @@ INSERT INTO venda(id, cliente_id, pagamento_id) VALUES (2, 1, 2);
 INSERT INTO venda(id, cliente_id, pagamento_id) VALUES (3, 1, 3);
 INSERT INTO venda(id, cliente_id, pagamento_id) VALUES (4, 1, 4);
 INSERT INTO venda(id, cliente_id, pagamento_id) VALUES (5, 1, 5);
+
+
+-- Admin
+INSERT INTO endereco (id, bairro, cep, cidade, estado, logradouro, numero) VALUES (2, 'A', '11111-111', 'A', 'SE', 'A', 1);
+ALTER SEQUENCE endereco_id_seq RESTART WITH 3;
+-- Senha admin
+INSERT INTO usuario (id, tipo, cpf, data_nascimento, email, nome, rg, senha, telefone, endereco_id) VALUES (2, 1, '1', '1899-12-31', 'admin@sigeli.com', 'Admin', '1', 'd033e22ae348aeb5660fc2140aec35850c4da997', '(11) 1111-1111', 2);
+ALTER SEQUENCE usuario_id_seq RESTART WITH 3;
+INSERT INTO funcionario (id, permissao) VALUES (2, 0);

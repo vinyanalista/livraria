@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <ui:composition template="/WEB-INF/template_cliente.xhtml">
 	<ui:define name="titulo">SIGELI - Página Inicial</ui:define>
@@ -19,41 +20,29 @@
 	<div class="row">
 		<div class="span4">
 			<div class="well">
-			<h5>CREATE YOUR ACCOUNT</h5><br/>
-			Enter your e-mail address to create an account.<br/><br/><br/>
-			<form action="register.html" jsf:acceptcharset="ISO-8859-1">
-			  <div class="control-group">
-				<label class="control-label" for="inputEmail0">E-mail address</label>
-				<div class="controls">
-				  <input class="span3"  type="text" id="inputEmail0" placeholder="Email"/>
-				</div>
-			  </div>
-			  <div class="controls">
-			  <button type="submit" class="btn block">Create Your Account</button>
-			  </div>
-			</form>
+			<a href="cadastro.jsf" class="btn block">Registre-se</a>
 		</div>
 		</div>
 		<div class="span1"> &nbsp;</div>
 		<div class="span4">
 			<div class="well">
-			<h5>ALREADY REGISTERED ?</h5>
+			<h5>Já possui cadastro?</h5>
 			<form jsf:acceptcharset="ISO-8859-1">
 			  <div class="control-group">
 				<label class="control-label" for="inputEmail1">Email</label>
 				<div class="controls">
-				  <input class="span3"  type="text" id="inputEmail1" placeholder="Email"/>
+				  <input class="span3"  type="text" id="inputEmail1" placeholder="Email" jsf:value="#{loginMB.email}"/>
 				</div>
 			  </div>
 			  <div class="control-group">
-				<label class="control-label" for="inputPassword1">Password</label>
+				<label class="control-label" for="inputPassword1">Senha</label>
 				<div class="controls">
-				  <input type="password" class="span3"  id="inputPassword1" placeholder="Password"/>
+				  <input type="password" class="span3"  id="inputPassword1" placeholder="Password" jsf:value="#{loginMB.senha}"/>
 				</div>
 			  </div>
 			  <div class="control-group">
 				<div class="controls">
-				  <button type="submit" class="btn">Sign in</button> <a href="forgetpass.html">Forget password?</a>
+				  <button type="submit" class="btn" jsf:action="#{loginMB.login}">Login</button> <a href="forgetpass.html">Esqueceu a senha?</a>
 				</div>
 			  </div>
 			</form>

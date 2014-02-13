@@ -9,6 +9,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import br.ufs.livraria.dao.ClienteDAO;
 import br.ufs.livraria.enumeration.MensagemTipo;
 import br.ufs.livraria.modelo.Cliente;
@@ -45,7 +47,7 @@ public class ClienteMB implements Serializable {
 	public String atualizar() {
 		try {
 			if (senhasIguais()) {
-				Cliente.setSenha(senha1);
+				Cliente.setSenha(DigestUtils.sha1Hex(senha1));
 				ClienteDao.atualizar(Cliente);
 				mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO,
 						"O Cliente foi atualizado com sucesso!");
@@ -65,7 +67,7 @@ public class ClienteMB implements Serializable {
 	public String inserir() {
 		try {
 			if (senhasIguais()) {
-				Cliente.setSenha(senha1);
+				Cliente.setSenha(DigestUtils.sha1Hex(senha1));
 				Cliente.setDataCadastro(new Date());
 				ClienteDao.inserir(Cliente);
 				mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO,

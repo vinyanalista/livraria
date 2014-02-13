@@ -42,16 +42,18 @@
 			<artifactId>postgresql</artifactId>
 			<version>${postgresql-version}</version>
 		</dependency>
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.9</version>
-        </dependency>
-        <!-- <dependency>
-			<groupId>org.primefaces</groupId>
-			<artifactId>primefaces</artifactId>
-			<version>${primefaces-version}</version>
-		</dependency> -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.9</version>
+		</dependency>
+		<dependency>
+			<groupId>org.omnifaces</groupId>
+			<artifactId>omnifaces</artifactId>
+			<version>1.7</version>
+		</dependency>
+		<!-- <dependency> <groupId>org.primefaces</groupId> <artifactId>primefaces</artifactId> 
+			<version>${primefaces-version}</version> </dependency> -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -60,25 +62,20 @@
 		</dependency>
 	</dependencies>
 
-	<!-- <repositories>
-		<repository>
-			<id>prime-repo</id>
-			<name>PrimeFaces Maven Repository</name>
-			<url>http://repository.primefaces.org</url>
-			<layout>default</layout>
-		</repository>
-	</repositories> -->
+	<!-- <repositories> <repository> <id>prime-repo</id> <name>PrimeFaces Maven 
+		Repository</name> <url>http://repository.primefaces.org</url> <layout>default</layout> 
+		</repository> </repositories> -->
 
 	<build>
 		<finalName>livraria</finalName>
-		<resources> 
-	        <resource> 
-	                <directory>src/main/resources</directory> 
-	        </resource> 
-	        <resource> 
-	                <directory>src/main/${application-server}-resources</directory> 
-	        </resource> 
-        </resources>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>src/main/${application-server}-resources</directory>
+			</resource>
+		</resources>
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -113,14 +110,14 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-	
+
 	<profiles>
-	
+
 		<profile>
 			<id>glassfish</id>
 			<activation>
-		        <activeByDefault>true</activeByDefault>
-		    </activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 			<properties>
 				<application-server>glassfish</application-server>
 				<eclipselink-version>2.5.0</eclipselink-version>
@@ -157,13 +154,13 @@
 								</component>
 							</components>
 							<debug>true</debug>
-					        <echo>true</echo>
+							<echo>true</echo>
 						</configuration>
 					</plugin>
 				</plugins>
 			</build>
 		</profile>
-		
+
 		<profile>
 			<id>wildfly</id>
 			<properties>
@@ -174,11 +171,11 @@
 			</properties>
 			<dependencies>
 				<dependency>
-		        	<groupId>org.hibernate</groupId>
-		            <artifactId>hibernate-entitymanager</artifactId>
-		            <version>${hibernate-version}</version>
-		            <scope>test</scope>
-		        </dependency>
+					<groupId>org.hibernate</groupId>
+					<artifactId>hibernate-entitymanager</artifactId>
+					<version>${hibernate-version}</version>
+					<scope>test</scope>
+				</dependency>
 			</dependencies>
 			<build>
 				<plugins>
@@ -210,7 +207,8 @@
 								<configuration>
 									<beforeDeployment>
 										<commands>
-											<command>deploy --force ${project.build.directory}/${project.build.finalName}/WEB-INF/lib/postgresql-${postgresql-version}.jar</command>
+											<command>deploy --force
+												${project.build.directory}/${project.build.finalName}/WEB-INF/lib/postgresql-${postgresql-version}.jar</command>
 										</commands>
 									</beforeDeployment>
 								</configuration>
@@ -220,7 +218,7 @@
 				</plugins>
 			</build>
 		</profile>
-		
+
 	</profiles>
-	
+
 </project>
