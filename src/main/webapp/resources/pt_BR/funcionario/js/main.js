@@ -1123,3 +1123,16 @@ function progRess() {
 
     });
 }
+
+$(document).ready(function(){
+    $('.moeda').maskMoney({
+        affixesStay: false,
+        allowNegative: false,
+        allowZero: false,
+        decimal: ',',
+        precision: 2,
+        prefix: '',
+        suffix: '',
+        thousands: '.'
+    });
+});

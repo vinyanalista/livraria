@@ -122,13 +122,16 @@
 							</div>
 							
 
-							<!-- TODO Preço deveria ter máscara -->
 							<div class="form-group">
 								<label class="control-label col-lg-4" for="preco">Preço</label>
 								<div class="col-lg-8">
-									<input 	jsf:id="preco" name="preco"
-											jsf:value="#{livroMB.livro.preco}" type="text" placeholder="Preço" class="form-control required"
-									/>
+									<div class="input-group">
+										<span class="input-group-addon">R$</span>
+										<input 	jsf:id="preco" name="preco"
+												jsf:value="#{livroMB.livro.preco}" type="text" placeholder="Preço" class="form-control moeda required">
+											<f:convertNumber pattern="#,##0.00" minFractionDigits="2" />
+										</input>
+									</div>
 								</div>
 							</div>
 
