@@ -1,6 +1,7 @@
 package br.ufs.livraria.mb;
 
 import java.io.Serializable;
+import java.text.MessageFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,7 @@ import javax.inject.Named;
 
 import br.ufs.livraria.bean.LoginInfo;
 import br.ufs.livraria.dao.CompraDAO;
+import br.ufs.livraria.dao.FornecedorDAO;
 import br.ufs.livraria.dao.ItemLivroDAO;
 import br.ufs.livraria.dao.LivroDAO;
 import br.ufs.livraria.enumeration.MensagemTipo;
@@ -37,6 +39,9 @@ public class CompraMB implements Serializable {
 	@EJB
 	private LivroDAO livroDAO;
 	
+	@EJB
+	private FornecedorDAO fornecedorDAO;
+	
 	@Inject
 	private LoginInfo loginInfo;
 	
@@ -44,7 +49,6 @@ public class CompraMB implements Serializable {
 	private MensagensMB mensagensMb;
 	
 	private Compra compra;
-	private Map<String, Boolean> fornecedorCheckMap = new HashMap<>();
 	private Map<Integer, Boolean> livroCheckMap = new HashMap<>();
 	private Map<Integer, ItemLivro> itemLivroMap = new HashMap<>();
 	private Integer id;
@@ -60,8 +64,26 @@ public class CompraMB implements Serializable {
 		return compraDAO.listar();
 	}
 	
+	public List<Fornecedor> getFornecedores() {
+		return fornecedorDAO.listar();
+	}
+	
+	public List<Livro> getLivros() {
+		List<Livro> livros = livroDAO.listar();
+		for (Livro livro : livros) {
+			ItemLivro itemLivro = new ItemLivro();
+			itemLivro.setLivro(livro);
+			itemLivro.setMovimentacao(compra);
+			itemLivroMap.put(livro.getId(), itemLivro);
+		}
+		return livros;
+	}
+	
 	public String salvar() {
 		try {
+			if (!validar()) {
+				return null;
+			}
 			compra.setData(new Date());
 			compraDAO.inserir(compra);
 			for (ItemLivro itemLivro : itemLivroMap.values()) {
@@ -86,28 +108,10 @@ public class CompraMB implements Serializable {
 	
 	public void setCompra(Compra compra) {
 		this.compra = compra;
-		this.fornecedorCheckMap.put(compra.getFornecedor().getCnpj(), true);
-		for (ItemLivro itemLivro : compra.getListaItens()) {
-			this.livroCheckMap.put(itemLivro.getLivro().getId(), true);
-			this.itemLivroMap.put(itemLivro.getLivro().getId(), itemLivro);
-		}
 	}
 	
 	public boolean isCadastro() {
 		return this.compra.getId() == null;
-	}
-	
-	public void setFornecedor(Fornecedor fornecedor) {
-		compra.setFornecedor(fornecedor);
-		for (String key : fornecedorCheckMap.keySet()) {
-			if (!key.equals(fornecedor.getCnpj())) {
-				fornecedorCheckMap.put(key, false);
-			}
-		}
-	}
-	
-	public Map<String, Boolean> getFornecedorCheckMap() {
-		return fornecedorCheckMap;
 	}
 	
 	public Map<Integer, Boolean> getLivroCheckMap() {
@@ -118,17 +122,6 @@ public class CompraMB implements Serializable {
 		return itemLivroMap;
 	}
 	
-	public void prepareItemLivro(Livro livro) {
-		if (itemLivroMap.containsKey(livro.getId())) {
-			itemLivroMap.remove(livro.getId());
-		} else {
-			ItemLivro itemLivro = new ItemLivro();
-			itemLivro.setLivro(livro);
-			itemLivro.setMovimentacao(compra);
-			itemLivroMap.put(livro.getId(), itemLivro);
-		}
-	}
-	
 	public Integer getId() {
 		return id;
 	}
@@ -136,5 +129,28 @@ public class CompraMB implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 		setCompra(compraDAO.buscar(id));
+	}
+	
+	private boolean validar() {
+		boolean valid = true;
+		boolean possuiLivroMarcado = false;
+		for (Integer idLivro : livroCheckMap.keySet()) {
+			if (livroCheckMap.get(idLivro)) {
+				possuiLivroMarcado = true;
+				ItemLivro itemLivro = itemLivroMap.get(idLivro);
+				if (itemLivro.getPreco() == null) {
+					mensagensMb.adicionarMensagem(MensagemTipo.ERRO, MessageFormat.format("O livro {0} não possui preço", itemLivro.getLivro().getTitulo()));
+					valid = false;
+				}
+				if (itemLivro.getQuantidade() == null) {
+					mensagensMb.adicionarMensagem(MensagemTipo.ERRO, MessageFormat.format("O livro {0} não possui quantidade", itemLivro.getLivro().getTitulo()));
+					valid = false;
+				}
+			}
+		}
+		if (!possuiLivroMarcado) {
+			mensagensMb.adicionarMensagem(MensagemTipo.ERRO, "Você deve escolher pelo menos um livro");
+		}
+		return valid && possuiLivroMarcado;
 	}
 }
