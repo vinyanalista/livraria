@@ -136,7 +136,7 @@
 							</div>
 							
 							<div class="form-actions no-margin-bottom">
-								<a jsf:id="cancelar" class="btn btn-default" jsf:action="index.jsf" jsf:immediate="true">Cancelar</a>
+								<a jsf:id="cancelar" class="btn btn-default" jsf:action="index.jsf?faces-redirect=true" jsf:immediate="true">Cancelar</a>
 								<button jsf:id="inserir" class="btn btn-primary" jsf:action="#{fornecedorMB.inserir()}" jsf:rendered="#{fornecedorMB.cadastro}">Salvar</button>
 								<button jsf:id="atualizar" class="btn btn-primary" jsf:action="#{fornecedorMB.atualizar()}" jsf:rendered="#{!fornecedorMB.cadastro}">Salvar</button>
 							</div>

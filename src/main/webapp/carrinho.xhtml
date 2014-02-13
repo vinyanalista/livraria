@@ -16,7 +16,8 @@
 		<h3>
 			Carrinho [ <small>
 				<h:outputText value="Sem itens " rendered="#{carrinhoMB.quantidadeDeItens == 0}" />
-				<h:outputText value="#{carrinhoMB.quantidadeDeItens} itens" rendered="#{carrinhoMB.quantidadeDeItens > 0}" />
+				<h:outputText value="1 item" rendered="#{carrinhoMB.quantidadeDeItens == 1}" />
+				<h:outputText value="#{carrinhoMB.quantidadeDeItens} itens" rendered="#{carrinhoMB.quantidadeDeItens > 1}" />
 			</small> ]<a href="index.jsf"
 				class="btn btn-large pull-right"><i class="icon-arrow-left"></i>
 				Continuar comprando</a>

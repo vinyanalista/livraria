@@ -24,7 +24,8 @@
 			<h:outputText value="#{buscarMB.tituloDaPagina}" />
 			<h:panelGroup rendered="#{not empty buscarMB.lista}">
 				<small class="pull-right">
-					<h:outputText value="A busca retornou #{buscarMB.lista.size()} livros" />
+					<h:outputText value="A busca retornou 1 livro" rendered="#{buscarMB.lista.size() == 1}" />
+					<h:outputText value="A busca retornou #{buscarMB.lista.size()} livros" rendered="#{buscarMB.lista.size() > 1}" />
 				</small>
 			</h:panelGroup>
 		</h3>

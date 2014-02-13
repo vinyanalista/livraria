@@ -199,7 +199,7 @@
 
 							<div class="form-actions no-margin-bottom">
 								<a jsf:id="cancelar" class="btn btn-default"
-									jsf:action="index.jsf" jsf:immediate="true">Cancelar</a>
+									jsf:action="index.jsf?faces-redirect=true" jsf:immediate="true">Cancelar</a>
 								<button jsf:id="inserir" class="btn btn-primary"
 									jsf:action="#{funcionarioMB.inserir()}"
 									jsf:rendered="#{funcionarioMB.cadastro}">Salvar</button>
