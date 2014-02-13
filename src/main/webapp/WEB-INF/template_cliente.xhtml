@@ -53,9 +53,12 @@
 				<div class="span6">
 				    <h:panelGroup rendered="#{loginInfo.loggedIn}">
 					   Bem-vindo, <strong>#{loginInfo.usuarioLogado.nome}</strong>!
+					   <h:form style="display: inline">
+                           <h:commandLink action="#{loginMB.logout}" value="Logout" styleClass="btn btn-small" />
+                       </h:form>
 					</h:panelGroup>
 					<h:panelGroup rendered="#{!loginInfo.loggedIn}">
-					   Bem-vindo, <strong>visitante</strong>! <a href="#login" role="button" data-toggle="modal">Faça login</a> ou <a href="cadastro.jsf">registre-se</a>!
+					   Bem-vindo, <strong>visitante</strong>! <a href="#login" role="button" data-toggle="modal" style="text-decoration: underline">Faça login</a> ou <a href="cadastro.jsf" style="text-decoration: underline">registre-se</a>!
 					</h:panelGroup>
 				</div>
 				<div id="login" class="modal hide fade in" tabindex="-1"
