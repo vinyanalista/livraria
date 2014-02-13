@@ -56,23 +56,41 @@ public class LivroDAO extends DAO<Livro> implements Serializable {
 		System.out.println("LIVRO DAO\nPor: " + por + "\nFiltro: " + filtro + "\nGênero: " + genero + "\nOrdenação: " + ordenacao);
 		System.out.println("******************************************************************************************************");
 
-		StringBuilder query = new StringBuilder("SELECT livro FROM Livro livro WHERE");
+		StringBuilder query = new StringBuilder("SELECT livro FROM Livro livro");
 		if ((por != null) && (!por.isEmpty())) {
+			query.append(" WHERE");
 			switch (filtro) {
 			case TITULO:
-				query.append(" livro.titulo");
+				query.append(" ((livro.titulo");
 				break;
-			// TODO Verificar demais casos
 			case AUTOR:
+				query.append(" ((livro.autor");
+				break;
 			case SINOPSE:
+				query.append(" ((livro.sinopse");
+				break;
 			case TUDO:
 			default:
-				query.append(" livro.titulo");
+				query.append(" ((livro.titulo LIKE '%")
+				.append(por).append("%') OR (livro.autor LIKE '%")
+				.append(por).append("%') OR (livro.sinopse");
 				break;
 			}
-			query.append(" LIKE '%").append(por).append("%'");
+			query.append(" LIKE '%").append(por).append("%'))");
 		}
-		// TODO Busca por gênero
+		
+		if (genero != null) {
+			if (genero != Genero.TUDO) {
+				if ((por == null) || (por.isEmpty())) {
+					query.append(" WHERE");
+				} else {
+					query.append(" AND");
+				}
+				query.append(" (livro.genero = '")
+				.append(genero.toString()).append("')");
+			}
+		}
+		
 		if (ordenacao != null) {
 			query.append(" ORDER BY");
 			switch (ordenacao) {

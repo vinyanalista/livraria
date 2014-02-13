@@ -106,7 +106,7 @@ public class BuscarMB implements Serializable {
 	/* Ações */
 	
 	public void processar() {
-		if ((por == null) || (por.isEmpty())) {
+		if ((por == null) /*|| (por.isEmpty())*/) {
 			mensagensMb.adicionarMensagem(MensagemTipo.ERRO, "Requisição inválida");
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
@@ -120,6 +120,11 @@ public class BuscarMB implements Serializable {
 
 		BuscaFiltro filtro;
 		if (this.filtro == null) {
+			filtro = BuscaFiltro.TUDO;
+		} else {
+			filtro = BuscaFiltro.values()[this.filtro - 1];
+		}
+		/*if (this.filtro == null) {
 			this.filtro = DEFAULT_FILTRO;
 		}
 		switch (this.filtro) {
@@ -136,10 +141,15 @@ public class BuscarMB implements Serializable {
 			default:
 				filtro = BuscaFiltro.TUDO;
 				break;
-		}
+		}*/
 
 		BuscaOrdenacao ordenacao;
 		if (this.ordenacao == null) {
+			ordenacao = BuscaOrdenacao.TITULO_A_Z;
+		} else {
+			ordenacao = BuscaOrdenacao.values()[this.ordenacao - 1];
+		}
+		/*if (this.ordenacao == null) {
 			this.ordenacao = DEFAULT_ORDENACAO;
 		}
 		switch (this.ordenacao) {
@@ -156,9 +166,16 @@ public class BuscarMB implements Serializable {
 			default:
 				ordenacao = BuscaOrdenacao.TITULO_A_Z;
 				break;
-		}
+		}*/
 
-		lista = livroDao.buscar(por, filtro, ordenacao, null);
+		Genero genero;
+		if (this.genero == null) {
+			genero = Genero.TUDO;
+		} else {
+			genero = Genero.values()[this.genero - 1];
+		}
+		
+		lista = livroDao.buscar(por, filtro, ordenacao, genero);
 	}
 	
 }
