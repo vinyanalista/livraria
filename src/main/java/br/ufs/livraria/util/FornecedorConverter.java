@@ -9,7 +9,7 @@ import javax.faces.convert.FacesConverter;
 import br.ufs.livraria.dao.FornecedorDAO;
 import br.ufs.livraria.modelo.Fornecedor;
 
-@FacesConverter(value = "fornecedorConverter")
+@FacesConverter(forClass = Fornecedor.class)
 public class FornecedorConverter implements Converter {
 
 	@EJB
