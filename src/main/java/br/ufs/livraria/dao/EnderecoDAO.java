@@ -13,4 +13,10 @@ public class EnderecoDAO extends DAO<Endereco> implements Serializable {
 	public EnderecoDAO() {
 		super(Endereco.class);
 	}
+
+	@Override
+	public void remover(Endereco endereco) {
+		remover(endereco.getId());
+	}
+	
 }

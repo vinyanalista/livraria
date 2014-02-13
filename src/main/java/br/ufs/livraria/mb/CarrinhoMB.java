@@ -21,9 +21,6 @@ public class CarrinhoMB implements Serializable {
 	
 	private List<ItemLivro> itens;
 
-	// TODO Apenas para fins de protótipo! Remover!
-	private Livro livroDeTeste;
-	
 	@EJB
 	private LivroDAO livroDao;
 	
@@ -32,34 +29,6 @@ public class CarrinhoMB implements Serializable {
 	
 	public CarrinhoMB() {
 		itens = new ArrayList<ItemLivro>();
-	}
-	
-	public void inicializar() {
-		// TODO Apenas para fins de protótipo! Remover!
-		if (itens.size() == 0) {
-			Livro livro1 = livroDao.buscar(1);
-			ItemLivro item1 = new ItemLivro();
-			item1.setLivro(livro1);
-			item1.setPreco(livro1.getPreco());
-			item1.setQuantidade(1);
-			itens.add(item1);
-			
-			Livro livro2 = livroDao.buscar(2);
-			ItemLivro item2 = new ItemLivro();
-			item2.setLivro(livro2);
-			item2.setPreco(livro2.getPreco());
-			item2.setQuantidade(2);
-			itens.add(item2);
-			
-			Livro livro3 = livroDao.buscar(3);
-			ItemLivro item3 = new ItemLivro();
-			item3.setLivro(livro3);
-			item3.setPreco(livro3.getPreco());
-			item3.setQuantidade(3);
-			itens.add(item3);
-
-			livroDeTeste = livroDao.buscar(4);
-		}
 	}
 	
 	public String adicionar(Livro livro) {
@@ -74,10 +43,9 @@ public class CarrinhoMB implements Serializable {
 		if (!livroJaExistia) {
 			ItemLivro novoItem = new ItemLivro();
 			novoItem.setLivro(livro);
-			novoItem.setPreco(livro.getPreco());
+			novoItem.setPrecoEfetivo(livro.getPreco());
 			novoItem.setQuantidade(1);
 			itens.add(novoItem);
-			// TODO As tags <b></b> estão sendo impressas
 			mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO, "O livro <b>" + livro.getTitulo() + "</b> foi adicionado ao carrinho!");
 		}
 		return "carrinho.jsf?faces-redirect=true";
@@ -87,10 +55,6 @@ public class CarrinhoMB implements Serializable {
 		return itens;
 	}
 
-	public Livro getLivroDeTeste() {
-		return livroDeTeste;
-	}
-	
 	public Integer getQuantidadeDeItens() {
 		return itens.size();
 	}
@@ -98,7 +62,7 @@ public class CarrinhoMB implements Serializable {
 	public Float getValorTotal() {
 		float valorTotal = 0;
 		for (ItemLivro item : itens) {
-			valorTotal += (item.getPreco() * item.getQuantidade());
+			valorTotal += (item.getPrecoEfetivo() * item.getQuantidade());
 		}
 		return valorTotal;
 	}

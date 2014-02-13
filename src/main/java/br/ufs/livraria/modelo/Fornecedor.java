@@ -7,9 +7,13 @@ import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
 @Entity
-public class Fornecedor extends Entidade implements Serializable {
+public class Fornecedor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Integer id;
+	
 	@Column(unique = true, length = 14)
 //	@Pattern(regexp = "[0-9]*")
 	private String cnpj;
@@ -33,6 +37,10 @@ public class Fornecedor extends Entidade implements Serializable {
 	
 	public Fornecedor() {
 		endereco = new Endereco();
+	}
+	
+	public Integer getId() {
+		return id;
 	}
 	
 	public String getCnpj() {
@@ -59,6 +67,10 @@ public class Fornecedor extends Entidade implements Serializable {
 		return compras;
 	}
 	
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
@@ -81,6 +93,24 @@ public class Fornecedor extends Entidade implements Serializable {
 
 	public void setCompras(List<Compra> compras) {
 		this.compras = compras;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Fornecedor) {
+			Fornecedor outroFornecedor = (Fornecedor) obj;
+			return (this.id == outroFornecedor.id);
+		} else {
+			return false;
+		}
+	}
+	
+	@Override
+	public int hashCode() {
+		final int PRIME = 31;
+		int result = 1;
+		result = PRIME * result + ((id == null) ? 0 : id.hashCode());
+		return result;
 	}
 
 }

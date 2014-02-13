@@ -13,4 +13,10 @@ public class ItemLivroDAO extends DAO<ItemLivro> implements Serializable {
 	public ItemLivroDAO() {
 		super(ItemLivro.class);
 	}
+
+	@Override
+	public void remover(ItemLivro itemLivro) {
+		remover(itemLivro.getId());
+	}
+	
 }

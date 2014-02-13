@@ -43,33 +43,25 @@ INSERT INTO movimentacao (id, tipo, data) VALUES (5, 2, '2013/11/07');
 ALTER SEQUENCE movimentacao_id_seq RESTART WITH 6;
 
 -- Itens de Livros
-INSERT INTO itemlivro (id, preco, quantidade, movimentacao_id, livro_id) VALUES (1, 312, 1, 1, 1);
-INSERT INTO itemlivro (id, preco, quantidade, movimentacao_id, livro_id) VALUES (2, 246, 2, 1, 2);
-INSERT INTO itemlivro (id, preco, quantidade, movimentacao_id, livro_id) VALUES (3, 417, 3, 2, 3);
-INSERT INTO itemlivro (id, preco, quantidade, movimentacao_id, livro_id) VALUES (4, 170, 1, 2, 4);
-INSERT INTO itemlivro (id, preco, quantidade, movimentacao_id, livro_id) VALUES (5, 410, 1, 3, 5);
-INSERT INTO itemlivro (id, preco, quantidade, movimentacao_id, livro_id) VALUES (6, 79.80, 2, 3, 6);
-INSERT INTO itemlivro (id, preco, quantidade, movimentacao_id, livro_id) VALUES (7, 71.70, 3, 4, 7);
-INSERT INTO itemlivro (id, preco, quantidade, movimentacao_id, livro_id) VALUES (8, 47.80, 2, 4, 8);
-INSERT INTO itemlivro (id, preco, quantidade, movimentacao_id, livro_id) VALUES (9, 25, 1, 5, 9);
-INSERT INTO itemlivro (id, preco, quantidade, movimentacao_id, livro_id) VALUES (10, 406.50, 15, 5, 10);
+INSERT INTO itemlivro (id, preco_efetivo, quantidade, movimentacao_id, livro_id) VALUES (1, 312, 1, 1, 1);
+INSERT INTO itemlivro (id, preco_efetivo, quantidade, movimentacao_id, livro_id) VALUES (2, 246, 2, 1, 2);
+INSERT INTO itemlivro (id, preco_efetivo, quantidade, movimentacao_id, livro_id) VALUES (3, 417, 3, 2, 3);
+INSERT INTO itemlivro (id, preco_efetivo, quantidade, movimentacao_id, livro_id) VALUES (4, 170, 1, 2, 4);
+INSERT INTO itemlivro (id, preco_efetivo, quantidade, movimentacao_id, livro_id) VALUES (5, 410, 1, 3, 5);
+INSERT INTO itemlivro (id, preco_efetivo, quantidade, movimentacao_id, livro_id) VALUES (6, 79.80, 2, 3, 6);
+INSERT INTO itemlivro (id, preco_efetivo, quantidade, movimentacao_id, livro_id) VALUES (7, 71.70, 3, 4, 7);
+INSERT INTO itemlivro (id, preco_efetivo, quantidade, movimentacao_id, livro_id) VALUES (8, 47.80, 2, 4, 8);
+INSERT INTO itemlivro (id, preco_efetivo, quantidade, movimentacao_id, livro_id) VALUES (9, 25, 1, 5, 9);
+INSERT INTO itemlivro (id, preco_efetivo, quantidade, movimentacao_id, livro_id) VALUES (10, 406.50, 15, 5, 10);
 ALTER SEQUENCE itemlivro_id_seq RESTART WITH 11;
 
--- Pagamentos
-INSERT INTO pagamento(id, aprovado, data, tipo) VALUES (1, 'TRUE', '2014/01/02', 3);
-INSERT INTO pagamento(id, aprovado, data, tipo) VALUES (2, 'TRUE', '2014/01/03', 1);
-INSERT INTO pagamento(id, aprovado, data, tipo) VALUES (3, 'FALSE', '2014/01/04', 5);
-INSERT INTO pagamento(id, aprovado, data, tipo) VALUES (4, 'TRUE', '2014/01/05', 2);
-INSERT INTO pagamento(id, data, tipo) VALUES (5, '2014/01/06', 1);
-ALTER SEQUENCE pagamento_id_seq RESTART WITH 6;
-
 -- Vendas
-INSERT INTO venda(id, cliente_id, pagamento_id) VALUES (1, 1, 1);
-INSERT INTO venda(id, cliente_id, pagamento_id) VALUES (2, 1, 2);
-INSERT INTO venda(id, cliente_id, pagamento_id) VALUES (3, 1, 3);
-INSERT INTO venda(id, cliente_id, pagamento_id) VALUES (4, 1, 4);
-INSERT INTO venda(id, cliente_id, pagamento_id) VALUES (5, 1, 5);
-
+-- TODO Revisar, a classe Pagamento foi extinta 
+-- INSERT INTO venda(id, cliente_id, pagamento_id) VALUES (1, 1, 1);
+-- INSERT INTO venda(id, cliente_id, pagamento_id) VALUES (2, 1, 2);
+-- INSERT INTO venda(id, cliente_id, pagamento_id) VALUES (3, 1, 3);
+-- INSERT INTO venda(id, cliente_id, pagamento_id) VALUES (4, 1, 4);
+-- INSERT INTO venda(id, cliente_id, pagamento_id) VALUES (5, 1, 5);
 
 -- Admin
 INSERT INTO endereco (id, bairro, cep, cidade, estado, logradouro, numero) VALUES (2, 'A', '11111-111', 'A', 'SE', 'A', 1);

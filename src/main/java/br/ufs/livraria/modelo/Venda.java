@@ -13,9 +13,6 @@ public class Venda extends Movimentacao implements Serializable {
 	@JoinColumn(nullable = false)
 	private Cliente cliente;
 
-	@OneToOne
-	private Pagamento pagamento;
-
 	public Venda() {
 	}
 	
@@ -23,16 +20,8 @@ public class Venda extends Movimentacao implements Serializable {
 		return cliente;
 	}
 	
-	public Pagamento getPagamento() {
-		return pagamento;
-	}
-
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
-	}
-
-	public void setPagamento(Pagamento pagamento) {
-		this.pagamento = pagamento;
 	}
 
 }

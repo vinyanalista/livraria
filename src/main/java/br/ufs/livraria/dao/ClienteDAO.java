@@ -13,4 +13,10 @@ public class ClienteDAO extends DAO<Cliente> implements Serializable {
 	public ClienteDAO() {
 		super(Cliente.class);
 	}
+
+	@Override
+	public void remover(Cliente cliente) {
+		remover(cliente.getId());
+	}
+	
 }

@@ -13,4 +13,10 @@ public class FornecedorDAO extends DAO<Fornecedor> implements Serializable {
 	public FornecedorDAO() {
 		super(Fornecedor.class);
 	}
+
+	@Override
+	public void remover(Fornecedor fornecedor) {
+		remover(fornecedor.getId());
+	}
+	
 }

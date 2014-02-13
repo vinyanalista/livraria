@@ -154,5 +154,10 @@ public class LivroDAO extends DAO<Livro> implements Serializable {
 				.setParameter("precoMax", precoMax)
 				.getResultList();
 	}
+
+	@Override
+	public void remover(Livro livro) {
+		remover(livro.getId());
+	}
 	
 }

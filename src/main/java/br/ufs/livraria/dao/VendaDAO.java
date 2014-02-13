@@ -18,6 +18,11 @@ public class VendaDAO extends DAO<Venda> implements Serializable {
 		super(Venda.class);
 	}
 	
+	@Override
+	public void remover(Venda venda) {
+		remover(venda.getId());
+	}
+	
 	public List<Venda> listar(Cliente cliente) {
 		return entityManager.createQuery(
 				"SELECT v FROM Venda v WHERE v.cliente.id = :cliente", Venda.class)
@@ -72,4 +77,5 @@ public class VendaDAO extends DAO<Venda> implements Serializable {
 				.setParameter("cliente", cliente.getId())
 				.getResultList();
 	}
+
 }

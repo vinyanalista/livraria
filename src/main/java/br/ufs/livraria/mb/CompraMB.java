@@ -138,7 +138,7 @@ public class CompraMB implements Serializable {
 			if (livroCheckMap.get(idLivro)) {
 				possuiLivroMarcado = true;
 				ItemLivro itemLivro = itemLivroMap.get(idLivro);
-				if (itemLivro.getPreco() == null) {
+				if (itemLivro.getPrecoEfetivo() == null) {
 					mensagensMb.adicionarMensagem(MensagemTipo.ERRO, MessageFormat.format("O livro {0} não possui preço", itemLivro.getLivro().getTitulo()));
 					valid = false;
 				}

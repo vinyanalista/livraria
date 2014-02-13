@@ -5,9 +5,13 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-public class Endereco extends Entidade implements Serializable {
+public class Endereco implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Integer id;
+	
 	private String logradouro;
 	
 	@Column(length = 50)
@@ -27,6 +31,10 @@ public class Endereco extends Entidade implements Serializable {
 	public Endereco() {
 	}
 
+	public Integer getId() {
+		return id;
+	}
+	
 	public String getLogradouro() {
 		return logradouro;
 	}
@@ -49,6 +57,10 @@ public class Endereco extends Entidade implements Serializable {
 
 	public String getCep() {
 		return cep;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public void setLogradouro(String logradouro) {
@@ -73,6 +85,24 @@ public class Endereco extends Entidade implements Serializable {
 
 	public void setCep(String cep) {
 		this.cep = cep;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Endereco) {
+			Endereco outroEndereco = (Endereco) obj;
+			return (this.id == outroEndereco.id);
+		} else {
+			return false;
+		}
+	}
+	
+	@Override
+	public int hashCode() {
+		final int PRIME = 31;
+		int result = 1;
+		result = PRIME * result + ((id == null) ? 0 : id.hashCode());
+		return result;
 	}
 
 }

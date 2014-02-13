@@ -13,4 +13,10 @@ public class FuncionarioDAO extends DAO<Funcionario> implements Serializable {
 	public FuncionarioDAO() {
 		super(Funcionario.class);
 	}
+
+	@Override
+	public void remover(Funcionario funcionario) {
+		remover(funcionario.getId());
+	}
+	
 }

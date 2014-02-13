@@ -11,9 +11,12 @@ import javax.persistence.*;
 public class Cliente extends Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="data_cadastro")
+	@Column(name = "data_cadastro")
 	@Temporal(TemporalType.DATE)
 	private Date dataCadastro;
+	
+	@Column(length = 50)
+	private String profissao;
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "cliente_id")
@@ -25,9 +28,17 @@ public class Cliente extends Usuario implements Serializable {
 	public Date getDataCadastro() {
 		return dataCadastro;
 	}
+	
+	public String getProfissao() {
+		return profissao;
+	}
 
 	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
+	}
+	
+	public void setProfissao(String profissao) {
+		this.profissao = profissao;
 	}
 
 }

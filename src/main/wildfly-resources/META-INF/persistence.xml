@@ -13,6 +13,7 @@
 
 	<persistence-unit name="livraria_teste"
 		transaction-type="RESOURCE_LOCAL">
+		<class>br.ufs.livraria.modelo.Boleto</class>
 		<class>br.ufs.livraria.modelo.Cliente</class>
 		<class>br.ufs.livraria.modelo.Compra</class>
 		<class>br.ufs.livraria.modelo.Endereco</class>
@@ -21,7 +22,6 @@
 		<class>br.ufs.livraria.modelo.ItemLivro</class>
 		<class>br.ufs.livraria.modelo.Livro</class>
 		<class>br.ufs.livraria.modelo.Movimentacao</class>
-		<class>br.ufs.livraria.modelo.Pagamento</class>
 		<class>br.ufs.livraria.modelo.Usuario</class>
 		<class>br.ufs.livraria.modelo.Venda</class>
 		<properties>

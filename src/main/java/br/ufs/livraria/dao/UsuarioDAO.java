@@ -31,4 +31,10 @@ public class UsuarioDAO extends DAO<Usuario> implements Serializable {
 	public boolean verificarCredenciais(String email, String senha) {
 		return verificarSenha(getByEmail(email), senha);
 	}
+
+	@Override
+	public void remover(Usuario usuario) {
+		remover(usuario.getId());
+	}
+	
 }

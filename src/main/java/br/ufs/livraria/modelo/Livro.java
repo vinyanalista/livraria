@@ -1,12 +1,17 @@
 package br.ufs.livraria.modelo;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
-public class Livro extends Entidade implements Serializable {
+public class Livro implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Integer id;
+	
 	@Column(length = 50, nullable = false)
 	private String titulo;
 	
@@ -40,6 +45,10 @@ public class Livro extends Entidade implements Serializable {
 	private byte[] capa;
 
 	public Livro() {
+	}
+	
+	public Integer getId() {
+		return id;
 	}
 
 	public String getTitulo() {
@@ -84,6 +93,10 @@ public class Livro extends Entidade implements Serializable {
 
 	public byte[] getCapa() {
 		return capa;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public void setTitulo(String titulo) {
@@ -134,9 +147,18 @@ public class Livro extends Entidade implements Serializable {
 	public boolean equals(Object obj) {
 		if (obj instanceof Livro) {
 			Livro outroLivro = (Livro) obj;
-			return this.getId() == outroLivro.getId();
+			return this.id == outroLivro.id;
+		} else {
+			return false;
 		}
-		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int PRIME = 31;
+		int result = 1;
+		result = PRIME * result + ((id == null) ? 0 : id.hashCode());
+		return result;
 	}
 	
 	public String getSinopseCurta() {

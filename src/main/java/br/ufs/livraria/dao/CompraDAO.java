@@ -6,9 +6,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 
 import br.ufs.livraria.modelo.Compra;
-import br.ufs.livraria.modelo.Pagamento;
 import br.ufs.livraria.modelo.Usuario;
-
 
 @Stateless
 public class CompraDAO extends DAO<Compra> implements Serializable {
@@ -18,7 +16,10 @@ public class CompraDAO extends DAO<Compra> implements Serializable {
 		super(Compra.class);
 	}
 	
-	
+	@Override
+	public void remover(Compra compra) {
+		compra.getId();
+	}
 	
 	public List<Compra> listar(Usuario usuario) {
 		return entityManager.createQuery(
@@ -29,13 +30,14 @@ public class CompraDAO extends DAO<Compra> implements Serializable {
 	
 	//Compras com Pagamentos Aprovados
 	public List<Compra> aprovados() {
-		return entityManager.createQuery(
+		// TODO Revisar, a classe Pagamento foi extinta
+		/*return entityManager.createQuery(
 				"SELECT entidade "+
 		        "FROM " + Compra.class.getSimpleName()+" entidade "+
 			    "JOIN "+Pagamento.class.getSimpleName()+" pagamento"+
 				"ON entidade.pagamento_id = pagamento.id"+
-				"WHERE pagamento.aprovado = 1", Compra.class).getResultList();
+				"WHERE pagamento.aprovado = 1", Compra.class).getResultList();*/
+		return null;
 	}
-	
 	
 }
