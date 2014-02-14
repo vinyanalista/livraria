@@ -81,6 +81,42 @@
 									</input>
 								</div>
 							</div>
+							
+							<div class="form-group">
+								<label class="control-label col-lg-4" for="dataContratacao">Data
+									de Contratação</label>
+								<div class="col-lg-8">
+									<input jsf:id="dataContratacao" name="dataContratacao"
+										jsf:value="#{funcionarioMB.funcionario.dataContratacao}"
+										type="text" placeholder="dd/mm/yyyy"
+										class="form-control required">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</input>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label class="control-label col-lg-4" for="cargo">Cargo</label>
+								<div class="col-lg-8">
+									<input jsf:id="cargo" name="cargo"
+										jsf:value="#{funcionarioMB.funcionario.cargo}" type="text"
+										placeholder="cargo" class="form-control required" />
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label class="control-label col-lg-4" for="salario">Salário</label>
+								<div class="col-lg-8">
+									<div class="input-group">
+										<span class="input-group-addon">R$</span>
+										<input 	jsf:id="salario" name="salario"
+												jsf:value="#{funcionarioMB.funcionario.salario}" type="text" placeholder="Salario" class="form-control moeda required">
+											<f:convertNumber pattern="#,##0.00" minFractionDigits="2" />
+										</input>
+									</div>
+								</div>
+							</div>
+							
 
 							<h4>Contato</h4>
 
