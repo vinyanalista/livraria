@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.persistence.TypedQuery;
 
 import br.ufs.livraria.enumeration.BuscaFiltro;
 import br.ufs.livraria.enumeration.BuscaOrdenacao;
@@ -56,61 +57,86 @@ public class LivroDAO extends DAO<Livro> implements Serializable {
 		System.out.println("LIVRO DAO\nPor: " + por + "\nFiltro: " + filtro + "\nGênero: " + genero + "\nOrdenação: " + ordenacao);
 		System.out.println("******************************************************************************************************");
 
-		StringBuilder query = new StringBuilder("SELECT livro FROM Livro livro");
-		if ((por != null) && (!por.isEmpty())) {
-			query.append(" WHERE");
+		StringBuilder jpql = new StringBuilder("SELECT livro FROM Livro livro");
+		
+		boolean filtrar = ((por != null) && (!por.isEmpty()) && (filtro != null));
+		boolean filtrarGenero = ((genero != null) && (genero != Genero.TUDO));
+		boolean ordenar = (ordenacao != null);
+
+		if (filtrar || filtrarGenero) {
+			jpql.append(" WHERE");
+		}
+
+		if (filtrar) {
+			
 			switch (filtro) {
 			case TITULO:
-				query.append(" ((livro.titulo");
+				jpql.append(" (LOWER(livro.titulo) LIKE LOWER(:titulo))");
 				break;
 			case AUTOR:
-				query.append(" ((livro.autor");
+				jpql.append(" (LOWER(livro.autor) LIKE LOWER(:autor))");
 				break;
 			case SINOPSE:
-				query.append(" ((livro.sinopse");
+				jpql.append(" (LOWER(livro.sinopse) LIKE LOWER(:sinopse))");
 				break;
 			case TUDO:
 			default:
-				query.append(" ((livro.titulo LIKE '%")
-				.append(por).append("%') OR (livro.autor LIKE '%")
-				.append(por).append("%') OR (livro.sinopse");
+				jpql.append(" ((LOWER(livro.titulo) LIKE LOWER(:titulo))");
+				jpql.append(" OR (LOWER(livro.autor) LIKE LOWER(:autor))");
+				jpql.append(" OR (LOWER(livro.sinopse) LIKE LOWER(:sinopse)))");
 				break;
 			}
-			query.append(" LIKE '%").append(por).append("%'))");
 		}
 		
-		if (genero != null) {
-			if (genero != Genero.TUDO) {
-				if ((por == null) || (por.isEmpty())) {
-					query.append(" WHERE");
-				} else {
-					query.append(" AND");
-				}
-				query.append(" (livro.genero = '")
-				.append(genero.toString()).append("')");
+		if (filtrarGenero) {
+			if (filtrar) {
+				jpql.append(" AND");
+			}
+			jpql.append(" AND (LOWER(livro.genero) = LOWER(:genero))");
+		}
+		
+		if (ordenar) {
+			jpql.append(" ORDER BY :ordenacao");
+		}
+
+		TypedQuery<Livro> query = entityManager.createQuery(jpql.toString(), Livro.class);
+		
+		if (filtrar) {
+			if (filtro.equals(BuscaFiltro.TITULO) || filtro.equals(BuscaFiltro.TUDO)) {
+				query.setParameter("titulo", "%" + por + "%");
+			}
+			if (filtro.equals(BuscaFiltro.AUTOR) || filtro.equals(BuscaFiltro.TUDO)) {
+				query.setParameter("autor", "%" + por + "%");
+			}
+			if (filtro.equals(BuscaFiltro.SINOPSE) || filtro.equals(BuscaFiltro.TUDO)) {
+				query.setParameter("sinopse", "%" + por + "%");
 			}
 		}
-		
-		if (ordenacao != null) {
-			query.append(" ORDER BY");
+
+		if (filtrarGenero) {
+			query.setParameter("genero", "%" + genero.toString() + "%");
+		}
+
+		if (ordenar) {
 			switch (ordenacao) {
 			case ESTOQUE:
-				query.append(" livro.estoque DESC");
+				query.setParameter("ordenacao", "livro.estoque DESC");
 				break;
 			case MENOR_PRECO:
-				query.append(" livro.preco ASC");
+				query.setParameter("ordenacao", "livro.preco ASC");
 				break;
 			case TITULO_A_Z:
-				query.append(" livro.titulo ASC");
+				query.setParameter("ordenacao", "livro.titulo ASC");
 				break;
 			case TITULO_Z_A:
-				query.append(" livro.titulo DESC");
+				query.setParameter("ordenacao", "livro.titulo DESC");
 				break;
 			default:
 				break;
 			}
 		}
-		return entityManager.createQuery(query.toString(), Livro.class).getResultList();
+
+		return query.getResultList();
 	}
 
 	public List<Livro> buscarLivro(String padrao){
