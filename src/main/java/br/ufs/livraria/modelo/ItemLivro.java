@@ -18,7 +18,7 @@ public class ItemLivro implements Serializable {
 	@Column(name = "preco_efetivo", precision = 8, scale = 2)
 	private Float precoEfetivo;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(nullable = false)
 	private Movimentacao movimentacao;
 

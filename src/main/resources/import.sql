@@ -57,11 +57,11 @@ ALTER SEQUENCE itemlivro_id_seq RESTART WITH 11;
 
 -- Vendas
 -- TODO Revisar, a classe Pagamento foi extinta 
--- INSERT INTO venda(id, cliente_id, pagamento_id) VALUES (1, 1, 1);
--- INSERT INTO venda(id, cliente_id, pagamento_id) VALUES (2, 1, 2);
--- INSERT INTO venda(id, cliente_id, pagamento_id) VALUES (3, 1, 3);
--- INSERT INTO venda(id, cliente_id, pagamento_id) VALUES (4, 1, 4);
--- INSERT INTO venda(id, cliente_id, pagamento_id) VALUES (5, 1, 5);
+INSERT INTO venda(id, cliente_id) VALUES (1, 1);
+INSERT INTO venda(id, cliente_id) VALUES (2, 1);
+INSERT INTO venda(id, cliente_id) VALUES (3, 1);
+INSERT INTO venda(id, cliente_id) VALUES (4, 1);
+INSERT INTO venda(id, cliente_id) VALUES (5, 1);
 
 -- Admin
 INSERT INTO endereco (id, bairro, cep, cidade, estado, logradouro, numero) VALUES (2, 'A', '11111-111', 'A', 'SE', 'A', 1);
