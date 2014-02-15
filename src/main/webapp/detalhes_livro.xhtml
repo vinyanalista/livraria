@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+<f:metadata>
+	<f:viewParam name="id" value="#{livroMB.id}" />
+	<f:viewAction action="#{livroMB.carregar()}"/>
+</f:metadata>
+	
+<ui:composition template="/WEB-INF/template_cliente.xhtml">
+	<ui:define name="titulo">SIGELI - Detalhes de livro</ui:define>
+	<ui:define name="conteudo">
+		<ul class="breadcrumb">
+			<li><a href="index.jsf">Página inicial</a> <span class="divider">/</span></li>
+			<li class="active">Detalhes de livro</li>
+		</ul>
+		<div id="mainBody">
+				<div class="container">
+					<div class="row">			
+						<div class="span9">
+							<div class="row">	  
+									<div id="gallery" class="span3">
+										<a href="#{request.contextPath}/capa?id=#{livroMB.livro.id}" title="#{livroMB.livro.titulo}">
+											<img src="#{request.contextPath}/capa?id=#{livroMB.livro.id}" style="width:80%" alt=""/>
+										</a>
+										<div id="differentview" class="moreOptopm carousel slide">
+											<div class="carousel-inner">
+												<div class="item active">
+													<a href="#{request.contextPath}/capa?id=#{livroMB.livro.id}"> <img style="width:20%" src="#{request.contextPath}/capa?id=#{livroMB.livro.id}" alt=""/></a>
+													<a href="#{request.contextPath}/capa?id=#{livroMB.livro.id}"> <img style="width:20%" src="#{request.contextPath}/capa?id=#{livroMB.livro.id}" alt=""/></a>
+													<a href="#{request.contextPath}/capa?id=#{livroMB.livro.id}" > <img style="width:20%" src="#{request.contextPath}/capa?id=#{livroMB.livro.id}" alt=""/></a>
+												</div>
+												<div class="item">
+													<a href="#{request.contextPath}/capa?id=#{livroMB.livro.id}" > <img style="width:20%" src="#{request.contextPath}/capa?id=#{livroMB.livro.id}" alt=""/></a>
+													<a href="#{request.contextPath}/capa?id=#{livroMB.livro.id}"> <img style="width:20%" src="#{request.contextPath}/capa?id=#{livroMB.livro.id}" alt=""/></a>
+													<a href="#{request.contextPath}/capa?id=#{livroMB.livro.id}"> <img style="width:20%" src="#{request.contextPath}/capa?id=#{livroMB.livro.id}" alt=""/></a>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									<div class="span6">
+										<h3>
+											<h:outputText value="#{livroMB.livro.titulo}" />
+										</h3>
+										<hr class="soft"/>
+										<h:form prependId="false" acceptcharset="ISO-8859-1">
+											<a class="btn" jsf:action="#{carrinhoMB.adicionar(livroMB.livro)}">Adicionar <i class="icon-shopping-cart"></i></a>
+											<h3>
+												<h:outputText value="#{livroMB.livro.preco}">
+													<f:convertNumber locale="pt_BR" type="currency" />
+												</h:outputText>
+											</h3>
+										</h:form>
+										
+										<hr class="soft"/>
+										<h4>
+											<h:outputText value="Há #{livroMB.livro.estoque} unidades disponíveis" />
+										</h4>
+										<hr class="soft clr"/>
+										<p>
+											<h:outputText value="#{livroMB.livro.sinopse}" />
+										</p>
+										<a class="btn btn-small pull-right" href="#detail">Mais detalhes</a>
+										<br class="clr"/>
+									<a href="#" name="detail"></a>
+									<hr class="soft"/>
+								</div>
+									
+								<div class="span9">
+									<ul id="productDetail" class="nav nav-tabs">
+									  <li class="active"><a href="#home" data-toggle="tab">Detalhes do livro</a></li>
+									</ul>
+									<div id="myTabContent" class="tab-content">
+										<div class="tab-pane fade active in" id="home">
+											<h4>Informações do livro</h4>
+											<table class="table table-bordered">
+												<tbody>
+													<tr class="techSpecRow"><th colspan="2">Detalhes do livro</th></tr>
+													<tr class="techSpecRow"><td class="techSpecTD1">Título: </td><td class="techSpecTD2"><h:outputText value="#{livroMB.livro.titulo}" /></td></tr>
+													<tr class="techSpecRow"><td class="techSpecTD1">Editora:</td><td class="techSpecTD2"><h:outputText value="#{livroMB.livro.editora}" /></td></tr>
+													<tr class="techSpecRow"><td class="techSpecTD1">Edição:</td><td class="techSpecTD2"><h:outputText value="#{livroMB.livro.edicao}ª" /></td></tr>
+													<tr class="techSpecRow"><td class="techSpecTD1">Ano de lançamento: </td><td class="techSpecTD2"><h:outputText value="#{livroMB.livro.ano}" /></td></tr>
+													<tr class="techSpecRow"><td class="techSpecTD1">Estoque:</td><td class="techSpecTD2"><h:outputText value="#{livroMB.livro.estoque}" /></td></tr>
+												</tbody>
+											</table>
+										</div>					
+										<div class="tab-pane fade" id="profile">
+											<div id="myTab" class="pull-right">
+												<a href="#listView" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a>
+												<a href="#blockView" data-toggle="tab"><span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a>
+											</div>
+											<br class="clr"/>
+											<hr class="soft"/>
+											<br class="clr"/>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		<style>
+			.btn-remover-todos {
+				-webkit-border-radius: 0 4px 4px 0 !important;
+				-moz-border-radius: 0 4px 4px 0 !important;
+				border-radius: 0 4px 4px 0 !important;
+			}
+			table td {
+				vertical-align: middle !important;
+				
+			}
+		</style>
+	</ui:define>
+</ui:composition>
+</html>

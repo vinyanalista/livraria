@@ -63,13 +63,13 @@
 				<c:forEach items="#{buscarMB.lista}" var="livro" varStatus="status">
 					<div class="row">
 						<div class="span2">
-							<a href="livro.jsf?id=#{livro.id}">
+							<a href="detalhes_livro.jsf?id=#{livro.id}">
 								<img src="#{request.contextPath}/capa?id=#{livro.id}" alt="" />
 							</a>
 						</div>
 						<div class="span4">
 							<h3>
-								<a href="livro.jsf?id=#{livro.id}">
+								<a href="detalhes_livro.jsf?id=#{livro.id}">
 									<h:outputText value="#{livro.titulo}" />
 								</a>
 							</h3>
@@ -84,14 +84,14 @@
 						</div>
 						<div class="span3 alignR">
 							<form class="form-horizontal qtyFrm" jsf:prependId="false" jsf:acceptcharset="ISO-8859-1">
-								<h3><a href="livro.jsf?id=#{livro.id}">
+								<h3><a href="detalhes_livro.jsf?id=#{livro.id}">
 									<h:outputText value="#{livro.preco}">
 										<f:convertNumber locale="pt_BR" type="currency" />
 									</h:outputText>
 								</a></h3>
 								<br />
 								<a jsf:action="#{carrinhoMB.adicionar(livro)}" class="btn btn-large btn-primary"> Adicionar <i class=" icon-shopping-cart"></i></a>
-								<a href="livro.jsf?id=#{livro.id}" class="btn btn-large"><i class="icon-zoom-in"></i></a>
+								<a href="detalhes_livro.jsf?id=#{livro.id}" class="btn btn-large"><i class="icon-zoom-in"></i></a>
 							</form>
 						</div>
 					</div>
@@ -112,23 +112,23 @@
 						</c:choose>
 						<li class="#{liClass}">
 							<div class="thumbnail">
-								<a href="livro.jsf?id=#{livro.id}">
+								<a href="detalhes_livro.jsf?id=#{livro.id}">
 									<img src="#{request.contextPath}/capa?id=#{livro.id}" alt="" />
 								</a>
 								<div class="caption">
 									<h5>
-										<a href="livro.jsf?id=#{livro.id}">
+										<a href="detalhes_livro.jsf?id=#{livro.id}">
 											<h:outputText value="#{livro.titulo}" />
 										</a>
 									</h5>
 									<p><h:outputText value="#{livro.sinopseCurta}" /></p>
 									<h4 style="text-align: center">
 										<form jsf:prependId="false" jsf:acceptcharset="ISO-8859-1">
-											<a class="btn" href="livro.jsf?id=#{livro.id}">
+											<a class="btn" href="detalhes_livro.jsf?id=#{livro.id}">
 												<i class="icon-zoom-in"></i>
 											</a>
 											<a class="btn" jsf:action="#{carrinhoMB.adicionar(livro)}">Adicionar <i class="icon-shopping-cart"></i></a>
-											<a class="btn btn-primary" href="livro.jsf?id=#{livro.id}">
+											<a class="btn btn-primary" href="detalhes_livro.jsf?id=#{livro.id}">
 												<h:outputText value="#{livro.preco}">
 													<f:convertNumber locale="pt_BR" type="currency" />
 												</h:outputText>
