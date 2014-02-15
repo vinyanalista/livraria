@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import br.ufs.livraria.enumeration.Genero;
+
 @Entity
 public class Livro implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -30,8 +32,8 @@ public class Livro implements Serializable {
 	@Column(length = 4)
 	private Integer estoque;
 	
-	@Column(length = 50)
-	private String genero;
+	@Enumerated(EnumType.ORDINAL)
+	private Genero genero;
 	
 	@Column(length = 50)
 	private String autor;
@@ -75,7 +77,7 @@ public class Livro implements Serializable {
 		return estoque;
 	}
 
-	public String getGenero() {
+	public Genero getGenero() {
 		return genero;
 	}
 
@@ -123,7 +125,7 @@ public class Livro implements Serializable {
 		this.estoque = estoque;
 	}
 
-	public void setGenero(String genero) {
+	public void setGenero(Genero genero) {
 		this.genero = genero;
 	}
 

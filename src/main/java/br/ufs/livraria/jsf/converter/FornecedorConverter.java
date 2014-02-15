@@ -1,4 +1,4 @@
-package br.ufs.livraria.util;
+package br.ufs.livraria.jsf.converter;
 
 import javax.ejb.EJB;
 import javax.faces.component.UIComponent;

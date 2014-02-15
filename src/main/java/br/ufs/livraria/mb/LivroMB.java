@@ -12,6 +12,7 @@ import javax.servlet.http.Part;
 import org.apache.commons.io.IOUtils;
 
 import br.ufs.livraria.dao.LivroDAO;
+import br.ufs.livraria.enumeration.Genero;
 import br.ufs.livraria.enumeration.MensagemTipo;
 import br.ufs.livraria.modelo.Livro;
 import br.ufs.livraria.modelo.Mensagem;
@@ -155,6 +156,10 @@ public class LivroMB implements Serializable {
             mensagensMb.adicionarMensagem(MensagemTipo.ERRO, "Houve um erro ao tentar fazer upload da capa.");
             return "cadastro.jsf";
         }
+	}
+	
+	public Genero[] getGeneros() {
+		return Genero.values();
 	}
 	
 	public boolean isCadastro() {
