@@ -1,6 +1,7 @@
 package br.ufs.livraria.dao;
 
 import java.io.Serializable;
+import java.util.EnumSet;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -92,7 +93,7 @@ public class LivroDAO extends DAO<Livro> implements Serializable {
 			if (filtrar) {
 				jpql.append(" AND");
 			}
-			jpql.append(" AND (LOWER(livro.genero) = LOWER(:genero))");
+			jpql.append(" (livro.genero IN :genero)");
 		}
 		
 		if (ordenar) {
@@ -114,7 +115,7 @@ public class LivroDAO extends DAO<Livro> implements Serializable {
 		}
 
 		if (filtrarGenero) {
-			query.setParameter("genero", "%" + genero.toString() + "%");
+			query.setParameter("genero", EnumSet.of(genero));
 		}
 
 		if (ordenar) {

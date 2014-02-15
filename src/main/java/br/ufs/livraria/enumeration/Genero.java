@@ -1,7 +1,7 @@
 package br.ufs.livraria.enumeration;
 
 public enum Genero {
-	TUDO("Tudo"),
+	TUDO("Tudo"), // 0
 	ADMINISTRACAO("Administração"),
 	AGROPECUARIA("Agropecuária"),
 	ARTES("Artes"),
@@ -13,13 +13,13 @@ public enum Genero {
 	DIDATICOS("Didáticos"),
 	DIREITO("Direito"),
 	ECONOMIA("Economia"),
-	INFORMATICA("Informática"),
-	LITERATURA_ESTRANGEIRA("Literatura estrangeira"),
+	INFORMATICA("Informática"), // 12
+	LITERATURA_ESTRANGEIRA("Literatura estrangeira"), // 13
 	LITERATURA_INFANTO_JUVENIL("Literatura infanto-juvenil"),
-	LITERATURA_NACIONAL("Literatura nacional"),
+	LITERATURA_NACIONAL("Literatura nacional"), // 15
 	MEDICINA("Medicina"),
 	RELIGIAO("Religião"),
-	TURISMO("Turismo");
+	TURISMO("Turismo"); // 18
 
 	private final String label;
 
@@ -38,6 +38,15 @@ public enum Genero {
 	@Override
 	public String toString() {
 		return label;
+	}
+	
+	public static Genero buscar(Integer id) {
+		Genero[] values = Genero.values();
+		if ((id > 0) && (id < values.length)) {
+			return values[id];
+		} else {
+			return null;
+		}
 	}
 
 }

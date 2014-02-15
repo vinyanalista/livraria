@@ -106,7 +106,7 @@ public class BuscarMB implements Serializable {
 	/* Ações */
 	
 	public void processar() {
-		if ((por == null) /*|| (por.isEmpty())*/) {
+		if (por == null) {
 			mensagensMb.adicionarMensagem(MensagemTipo.ERRO, "Requisição inválida");
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
@@ -115,8 +115,6 @@ public class BuscarMB implements Serializable {
 			}
 			return;
 		}
-		
-		tituloDaPagina = "Resultados da busca por " + por;
 
 		BuscaFiltro filtro;
 		if (this.filtro == null) {
@@ -124,24 +122,6 @@ public class BuscarMB implements Serializable {
 		} else {
 			filtro = BuscaFiltro.values()[this.filtro - 1];
 		}
-		/*if (this.filtro == null) {
-			this.filtro = DEFAULT_FILTRO;
-		}
-		switch (this.filtro) {
-			case 2:
-				filtro = BuscaFiltro.TITULO;
-				break;
-			case 3:
-				filtro = BuscaFiltro.AUTOR;
-				break;
-			case 4:
-				filtro = BuscaFiltro.SINOPSE;
-				break;
-			case 1:
-			default:
-				filtro = BuscaFiltro.TUDO;
-				break;
-		}*/
 
 		BuscaOrdenacao ordenacao;
 		if (this.ordenacao == null) {
@@ -149,30 +129,18 @@ public class BuscarMB implements Serializable {
 		} else {
 			ordenacao = BuscaOrdenacao.values()[this.ordenacao - 1];
 		}
-		/*if (this.ordenacao == null) {
-			this.ordenacao = DEFAULT_ORDENACAO;
-		}
-		switch (this.ordenacao) {
-			case 2:
-				ordenacao = BuscaOrdenacao.TITULO_Z_A;
-				break;
-			case 3:
-				ordenacao = BuscaOrdenacao.ESTOQUE;
-				break;
-			case 4:
-				ordenacao = BuscaOrdenacao.MENOR_PRECO;
-				break;
-			case 1:
-			default:
-				ordenacao = BuscaOrdenacao.TITULO_A_Z;
-				break;
-		}*/
 
 		Genero genero;
 		if (this.genero == null) {
 			genero = Genero.TUDO;
 		} else {
-			genero = Genero.values()[this.genero - 1];
+			genero = Genero.buscar(this.genero);
+		}
+		
+		if ((genero == null) || (genero == Genero.TUDO)) {
+			tituloDaPagina = "Resultados da busca por " + por;
+		} else {
+			tituloDaPagina = "Livros de " + genero.getLabel();
 		}
 		
 		lista = livroDao.buscar(por, filtro, ordenacao, genero);
