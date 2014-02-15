@@ -120,9 +120,9 @@
 							<div class="form-group">
 								<label class="control-label col-lg-4" for="estado">Estado</label>
 								<div class="col-lg-8">
-									<input jsf:id="estado" name="estado"
-										jsf:value="#{fornecedorMB.fornecedor.endereco.estado}" type="text"
-										placeholder="Estado" class="form-control" />
+									<h:selectOneMenu id="estado" class="form-control" value="#{fornecedorMB.fornecedor.endereco.estado}">
+										<f:selectItems value="#{fornecedorMB.estados}" />
+									</h:selectOneMenu>
 								</div>
 							</div>
 

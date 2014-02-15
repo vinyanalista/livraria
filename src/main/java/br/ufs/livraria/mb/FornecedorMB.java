@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.ufs.livraria.dao.FornecedorDAO;
+import br.ufs.livraria.enumeration.Estado;
 import br.ufs.livraria.enumeration.MensagemTipo;
 import br.ufs.livraria.modelo.Fornecedor;
 import br.ufs.livraria.modelo.Mensagem;
@@ -119,6 +120,10 @@ public class FornecedorMB implements Serializable {
 
 	/* Outros */
 
+	public Estado[] getEstados() {
+		return Estado.values();
+	}
+	
 	public boolean isCadastro() {
 		return (id == null);
 	}

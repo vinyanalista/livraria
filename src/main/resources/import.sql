@@ -22,7 +22,7 @@ INSERT INTO livro (id, ano, autor, edicao, editora, estoque, genero, isbn, preco
 ALTER SEQUENCE livro_id_seq RESTART WITH 17;
 
 -- Endereços
-INSERT INTO endereco (id, bairro, cep, cidade, estado, logradouro, numero) VALUES (1, 'Algum', '49000000', 'Fictícia', 'Sergipe', 'rua Frei limão', '45');
+INSERT INTO endereco (id, bairro, cep, cidade, estado, logradouro, numero) VALUES (1, 'Algum', '49000000', 'Fictícia', 'SE', 'rua Frei limão', '45');
 ALTER SEQUENCE endereco_id_seq RESTART WITH 2;
 
 -- Usuários

@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import br.ufs.livraria.enumeration.Estado;
+
 @Entity
 public class Endereco implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -22,13 +24,15 @@ public class Endereco implements Serializable {
 	@Column(length = 50)
 	private String cidade;
 	
-	@Column(length = 50)
-	private String estado;
+	@Column(length = 2)
+	@Enumerated(EnumType.STRING)
+	private Estado estado;
 	
 	@Column(length = 50)
 	private String cep;
 	
 	public Endereco() {
+		estado = Estado.SE;
 	}
 
 	public Integer getId() {
@@ -51,7 +55,7 @@ public class Endereco implements Serializable {
 		return cidade;
 	}
 	
-	public String getEstado() {
+	public Estado getEstado() {
 		return estado;
 	}
 
@@ -79,7 +83,7 @@ public class Endereco implements Serializable {
 		this.cidade = cidade;
 	}
 	
-	public void setEstado(String estado) {
+	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
 
