@@ -73,7 +73,8 @@ public class ItemLivro implements Serializable {
 	public boolean equals(Object obj) {
 		if (obj instanceof ItemLivro) {
 			ItemLivro outroItemLivro = (ItemLivro) obj;
-			return (this.id == outroItemLivro.id);
+			return (this.livro.equals(outroItemLivro.livro))
+					&& (this.quantidade.equals(outroItemLivro.quantidade));
 		} else {
 			return false;
 		}
