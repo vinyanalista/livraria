@@ -21,17 +21,17 @@
 								<c:forEach items="#{indexMB.maisVendidos()}" var="livro" varStatus="status" begin="0" end="3">
 									<li class="span3">
 										<div class="thumbnail">
-											<a href="livro.jsf?id=#{livro.id}">
+											<a href="detalhes_livro.jsf?id=#{livro.id}">
 												<img src="#{request.contextPath}/capa?id=#{livro.id}" alt="" />
 											</a>
 											<div class="caption">
 												<h5>
-													<a href="livro.jsf?id=#{livro.id}">
+													<a href="detalhes_livro.jsf?id=#{livro.id}">
 														<h:outputText value="#{livro.titulo}" />
 													</a>
 												</h5>
 												<h4>
-													<a class="btn btn-ver" href="livro.jsf?id=#{livro.id}"><i class="icon-zoom-in"></i></a>
+													<a class="btn btn-ver" href="detalhes_livro.jsf?id=#{livro.id}"><i class="icon-zoom-in"></i></a>
 													<span class="pull-right">
 														<h:outputText value="#{livro.preco}">
 															<f:convertNumber locale="pt_BR" type="currency" />
@@ -49,17 +49,17 @@
 								<c:forEach items="#{indexMB.maisVendidos()}" var="livro" varStatus="status" begin="4" end="7">
 									<li class="span3">
 										<div class="thumbnail">
-											<a href="livro.jsf?id=#{livro.id}">
+											<a href="detalhes_livro.jsf?id=#{livro.id}">
 												<img src="#{request.contextPath}/capa?id=#{livro.id}" alt="" />
 											</a>
 											<div class="caption">
 												<h5>
-													<a href="livro.jsf?id=#{livro.id}">
+													<a href="detalhes_livro.jsf?id=#{livro.id}">
 														<h:outputText value="#{livro.titulo}" />
 													</a>
 												</h5>
 												<h4>
-													<a class="btn btn-ver" href="livro.jsf?id=#{livro.id}"><i class="icon-zoom-in"></i></a>
+													<a class="btn btn-ver" href="detalhes_livro.jsf?id=#{livro.id}"><i class="icon-zoom-in"></i></a>
 													<span class="pull-right">
 														<h:outputText value="#{livro.preco}">
 															<f:convertNumber locale="pt_BR" type="currency" />
@@ -92,23 +92,23 @@
 				</c:choose>
 				<li class="#{liClass}">
 					<div class="thumbnail">
-						<a href="livro.jsf?id=#{livro.id}">
+						<a href="detalhes_livro.jsf?id=#{livro.id}">
 							<img src="#{request.contextPath}/capa?id=#{livro.id}" alt="" />
 						</a>
 						<div class="caption">
 							<h5>
-								<a href="livro.jsf?id=#{livro.id}">
+								<a href="detalhes_livro.jsf?id=#{livro.id}">
 									<h:outputText value="#{livro.titulo}" />
 								</a>
 							</h5>
 							<p><h:outputText value="#{livro.sinopseCurta}" /></p>
 							<h4 style="text-align: center">
 								<h:form prependId="false" acceptcharset="ISO-8859-1">
-									<a class="btn" href="livro.jsf?id=#{livro.id}">
+									<a class="btn" href="detalhes_livro.jsf?id=#{livro.id}">
 										<i class="icon-zoom-in"></i>
 									</a>
 									<a class="btn" jsf:action="#{carrinhoMB.adicionar(livro)}">Adicionar <i class="icon-shopping-cart"></i></a>
-									<a class="btn btn-primary" href="livro.jsf?id=#{livro.id}">
+									<a class="btn btn-primary" href="detalhes_livro.jsf?id=#{livro.id}">
 										<h:outputText value="#{livro.preco}">
 											<f:convertNumber locale="pt_BR" type="currency" />
 										</h:outputText>
