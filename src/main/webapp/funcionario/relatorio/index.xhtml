@@ -7,10 +7,10 @@
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <ui:composition template="/WEB-INF/template_funcionario.xhtml">
-	<ui:define name="titulo">SIGELI - Acesso do Funcionário - Relatório</ui:define>
+	<ui:define name="titulo">SIGELI - Acesso do Funcionï¿½rio - Relatï¿½rio</ui:define>
 	<ui:define name="main-bar">
 		<h3>
-			<i class="fa fa-book"></i>Relatório
+			<i class="fa fa-book"></i>Relatï¿½rio de Vendas
 		</h3>
 	</ui:define>
 	<ui:define name="conteudo">
@@ -23,29 +23,49 @@
 					</div>
 					<h5>Consultar</h5>
 					</header>
-					<div id="collapse4" class="body">
-						<form jsf:prependId="false" jsf:acceptcharset="ISO-8859-1">
-							<table id="dataTable"
-								class="table table-bordered table-condensed table-hover table-striped">
+					
+					<div id="collapse2" class="body in"  style="height: auto">
+						
+						<h:form id="form" class="inline-validate" prependId="false" acceptcharset="ISO-8859-1">
+							
+							<table id="dataTable" class="table table-bordered table-condensed table-hover table-striped">
 								<thead>
 									<tr>
 										<th>Data</th>
 										<th>Cliente</th>
-										<th>Pagamento</th>
-										<th>Ações</th>
+										<th>CPF</th>
+										<th>SituaÃ§Ã£o</th>
+										<th>OpÃ§Ã£o de Pagamento</th>
+										<th>AÃ§Ãµes</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="#{relatorioMB.listaDeVendas}" var="venda">
 										<tr>
-											<td><h:outputText value="#{venda.data}" /></td>
-											<td><h:outputText value="#{venda.cliente}" /></td>
-											<td><h:outputText value="#{venda.pagamento}" /></td>
+											<td><h:outputText value="#{venda.pagamento.data.date}/#{venda.pagamento.data.month + 1}/#{venda.pagamento.data.year + 1900}" /></td>
+											<td><h:outputText value="#{venda.cliente.nome}" /></td>
+											<td><h:outputText value="#{venda.cliente.cpf}" /></td>
+											<c:choose>
+												<c:when test="#{empty venda.pagamento.aprovado}">
+													<td><h:outputText value="Em Andamento" /></td>
+												</c:when>
+												<c:when test="#{venda.pagamento.aprovado}">
+													<td><h:outputText value="Confirmada" /></td>
+												</c:when>
+												<c:when test="#{!venda.pagamento.aprovado}">
+													<td><h:outputText value="Cancelada" /></td>
+												</c:when>
+											</c:choose>
+											<td><h:outputText value="#{venda.pagamento.tipo}" /></td>
 											<td>
 												<div class="actions">
+													<a href="#" class="glyphicon fa fa-search" title="Visualizar" data-toggle="tooltip"> </a>
+													<!-- <a class="glyphicon fa fa-search" jsf:action="#{relatorioMB.excluir()}" title="Visualizar" data-toggle="tooltip">
+														<f:setPropertyActionListener target="#{relatorioMB.venda}" value="#{venda}" />
+													</a>  -->
 													<a class="glyphicon glyphicon-remove" jsf:action="#{relatorioMB.excluir()}" title="Excluir" data-toggle="tooltip">
 														<f:setPropertyActionListener target="#{relatorioMB.venda}" value="#{venda}" />
-													</a>
+													</a>													
 												</div>
 											</td>
 										</tr>
