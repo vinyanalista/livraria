@@ -97,9 +97,9 @@
 							<div class="form-group">
 								<label class="control-label col-lg-4" for="genero">Gênero</label>
 								<div class="col-lg-8">
-									<input  jsf:id="genero" name="genero"
-											jsf:value="#{livroMB.livro.genero}" type="text" placeholder="Gênero" class="form-control" maxlength="50"
-									/>
+									<h:selectOneMenu id="genero" class="form-control" value="#{livroMB.livro.genero}">
+										<f:selectItems value="#{livroMB.generos}" />
+									</h:selectOneMenu>
 								</div>
 							</div>
 							

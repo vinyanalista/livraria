@@ -1,36 +1,34 @@
 package br.ufs.livraria.enumeration;
 
 public enum Genero {
-	TUDO(1, "Tudo"),
-	ADMINISTRACAO(2, "Administração"),
-	AGROPECUARIA(3, "Agropecuária"),
-	ARTES(4, "Artes"),
-	CIENCIAS_BIOLOGICAS(5, "Ciências biológicas"),
-	CIENCIAS_EXATAS(6, "Ciências exatas"),
-	CIENCIAS_HUMANAS_E_SOCIAIS(7, "Ciências humanas e sociais"),
-	CONTABILIDADE(8, "Contabilidade"),
-	CURSOS_E_IDIOMAS(9, "Cursos e idiomas"),
-	DIDATICOS(10, "Didáticos"),
-	DIREITO(11, "Direito"),
-	ECONOMIA(12, "Economia"),
-	INFORMATICA(13, "Informática"),
-	LITERATURA_ESTRANGEIRA(14, "Literatura estrangeira"),
-	LITERATURA_INFANTO_JUVENIL(15, "Literatura infanto-juvenil"),
-	LITERATURA_NACIONAL(16, "Literatura nacional"),
-	MEDICINA(17, "Medicina"),
-	RELIGIAO(18, "Religião"),
-	TURISMO(19, "Turismo");
+	TUDO("Tudo"),
+	ADMINISTRACAO("Administração"),
+	AGROPECUARIA("Agropecuária"),
+	ARTES("Artes"),
+	CIENCIAS_BIOLOGICAS("Ciências biológicas"),
+	CIENCIAS_EXATAS("Ciências exatas"),
+	CIENCIAS_HUMANAS_E_SOCIAIS("Ciências humanas e sociais"),
+	CONTABILIDADE("Contabilidade"),
+	CURSOS_E_IDIOMAS("Cursos e idiomas"),
+	DIDATICOS("Didáticos"),
+	DIREITO("Direito"),
+	ECONOMIA("Economia"),
+	INFORMATICA("Informática"),
+	LITERATURA_ESTRANGEIRA("Literatura estrangeira"),
+	LITERATURA_INFANTO_JUVENIL("Literatura infanto-juvenil"),
+	LITERATURA_NACIONAL("Literatura nacional"),
+	MEDICINA("Medicina"),
+	RELIGIAO("Religião"),
+	TURISMO("Turismo");
 
-	private final int value;
 	private final String label;
 
-	private Genero(int value, String label) {
-		this.value = value;
+	private Genero(String label) {
 		this.label = label;
 	}
 
 	public int getValue() {
-		return value;
+		return this.ordinal();
 	}
 	
 	public String getLabel() {
