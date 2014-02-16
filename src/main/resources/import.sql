@@ -69,3 +69,11 @@ ALTER SEQUENCE endereco_id_seq RESTART WITH 3;
 INSERT INTO usuario (id, tipo, cpf, data_nascimento, email, nome, rg, senha, telefone, endereco_id) VALUES (2, 1, '1', '1899-12-31', 'admin@sigeli.com', 'Admin', '1', 'd033e22ae348aeb5660fc2140aec35850c4da997', '(11) 1111-1111', 2);
 ALTER SEQUENCE usuario_id_seq RESTART WITH 3;
 INSERT INTO funcionario (id, permissao) VALUES (2, 0);
+
+-- Boletos
+INSERT INTO boleto(id, data_pagamento, status_pagamento, cliente_id, venda_id) VALUES (1, '2013/11/05', 0, 1, 1);
+INSERT INTO boleto(id, data_pagamento, status_pagamento, cliente_id, venda_id) VALUES (2, '2013/11/18', 2, 1, 2);
+INSERT INTO boleto(id, status_pagamento, cliente_id, venda_id) VALUES (3, 1, 1, 3);
+INSERT INTO boleto(id, data_pagamento, status_pagamento, cliente_id, venda_id) VALUES (4, '2013/11/09', 0, 1, 4);
+INSERT INTO boleto(id, data_pagamento, status_pagamento, cliente_id, venda_id) VALUES (5, '2013/11/21', 2, 1, 5);
+ALTER SEQUENCE boleto_id_seq RESTART WITH 6;

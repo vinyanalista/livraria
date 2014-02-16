@@ -6,61 +6,34 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<f:metadata>
-	<f:viewParam name="cliente" value="#{historicoClienteMB.idCliente}" />
+ <f:metadata>
+  	<f:viewParam name="cliente" value="#{historicoClienteMB.idCliente}" />
 	<f:viewAction action="#{historicoClienteMB.carregarCliente}"/>
 </f:metadata>
 <ui:composition template="/WEB-INF/template_cliente.xhtml">
 	<ui:define name="titulo">SIGELI - Acesso do Cliente - Histórico</ui:define>
-	<ui:define name="main-bar">
-		<h3>
-			<i class="fa fa-truck"></i>Meu Histórico de Compras
-		</h3>
-	</ui:define>
 	<ui:define name="conteudo">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="box">
-					<header>
+		<ul class="breadcrumb">
+			<li><a href="index.jsf">Página inicial</a> <span class="divider">/</span></li>
+			<li class="active">Meu histórico de compras</li>
+		</ul>
+		<h3>Histórico de compras</h3>
+		<div class="col-lg-12">
+			<div class="box">
+				<header>
 					<div class="icons">
 						<i class="fa fa-table"></i>
 					</div>
-					<section id="navbar">
-  							<div class="navbar">
-    							<div class="navbar-inner">
-      								<div class="container">
-        								<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          									<span class="icon-bar"></span>
-          									<span class="icon-bar"></span>
-          									<span class="icon-bar"></span>
-        								</a>
-        								<div class="nav-collapse">
-          									<ul class="nav">
-            									<li><a href="/livraria/">Home</a></li>
-            									<li><a href="/livraria/produtos">Produtos</a></li>
-            									<li><a href="/livraria/carrinho">Meu Carrinho</a></li>
-            									<li class="active"><a href="">Meus Pedidos</a></li>
-          									</ul>
-          								<form class="navbar-search pull-right" action="#" jsf:acceptcharset="ISO-8859-1">
-            								<input class="search-query span2" placeholder="Pesquisar" type="text"/>
-          								</form>
-        							</div><!-- /.nav-collapse -->
-      							</div>
-    						</div><!-- /navbar-inner -->
-  						</div><!-- /navbar -->
-					</section>
-					<h5>Histórico de Compras</h5>
-					</header>
-					<div id="collapse4" class="body">
-						<div id="grids">
-							<ul class="nav nav-tabs" id="myTab">
-								<li class="active"><a href="#todas" data-toggle="tab">Todos</a></li>
-							  	<li class=""><a href="#confirmadas" data-toggle="tab">Confirmados</a></li>
-							  	<li class=""><a href="#andamento" data-toggle="tab">Em Andamento</a></li>
-							  	<li class=""><a href="#canceladas" data-toggle="tab">Cancelados</a></li>
-							</ul>
- 
-						<div class="tab-content">
+				</header>
+				<div id="collapse4" class="body">
+					<div id="grids">
+						<ul class="nav nav-tabs" id="myTab">
+							<li class="active"><a href="#todas" data-toggle="tab">Todas</a></li>
+						  	<li class=""><a href="#confirmadas" data-toggle="tab">Confirmadas</a></li>
+						  	<li class=""><a href="#andamento" data-toggle="tab">Em Andamento</a></li>
+						  	<li class=""><a href="#canceladas" data-toggle="tab">Canceladas</a></li>
+						</ul>
+	 					<div class="tab-content">
 						  	<div class="tab-pane active" id="todas">
 							  	<div class="row-fluid">
 									<h:form acceptcharset="ISO-8859-1">
@@ -78,30 +51,27 @@
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach items="#{historicoClienteMB.listaDeVendas}" var="venda">
-													<c:forEach items="#{venda.listaItens}" var="item">
+												<c:forEach items="#{historicoClienteMB.listaDeBoletos}" var="boleto">
+													<c:forEach items="#{boleto.venda.listaItens}" var="item">
 														<tr>
 															<td><h:outputText value="#{item.livro.titulo}" /></td>
 															<td><h:outputText value="#{item.quantidade}" /></td>
 															<td><h:outputText value="#{item.livro.preco}" /></td>
-															<td><h:outputText value="#{item.preco}" /></td>
-															<td><h:outputText value="#{venda.data.date}/#{venda.data.month + 1}/#{venda.data.year + 1900}" /></td>
-															<td><h:outputText value="#{venda.pagamento.data.date}/#{venda.pagamento.data.month + 1}/#{venda.pagamento.data.year + 1900}" /></td>
+															<td><h:outputText value="#{item.precoEfetivo}" /></td>
+															<td><h:outputText value="#{boleto.venda.data.date}/#{boleto.venda.data.month + 1}/#{boleto.venda.data.year + 1900}" /></td>
 															<c:choose>
-																<c:when test="#{empty venda.pagamento.aprovado}">
-																	<td><h:outputText value="Em Andamento" /></td>
+																<c:when test="#{boleto.statusPagamento.value != 1}">
+																	<td><h:outputText value="#{boleto.dataPagamento.date}/#{boleto.dataPagamento.month + 1}/#{boleto.dataPagamento.year + 1900}" /></td>
 																</c:when>
-																<c:when test="#{venda.pagamento.aprovado}">
-																	<td><h:outputText value="Confirmada" /></td>
-																</c:when>
-																<c:when test="#{!venda.pagamento.aprovado}">
-																	<td><h:outputText value="Cancelada" /></td>
+																<c:when test="#{boleto.statusPagamento.value == 1}">
+																	<td>-</td>
 																</c:when>
 															</c:choose>
+															<td><h:outputText value="#{boleto.statusPagamento.toString()}" /></td>
 														</tr>
 													</c:forEach>
 												</c:forEach>
-												<h:outputText value="Não há registros de compras efetuadas" rendered="#{empty historicoClienteMB.listaDeVendas}"/>
+												<h:outputText value="Não há registros de compras efetuadas" rendered="#{empty historicoClienteMB.listaDeBoletos}"/>
 											</tbody>
 										</table>
 									</h:form>
@@ -124,20 +94,20 @@
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach items="#{historicoClienteMB.listaDeVendasConfirmadas}" var="venda">
-													<c:forEach items="#{venda.listaItens}" var="item">
+												<c:forEach items="#{historicoClienteMB.listaDeBoletosConfirmados}" var="boleto">
+													<c:forEach items="#{boleto.venda.listaItens}" var="item">
 														<tr>
 															<td><h:outputText value="#{item.livro.titulo}" /></td>
 															<td><h:outputText value="#{item.quantidade}" /></td>
 															<td><h:outputText value="#{item.livro.preco}" /></td>
-															<td><h:outputText value="#{item.preco}" /></td>
-															<td><h:outputText value="#{venda.data.date}/#{venda.data.month + 1}/#{venda.data.year + 1900}" /></td>
-															<td><h:outputText value="#{venda.pagamento.data.date}/#{venda.pagamento.data.month + 1}/#{venda.pagamento.data.year + 1900}" /></td>
-															<td><h:outputText value="Confirmada" /></td>
+															<td><h:outputText value="#{item.precoEfetivo}" /></td>
+															<td><h:outputText value="#{boleto.venda.data.date}/#{boleto.venda.data.month + 1}/#{boleto.venda.data.year + 1900}" /></td>
+															<td><h:outputText value="#{boleto.dataPagamento.date}/#{boleto.dataPagamento.month + 1}/#{boleto.dataPagamento.year + 1900}" /></td>
+															<td><h:outputText value="#{boleto.statusPagamento.toString()}" /></td>
 														</tr>
 													</c:forEach>
 												</c:forEach>
-												<h:outputText value="Não há registros de compras confirmadas" rendered="#{empty historicoClienteMB.listaDeVendasConfirmadas}"/>
+												<h:outputText value="Não há registros de compras confirmadas" rendered="#{empty historicoClienteMB.listaDeBoletosConfirmados}"/>
 											</tbody>
 										</table>
 									</h:form>
@@ -159,19 +129,19 @@
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach items="#{historicoClienteMB.listaDeVendasEmAndamento}" var="venda">
-													<c:forEach items="#{venda.listaItens}" var="item">
+												<c:forEach items="#{historicoClienteMB.listaDeBoletosEmAndamento}" var="boleto">
+													<c:forEach items="#{boleto.venda.listaItens}" var="item">
 														<tr>
 															<td><h:outputText value="#{item.livro.titulo}" /></td>
 															<td><h:outputText value="#{item.quantidade}" /></td>
 															<td><h:outputText value="#{item.livro.preco}" /></td>
-															<td><h:outputText value="#{item.preco}" /></td>
-															<td><h:outputText value="#{venda.data.date}/#{venda.data.month + 1}/#{venda.data.year + 1900}" /></td>
-															<td><h:outputText value="Em Andamento" /></td>
+															<td><h:outputText value="#{item.precoEfetivo}" /></td>
+															<td><h:outputText value="#{boleto.venda.data.date}/#{boleto.venda.data.month + 1}/#{boleto.venda.data.year + 1900}" /></td>
+															<td><h:outputText value="#{boleto.statusPagamento.toString()}" /></td>
 														</tr>
 													</c:forEach>
 												</c:forEach>
-												<h:outputText value="Não há registros de compras em andamento" rendered="#{empty historicoClienteMB.listaDeVendasEmAndamento}"/>
+												<h:outputText value="Não há registros de compras em andamento" rendered="#{empty historicoClienteMB.listaDeBoletosEmAndamento}"/>
 											</tbody>
 										</table>
 									</h:form>
@@ -194,25 +164,24 @@
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach items="#{historicoClienteMB.listaDeVendasCanceladas}" var="venda">
-													 <c:forEach items="#{venda.listaItens}" var="item">
+												<c:forEach items="#{historicoClienteMB.listaDeBoletosCancelados}" var="boleto">
+													 <c:forEach items="#{boleto.venda.listaItens}" var="item">
 														<tr>
 															<td><h:outputText value="#{item.livro.titulo}" /></td>
 															<td><h:outputText value="#{item.quantidade}" /></td>
 															<td><h:outputText value="#{item.livro.preco}" /></td>
-															<td><h:outputText value="#{item.preco}" /></td>
-															<td><h:outputText value="#{venda.data.date}/#{venda.data.month + 1}/#{venda.data.year + 1900}" /></td>
-															<td><h:outputText value="#{venda.pagamento.data.date}/#{venda.pagamento.data.month + 1}/#{venda.pagamento.data.year + 1900}" /></td>
-															<td><h:outputText value="Cancelada" /></td>
+															<td><h:outputText value="#{item.precoEfetivo}" /></td>
+															<td><h:outputText value="#{boleto.venda.data.date}/#{boleto.venda.data.month + 1}/#{boleto.venda.data.year + 1900}" /></td>
+															<td><h:outputText value="#{boleto.dataPagamento.date}/#{boleto.dataPagamento.month + 1}/#{boleto.dataPagamento.year + 1900}" /></td>
+															<td><h:outputText value="#{boleto.statusPagamento.toString()}" /></td>
 														</tr>
 													</c:forEach>
 												</c:forEach>
-												<h:outputText value="Não há registros de compras canceladas" rendered="#{empty historicoClienteMB.listaDeVendasCanceladas}"/>
+												<h:outputText value="Não há registros de compras canceladas" rendered="#{empty historicoClienteMB.listaDeBoletosCancelados}"/>
 											</tbody>
 										</table>
-									</h:form>
-  									</div>
-								</div>
+										</h:form>
+  								</div>
 							</div>
 						</div>
 					</div>
