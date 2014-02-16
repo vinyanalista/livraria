@@ -91,4 +91,12 @@ public class VendaDAO extends DAO<Venda> implements Serializable {
 				.getResultList();
 	}
 
+	public List<Venda> pendentes() {
+		return entityManager.createQuery(
+				"SELECT boleto.venda FROM Boleto boleto"
+				+ " WHERE boleto.statusPagamento = :pendente", Venda.class)
+				.setParameter("pendente", StatusPagamento.EM_ANDAMENTO)
+				.getResultList();
+	}
+
 }

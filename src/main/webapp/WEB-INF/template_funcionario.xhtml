@@ -90,8 +90,16 @@
           <div class="topnav">
             <div class="btn-toolbar">
               <div class="btn-group">
-                <a data-placement="bottom" data-original-title="Show / Hide Sidebar" data-toggle="tooltip" class="btn btn-success btn-sm" id="changeSidebarPos">
+                <a data-placement="bottom" data-original-title="Exibir / ocular menu lateral" data-toggle="tooltip" class="btn btn-success btn-sm" id="changeSidebarPos">
                   <i class="fa fa-expand"></i>
+                </a> 
+              </div>
+              <div class="btn-group">
+                <a data-placement="bottom" data-original-title="Pagamentos aguardando confirmacao" data-toggle="tooltip" class="btn btn-default btn-sm" href="#{request.contextPath}/funcionario/venda/index.jsf?filtrarPendentes=true">
+                  <i class="fa fa-usd"></i>
+                  <c:set var="quantidadePendentes" value="#{vendaMB.listarPendentes().size()}"/>
+                  <span class="label label-warning" jsf:rendered="#{quantidadePendentes gt 0}"><h:outputText value="#{quantidadePendentes}" /></span> 
+                  <span class="label label-success" jsf:rendered="#{quantidadePendentes eq 0}">0</span> 
                 </a> 
               </div>
               <!-- <div class="btn-group">

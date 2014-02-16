@@ -6,6 +6,10 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
+<f:metadata>
+	<f:viewParam name="filtrarPendentes" value="#{vendaMB.filtrarPendentes}" />
+	<f:viewAction action="#{vendaMB.filtrar()}"/>
+</f:metadata>
 <ui:composition template="/WEB-INF/template_funcionario.xhtml">
 	<ui:define name="titulo">SIGELI - Acesso do Funcionário - Venda</ui:define>
 	<ui:define name="main-bar">
@@ -21,7 +25,10 @@
 					<div class="icons">
 						<i class="fa fa-table"></i>
 					</div>
-					<h5>Consultar</h5>
+					<h5>
+						<h:outputText value="Consultar" rendered="#{not vendaMB.filtrarPendentes}" />
+						<h:outputText value="Pendentes" rendered="#{vendaMB.filtrarPendentes}" />
+					</h5>
 					</header>
 					<div id="collapse4" class="body">
 						<h:form prependId="false" acceptcharset="ISO-8859-1">
@@ -40,7 +47,7 @@
 										<tr>
 											<td>
 												<h:outputText value="#{venda.data}">
-													<f:convertDateTime pattern="d/M/yyyy" />
+													<f:convertDateTime pattern="dd/MM/yyyy " />
 												</h:outputText>
 											</td>
 											<td><h:outputText value="#{venda.cliente.nome}" /></td>
@@ -57,7 +64,8 @@
 											<td>
 												<div class="actions">
 													<a class="fa fa-search" href="visualizar.jsf?id=#{venda.id}" title="Visualizar" data-toggle="tooltip"></a>
-													<a class="glyphicon glyphicon-remove" jsf:action="#{vendaMB.excluir(venda)}" title="Excluir" data-toggle="tooltip"></a>													
+													<a class="glyphicon glyphicon-ok" jsf:action="#{vendaMB.confirmar(venda)}" title="Confirmar" data-toggle="tooltip" jsf:rendered="#{vendaMB.filtrarPendentes}"></a>
+													<a class="glyphicon glyphicon-remove" jsf:action="#{vendaMB.cancelar(venda)}" title="Rejeitar" data-toggle="tooltip" jsf:rendered="#{vendaMB.filtrarPendentes}"></a>
 												</div>
 											</td>
 										</tr>
