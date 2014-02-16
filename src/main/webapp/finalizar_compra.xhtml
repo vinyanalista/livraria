@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<f:metadata>
+	<f:viewAction action="#{finalizarCompraMB.verificarDisponibilidadeDosLivros()}"/>
+</f:metadata>
+<ui:composition template="/WEB-INF/template_cliente.xhtml">
+	<ui:define name="titulo">SIGELI - Finalizar compra</ui:define>
+	<ui:define name="conteudo">
+		<ul class="breadcrumb">
+			<li><a href="index.jsf">Página inicial</a> <span class="divider">/</span></li>
+			<li class="active">Finalizar compra</li>
+		</ul>
+		<h3>Finalizar compra</h3>
+		<hr class="soft" />
+		<p>Por favor, revise as informações da compra antes de prosseguir.</p>
+		
+		<h4>Itens da compra</h4>
+		<div class="alert alert-warning" jsf:rendered="#{finalizarCompraMB.revisarItens}">
+			Infelizmente, há livros que não possuem em nosso estoque as quantidades desejadas. Por favor, revise as quantidades dos livros.
+		</div>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Capa</th>
+					<th>Livro</th>
+					<th>Quantidade</th>
+					<th>Preço</th>
+					<th>Total</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="#{finalizarCompraMB.itens}" var="item">
+					<c:set var="revisarItem" value="#{(finalizarCompraMB.revisarItens) and (item.quantidade > item.livro.estoque)}"/>
+					<tr>
+						<td>
+							<img width="60" src="#{request.contextPath}/capa?id=#{item.livro.id}" alt="" />
+						</td>
+						<td>
+							<h:outputText value="#{item.livro.titulo}" /><br />
+							<small><h:outputText value="#{item.livro.autor}" /></small>
+						</td>
+						<td>
+							<div class="input-append" jsf:rendered="#{revisarItem}">
+								<h:form prependId="false" acceptcharset="ISO-8859-1">
+									<input class="span1" style="max-width: 34px" value="#{item.quantidade}"
+										id="appendedInputButtons" size="16" type="text" readonly="readonly" />
+									<h:commandLink class="btn" action="#{finalizarCompraMB.remover(item.livro)}">
+										<i class="icon-minus"></i>
+									</h:commandLink>
+									<h:commandLink class="btn" action="#{finalizarCompraMB.adicionar(item.livro)}">
+										<i class="icon-plus"></i>
+									</h:commandLink>
+									<h:commandLink class="btn btn-danger btn-remover-todos" action="#{finalizarCompraMB.removerTodos(item.livro)}">
+										<i class="icon-remove icon-white"></i>
+									</h:commandLink>
+								</h:form>
+							</div>
+							<h:panelGroup rendered="#{(revisarItem == true) and (item.livro.estoque == 1)}">
+								Há apenas <span class="badge badge-warning">1</span> exemplar disponível no estoque
+							</h:panelGroup>
+							<h:panelGroup rendered="#{(revisarItem == true) and (item.livro.estoque > 1)}">
+								Há <span class="badge badge-warning"><h:outputText value="#{item.livro.estoque}" /></span> exemplares disponíveis no estoque
+							</h:panelGroup>
+							<h:outputText value="#{item.quantidade}" rendered="#{!revisarItem}" />
+						</td>
+						<td>
+							<h:outputText value="#{item.livro.preco}">
+								<f:convertNumber locale="pt_BR" type="currency" />
+							</h:outputText>
+						</td>
+						<td>
+							<h:outputText value="#{item.livro.preco * item.quantidade}">
+								<f:convertNumber locale="pt_BR" type="currency" />
+							</h:outputText>
+						</td>
+					</tr>
+				</c:forEach>
+				<tr>
+					<td colspan="4" style="text-align: right"><strong>Valor total da compra:</strong></td>
+					<td class="label label-success" style="display: block"><strong>
+						<h:outputText value="#{finalizarCompraMB.valorTotal}">
+							<f:convertNumber locale="pt_BR" type="currency" />
+						</h:outputText>
+					</strong></td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<h4>Dados da entrega</h4>
+		<p>Os dados a seguir foram obtidos do seu cadastro no SIGELI. Quaisquer alterações serão automaticamente salvas no seu cadastro.</p>
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<th>Endereço</th>
+				</tr>
+				<tr>
+					<td>
+						<form class="form-horizontal" jsf:acceptcharset="ISO-8859-1" jsf:prependId="false">
+							<div class="control-group">
+								<label class="control-label" for="inputCountry">Logradouro</label>
+								<div class="controls">
+									<input type="text" jsf:id="logradouro" name="logradouro"
+										placeholder="Logradouro"
+										jsf:value="#{finalizarCompraMB.cliente.endereco.logradouro}" />
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="numero">Número</label>
+								<div class="controls">
+									<input type="text" jsf:id="numero" name="numero"
+										placeholder="Número"
+										jsf:value="#{finalizarCompraMB.cliente.endereco.numero}" />
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="bairro">Bairro</label>
+								<div class="controls">
+									<input type="text" jsf:id="bairro" name="bairro"
+										placeholder="Bairro"
+										jsf:value="#{finalizarCompraMB.cliente.endereco.bairro}" />
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="cidade">Cidade</label>
+								<div class="controls">
+									<input type="text" jsf:id="cidade" name="cidade"
+										placeholder="Cidade"
+										jsf:value="#{finalizarCompraMB.cliente.endereco.cidade}" />
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="estado">Estado</label>
+								<div class="controls">
+									<h:selectOneMenu id="estado" value="#{finalizarCompraMB.cliente.endereco.estado}">
+										<f:selectItems value="#{finalizarCompraMB.estados}" />
+									</h:selectOneMenu>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="cep">CEP</label>
+								<div class="controls">
+									<input type="text" jsf:id="cep" name="cep"
+										placeholder="CEP"
+										jsf:value="#{finalizarCompraMB.cliente.endereco.cep}" />
+								</div>
+							</div>
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<form jsf:prependId="false">
+			<a href="carrinho.jsf" class="btn btn-large"><i
+				class="icon-arrow-left"></i> Voltar ao carrinho </a>
+			<a jsf:action="#{finalizarCompraMB.finalizarCompra()}" class="btn btn-large btn-success pull-right">
+				Gerar boleto <i class="icon-arrow-right"></i>
+			</a>
+		</form>
+		<style>
+			.btn-remover-todos {
+				-webkit-border-radius: 0 4px 4px 0 !important;
+				-moz-border-radius: 0 4px 4px 0 !important;
+				border-radius: 0 4px 4px 0 !important;
+			}
+			table td {
+				vertical-align: middle !important;
+			}
+		</style>
+	</ui:define>
+</ui:composition>
+</html>
