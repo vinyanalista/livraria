@@ -112,7 +112,7 @@
 						</td>
 						<td>
 							<a href="livro.jsf?id=#{item.livro.id}">
-								<h:outputText value="#{item.livro.preco * item.quantidade}">
+								<h:outputText value="#{item.valorTotal}">
 									<f:convertNumber locale="pt_BR" type="currency" />
 								</h:outputText>
 							</a>
@@ -180,10 +180,13 @@
 			</tr>
 		</table> -->
 		
-		<a href="index.jsf" class="btn btn-large"><i
-			class="icon-arrow-left"></i> Continuar comprando </a>
-		<a href="finalizar_compra.jsf" class="btn btn-large btn-success pull-right">Finalizar compra <i
-			class="icon-arrow-right"></i></a>
+		<form jsf:prependId="false">
+			<a href="index.jsf" class="btn btn-large"><i
+				class="icon-arrow-left"></i> Continuar comprando </a>
+			<a jsf:action="#{finalizarCompraMB.finalizarCompra()}" class="btn btn-large btn-success pull-right">
+				Finalizar compra <i class="icon-arrow-right"></i>
+			</a>
+		</form>
 		<style>
 			.btn-remover-todos {
 				-webkit-border-radius: 0 4px 4px 0 !important;

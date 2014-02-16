@@ -49,7 +49,7 @@ public abstract class Usuario implements Serializable {
 	@Column(length = 50)
 	protected String email;
 
-	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(nullable = false)
 	protected Endereco endereco;
 

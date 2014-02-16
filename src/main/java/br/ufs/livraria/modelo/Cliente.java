@@ -18,8 +18,7 @@ public class Cliente extends Usuario implements Serializable {
 	@Column(length = 50)
 	private String profissao;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-	@JoinColumn(name = "cliente_id")
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "cliente")
 	private List<Venda> vendas;
 	
 	public Cliente() {

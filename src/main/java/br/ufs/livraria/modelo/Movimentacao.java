@@ -18,11 +18,12 @@ public abstract class Movimentacao implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	protected Date data;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "movimentacao")
-	@JoinColumn(name = "movimentacao_id")
-	protected List<ItemLivro> listaItens;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "movimentacao")
+	protected List<ItemLivro> itens;
 	
 	public Movimentacao() {
+		data = new Date();
+		itens = new ArrayList<ItemLivro>();
 	}
 	
 	public Integer getId() {
@@ -33,8 +34,17 @@ public abstract class Movimentacao implements Serializable {
 		return data;
 	}
 
-	public List<ItemLivro> getListaItens() {
-		return listaItens;
+	public List<ItemLivro> getItens() {
+		return itens;
+	}
+	
+	@Transient
+	public Float getValorTotal() {
+		float valorTotal = 0;
+		for (ItemLivro item : itens) {
+			valorTotal += item.getValorTotal();
+		}
+		return valorTotal;
 	}
 	
 	public void setId(Integer id) {

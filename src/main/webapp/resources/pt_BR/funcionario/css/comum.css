@@ -13,3 +13,61 @@
 #mensagens {
 	margin-top: 10px;
 }
+
+.topnav .fa.fa-usd {
+	margin-right: 5px;
+}
+
+h3 i {
+	margin-right: 5px;
+}
+
+/* Informações sobre o usuário logado */
+
+.head .media.user-media { /*218*/
+  margin: 0 auto;
+  padding: 10px 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+@media (min-width: 768px) { /*241*/
+  .head .media.user-media {
+    border-bottom-width: 0;
+    border-right: 1px solid rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: -1px 0px 0px rgba(255, 255, 255, 0.05) inset;
+    box-shadow: -1px 0px 0px rgba(255, 255, 255, 0.05) inset;
+  }
+}
+
+@media (min-width: 768px) { /*277*/
+  .head .media.user-media {
+    width: 100px;
+    float: left;
+    padding: 10px 4px;
+  }
+}
+
+@media (min-width: 992px) { /*300*/
+  .head .media.user-media {
+    width: 220px;
+    padding: 10px 15px;
+  }
+}
+
+.head .media.user-media {
+	background-color: transparent;
+}
+
+.head .user-media .media-body {
+	margin-left: 0px;
+}
+
+.head .user-media .media-body h5.media-heading {
+	padding-top: 0px;
+}
+
+.head .list-unstyled.user-info {
+	margin-bottom: 0px;
+}

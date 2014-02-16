@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import br.ufs.livraria.enumeration.StatusPagamento;
+
 @Entity
 public class Boleto implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -13,16 +15,21 @@ public class Boleto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(nullable = false)
 	private Venda venda;
 	
+	@Column(name = "data_pagamento")
 	@Temporal(TemporalType.DATE)
-	private Date data;
+	private Date dataPagamento;
 	
-	@OneToOne
-	@JoinColumn(nullable = false)
-	private Cliente cliente;
+	@Column(name = "status_pagamento")
+	@Enumerated(EnumType.ORDINAL)
+	private StatusPagamento statusPagamento;
+	
+	public Boleto() {
+		dataPagamento = null;
+	}
 
 	public Integer getId() {
 		return id;
@@ -32,12 +39,12 @@ public class Boleto implements Serializable {
 		return venda;
 	}
 
-	public Date getData() {
-		return data;
+	public Date getDataPagamento() {
+		return dataPagamento;
 	}
-
-	public Cliente getCliente() {
-		return cliente;
+	
+	public StatusPagamento getStatusPagamento() {
+		return statusPagamento;
 	}
 
 	public void setId(Integer id) {
@@ -48,12 +55,12 @@ public class Boleto implements Serializable {
 		this.venda = venda;
 	}
 
-	public void setData(Date data) {
-		this.data = data;
+	public void setDataPagamento(Date dataPagamento) {
+		this.dataPagamento = dataPagamento;
 	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	
+	public void setStatusPagamento(StatusPagamento statusPagamento) {
+		this.statusPagamento = statusPagamento;
 	}
 
 }

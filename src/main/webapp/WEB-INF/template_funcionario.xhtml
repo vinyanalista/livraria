@@ -90,8 +90,16 @@
           <div class="topnav">
             <div class="btn-toolbar">
               <div class="btn-group">
-                <a data-placement="bottom" data-original-title="Show / Hide Sidebar" data-toggle="tooltip" class="btn btn-success btn-sm" id="changeSidebarPos">
+                <a data-placement="bottom" data-original-title="Exibir / ocular menu lateral" data-toggle="tooltip" class="btn btn-success btn-sm" id="changeSidebarPos">
                   <i class="fa fa-expand"></i>
+                </a> 
+              </div>
+              <div class="btn-group">
+                <a data-placement="bottom" data-original-title="Pagamentos aguardando confirmacao" data-toggle="tooltip" class="btn btn-default btn-sm" href="#{request.contextPath}/funcionario/venda/index.jsf?filtrarPendentes=true">
+                  <i class="fa fa-usd"></i>
+                  <c:set var="quantidadePendentes" value="#{vendaMB.listarPendentes().size()}"/>
+                  <span class="label label-warning" jsf:rendered="#{quantidadePendentes gt 0}"><h:outputText value="#{quantidadePendentes}" /></span> 
+                  <span class="label label-success" jsf:rendered="#{quantidadePendentes eq 0}">0</span> 
                 </a> 
               </div>
               <!-- <div class="btn-group">
@@ -146,7 +154,16 @@
 
         <!-- header.head -->
         <header class="head">
-          <div class="search-bar">
+        	<div class="media user-media">
+	          <h:panelGroup styleClass="media-body" rendered="#{loginInfo.loggedIn}">
+	            <h5 class="media-heading">#{loginInfo.usuarioLogado.nome}</h5>
+	            <ul class="list-unstyled user-info">
+	                <li>#{loginInfo.usuarioLogado.permissao eq 0 ? 'Administrador' : 'Funcionário'}</li>
+	            </ul>
+	          </h:panelGroup>
+	        </div>
+        
+          <!-- <div class="search-bar">
             <a data-original-title="Show/Hide Menu" data-placement="bottom" data-tooltip="tooltip" class="accordion-toggle btn btn-primary btn-sm visible-xs" data-toggle="collapse" href="#menu" id="menu-toggle">
               <i class="fa fa-expand"></i>
             </a> 
@@ -158,7 +175,7 @@
                                 </span> 
               </div>
             </form>
-          </div>
+          </div> -->
 
           <!-- ."main-bar -->
           <div class="main-bar">  
@@ -169,14 +186,14 @@
         <!-- end header.head -->
       </div><!-- /#top -->
       <div id="left">
-        <div class="media user-media">
+        <!-- <div class="media user-media">
           <h:panelGroup styleClass="media-body" rendered="#{loginInfo.loggedIn}">
             <h5 class="media-heading">#{loginInfo.usuarioLogado.nome}</h5>
             <ul class="list-unstyled user-info">
                 <li>#{loginInfo.usuarioLogado.permissao eq 0 ? 'Administrador' : 'Funcionário'}</li>
             </ul>
           </h:panelGroup>
-        </div>
+        </div> -->
 
         <!-- #menu -->
         <ui:include src="navegacao_funcionario.xhtml" />

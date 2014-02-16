@@ -18,7 +18,7 @@ public class CompraDAO extends DAO<Compra> implements Serializable {
 	
 	@Override
 	public void remover(Compra compra) {
-		compra.getId();
+		remover(compra.getId());
 	}
 	
 	public List<Compra> listar(Usuario usuario) {

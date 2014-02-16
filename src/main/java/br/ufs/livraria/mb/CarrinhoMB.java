@@ -28,7 +28,7 @@ public class CarrinhoMB implements Serializable {
 	private MensagensMB mensagensMb;
 	
 	public CarrinhoMB() {
-		itens = new ArrayList<ItemLivro>();
+		esvaziar();
 	}
 	
 	public String adicionar(Livro livro) {
@@ -62,6 +62,10 @@ public class CarrinhoMB implements Serializable {
 		return livroDao.buscar(livro.getId());
 	}
 	
+	public void esvaziar() {
+		itens = new ArrayList<ItemLivro>();
+	}
+	
 	public List<ItemLivro> getItens() {
 		return itens;
 	}
@@ -73,7 +77,7 @@ public class CarrinhoMB implements Serializable {
 	public Float getValorTotal() {
 		float valorTotal = 0;
 		for (ItemLivro item : itens) {
-			valorTotal += (item.getPrecoEfetivo() * item.getQuantidade());
+			valorTotal += item.getValorTotal();
 		}
 		return valorTotal;
 	}
