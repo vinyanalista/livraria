@@ -1,6 +1,7 @@
 package br.ufs.livraria.mb;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -96,10 +97,19 @@ public class VendaMB implements Serializable {
 		return proximaPagina;
 	}
 	
+	public void carregar() {
+		if (id == null) {
+			venda = new Venda();
+		} else {
+			venda = vendaDao.buscar(id);
+		}
+	}
+	
 	public String confirmar(Venda venda) {
 		Mensagem mensagem;
 		String proximaPagina;
 		try {
+			venda.getBoleto().setDataPagamento(new Date());
 			venda.getBoleto().setStatusPagamento(StatusPagamento.CONFIRMADO);
 			vendaDao.atualizar(venda);
 			mensagem = new Mensagem(MensagemTipo.SUCCESSO,

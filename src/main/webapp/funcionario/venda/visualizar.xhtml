@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<f:metadata>
+	<f:viewParam name="id" value="#{vendaMB.id}" />
+	<f:viewAction action="#{vendaMB.carregar()}"/>
+</f:metadata>
+<ui:composition template="/WEB-INF/template_funcionario.xhtml">
+	<ui:define name="titulo">SIGELI - Acesso do Funcionário - Venda - Visualizar</ui:define>
+	<ui:define name="main-bar">
+		<h3>
+			<i class="fa fa-usd"></i>Venda
+		</h3>
+	</ui:define>
+	<ui:define name="conteudo">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="box">
+					<header>
+						<div class="icons">
+							<i class="fa fa-search"></i>
+						</div>
+						<h5>Visualizar</h5>
+						<ul class="nav nav-tabs pull-right">
+							<li class="active">
+								<a href="#tab_venda" data-toggle="tab">Venda</a>
+							</li>
+							<li>
+								<a href="#tab_cliente" data-toggle="tab">Cliente</a>
+							</li>
+						</ul>
+					</header>
+					<div id="div-3" class="body tab-content">
+						<div class="tab-pane fade in active" id="tab_venda">
+							<form class="form-horizontal inline-validate" jsf:prependId="false" jsf:acceptcharset="ISO-8859-1">
+								<h4>Venda</h4>
+	
+								<div class="form-group">
+									<label class="control-label col-lg-4" for="data">Data da venda</label>
+									<div class="col-lg-8">
+										<h:outputText id="data" value="#{vendaMB.venda.data}">
+											<f:convertDateTime pattern="dd/MM/yyyy " />
+										</h:outputText>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-lg-4" for="cliente">Cliente</label>
+									<div class="col-lg-8">
+										<h:outputText id="cliente" value="#{vendaMB.venda.cliente.nome}" />
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-lg-4" for="boleto_id">Número do boleto</label>
+									<div class="col-lg-8">
+										<h:outputText id="boleto_id" value="#{vendaMB.venda.boleto.id}" />
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-lg-4" for="valor_total">Valor total</label>
+									<div class="col-lg-8">
+										<h:outputText id="valor_total" value="#{vendaMB.venda.valorTotal}">
+											<f:convertNumber locale="pt_BR" type="currency" />
+										</h:outputText>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-lg-4" for="boleto_status">Status</label>
+									<div class="col-lg-8">
+										<h:outputText id="boleto_status_0" value="Confirmado" rendered="#{vendaMB.venda.boleto.statusPagamento == 'CONFIRMADO'}" />
+										<h:outputText id="boleto_status_1" value="Pendente" rendered="#{vendaMB.venda.boleto.statusPagamento == 'EM_ANDAMENTO'}" />
+										<h:outputText id="boleto_status_2" value="Cancelado" rendered="#{vendaMB.venda.boleto.statusPagamento == 'CANCELADO'}" />
+									</div>
+								</div>
+								
+								<div class="form-group" jsf:rendered="#{vendaMB.venda.boleto.statusPagamento == 'CONFIRMADO'}">
+									<label class="control-label col-lg-4" for="boleto_data">Data do pagamento</label>
+									<div class="col-lg-8">
+										<h:outputText id="boleto_data" value="#{vendaMB.venda.boleto.dataPagamento}">
+											<f:convertDateTime pattern="dd/MM/yyyy " />
+										</h:outputText>
+									</div>
+								</div>
+	
+								<h4>Itens da venda</h4>
+	
+								<table class="table table-bordered table-condensed table-hover table-striped">
+									<thead>
+										<tr>
+											<th>Livro</th>
+											<th>Autor</th>
+											<th>Quantidade</th>
+											<th>Preço</th>
+											<th>Total</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach items="#{vendaMB.venda.itens}" var="item">
+											<tr>
+												<td>
+													<h:outputText value="#{item.livro.titulo}" />
+												</td>
+												<td>
+													<h:outputText value="#{item.livro.autor}" />
+												</td>
+												<td>
+													<h:outputText value="#{item.quantidade}" />
+												</td>
+												<td>
+													<h:outputText value="#{item.precoEfetivo}">
+														<f:convertNumber locale="pt_BR" type="currency" />
+													</h:outputText>
+												</td>
+												<td>
+													<h:outputText value="#{item.valorTotal}">
+														<f:convertNumber locale="pt_BR" type="currency" />
+													</h:outputText>
+												</td>
+											</tr>
+										</c:forEach>
+										<tr>
+											<td colspan="4" style="text-align: right"><strong>Valor total:</strong></td>
+											<td><strong>
+												<h:outputText value="#{vendaMB.venda.valorTotal}">
+													<f:convertNumber locale="pt_BR" type="currency" />
+												</h:outputText>
+											</strong></td>
+										</tr>
+									</tbody>
+								</table>
+								
+								<div class="form-actions no-margin-bottom">
+									<a jsf:id="voltar" class="btn btn-default" href="#" onclick="javascript:history.back(-1);" jsf:immediate="true">Voltar</a>
+								</div>
+							</form>
+						</div>
+							
+						<div class="tab-pane fade" id="tab_cliente">
+							<form class="form-horizontal inline-validate" jsf:prependId="false" jsf:acceptcharset="ISO-8859-1">
+								<h4>Identificação</h4>
+							
+								<div class="form-group">
+									<label class="control-label col-lg-4" for="nome">Nome</label>
+									<div class="col-lg-8">
+										<h:outputText id="nome" value="#{vendaMB.venda.cliente.nome}" />
+									</div>
+								</div>
+	
+								<div class="form-group">
+									<label class="control-label col-lg-4" for="cpf">CPF</label>
+									<div class="col-lg-8">
+										<h:outputText id="cpf" value="#{vendaMB.venda.cliente.cpf}" />
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-lg-4" for="rg">RG</label>
+									<div class="col-lg-8">
+										<h:outputText id="rg" value="#{vendaMB.venda.cliente.rg}" />
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-lg-4" for="dataNascimento">Data de nascimento</label>
+									<div class="col-lg-8">
+										<h:outputText id="dataNascimento" value="#{vendaMB.venda.cliente.dataNascimento}">
+											<f:convertDateTime pattern="dd/MM/yyyy " />
+										</h:outputText>
+									</div>
+								</div>
+								
+								<h4>Contato</h4>
+								
+								<div class="form-group">
+									<label class="control-label col-lg-4" for="telefone">Telefone</label>
+									<div class="col-lg-8">
+										<h:outputText id="telefone" value="#{vendaMB.venda.cliente.telefone}" />
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-lg-4" for="email">E-mail</label>
+									<div class="col-lg-8">
+										<h:outputText id="email" value="#{vendaMB.venda.cliente.email}" />
+									</div>
+								</div>
+								
+								<h4>Endereço</h4>
+								
+								<div class="form-group">
+									<label class="control-label col-lg-4" for="logradouro">Logradouro</label>
+									<div class="col-lg-8">
+										<h:outputText id="logradouro" value="#{vendaMB.venda.cliente.endereco.logradouro}" />
+									</div>
+								</div>
+	
+								<div class="form-group">
+									<label class="control-label col-lg-4" for="numero">Número</label>
+									<div class="col-lg-8">
+										<h:outputText id="numero" value="#{vendaMB.venda.cliente.endereco.numero}" />
+									</div>
+								</div>
+	
+								<div class="form-group">
+									<label class="control-label col-lg-4" for="bairro">Bairro</label>
+									<div class="col-lg-8">
+										<h:outputText id="bairro" value="#{vendaMB.venda.cliente.endereco.bairro}" />
+									</div>
+								</div>
+	
+								<div class="form-group">
+									<label class="control-label col-lg-4" for="cidade">Cidade</label>
+									<div class="col-lg-8">
+										<h:outputText id="cidade" value="#{vendaMB.venda.cliente.endereco.cidade}" />
+									</div>
+								</div>
+	
+								<div class="form-group">
+									<label class="control-label col-lg-4" for="estado">Estado</label>
+									<div class="col-lg-8">
+										<h:outputText id="estado" value="#{vendaMB.venda.cliente.endereco.estado}" />
+									</div>
+								</div>
+	
+								<div class="form-group">
+									<label class="control-label col-lg-4" for="cep">CEP</label>
+									<div class="col-lg-8">
+										<h:outputText id="cep" value="#{vendaMB.venda.cliente.endereco.cep}" />
+									</div>
+								</div>
+								
+								<div class="form-actions no-margin-bottom">
+									<a jsf:id="voltar" class="btn btn-default" href="#" onclick="javascript:history.back(-1);" jsf:immediate="true">Voltar</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<h:outputStylesheet library="funcionario" name="css/funcionario.css" />
+		<h:outputScript library="funcionario" name="js/funcionario.js" />
+	</ui:define>
+</ui:composition>
+</html>

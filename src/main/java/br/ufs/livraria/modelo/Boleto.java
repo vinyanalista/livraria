@@ -28,7 +28,7 @@ public class Boleto implements Serializable {
 	private StatusPagamento statusPagamento;
 	
 	public Boleto() {
-		dataPagamento = new Date();
+		dataPagamento = null;
 	}
 
 	public Integer getId() {
