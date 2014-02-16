@@ -13,16 +13,16 @@ public class Boleto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(nullable = false)
 	private Venda venda;
 	
 	@Temporal(TemporalType.DATE)
 	private Date data;
 	
-	@OneToOne
-	@JoinColumn(nullable = false)
-	private Cliente cliente;
+	public Boleto() {
+		data = new Date();
+	}
 
 	public Integer getId() {
 		return id;
@@ -36,10 +36,6 @@ public class Boleto implements Serializable {
 		return data;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
-	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -50,10 +46,6 @@ public class Boleto implements Serializable {
 
 	public void setData(Date data) {
 		this.data = data;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
 	}
 
 }

@@ -19,6 +19,7 @@
 		<h3>Finalizar compra</h3>
 		<hr class="soft" />
 		<p>Por favor, revise as informações da compra antes de prosseguir.</p>
+		<h:form prependId="false" acceptcharset="ISO-8859-1">
 		
 		<h4>Itens da compra</h4>
 		<div class="alert alert-warning" jsf:rendered="#{finalizarCompraMB.revisarItens}">
@@ -36,7 +37,7 @@
 			</thead>
 			<tbody>
 				<c:forEach items="#{finalizarCompraMB.itens}" var="item">
-					<c:set var="revisarItem" value="#{(finalizarCompraMB.revisarItens) and (item.quantidade > item.livro.estoque)}"/>
+					<c:set var="revisarItem" value="#{(finalizarCompraMB.revisarItens) and (item.livro.estoque lt item.quantidade)}"/>
 					<tr>
 						<td>
 							<img width="60" src="#{request.contextPath}/capa?id=#{item.livro.id}" alt="" />
@@ -47,19 +48,17 @@
 						</td>
 						<td>
 							<div class="input-append" jsf:rendered="#{revisarItem}">
-								<h:form prependId="false" acceptcharset="ISO-8859-1">
-									<input class="span1" style="max-width: 34px" value="#{item.quantidade}"
-										id="appendedInputButtons" size="16" type="text" readonly="readonly" />
-									<h:commandLink class="btn" action="#{finalizarCompraMB.remover(item.livro)}">
-										<i class="icon-minus"></i>
-									</h:commandLink>
-									<h:commandLink class="btn" action="#{finalizarCompraMB.adicionar(item.livro)}">
-										<i class="icon-plus"></i>
-									</h:commandLink>
-									<h:commandLink class="btn btn-danger btn-remover-todos" action="#{finalizarCompraMB.removerTodos(item.livro)}">
-										<i class="icon-remove icon-white"></i>
-									</h:commandLink>
-								</h:form>
+								<input class="span1" style="max-width: 34px" value="#{item.quantidade}"
+									id="appendedInputButtons" size="16" type="text" readonly="readonly" />
+								<h:commandLink class="btn" action="#{finalizarCompraMB.remover(item.livro)}">
+									<i class="icon-minus"></i>
+								</h:commandLink>
+								<h:commandLink class="btn" action="#{finalizarCompraMB.adicionar(item.livro)}">
+									<i class="icon-plus"></i>
+								</h:commandLink>
+								<h:commandLink class="btn btn-danger btn-remover-todos" action="#{finalizarCompraMB.removerTodos(item.livro)}">
+									<i class="icon-remove icon-white"></i>
+								</h:commandLink>
 							</div>
 							<h:panelGroup rendered="#{(revisarItem == true) and (item.livro.estoque == 1)}">
 								Há apenas <span class="badge badge-warning">1</span> exemplar disponível no estoque
@@ -100,69 +99,66 @@
 					<th>Endereço</th>
 				</tr>
 				<tr>
-					<td>
-						<form class="form-horizontal" jsf:acceptcharset="ISO-8859-1" jsf:prependId="false">
-							<div class="control-group">
-								<label class="control-label" for="inputCountry">Logradouro</label>
-								<div class="controls">
-									<input type="text" jsf:id="logradouro" name="logradouro"
-										placeholder="Logradouro"
-										jsf:value="#{finalizarCompraMB.cliente.endereco.logradouro}" />
-								</div>
+					<td class="form-horizontal">
+						<div class="control-group">
+							<label class="control-label" for="inputCountry">Logradouro</label>
+							<div class="controls">
+								<input type="text" jsf:id="logradouro" name="logradouro"
+									placeholder="Logradouro"
+									jsf:value="#{finalizarCompraMB.cliente.endereco.logradouro}" />
 							</div>
-							<div class="control-group">
-								<label class="control-label" for="numero">Número</label>
-								<div class="controls">
-									<input type="text" jsf:id="numero" name="numero"
-										placeholder="Número"
-										jsf:value="#{finalizarCompraMB.cliente.endereco.numero}" />
-								</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="numero">Número</label>
+							<div class="controls">
+								<input type="text" jsf:id="numero" name="numero"
+									placeholder="Número"
+									jsf:value="#{finalizarCompraMB.cliente.endereco.numero}" />
 							</div>
-							<div class="control-group">
-								<label class="control-label" for="bairro">Bairro</label>
-								<div class="controls">
-									<input type="text" jsf:id="bairro" name="bairro"
-										placeholder="Bairro"
-										jsf:value="#{finalizarCompraMB.cliente.endereco.bairro}" />
-								</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="bairro">Bairro</label>
+							<div class="controls">
+								<input type="text" jsf:id="bairro" name="bairro"
+									placeholder="Bairro"
+									jsf:value="#{finalizarCompraMB.cliente.endereco.bairro}" />
 							</div>
-							<div class="control-group">
-								<label class="control-label" for="cidade">Cidade</label>
-								<div class="controls">
-									<input type="text" jsf:id="cidade" name="cidade"
-										placeholder="Cidade"
-										jsf:value="#{finalizarCompraMB.cliente.endereco.cidade}" />
-								</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="cidade">Cidade</label>
+							<div class="controls">
+								<input type="text" jsf:id="cidade" name="cidade"
+									placeholder="Cidade"
+									jsf:value="#{finalizarCompraMB.cliente.endereco.cidade}" />
 							</div>
-							<div class="control-group">
-								<label class="control-label" for="estado">Estado</label>
-								<div class="controls">
-									<h:selectOneMenu id="estado" value="#{finalizarCompraMB.cliente.endereco.estado}">
-										<f:selectItems value="#{finalizarCompraMB.estados}" />
-									</h:selectOneMenu>
-								</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="estado">Estado</label>
+							<div class="controls">
+								<h:selectOneMenu id="estado" value="#{finalizarCompraMB.cliente.endereco.estado}">
+									<f:selectItems value="#{finalizarCompraMB.estados}" />
+								</h:selectOneMenu>
 							</div>
-							<div class="control-group">
-								<label class="control-label" for="cep">CEP</label>
-								<div class="controls">
-									<input type="text" jsf:id="cep" name="cep"
-										placeholder="CEP"
-										jsf:value="#{finalizarCompraMB.cliente.endereco.cep}" />
-								</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="cep">CEP</label>
+							<div class="controls">
+								<input type="text" jsf:id="cep" name="cep"
+									placeholder="CEP"
+									jsf:value="#{finalizarCompraMB.cliente.endereco.cep}" />
 							</div>
-						</form>
+						</div>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 
-		<form jsf:prependId="false">
-			<a href="carrinho.jsf" class="btn btn-large"><i
-				class="icon-arrow-left"></i> Voltar ao carrinho </a>
-			<a jsf:action="#{finalizarCompraMB.finalizarCompra()}" class="btn btn-large btn-success pull-right">
-				Gerar boleto <i class="icon-arrow-right"></i>
-			</a>
-		</form>
+		<a href="carrinho.jsf" class="btn btn-large"><i
+			class="icon-arrow-left"></i> Voltar ao carrinho </a>
+		<a jsf:action="#{finalizarCompraMB.gerarBoleto()}" class="btn btn-large btn-success pull-right">
+			Gerar boleto <i class="icon-arrow-right"></i>
+		</a>
+		</h:form>
 		<style>
 			.btn-remover-todos {
 				-webkit-border-radius: 0 4px 4px 0 !important;
