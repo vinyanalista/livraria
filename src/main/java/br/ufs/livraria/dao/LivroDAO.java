@@ -53,11 +53,6 @@ public class LivroDAO extends DAO<Livro> implements Serializable {
 	}
 	
 	public List<Livro> buscar(String por, BuscaFiltro filtro, BuscaOrdenacao ordenacao, Genero genero) {
-		// TODO Apenas para fins de teste! Remover!
-		System.out.println("******************************************************************************************************");
-		System.out.println("LIVRO DAO\nPor: " + por + "\nFiltro: " + filtro + "\nGênero: " + genero + "\nOrdenação: " + ordenacao);
-		System.out.println("******************************************************************************************************");
-
 		StringBuilder jpql = new StringBuilder("SELECT livro FROM Livro livro");
 		
 		boolean filtrar = ((por != null) && (!por.isEmpty()) && (filtro != null));
@@ -69,7 +64,6 @@ public class LivroDAO extends DAO<Livro> implements Serializable {
 		}
 
 		if (filtrar) {
-			
 			switch (filtro) {
 			case TITULO:
 				jpql.append(" (LOWER(livro.titulo) LIKE LOWER(:titulo))");
@@ -97,8 +91,29 @@ public class LivroDAO extends DAO<Livro> implements Serializable {
 		}
 		
 		if (ordenar) {
-			jpql.append(" ORDER BY :ordenacao");
+			jpql.append(" ORDER BY");
+			switch (ordenacao) {
+			case ESTOQUE:
+				jpql.append(" livro.estoque DESC, livro.titulo ASC");
+				break;
+			case MENOR_PRECO:
+				jpql.append(" livro.preco ASC, livro.titulo ASC");
+				break;
+			case TITULO_A_Z:
+				jpql.append(" livro.titulo ASC");
+				break;
+			case TITULO_Z_A:
+				jpql.append(" livro.titulo DESC");
+				break;
+			default:
+				break;
+			}
 		}
+		
+		// TODO Apenas para fins de teste! Remover!
+		System.out.println("******************************************************************************************************");
+		System.out.println("LIVRO DAO\nPor: " + por + "\nFiltro: " + filtro + "\nGênero: " + genero + "\nOrdenação: " + ordenacao + "\nQuery: " + jpql.toString());
+		System.out.println("******************************************************************************************************");
 
 		TypedQuery<Livro> query = entityManager.createQuery(jpql.toString(), Livro.class);
 		
@@ -116,25 +131,6 @@ public class LivroDAO extends DAO<Livro> implements Serializable {
 
 		if (filtrarGenero) {
 			query.setParameter("genero", EnumSet.of(genero));
-		}
-
-		if (ordenar) {
-			switch (ordenacao) {
-			case ESTOQUE:
-				query.setParameter("ordenacao", "livro.estoque DESC");
-				break;
-			case MENOR_PRECO:
-				query.setParameter("ordenacao", "livro.preco ASC");
-				break;
-			case TITULO_A_Z:
-				query.setParameter("ordenacao", "livro.titulo ASC");
-				break;
-			case TITULO_Z_A:
-				query.setParameter("ordenacao", "livro.titulo DESC");
-				break;
-			default:
-				break;
-			}
 		}
 
 		return query.getResultList();

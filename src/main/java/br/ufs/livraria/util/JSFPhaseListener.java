@@ -6,6 +6,7 @@ import javax.faces.event.PhaseListener;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.ufs.livraria.mb.CarrinhoMB;
 import br.ufs.livraria.mb.MensagensMB;
 
 @Named
@@ -13,12 +14,21 @@ public class JSFPhaseListener implements PhaseListener {
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
+	private CarrinhoMB carrinhoMb;
+	
+	@Inject
 	private MensagensMB mensagensMb;
 
 	@Override
 	public void afterPhase(PhaseEvent event) {
-		// Esvazia a fila de mensagens após renderizar a resposta
-		mensagensMb.esvaziar();
+		if (event.getPhaseId().equals(PhaseId.PROCESS_VALIDATIONS)) {
+			// Verifica se acabou o estoque de algum dos livros adicionados ao carrinho
+			carrinhoMb.verificarDisponibilidadeDosLivros();
+		}
+		if (event.getPhaseId().equals(PhaseId.RENDER_RESPONSE)) {
+			// Esvazia a fila de mensagens após renderizar a resposta
+			mensagensMb.esvaziar();
+		}
 	}
 
 	@Override
@@ -27,7 +37,7 @@ public class JSFPhaseListener implements PhaseListener {
 
 	@Override
 	public PhaseId getPhaseId() {
-		return PhaseId.RENDER_RESPONSE;
+		return PhaseId.ANY_PHASE;
 	}
 
 }

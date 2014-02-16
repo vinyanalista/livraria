@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/WEB-INF/template_cliente.xhtml">
+	<ui:define name="titulo">SIGELI - Finalizar compra</ui:define>
+	<ui:define name="conteudo">
+		<ul class="breadcrumb">
+			<li><a href="index.jsf">Página inicial</a> <span class="divider">/</span></li>
+			<li class="active">Finalizar compra</li>
+		</ul>
+		<h3>Finalizar compra</h3>
+		<hr class="soft" />
+		<div class="alert alert-info">Você precisa ter uma conta no SIGELI para poder finalizar sua compra.</div>
+		<div class="row">
+			<div class="span4">
+				<div class="well">
+					<h5>CRIE UMA CONTA</h5>
+					<br />
+					Se você ainda não possui uma conta no SIGELI, pode se cadastrar agora: é fácil, rápido e gratuito!<br /><br />
+					<a class="btn" href="cadastro.jsf">Cadastrar</a>
+				</div>
+			</div>
+			<div class="span1">&nbsp;</div>
+			<div class="span4">
+				<div class="well">
+					<h5>JÁ POSSUI UMA CONTA?</h5>
+					<form jsf:acceptcharset="ISO-8859-1" jsf:prependId="false">
+						<div class="control-group">
+							<label class="control-label" for="inputEmail1">E-mail</label>
+							<div class="controls">
+								<input type="text" class="span3" placeholder="E-mail" required="required" jsf:id="inputEmail1" jsf:value="#{loginMB.email}">
+									<f:validator validatorId="emailValidator" />
+								</input>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="inputPassword1">Senha</label>
+							<div class="controls">
+								<input type="password" class="span3" placeholder="Senha" required="required" jsf:id="inputPassword1" jsf:value="#{loginMB.senha}" />
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="controls">
+								<button type="submit" class="btn" jsf:action="#{loginMB.login()}">
+									Login
+									<f:setPropertyActionListener target="#{loginMB.urlRetorno}" value="finalizar_compra.jsf" />
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

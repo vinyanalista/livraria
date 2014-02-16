@@ -22,7 +22,9 @@ public abstract class DAO<Entidade> implements Serializable {
 	}
 
 	public Entidade buscar(Integer id) {
-		return entityManager.find(classeDaEntidade, id);
+		Entidade entidade = entityManager.find(classeDaEntidade, id);
+		entityManager.refresh(entidade); // Evitar cache
+		return entidade;
 	}
 
 	public void inserir(Entidade entidade) {

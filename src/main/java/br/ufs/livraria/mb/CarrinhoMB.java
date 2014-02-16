@@ -28,27 +28,42 @@ public class CarrinhoMB implements Serializable {
 	private MensagensMB mensagensMb;
 	
 	public CarrinhoMB() {
-		itens = new ArrayList<ItemLivro>();
+		esvaziar();
 	}
 	
 	public String adicionar(Livro livro) {
-		boolean livroJaExistia = false;
-		for (ItemLivro item : itens) {
-			if (item.getLivro().equals(livro)) {
-				item.setQuantidade(item.getQuantidade() + 1);
-				livroJaExistia = true;
-				mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO, "Mais um exemplar do livro <b>" + livro.getTitulo() + "</b> foi adicionado ao carrinho!");
+		if (livro != null) {
+			boolean livroJaExistia = false;
+			for (ItemLivro item : itens) {
+				if (item.getLivro().equals(livro)) {
+					item.setQuantidade(item.getQuantidade() + 1);
+					livroJaExistia = true;
+					mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO, "Mais um exemplar do livro <b>" + livro.getTitulo() + "</b> foi adicionado ao carrinho!");
+				}
+			}
+			if (!livroJaExistia) {
+				livro = atualizarLivro(livro);
+				if (livro.getEstoque() == 0) {
+					mensagensMb.adicionarMensagem(MensagemTipo.ADVERTENCIA, "O livro <b>" + livro.getTitulo() + "</b> não foi adicionado ao carrinho por terem se esgotado as unidades disponíveis no estoque.");
+				} else {
+					ItemLivro novoItem = new ItemLivro();
+					novoItem.setLivro(livro);
+					novoItem.setPrecoEfetivo(livro.getPreco());
+					novoItem.setQuantidade(1);
+					itens.add(novoItem);
+					mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO, "O livro <b>" + livro.getTitulo() + "</b> foi adicionado ao carrinho!");
+				}
 			}
 		}
-		if (!livroJaExistia) {
-			ItemLivro novoItem = new ItemLivro();
-			novoItem.setLivro(livro);
-			novoItem.setPrecoEfetivo(livro.getPreco());
-			novoItem.setQuantidade(1);
-			itens.add(novoItem);
-			mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO, "O livro <b>" + livro.getTitulo() + "</b> foi adicionado ao carrinho!");
-		}
 		return "carrinho.jsf?faces-redirect=true";
+	}
+	
+	private Livro atualizarLivro(Livro livro) {
+		return livroDao.buscar(livro.getId());
+	}
+	
+	public void esvaziar() {
+		itens = new ArrayList<ItemLivro>();
 	}
 	
 	public List<ItemLivro> getItens() {
@@ -94,5 +109,15 @@ public class CarrinhoMB implements Serializable {
 		itens.remove(item);
 		mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO, "O livro <b>" + item.getLivro().getTitulo() + "</b> foi removido do carrinho!");
 		return "carrinho.jsf?faces-redirect=true";
+	}
+	
+	public void verificarDisponibilidadeDosLivros() {
+		for (ItemLivro item : new ArrayList<ItemLivro>(itens)) {
+			item.setLivro(atualizarLivro(item.getLivro()));
+			if (item.getLivro().getEstoque() == 0) {
+				itens.remove(item);
+				mensagensMb.adicionarMensagem(MensagemTipo.ADVERTENCIA, "O livro <b>" + item.getLivro().getTitulo() + "</b> foi removido do carrinho por terem se esgotado as unidades disponíveis no estoque.");
+			}
+		}
 	}
 }

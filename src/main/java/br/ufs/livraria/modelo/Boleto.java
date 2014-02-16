@@ -15,7 +15,7 @@ public class Boleto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(nullable = false)
 	private Venda venda;
 	
@@ -27,9 +27,9 @@ public class Boleto implements Serializable {
 	@Enumerated(EnumType.ORDINAL)
 	private StatusPagamento statusPagamento;
 	
-	@OneToOne
-	@JoinColumn(nullable = false)
-	private Cliente cliente;
+	public Boleto() {
+		dataPagamento = new Date();
+	}
 
 	public Integer getId() {
 		return id;
@@ -47,10 +47,6 @@ public class Boleto implements Serializable {
 		return statusPagamento;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
-	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -65,10 +61,6 @@ public class Boleto implements Serializable {
 	
 	public void setStatusPagamento(StatusPagamento statusPagamento) {
 		this.statusPagamento = statusPagamento;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
 	}
 
 }

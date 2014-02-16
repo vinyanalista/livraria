@@ -23,6 +23,8 @@ public abstract class Movimentacao implements Serializable {
 	protected List<ItemLivro> listaItens;
 	
 	public Movimentacao() {
+		data = new Date();
+		listaItens = new ArrayList<ItemLivro>();
 	}
 	
 	public Integer getId() {

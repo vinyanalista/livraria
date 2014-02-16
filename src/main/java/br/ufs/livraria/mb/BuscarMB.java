@@ -137,8 +137,10 @@ public class BuscarMB implements Serializable {
 			genero = Genero.buscar(this.genero);
 		}
 		
-		if ((genero == null) || (genero == Genero.TUDO)) {
+		if (!por.isEmpty()) {
 			tituloDaPagina = "Resultados da busca por " + por;
+		} else if (genero == Genero.TUDO) {
+			tituloDaPagina = "Todos os livros cadastrados";
 		} else {
 			tituloDaPagina = "Livros de " + genero.getLabel();
 		}

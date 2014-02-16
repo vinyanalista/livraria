@@ -42,7 +42,7 @@ public enum Genero {
 	
 	public static Genero buscar(Integer id) {
 		Genero[] values = Genero.values();
-		if ((id > 0) && (id < values.length)) {
+		if ((id >= 0) && (id < values.length)) {
 			return values[id];
 		} else {
 			return null;

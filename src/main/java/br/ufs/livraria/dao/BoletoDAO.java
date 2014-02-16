@@ -12,7 +12,7 @@ import br.ufs.livraria.modelo.Cliente;
 @Stateless
 public class BoletoDAO extends DAO<Boleto> implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	public BoletoDAO() {
 		super(Boleto.class);
 	}

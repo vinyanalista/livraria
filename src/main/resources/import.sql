@@ -16,19 +16,21 @@ INSERT INTO livro (id, ano, autor, edicao, editora, estoque, genero, isbn, preco
 INSERT INTO livro (id, ano, autor, edicao, editora, estoque, genero, isbn, preco, sinopse, titulo) VALUES (12, 2010, 'Nicholas Sparks', 1, 'Novo Conceito', 5, 13, '9788563219077', 21.8999999999999986, 'Aos 17 anos, Verônica Miller, ou simplesmente Ronnie, vê sua vida virar de cabeça para baixo quando seus pais se divorciam e seu pai decide se mudar para a praia de Wrightsville, na Carolina do Norte.', 'A Última Música');
 INSERT INTO livro (id, ano, autor, edicao, editora, estoque, genero, isbn, preco, sinopse, titulo) VALUES (13, 2011, 'Nicholas Sparks', 1, 'Novo Conceito', 7, 13, '9788563219268', 15.2100000000000009, 'Cada mês de abril, quando o vento sopra do mar e se mistura com o perfume de violetas, Landon Carter recorda seu último ano na High Beaufort. Isso era 1958 e Landon já tinha namorado uma ou duas meninas. Ele sempre jurou que já tinha se apaixonado antes.', 'Um Amor Para Recordar');
 INSERT INTO livro (id, ano, autor, edicao, editora, estoque, genero, isbn, preco, sinopse, titulo) VALUES (14, 2007, 'Markus Zusak', 1, 'Intrinseca', 50, 13, '9788598078175', 26.8999999999999986, 'Entre 1939 e 1943, Liesel Meminger encontrou a Morte três vezes.', 'A Menina que Roubava Livros');
-INSERT INTO livro (id, ano, autor, edicao, editora, estoque, genero, isbn, preco, sinopse, titulo) VALUES (15, 2008, 'William P. Young', 1, 'Sextante', 15, 13, '9788599296363', 14.9000000000000004, 'Durante uma viagem de fim de semana, a filha mais nova de Mack Allen Phillips é raptada e evidências de que ela foi brutalmente assassinada são encontradas numa cabana abandonada.', 'A Cabana');
-INSERT INTO livro (id, ano, autor, edicao, editora, estoque, genero, isbn, preco, sinopse, titulo) VALUES (16, 2009, 'Stephenie Meyer', 1, 'Intrinseca', 60, 13, '9788598078765', 39.8999999999999986, 'Crepúsculo desafiou a imaginação. Lua nova deixou os leitores sedentos por mais. Eclipse transformou a série em um fenômeno global. Agora, Amanhecer!', 'Amanhecer');
+INSERT INTO livro (id, ano, autor, edicao, editora, estoque, genero, isbn, preco, sinopse, titulo) VALUES (15, 2008, 'William P. Young', 1, 'Sextante', 2, 13, '9788599296363', 14.9000000000000004, 'Durante uma viagem de fim de semana, a filha mais nova de Mack Allen Phillips é raptada e evidências de que ela foi brutalmente assassinada são encontradas numa cabana abandonada.', 'A Cabana');
+INSERT INTO livro (id, ano, autor, edicao, editora, estoque, genero, isbn, preco, sinopse, titulo) VALUES (16, 2009, 'Stephenie Meyer', 1, 'Intrinseca', 1, 13, '9788598078765', 39.8999999999999986, 'Crepúsculo desafiou a imaginação. Lua nova deixou os leitores sedentos por mais. Eclipse transformou a série em um fenômeno global. Agora, Amanhecer!', 'Amanhecer');
 
 ALTER SEQUENCE livro_id_seq RESTART WITH 17;
 
 -- Endereços
-INSERT INTO endereco (id, bairro, cep, cidade, estado, logradouro, numero) VALUES (1, 'Algum', '49000000', 'Fictícia', 'Sergipe', 'rua Frei limão', '45');
-ALTER SEQUENCE endereco_id_seq RESTART WITH 2;
+INSERT INTO endereco (id, bairro, cep, cidade, estado, logradouro, numero) VALUES (1, 'Algum', '49000000', 'Fictícia', 'SE', 'rua Frei limão', '45');
+INSERT INTO endereco (id, bairro, cep, cidade, estado, logradouro, numero) VALUES (2, 'A', '11111-111', 'A', 'SE', 'A', 1);
+ALTER SEQUENCE endereco_id_seq RESTART WITH 3;
 
 -- Usuários
 -- 7c4a8d09ca3762af61e59520943dc26494f8941b = SHA1 para 123456
-INSERT INTO usuario (id, tipo, cpf, data_nascimento, email, nome, rg, senha, telefone, endereco_id) VALUES (1, 2, '12345678911', '1990/08/04', 'usuario@email.com', 'Usuario', '73284902', '7c4a8d09ca3762af61e59520943dc26494f8941b', '7937282920', 1);
-ALTER SEQUENCE usuario_id_seq RESTART WITH 2;
+INSERT INTO usuario (id, tipo, cpf, data_nascimento, email, nome, rg, senha, telefone, endereco_id) VALUES (1, 2, '71486304109', '1990/08/04', 'cliente@sigeli.com', 'Usuario', '73284902', '7c4a8d09ca3762af61e59520943dc26494f8941b', '7937282920', 1); -- Usuário cliente@sigeli.com senha 123456
+INSERT INTO usuario (id, tipo, cpf, data_nascimento, email, nome, rg, senha, telefone, endereco_id) VALUES (2, 1, '34386765247', '1899-12-31', 'admin@sigeli.com', 'Admin', '1', 'd033e22ae348aeb5660fc2140aec35850c4da997', '(11) 1111-1111', 2); -- Usuário admin@sigeli.com Senha admin
+ALTER SEQUENCE usuario_id_seq RESTART WITH 3;
 
 -- Clientes
 INSERT INTO cliente (id, data_cadastro) VALUES (1, '2013/11/03');
@@ -62,18 +64,14 @@ INSERT INTO venda(id, cliente_id) VALUES (3, 1);
 INSERT INTO venda(id, cliente_id) VALUES (4, 1);
 INSERT INTO venda(id, cliente_id) VALUES (5, 1);
 
--- Admin
-INSERT INTO endereco (id, bairro, cep, cidade, estado, logradouro, numero) VALUES (2, 'A', '11111-111', 'A', 'SE', 'A', 1);
-ALTER SEQUENCE endereco_id_seq RESTART WITH 3;
--- Senha admin
-INSERT INTO usuario (id, tipo, cpf, data_nascimento, email, nome, rg, senha, telefone, endereco_id) VALUES (2, 1, '1', '1899-12-31', 'admin@sigeli.com', 'Admin', '1', 'd033e22ae348aeb5660fc2140aec35850c4da997', '(11) 1111-1111', 2);
-ALTER SEQUENCE usuario_id_seq RESTART WITH 3;
-INSERT INTO funcionario (id, permissao) VALUES (2, 0);
-
 -- Boletos
-INSERT INTO boleto(id, data_pagamento, status_pagamento, cliente_id, venda_id) VALUES (1, '2013/11/05', 0, 1, 1);
-INSERT INTO boleto(id, data_pagamento, status_pagamento, cliente_id, venda_id) VALUES (2, '2013/11/18', 2, 1, 2);
-INSERT INTO boleto(id, status_pagamento, cliente_id, venda_id) VALUES (3, 1, 1, 3);
-INSERT INTO boleto(id, data_pagamento, status_pagamento, cliente_id, venda_id) VALUES (4, '2013/11/09', 0, 1, 4);
-INSERT INTO boleto(id, data_pagamento, status_pagamento, cliente_id, venda_id) VALUES (5, '2013/11/21', 2, 1, 5);
+INSERT INTO boleto(id, data_pagamento, status_pagamento, venda_id) VALUES (1, '2013/11/05', 0, 1);
+INSERT INTO boleto(id, data_pagamento, status_pagamento, venda_id) VALUES (2, '2013/11/18', 2, 2);
+INSERT INTO boleto(id, status_pagamento, venda_id) VALUES (3, 1, 3);
+INSERT INTO boleto(id, data_pagamento, status_pagamento, venda_id) VALUES (4, '2013/11/09', 0, 4);
+INSERT INTO boleto(id, data_pagamento, status_pagamento, venda_id) VALUES (5, '2013/11/21', 2, 5);
 ALTER SEQUENCE boleto_id_seq RESTART WITH 6;
+
+-- Funcionários
+
+INSERT INTO funcionario (id, permissao) VALUES (2, 0); -- Admin
