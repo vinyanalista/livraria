@@ -18,11 +18,12 @@ public class ItemLivro implements Serializable {
 	@Column(name = "preco_efetivo", precision = 8, scale = 2)
 	private Float precoEfetivo;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Movimentacao movimentacao;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	// TODO Existe um jeito de excluir os itens automaticamente ao excluir o livro? 
+	@ManyToOne(/* cascade = CascadeType.ALL, */fetch = FetchType.EAGER)
 	@JoinColumn(nullable = false)
 	private Livro livro;
 	

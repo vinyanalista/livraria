@@ -52,7 +52,7 @@
 											</thead>
 											<tbody>
 												<c:forEach items="#{historicoClienteMB.listaDeBoletos}" var="boleto">
-													<c:forEach items="#{boleto.venda.listaItens}" var="item">
+													<c:forEach items="#{boleto.venda.itens}" var="item">
 														<tr>
 															<td><h:outputText value="#{item.livro.titulo}" /></td>
 															<td><h:outputText value="#{item.quantidade}" /></td>
@@ -95,7 +95,7 @@
 											</thead>
 											<tbody>
 												<c:forEach items="#{historicoClienteMB.listaDeBoletosConfirmados}" var="boleto">
-													<c:forEach items="#{boleto.venda.listaItens}" var="item">
+													<c:forEach items="#{boleto.venda.itens}" var="item">
 														<tr>
 															<td><h:outputText value="#{item.livro.titulo}" /></td>
 															<td><h:outputText value="#{item.quantidade}" /></td>
@@ -130,7 +130,7 @@
 											</thead>
 											<tbody>
 												<c:forEach items="#{historicoClienteMB.listaDeBoletosEmAndamento}" var="boleto">
-													<c:forEach items="#{boleto.venda.listaItens}" var="item">
+													<c:forEach items="#{boleto.venda.itens}" var="item">
 														<tr>
 															<td><h:outputText value="#{item.livro.titulo}" /></td>
 															<td><h:outputText value="#{item.quantidade}" /></td>
@@ -165,7 +165,7 @@
 											</thead>
 											<tbody>
 												<c:forEach items="#{historicoClienteMB.listaDeBoletosCancelados}" var="boleto">
-													 <c:forEach items="#{boleto.venda.listaItens}" var="item">
+													 <c:forEach items="#{boleto.venda.itens}" var="item">
 														<tr>
 															<td><h:outputText value="#{item.livro.titulo}" /></td>
 															<td><h:outputText value="#{item.quantidade}" /></td>

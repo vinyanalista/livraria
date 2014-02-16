@@ -25,14 +25,14 @@ public class Fornecedor implements Serializable {
 	@Column(length = 50)
 	private String email;
 
-	@OneToOne(cascade = { CascadeType.ALL })
-	@JoinColumn(name = "endereco_id", nullable = false)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@JoinColumn(nullable = false)
 	private Endereco endereco;
 
 	@Column(length = 50, nullable = false)
 	private String nome;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fornecedor", cascade = { CascadeType.REMOVE })
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "fornecedor")
 	private List<Compra> compras;
 	
 	public Fornecedor() {

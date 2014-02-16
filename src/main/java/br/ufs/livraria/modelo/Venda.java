@@ -9,10 +9,10 @@ import javax.persistence.*;
 public class Venda extends Movimentacao implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@OneToOne(mappedBy = "venda")
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "venda", orphanRemoval = true)
 	private Boleto boleto;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(nullable = false)
 	private Cliente cliente;
 

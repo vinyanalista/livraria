@@ -15,7 +15,7 @@ public class Boleto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
 	
-	@OneToOne(cascade = CascadeType.REMOVE)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(nullable = false)
 	private Venda venda;
 	

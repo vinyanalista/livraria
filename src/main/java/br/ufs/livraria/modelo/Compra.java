@@ -9,11 +9,11 @@ import javax.persistence.*;
 public class Compra extends Movimentacao implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(nullable = false)
 	private Fornecedor fornecedor;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(nullable = false)
 	private Funcionario funcionario;
 	

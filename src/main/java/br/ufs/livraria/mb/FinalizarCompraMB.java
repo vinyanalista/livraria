@@ -92,8 +92,13 @@ public class FinalizarCompraMB implements Serializable {
 			venda.setCliente(getCliente());
 			vendaDao.inserir(venda);
 			for (ItemLivro item : carrinhoMB.getItens()) {
+				Livro livro = item.getLivro();
+				Integer estoqueAntigo = livro.getEstoque();
+				Integer exemplaresDaVenda = item.getQuantidade();
+				livro.setEstoque(estoqueAntigo - exemplaresDaVenda);
+				livroDao.atualizar(livro);
 				item.setMovimentacao(venda);
-				venda.getListaItens().add(item);
+				venda.getItens().add(item);
 				itemLivroDao.inserir(item);
 			}
 			vendaDao.atualizar(venda);

@@ -23,7 +23,7 @@ public class Funcionario extends Usuario implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dataContratacao;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "funcionario", cascade = { CascadeType.REMOVE })
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "funcionario")
 	private List<Compra> compras;
 	
 	public Funcionario() {
