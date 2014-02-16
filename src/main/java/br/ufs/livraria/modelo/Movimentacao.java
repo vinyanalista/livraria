@@ -39,6 +39,15 @@ public abstract class Movimentacao implements Serializable {
 		return listaItens;
 	}
 	
+	@Transient
+	public Float getValorTotal() {
+		float valorTotal = 0;
+		for (ItemLivro item : listaItens) {
+			valorTotal += (item.getPrecoEfetivo() * item.getQuantidade());
+		}
+		return valorTotal;
+	}
+	
 	public void setId(Integer id) {
 		this.id = id;
 	}
