@@ -32,6 +32,14 @@
 			</div>
 		 </div>
 		<div class="control-group">
+		<label class="control-label" for="email">CPF<sup>*</sup></label>
+		<div class="controls">
+			  <input jsf:id="cpf" name="cpf" jsf:value="#{clienteMB.cliente.cpf}"
+										type="text" placeholder="CPF"
+										class="form-control required" />
+		</div>
+		</div>
+		<div class="control-group">
 		<label class="control-label" for="email">Email<sup>*</sup></label>
 		<div class="controls">
 			  <input jsf:id="email" name="email" jsf:value="#{clienteMB.cliente.email}"
@@ -142,7 +150,7 @@
 		<div class="form-actions no-margin-bottom">
 			<a jsf:id="cancelar" class="btn btn-default" jsf:action="index.jsf" jsf:immediate="true">Cancelar</a>
 			<button jsf:id="inserir" class="btn btn-primary" jsf:action="#{clienteMB.inserir()}" jsf:rendered="#{clienteMB.cadastro}">Salvar</button>
-			<button jsf:id="atualizar" class="btn btn-primary" jsf:action="#{clienteMB.atualizar()}" jsf:rendered="#{!fornecedorMB.cadastro}">Salvar</button>
+			<button jsf:id="atualizar" class="btn btn-primary" jsf:action="#{clienteMB.atualizar()}" jsf:rendered="#{!clienteMB.cadastro}">Salvar</button>
 		</div>		
 	</form>
 </div>
