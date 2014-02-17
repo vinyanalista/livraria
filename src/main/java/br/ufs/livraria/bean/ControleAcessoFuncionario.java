@@ -11,7 +11,7 @@ import br.ufs.livraria.modelo.Funcionario;
 public class ControleAcessoFuncionario {
 	public boolean possuiPermissao(Funcionario funcionario, String uri) {
 		if (uri.startsWith("/livraria/funcionario/funcionario/")) {
-			return funcionario.getPermissao() == PermissaoFuncionario.ADMINISTRADOR.getValor();
+			return funcionario != null && funcionario.getPermissao() == PermissaoFuncionario.ADMINISTRADOR.getValor();
 		}
 		return true;
 	}
