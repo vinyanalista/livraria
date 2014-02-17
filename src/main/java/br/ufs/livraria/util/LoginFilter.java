@@ -1,6 +1,8 @@
 package br.ufs.livraria.util;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.util.Enumeration;
 
 import javax.inject.Inject;
 import javax.servlet.Filter;
@@ -40,7 +42,20 @@ public class LoginFilter implements Filter {
 			StringBuilder uriLogin = new StringBuilder(httpRequest.getContextPath());
 			uriLogin.append("/funcionario/login.jsf?faces-redirect=true");
 			uriLogin.append("&urlRetorno=");
-			uriLogin.append(httpResponse.encodeURL(httpRequest.getRequestURI().substring(9)));
+			StringBuilder uriRetorno = new StringBuilder(httpRequest.getRequestURI().substring(9));
+			uriRetorno.append("?faces-redirect=true");
+			
+			Enumeration<String> parameterNames = httpRequest.getParameterNames();
+			if (parameterNames.hasMoreElements()) {
+				while (parameterNames.hasMoreElements()) {
+					String parameter = parameterNames.nextElement();
+					uriRetorno.append("&");
+					uriRetorno.append(parameter);
+					uriRetorno.append("=");
+					uriRetorno.append(httpRequest.getParameter(parameter));
+				}
+			}
+			uriLogin.append(URLEncoder.encode(uriRetorno.toString(), "UTF-8"));
 			httpResponse.sendRedirect(httpResponse.encodeRedirectURL(uriLogin.toString()));
 		}
 		chain.doFilter(httpRequest, response);
