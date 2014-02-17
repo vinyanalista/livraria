@@ -39,7 +39,12 @@ public class LoginFilter implements Filter {
 			uriLogin.append("/funcionario/login.jsf?faces-redirect=true");
 			
 			uriLogin.append("&urlRetorno=");
-			StringBuilder uriRetorno = new StringBuilder(httpRequest.getRequestURI().substring(9));
+			StringBuilder uriRetorno = new StringBuilder();
+			if (httpRequest.getRequestURI().substring(9).endsWith(".jsf")) {
+				uriRetorno.append(httpRequest.getRequestURI().substring(9));
+			} else {
+				uriRetorno.append("index.jsf");
+			}
 			uriRetorno.append("?faces-redirect=true");
 			
 			Enumeration<String> parameterNames = httpRequest.getParameterNames();
