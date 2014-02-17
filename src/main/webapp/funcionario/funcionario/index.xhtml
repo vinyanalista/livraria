@@ -42,7 +42,8 @@
 											<td>
 												<div class="actions">
 													<a class="fa fa-pencil" href="cadastro.jsf?id=#{Funcionario.id}" title="Editar" data-toggle="tooltip"></a>
-													<a class="glyphicon glyphicon-remove" jsf:action="#{funcionarioMB.excluir(Funcionario)}" title="Excluir" data-toggle="tooltip"></a>
+													<a class="glyphicon glyphicon-remove" jsf:action="#{funcionarioMB.excluir(Funcionario)}" title="Excluir" data-toggle="tooltip"
+													   jsf:rendered="#{loginInfo.usuarioLogado.permissao eq 0}"></a>
 												</div>
 											</td>
 										</tr>

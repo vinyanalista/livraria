@@ -1,17 +1,24 @@
 package br.ufs.livraria.mb;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
+import br.ufs.livraria.bean.LoginInfo;
 import br.ufs.livraria.dao.FuncionarioDAO;
 import br.ufs.livraria.enumeration.MensagemTipo;
+import br.ufs.livraria.enumeration.PermissaoFuncionario;
 import br.ufs.livraria.modelo.Funcionario;
 
 @Named
@@ -28,15 +35,31 @@ public class FuncionarioMB implements Serializable {
 
 	@Inject
 	private MensagensMB mensagensMb;
-
+	
+	@Inject
+	private LoginInfo loginInfo;
+	
 	private String senha1;
 	private String senha2;
 
-	public FuncionarioMB() {
+	public FuncionarioMB() throws IOException {
 		funcionario = new Funcionario();
 		id = null;
 	}
 
+	@PostConstruct
+	public void init() {
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		if (request.getRequestURI().endsWith("cadastro.jsf") && request.getParameter("id") == null) {
+			mensagensMb.adicionarMensagem(MensagemTipo.ADVERTENCIA, "Você não possui permissão para visualizar este registro");
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf?faces-redirect=true");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	/* Getters e setters */
 
 	public Funcionario getFuncionario() {
@@ -47,15 +70,25 @@ public class FuncionarioMB implements Serializable {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Integer id) throws IOException {
 		this.id = id;
 		if (id != null) {
-			funcionario = funcionarioDao.buscar(id);
+			Funcionario funcionarioLogado = (Funcionario) loginInfo.getUsuarioLogado();
+			if (funcionarioLogado.getPermissao() == PermissaoFuncionario.ADMINISTRADOR.getValor() || id.equals(funcionarioLogado.getId())) {
+				funcionario = funcionarioDao.buscar(id);
+			} else {
+				mensagensMb.adicionarMensagem(MensagemTipo.ADVERTENCIA, "Você não possui permissão para visualizar este registro");
+				FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf?faces-redirect=true");
+			}
 		}
 	}
 
 	public List<Funcionario> getListaDeFuncionarios() {
-		return funcionarioDao.listar();
+		Funcionario funcionarioLogado = (Funcionario) loginInfo.getUsuarioLogado();
+		if (funcionarioLogado.getPermissao() == PermissaoFuncionario.ADMINISTRADOR.getValor()) {
+			return funcionarioDao.listar();
+		}
+		return Arrays.asList(funcionarioDao.buscar(funcionarioLogado.getId()));
 	}
 
 	/* Ações */
