@@ -15,7 +15,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.ufs.livraria.bean.ControleAcessoFuncionario;
 import br.ufs.livraria.bean.LoginInfo;
 import br.ufs.livraria.modelo.Funcionario;
 
@@ -27,9 +26,6 @@ public class LoginFilter implements Filter {
 	@Inject
 	private LoginInfo loginInfo;
 	
-	@Inject
-	private ControleAcessoFuncionario controleAcessoFuncionario;
-	
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 	}
@@ -37,10 +33,11 @@ public class LoginFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
-		if (!isLoginUri(httpRequest.getRequestURI()) && (!loginInfo.isLoggedIn() || !controleAcessoFuncionario.possuiPermissao((Funcionario) loginInfo.getUsuarioLogado(), httpRequest.getRequestURI()))) {
+		if (!isLoginUri(httpRequest.getRequestURI()) && (!loginInfo.isLoggedIn() || !(loginInfo.getUsuarioLogado() instanceof Funcionario))) {
 			HttpServletResponse httpResponse = (HttpServletResponse) response;
 			StringBuilder uriLogin = new StringBuilder(httpRequest.getContextPath());
 			uriLogin.append("/funcionario/login.jsf?faces-redirect=true");
+			
 			uriLogin.append("&urlRetorno=");
 			StringBuilder uriRetorno = new StringBuilder(httpRequest.getRequestURI().substring(9));
 			uriRetorno.append("?faces-redirect=true");
@@ -55,6 +52,7 @@ public class LoginFilter implements Filter {
 					uriRetorno.append(httpRequest.getParameter(parameter));
 				}
 			}
+			
 			uriLogin.append(URLEncoder.encode(uriRetorno.toString(), "UTF-8"));
 			httpResponse.sendRedirect(httpResponse.encodeRedirectURL(uriLogin.toString()));
 		}
