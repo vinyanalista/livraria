@@ -36,3 +36,33 @@ jQuery.validator.addClassRules({
     maxlength: 5
   }
 });
+
+$(document).ready(function(){
+	$('a[data-original-title]').tooltip();
+});
+
+function formatarMoeda(valor) {
+	// http://battisti.wordpress.com/2007/03/08/arredondar-formatando-e-desformatando-valores-em-javascript/
+	x = 0;
+
+	if (valor < 0) {
+		valor = Math.abs(valor);
+		x = 1;
+	}
+	if (isNaN(valor))
+		valor = "0";
+	cents = Math.floor((valor * 100 + 0.5) % 100);
+
+	valor = Math.floor((valor * 100 + 0.5) / 100).toString();
+
+	if (cents < 10)
+		cents = "0" + cents;
+	for (var i = 0; i < Math.floor((valor.length - (1 + i)) / 3); i++)
+		valor = valor.substring(0, valor.length - (4 * i + 3)) + '.'
+				+ valor.substring(valor.length - (4 * i + 3));
+	ret = valor + ',' + cents;
+	if (x == 1)
+		ret = ' - ' + ret;
+	return 'R$ ' + ret;
+
+}

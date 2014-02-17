@@ -1,3 +1,15 @@
+#top .navbar {
+  border-top: none;
+}
+
+.topnav .fa.fa-usd {
+  margin-right: 5px;
+}
+
+h3 i {
+  margin-right: 5px;
+}
+
 .actions {
 	display: table;
 	margin: auto;
@@ -12,10 +24,6 @@
 
 #mensagens {
 	margin-top: 10px;
-}
-
-.topnav .fa.fa-usd {
-	margin-right: 5px;
 }
 
 /* Informações sobre o usuário logado */

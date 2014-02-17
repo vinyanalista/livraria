@@ -5,6 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <f:metadata>
 	<f:viewParam name="id" value="#{compraMB.id}" />
@@ -69,10 +70,15 @@
 													<td><h:outputText value="#{livro.autor}" /></td>
 													<td><h:outputText value="#{livro.edicao}&ordf;" /></td>
 													<td>
-														<h:inputText value="#{compraMB.itemLivroMap[livro.id].quantidade}"/>
+														<h:inputText value="#{compraMB.itemLivroMap[livro.id].quantidade}" 
+															p:placeholder="Quantidade" class="form-control"/>
 													</td>
 													<td>
-														<h:inputText value="#{compraMB.itemLivroMap[livro.id].preco}"/>
+														<input 	jsf:id="preco" name="preco"
+															jsf:value="#{compraMB.itemLivroMap[livro.id].precoEfetivo}" type="text" 
+															placeholder="Preço" class="form-control moeda">
+															<f:convertNumber pattern="#,##0.00" minFractionDigits="2" />
+														</input>
 													</td>
 												</tr>
 											</ui:repeat>
@@ -105,7 +111,7 @@
                                                         <h:outputText value="#{item.quantidade}"/>
                                                     </td>
                                                     <td>
-                                                        <h:outputText value="#{item.preco}">
+                                                        <h:outputText value="#{item.precoEfetivo}">
                                                             <f:convertNumber type="currency" maxFractionDigits="2" minFractionDigits="2" currencyCode="BRL" />
                                                         </h:outputText>
                                                     </td>

@@ -50,6 +50,11 @@ public class ItemLivro implements Serializable {
 		return movimentacao;
 	}
 	
+	@Transient
+	public Float getValorTotal() {
+		return precoEfetivo * quantidade;
+	}
+	
 	public void setId(Integer id) {
 		this.id = id;
 	}

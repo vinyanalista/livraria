@@ -77,7 +77,7 @@ public class CarrinhoMB implements Serializable {
 	public Float getValorTotal() {
 		float valorTotal = 0;
 		for (ItemLivro item : itens) {
-			valorTotal += (item.getPrecoEfetivo() * item.getQuantidade());
+			valorTotal += item.getValorTotal();
 		}
 		return valorTotal;
 	}

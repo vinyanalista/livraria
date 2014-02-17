@@ -87,10 +87,12 @@ public class CompraMB implements Serializable {
 			compra.setData(new Date());
 			compraDAO.inserir(compra);
 			for (ItemLivro itemLivro : itemLivroMap.values()) {
-				itemLivroDAO.inserir(itemLivro);
-				Livro livro = itemLivro.getLivro();
-				livro.setEstoque(livro.getEstoque() + itemLivro.getQuantidade());
-				livroDAO.atualizar(livro);
+				if (livroCheckMap.get(itemLivro.getLivro().getId())) {
+					itemLivroDAO.inserir(itemLivro);
+					Livro livro = itemLivro.getLivro();
+					livro.setEstoque(livro.getEstoque() + itemLivro.getQuantidade());
+					livroDAO.atualizar(livro);
+				}
 			}
 			mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO, "A compra foi cadastrada com sucesso!");
 			return "index.jsf?faces-redirect=true";

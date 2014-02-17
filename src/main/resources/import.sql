@@ -53,7 +53,7 @@ INSERT INTO itemlivro (id, preco_efetivo, quantidade, movimentacao_id, livro_id)
 INSERT INTO itemlivro (id, preco_efetivo, quantidade, movimentacao_id, livro_id) VALUES (7, 71.70, 3, 4, 7);
 INSERT INTO itemlivro (id, preco_efetivo, quantidade, movimentacao_id, livro_id) VALUES (8, 47.80, 2, 4, 8);
 INSERT INTO itemlivro (id, preco_efetivo, quantidade, movimentacao_id, livro_id) VALUES (9, 25, 1, 5, 9);
-INSERT INTO itemlivro (id, preco_efetivo, quantidade, movimentacao_id, livro_id) VALUES (10, 406.50, 15, 5, 10);
+INSERT INTO itemlivro (id, preco_efetivo, quantidade, movimentacao_id, livro_id) VALUES (10, 27.1, 15, 5, 10);
 ALTER SEQUENCE itemlivro_id_seq RESTART WITH 11;
 
 -- Vendas
