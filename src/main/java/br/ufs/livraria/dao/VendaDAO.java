@@ -1,8 +1,14 @@
 package br.ufs.livraria.dao;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map.Entry;
 
 import javax.ejb.Stateless;
 
@@ -97,6 +103,33 @@ public class VendaDAO extends DAO<Venda> implements Serializable {
 				+ " WHERE boleto.statusPagamento = :pendente", Venda.class)
 				.setParameter("pendente", StatusPagamento.EM_ANDAMENTO)
 				.getResultList();
+	}
+	
+	public HashMap<String, String> vendasDaSemana() {
+		final int DIAS_DA_SEMANA = 7;
+		
+		String sql = "SELECT COALESCE(SUM(preco_efetivo * quantidade), 0) FROM itemlivro";
+		sql += " INNER JOIN movimentacao ON movimentacao.id = itemlivro.movimentacao_id";
+		sql += " WHERE tipo = 2 AND data = ";
+		
+		DateFormat formatoBD = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat formatoUsuario = new SimpleDateFormat("dd/MM");
+		
+		LinkedHashMap<String, String> vendas = new LinkedHashMap<String, String>(DIAS_DA_SEMANA);
+		
+		Calendar calendario = Calendar.getInstance();
+		calendario.add(Calendar.DATE, -DIAS_DA_SEMANA);
+		
+		for (int dia = 0; dia < DIAS_DA_SEMANA; dia++) {
+			calendario.add(Calendar.DATE, 1);
+			String dataFormatoBD = formatoBD.format(calendario.getTime()).toString();
+			String query = sql + "'" + dataFormatoBD + "';";
+			Double totalVendido = (Double) entityManager.createNativeQuery(query).getSingleResult();
+			String dataFormatoUsuario = formatoUsuario.format(calendario.getTime()).toString();
+			vendas.put(dataFormatoUsuario, totalVendido.toString());
+		}
+		
+		return vendas;
 	}
 
 }

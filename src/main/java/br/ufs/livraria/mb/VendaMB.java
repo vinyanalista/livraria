@@ -2,7 +2,10 @@ package br.ufs.livraria.mb;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
@@ -56,6 +59,11 @@ public class VendaMB implements Serializable {
 	
 	public Venda getVenda() {
 		return venda;
+	}
+	
+	public Set<Entry<String, String>> getVendasDaSemana() {
+		HashMap<String, String> vendas =  vendaDao.vendasDaSemana();
+		return vendas.entrySet();
 	}
 
 	public void setFiltrarPendentes(Boolean filtrarPendentes) {
