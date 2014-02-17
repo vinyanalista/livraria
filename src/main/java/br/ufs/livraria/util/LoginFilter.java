@@ -16,10 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.ufs.livraria.bean.LoginInfo;
+import br.ufs.livraria.modelo.Cliente;
 import br.ufs.livraria.modelo.Funcionario;
+import br.ufs.livraria.modelo.Usuario;
 
 @WebFilter(urlPatterns = {
-		"/funcionario/*",
+		"/*",
 })
 public class LoginFilter implements Filter {
 
@@ -33,11 +35,22 @@ public class LoginFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
-		if (!isLoginUri(httpRequest.getRequestURI()) && (!loginInfo.isLoggedIn() || !(loginInfo.getUsuarioLogado() instanceof Funcionario))) {
+		Usuario usuarioLogado = loginInfo.getUsuarioLogado();
+		boolean isResourceUrl = httpRequest.getRequestURI().startsWith(httpRequest.getContextPath() + "/javax.faces.resource");
+		boolean isUriFuncionario = httpRequest.getRequestURI().startsWith(httpRequest.getContextPath() + "/funcionario");
+		if (!isResourceUrl && ((isUriFuncionario && usuarioLogado instanceof Cliente) || (!isUriFuncionario && usuarioLogado instanceof Funcionario))) {
+			loginInfo.setUsuarioLogado(null);
+			httpRequest.getSession().invalidate();
+			if (!isUriFuncionario) {
+				chain.doFilter(httpRequest, response);
+				return;
+			}
+		}
+		if (!isLoginUri(httpRequest.getRequestURI()) && !isResourceUrl && isUriFuncionario
+				&& !(loginInfo.isLoggedIn() || usuarioLogado instanceof Funcionario)) {
 			HttpServletResponse httpResponse = (HttpServletResponse) response;
 			StringBuilder uriLogin = new StringBuilder(httpRequest.getContextPath());
 			uriLogin.append("/funcionario/login.jsf?faces-redirect=true");
-			
 			uriLogin.append("&urlRetorno=");
 			StringBuilder uriRetorno = new StringBuilder();
 			if (httpRequest.getRequestURI().substring(9).endsWith(".jsf")) {
@@ -60,8 +73,9 @@ public class LoginFilter implements Filter {
 			
 			uriLogin.append(URLEncoder.encode(uriRetorno.toString(), "UTF-8"));
 			httpResponse.sendRedirect(httpResponse.encodeRedirectURL(uriLogin.toString()));
+		} else {
+			chain.doFilter(httpRequest, response);
 		}
-		chain.doFilter(httpRequest, response);
 	}
 
 	@Override
@@ -69,6 +83,6 @@ public class LoginFilter implements Filter {
 	}
 	
 	private boolean isLoginUri(String uri) {
-		return uri.equals("/livraria/funcionario/login.jsf");
+		return uri.contains("login.jsf");
 	}
 }
