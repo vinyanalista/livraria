@@ -96,6 +96,15 @@
 							class="fa fa-angle-right"></i>&nbsp;Pendentes
 					</a></li>
 				</ul></li>
+			<li class="" jsf:rendered="#{controleAcessoFuncionario.possuiPermissao(loginInfo.usuarioLogado, request.contextPath.concat('/funcionario/cliente/'))}"><a href="javascript:;"> <i class="fa fa-user"></i>
+					<span class="link-title">Cliente</span> <span class="fa arrow"></span>
+			</a>
+				<ul>
+					<li class=""><a
+						href="#{request.contextPath}/funcionario/cliente/index.jsf"> <i
+							class="fa fa-angle-right"></i>&nbsp;Consultar
+					</a></li>
+				</ul></li>
 			<!-- <li class="">
             <a href="javascript:;">
               <i class="fa fa-tasks"></i>&nbsp;Components

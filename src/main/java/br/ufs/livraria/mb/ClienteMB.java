@@ -14,6 +14,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import br.ufs.livraria.dao.ClienteDAO;
 import br.ufs.livraria.enumeration.MensagemTipo;
 import br.ufs.livraria.modelo.Cliente;
+import br.ufs.livraria.modelo.Mensagem;
 
 @Named
 @RequestScoped
@@ -62,6 +63,23 @@ public class ClienteMB implements Serializable {
 					"Ocorreu um erro durante o processamento da solicitação.");
 			return "cadastro.jsf";
 		}
+	}
+	
+	public String excluir(Cliente cliente){
+		Mensagem mensagem;
+		String proximaPagina;
+		try {
+			ClienteDao.remover(cliente);
+			mensagem = new Mensagem(MensagemTipo.SUCCESSO,
+					"O cliente foi excluído com sucesso!");
+			proximaPagina = "index.jsf?faces-redirect=true";
+		} catch (Exception excecao) {
+			mensagem = new Mensagem(MensagemTipo.ERRO,
+					"Ocorreu um erro ao tentar excluir o cliente.");
+			proximaPagina = "index.jsf";
+		}
+		mensagensMb.adicionarMensagem(mensagem);
+		return proximaPagina;
 	}
 
 	public String inserir() {
