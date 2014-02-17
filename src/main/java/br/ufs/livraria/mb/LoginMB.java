@@ -54,7 +54,7 @@ public class LoginMB implements Serializable {
 				addMessage("Usuário ou senha inválidos", FacesMessage.SEVERITY_ERROR);
 			} else {
 				addMessage("Ocorreu um erro durante o processamento da solicitação.", FacesMessage.SEVERITY_ERROR);
-				return "index.jsf";
+				return "index.jsf?faces-redirect=true";
 			}
 		}
 		return null;
