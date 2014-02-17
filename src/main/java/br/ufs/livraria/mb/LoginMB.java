@@ -40,6 +40,9 @@ public class LoginMB implements Serializable {
 			if (usuarioDAO.verificarCredenciais(email, senha)) {
 				addMessage("Login efetuado com sucesso", FacesMessage.SEVERITY_INFO);
 				Usuario usuario = usuarioDAO.getByEmail(email);
+				if (loginInfo.isLoggedIn()) {
+					logout();
+				}
 				loginInfo.setUsuarioLogado(usuario);
 				if (urlRetorno == null) {
 					return "index.jsf?faces-redirect=true";
@@ -54,7 +57,7 @@ public class LoginMB implements Serializable {
 				addMessage("Usuário ou senha inválidos", FacesMessage.SEVERITY_ERROR);
 			} else {
 				addMessage("Ocorreu um erro durante o processamento da solicitação.", FacesMessage.SEVERITY_ERROR);
-				return "index.jsf";
+				return "index.jsf?faces-redirect=true";
 			}
 		}
 		return null;

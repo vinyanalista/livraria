@@ -202,13 +202,18 @@
 
 
 
-							<div class="form-group">
+							<h:panelGroup styleClass="form-group" rendered="#{loginInfo.usuarioLogado.permissao eq 0}">
 								<label class="control-label col-lg-4"> Permissão </label>
 								<h:selectOneRadio value="#{funcionarioMB.funcionario.permissao}" required="true">
 									<f:selectItem itemLabel="Funcionário" itemValue="1" />
 									<f:selectItem itemLabel="Administrador" itemValue="0" />
 								</h:selectOneRadio>
-							</div>
+							</h:panelGroup>
+							
+							<h:panelGroup styleClass="form-group" rendered="#{loginInfo.usuarioLogado.permissao eq 1}">
+                                <label class="control-label col-lg-4"> Permissão </label>
+                                <h:outputText value="Funcionário" />
+                            </h:panelGroup>
 
 							<div class="form-group">
 								<label class="control-label col-lg-4" for="senha1">Senha</label>

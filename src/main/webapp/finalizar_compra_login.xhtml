@@ -48,7 +48,7 @@
 							<div class="controls">
 								<button type="submit" class="btn" jsf:action="#{loginMB.login()}">
 									Login
-									<f:setPropertyActionListener target="#{loginMB.urlRetorno}" value="finalizar_compra.jsf" />
+									<f:setPropertyActionListener target="#{loginMB.urlRetorno}" value="finalizar_compra.jsf?faces-redirect=true" />
 								</button>
 							</div>
 						</div>
