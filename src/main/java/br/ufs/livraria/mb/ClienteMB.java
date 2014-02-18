@@ -12,6 +12,7 @@ import javax.inject.Named;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import br.ufs.livraria.dao.ClienteDAO;
+import br.ufs.livraria.enumeration.Estado;
 import br.ufs.livraria.enumeration.MensagemTipo;
 import br.ufs.livraria.modelo.Cliente;
 import br.ufs.livraria.modelo.Mensagem;
@@ -21,10 +22,10 @@ import br.ufs.livraria.modelo.Mensagem;
 public class ClienteMB implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Cliente Cliente;
+	private Cliente cliente;
 
 	@EJB
-	private ClienteDAO ClienteDao;
+	private ClienteDAO clienteDao;
 
 	private Integer id;
 
@@ -33,14 +34,17 @@ public class ClienteMB implements Serializable {
 
 	private String senha1;
 	private String senha2;
+	
+	private boolean compra = false;
+
 
 	public ClienteMB() {
-		Cliente = new Cliente();
+		cliente = new Cliente();
 		id = null;
 	}
 
 	public List<Cliente> getListaDeClientes() {
-		return ClienteDao.listar();
+		return clienteDao.listar();
 	}
 
 	/* Ações */
@@ -48,8 +52,8 @@ public class ClienteMB implements Serializable {
 	public String atualizar() {
 		try {
 			if (senhasIguais()) {
-				Cliente.setSenha(DigestUtils.sha1Hex(senha1));
-				ClienteDao.atualizar(Cliente);
+				cliente.setSenha(DigestUtils.sha1Hex(senha1));
+				clienteDao.atualizar(cliente);
 				mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO,
 						"O Cliente foi atualizado com sucesso!");
 				return "index.jsf?faces-redirect=true";
@@ -69,7 +73,7 @@ public class ClienteMB implements Serializable {
 		Mensagem mensagem;
 		String proximaPagina;
 		try {
-			ClienteDao.remover(cliente);
+			clienteDao.remover(cliente);
 			mensagem = new Mensagem(MensagemTipo.SUCCESSO,
 					"O cliente foi excluído com sucesso!");
 			proximaPagina = "index.jsf?faces-redirect=true";
@@ -82,15 +86,23 @@ public class ClienteMB implements Serializable {
 		return proximaPagina;
 	}
 
-	public String inserir() {
+	public String inserir(boolean funcionario) {
 		try {
 			if (senhasIguais()) {
-				Cliente.setSenha(DigestUtils.sha1Hex(senha1));
-				Cliente.setDataCadastro(new Date());
-				ClienteDao.inserir(Cliente);
+				cliente.setSenha(DigestUtils.sha1Hex(senha1));
+				cliente.setDataCadastro(new Date());
+				clienteDao.inserir(cliente);
 				mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO,
 						"O Cliente foi cadastrado com sucesso!");
-				return "login.jsf?faces-redirect=true";
+				if(funcionario){
+					return "index.jsf?faces-redirect=true";
+				}else{
+					if(compra){
+						return "finalizar_compra_login.jsf?faces-redirect=true&compra=true";
+					}else{
+						return "index.jsf?faces-redirect=true";
+					}
+				}
 			} else {
 				mensagensMb.adicionarMensagem(MensagemTipo.ERRO,
 						"A senha não confere");
@@ -107,7 +119,7 @@ public class ClienteMB implements Serializable {
 	/* Getters e setters */
 
 	public Cliente getCliente() {
-		return Cliente;
+		return cliente;
 	}
 
 	public Integer getId() {
@@ -117,7 +129,7 @@ public class ClienteMB implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 		if (id != null) {
-			Cliente = ClienteDao.buscar(id);
+			cliente = clienteDao.buscar(id);
 		}
 	}
 
@@ -145,4 +157,18 @@ public class ClienteMB implements Serializable {
 		this.senha2 = senha2;
 	}
 
+
+	public boolean isCompra() {
+		return compra;
+	}
+
+	public void setCompra(boolean compra) {
+		this.compra = compra;
+	}
+	
+	public Estado[] getEstados() {
+		return Estado.values();
+	}
+	
+	
 }
