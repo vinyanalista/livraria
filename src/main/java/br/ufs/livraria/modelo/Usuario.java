@@ -29,31 +29,31 @@ public abstract class Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
 	
-	@Column(length = 50)
+	@Column(length = 50, nullable = false)
 	protected String nome;
 	
-	@Column(length = 11)
+	@Column(length = 11, nullable = false)
 	@Pattern(regexp = "[0-9]*")
 	protected String cpf;
 	
 	@Column(length = 20)
 	protected String rg;
 	
-	@Column(name = "data_nascimento")
+	@Column(name = "data_nascimento", nullable = false)
 	@Temporal(TemporalType.DATE)
 	protected Date dataNascimento;
 	
 	@Column(length = 15)
 	protected String telefone;
 	
-	@Column(length = 50)
+	@Column(length = 50, nullable = false)
 	protected String email;
 
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(nullable = false)
 	protected Endereco endereco;
 
-	@Column(length = 40)
+	@Column(length = 40, nullable = false)
 	private String senha;
 
 	public Usuario() {

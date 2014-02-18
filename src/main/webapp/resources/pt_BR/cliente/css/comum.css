@@ -2,6 +2,15 @@
 	clear: both;
 }
 
+a.brand img {
+	height: 70px;
+}
+
 .navbar-search {
 	float: right !important;
+	margin-top: 20px;
+}
+
+.detalhes_livro {
+	margin-right: 5px;
 }

@@ -19,6 +19,7 @@ import br.ufs.livraria.dao.LivroDAO;
 import br.ufs.livraria.dao.VendaDAO;
 import br.ufs.livraria.enumeration.Estado;
 import br.ufs.livraria.enumeration.MensagemTipo;
+import br.ufs.livraria.enumeration.StatusPagamento;
 import br.ufs.livraria.modelo.Boleto;
 import br.ufs.livraria.modelo.Cliente;
 import br.ufs.livraria.modelo.ItemLivro;
@@ -103,10 +104,11 @@ public class FinalizarCompraMB implements Serializable {
 			}
 			vendaDao.atualizar(venda);
 			Boleto boleto = new Boleto();
+			boleto.setStatusPagamento(StatusPagamento.EM_ANDAMENTO);
 			boleto.setVenda(venda);
 			boletoDao.inserir(boleto);
 			carrinhoMB.esvaziar();
-			return "boleto.jsf?faces-redirect=true&id=" + boleto.getId(); // TODO Implementar impressão de boleto
+			return "boleto.jsf?faces-redirect=true&id=" + boleto.getId();
 		}
 	}
 	

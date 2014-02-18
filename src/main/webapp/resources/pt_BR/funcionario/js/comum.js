@@ -39,6 +39,8 @@ jQuery.validator.addClassRules({
 
 $(document).ready(function(){
 	$('a[data-original-title]').tooltip();
+
+	$(".sortableTable").tablesorter();
 });
 
 function formatarMoeda(valor) {

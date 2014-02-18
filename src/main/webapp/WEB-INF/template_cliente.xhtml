@@ -112,7 +112,7 @@
 									placeholder="Senha" jsf:value="#{loginMB.senha}" jsf:required="true"/>
 							    <h:message for="inputPassword" errorClass="alert-danger" infoClass="alert-info" />
 							</div>
-							<h:commandButton styleClass="btn btn-success" value="Login" action="#{loginMB.login}">
+							<h:commandButton styleClass="btn btn-primary" value="Login" action="#{loginMB.login}">
 							  <f:ajax event="action" execute="@form" render="@form"/>
 							</h:commandButton>
                                      <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
@@ -141,7 +141,7 @@
 			<div id="logoArea" class="navbar">
 				<div class="navbar-inner">
 					<a class="brand" href="#{request.contextPath}/index.jsf"><img
-						src="#{resource['cliente:images/logo.png']}" alt="Bootsshop" /></a>
+						src="#{resource['cliente:images/livraria.gif']}" alt="Bootsshop" /></a>
 					<form class="form-inline navbar-search" id="form_busca" method="get" action="buscar.jsf" jsf:prependId="false" jsf:acceptcharset="ISO-8859-1">
 						<input name="por" id="srchFld" class="srchTxt" type="text" value="#{buscarMB.por}" required="required" />
 						<select name="filtro" class="srchTxt">

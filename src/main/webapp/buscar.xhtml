@@ -90,7 +90,7 @@
 									</h:outputText>
 								</a></h3>
 								<br />
-								<a jsf:action="#{carrinhoMB.adicionar(livro)}" class="btn btn-large btn-primary"> Adicionar <i class=" icon-shopping-cart"></i></a>
+								<a jsf:action="#{carrinhoMB.adicionar(livro)}" class="btn btn-large btn-success"> Adicionar <i class=" icon-shopping-cart"></i></a>
 								<a href="detalhes_livro.jsf?id=#{livro.id}" class="btn btn-large"><i class="icon-zoom-in"></i></a>
 							</form>
 						</div>
@@ -124,10 +124,10 @@
 									<p><h:outputText value="#{livro.sinopseCurta}" /></p>
 									<h4 style="text-align: center">
 										<form jsf:prependId="false" jsf:acceptcharset="ISO-8859-1">
-											<a class="btn" href="detalhes_livro.jsf?id=#{livro.id}">
+											<a class="btn detalhes_livro" href="detalhes_livro.jsf?id=#{livro.id}">
 												<i class="icon-zoom-in"></i>
 											</a>
-											<a class="btn" jsf:action="#{carrinhoMB.adicionar(livro)}">Adicionar <i class="icon-shopping-cart"></i></a>
+											<a class="btn btn-success" jsf:action="#{carrinhoMB.adicionar(livro)}">Adicionar <i class="icon-shopping-cart"></i></a>
 											<a class="btn btn-primary" href="detalhes_livro.jsf?id=#{livro.id}">
 												<h:outputText value="#{livro.preco}">
 													<f:convertNumber locale="pt_BR" type="currency" />
@@ -149,6 +149,16 @@
 				
 				$('#ordenacao').change(function(){
 					$('#form_ordenacao').submit();
+				});
+				
+				$('a[href=#listView], a[href=#blockView]').click(function(){
+					if ($('#listView').hasClass('active')) {
+						$('a[href=#listView] span').removeClass('btn-primary');
+						$('a[href=#blockView] span').addClass('btn-primary');
+					} else {
+						$('a[href=#listView] span').addClass('btn-primary');
+						$('a[href=#blockView] span').removeClass('btn-primary');
+					}
 				});
 			});
 		</script>
