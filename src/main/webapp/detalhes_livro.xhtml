@@ -47,7 +47,8 @@
 									</h:outputLink>
 									<hr class="soft"/>
 									<h4>
-										<h:outputText value="Há #{livroMB.livro.estoque} unidades disponíveis" rendered="#{livroMB.livro.estoque > 0}" />
+										<h:outputText value="Há #{livroMB.livro.estoque} unidades disponíveis" rendered="#{livroMB.livro.estoque > 1}" />
+										<h:outputText value="Há 1 unidade disponível" rendered="#{livroMB.livro.estoque == 1}" />
 										<h:outputText value="Livro em falta no momento" rendered="#{livroMB.livro.estoque == 0}" />
 									</h4>
 									<form class="form-horizontal qtyFrm" jsf:prependId="false" jsf:acceptcharset="ISO-8859-1">

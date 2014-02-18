@@ -14,7 +14,7 @@ public class Fornecedor implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
 	
-	@Column(unique = true, length = 14)
+	@Column(unique = true, length = 18)
 	// @Pattern(regexp = "[0-9]*")
 	private String cnpj;
 

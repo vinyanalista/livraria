@@ -22,6 +22,10 @@ h3 i {
 	text-decoration: none;
 }
 
+.form-actions .btn {
+	margin-right: 5px;
+}
+
 #mensagens {
 	margin-top: 10px;
 }

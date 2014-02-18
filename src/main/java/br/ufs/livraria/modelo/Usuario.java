@@ -32,7 +32,7 @@ public abstract class Usuario implements Serializable {
 	@Column(length = 50, nullable = false)
 	protected String nome;
 	
-	@Column(length = 11, nullable = false)
+	@Column(length = 14, nullable = false)
 	@Pattern(regexp = "[0-9]*")
 	protected String cpf;
 	

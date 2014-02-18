@@ -28,7 +28,7 @@ public class Endereco implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Estado estado;
 	
-	@Column(length = 50)
+	@Column(length = 9)
 	private String cep;
 	
 	public Endereco() {

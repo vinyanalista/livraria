@@ -74,11 +74,14 @@
 															p:placeholder="Quantidade" class="form-control"/>
 													</td>
 													<td>
-														<input 	jsf:id="preco" name="preco"
-															jsf:value="#{compraMB.itemLivroMap[livro.id].precoEfetivo}" type="text" 
-															placeholder="Preço" class="form-control moeda">
-															<f:convertNumber pattern="#,##0.00" minFractionDigits="2" />
-														</input>
+														<div class="input-group">
+															<span class="input-group-addon">R$</span>
+															<input 	jsf:id="preco" name="preco"
+																jsf:value="#{compraMB.itemLivroMap[livro.id].precoEfetivo}" type="text" 
+																placeholder="Preço" class="form-control moeda required">
+																<f:convertNumber pattern="#,##0.00" minFractionDigits="2" />
+															</input>
+														</div>
 													</td>
 												</tr>
 											</ui:repeat>

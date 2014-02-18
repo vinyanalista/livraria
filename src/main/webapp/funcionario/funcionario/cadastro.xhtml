@@ -71,11 +71,11 @@
 
 							<div class="form-group">
 								<label class="control-label col-lg-4" for="dataNascimento">Data
-									de Nascimento</label>
+									de nascimento</label>
 								<div class="col-lg-8">
 									<input jsf:id="dataNascimento" name="dataNascimento"
 										jsf:value="#{funcionarioMB.funcionario.dataNascimento}"
-										type="text" placeholder="dd/mm/yyyy"
+										type="text" placeholder="Data de nascimento"
 										class="form-control required">
 										<f:convertDateTime pattern="dd/MM/yyyy" />
 									</input>
@@ -84,11 +84,11 @@
 							
 							<div class="form-group">
 								<label class="control-label col-lg-4" for="dataContratacao">Data
-									de Contratação</label>
+									de contratação</label>
 								<div class="col-lg-8">
 									<input jsf:id="dataContratacao" name="dataContratacao"
 										jsf:value="#{funcionarioMB.funcionario.dataContratacao}"
-										type="text" placeholder="dd/mm/yyyy"
+										type="text" placeholder="Data de contratação"
 										class="form-control required">
 										<f:convertDateTime pattern="dd/MM/yyyy" />
 									</input>
@@ -110,7 +110,7 @@
 									<div class="input-group">
 										<span class="input-group-addon">R$</span>
 										<input 	jsf:id="salario" name="salario"
-												jsf:value="#{funcionarioMB.funcionario.salario}" type="text" placeholder="Salario" class="form-control moeda required">
+												jsf:value="#{funcionarioMB.funcionario.salario}" type="text" placeholder="Salário" class="form-control moeda required">
 											<f:convertNumber pattern="#,##0.00" minFractionDigits="2" />
 										</input>
 									</div>

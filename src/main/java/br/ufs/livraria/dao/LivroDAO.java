@@ -20,7 +20,6 @@ public class LivroDAO extends DAO<Livro> implements Serializable {
 
 	public LivroDAO() {
 		super(Livro.class);
-		// TODO Auto-generated constructor stub
 	}
 
 	public int adicionarQtdEstoque(int id, int qtd){
@@ -110,11 +109,6 @@ public class LivroDAO extends DAO<Livro> implements Serializable {
 			}
 		}
 		
-		// TODO Apenas para fins de teste! Remover!
-		System.out.println("******************************************************************************************************");
-		System.out.println("LIVRO DAO\nPor: " + por + "\nFiltro: " + filtro + "\nGênero: " + genero + "\nOrdenação: " + ordenacao + "\nQuery: " + jpql.toString());
-		System.out.println("******************************************************************************************************");
-
 		TypedQuery<Livro> query = entityManager.createQuery(jpql.toString(), Livro.class);
 		
 		if (filtrar) {

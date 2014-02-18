@@ -56,7 +56,8 @@
 								<div class="col-lg-8">
 									<input jsf:id="cpf" name="cpf"
 										jsf:value="#{clienteMB.cliente.cpf}" type="text"
-										placeholder="CPF" class="form-control required" />
+										placeholder="CPF" class="form-control required"
+										data-mask="999.999.999-99" />
 								</div>
 							</div>
 
@@ -71,11 +72,11 @@
 
 							<div class="form-group">
 								<label class="control-label col-lg-4" for="dataNascimento">Data
-									de Nascimento</label>
+									de nascimento</label>
 								<div class="col-lg-8">
 									<input jsf:id="dataNascimento" name="dataNascimento"
 										jsf:value="#{clienteMB.cliente.dataNascimento}"
-										type="text" placeholder="dd/mm/yyyy"
+										type="text" placeholder="Data de nascimento" data-mask="99/99/9999"
 										class="form-control required">
 										<f:convertDateTime pattern="dd/MM/yyyy" />
 									</input>
@@ -84,11 +85,11 @@
 							
 							<div class="form-group">
 								<label class="control-label col-lg-4" for="dataCadastro">Data
-									de Cadastro</label>
+									de cadastro</label>
 								<div class="col-lg-8">
 									<input jsf:id="dataCadastro" name="dataCadastro"
 										jsf:value="#{clienteMB.cliente.dataCadastro}"
-										type="text" placeholder="dd/mm/yyyy"
+										type="text" placeholder="Data de cadastro" data-mask="99/99/9999"
 										class="form-control required">
 										<f:convertDateTime pattern="dd/MM/yyyy" />
 									</input>
@@ -159,9 +160,9 @@
 							<div class="form-group">
 								<label class="control-label col-lg-4" for="estado">Estado</label>
 								<div class="col-lg-8">
-									<input jsf:id="estado" name="estado"
-										jsf:value="#{clienteMB.cliente.endereco.estado}"
-										type="text" placeholder="Estado" class="form-control required" />
+									<h:selectOneMenu id="estado" class="form-control required" value="#{clienteMB.cliente.endereco.estado}">
+										<f:selectItems value="#{clienteMB.estados}" />
+									</h:selectOneMenu>
 								</div>
 							</div>
 
@@ -195,10 +196,6 @@
 										placeholder="Senha" class="form-control required" />
 								</div>
 							</div>
-
-
-
-
 
 							<div class="form-actions no-margin-bottom">
 								<a jsf:id="cancelar" class="btn btn-default"

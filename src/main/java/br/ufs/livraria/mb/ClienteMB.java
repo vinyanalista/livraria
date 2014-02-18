@@ -136,7 +136,7 @@ public class ClienteMB implements Serializable {
 	private boolean senhasIguais() {
 		return senha1.equals(senha2);
 	}
-
+	
 	public boolean isCadastro() {
 		return id == null;
 	}

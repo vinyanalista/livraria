@@ -22,8 +22,7 @@ public class ItemLivro implements Serializable {
 	@JoinColumn(nullable = false)
 	private Movimentacao movimentacao;
 
-	// TODO Existe um jeito de excluir os itens automaticamente ao excluir o livro? 
-	@ManyToOne(/* cascade = CascadeType.ALL, */fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(nullable = false)
 	private Livro livro;
 	

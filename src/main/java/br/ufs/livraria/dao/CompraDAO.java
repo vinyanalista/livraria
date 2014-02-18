@@ -28,16 +28,4 @@ public class CompraDAO extends DAO<Compra> implements Serializable {
 						"WHERE cliente_id = "+usuario.getId(), Compra.class).getResultList();
 	}
 	
-	//Compras com Pagamentos Aprovados
-	public List<Compra> aprovados() {
-		// TODO Revisar, a classe Pagamento foi extinta
-		/*return entityManager.createQuery(
-				"SELECT entidade "+
-		        "FROM " + Compra.class.getSimpleName()+" entidade "+
-			    "JOIN "+Pagamento.class.getSimpleName()+" pagamento"+
-				"ON entidade.pagamento_id = pagamento.id"+
-				"WHERE pagamento.aprovado = 1", Compra.class).getResultList();*/
-		return null;
-	}
-	
 }

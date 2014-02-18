@@ -36,7 +36,7 @@
 		<div class="controls">
 			  <input jsf:id="cpf" name="cpf" jsf:value="#{clienteMB.cliente.cpf}"
 										type="text" placeholder="CPF"
-										class="form-control required" />
+										class="form-control required" data-mask="999.999.999-99" />
 		</div>
 		</div>
 		<div class="control-group">
@@ -132,7 +132,7 @@
 			  			  <input jsf:id="cep" name="cep"
 										jsf:value="#{clienteMB.cliente.endereco.cep}" type="text"
 										placeholder="CEP"
-										 class="form-control"  data-mask="99999-999"/> 
+										 class="form-control" data-mask="99999-999"/> 
 			</div>
 		</div>
 		
@@ -155,7 +155,21 @@
 	</form>
 </div>
 </div>
-
+<h:outputScript library="funcionario" name="lib/jquery.min.js" />
+<h:outputScript library="funcionario" name="lib/bootstrap/js/bootstrap.min.js" />
+<h:outputScript library="funcionario" name="lib/jqueryui/1.10.4/jquery-ui.min.js" />
+<h:outputScript library="funcionario" name="lib/validationengine/js/jquery.validationEngine.js" />
+<h:outputScript library="funcionario" name="lib/validationengine/js/languages/jquery.validationEngine-pt_BR.js" />
+<h:outputScript library="funcionario" name="lib/jquery-validation-1.11.1/dist/jquery.validate.min.js" />
+<h:outputScript library="funcionario" name="lib/jquery-validation-1.11.1/localization/messages_pt_BR.js" />
+<h:outputScript library="funcionario" name="lib/datatables/jquery.dataTables.js" />
+<h:outputScript library="funcionario" name="lib/datatables/DT_bootstrap.js" />
+<h:outputScript library="funcionario" name="lib/tablesorter/js/jquery.tablesorter.min.js" />
+<h:outputScript library="funcionario" name="lib/jasny/js/jasny-bootstrap.min.js" />
+<h:outputScript library="funcionario" name="lib/jquery.maskMoney.min.js" />
+<h:outputScript library="funcionario" name="js/main.js" />
+<h:outputScript library="javax.faces" name="jsf.js" target="head" />
+<h:outputScript library="funcionario" name="js/comum.js" />
 <h:outputStylesheet library="funcionario" name="css/funcionario.css" />
 <h:outputScript library="funcionario" name="js/funcionario.js" />
 </ui:define>
