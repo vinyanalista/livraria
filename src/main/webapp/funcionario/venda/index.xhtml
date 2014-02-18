@@ -32,13 +32,29 @@
 					</header>
 					<div id="collapse4" class="body">
 						<h:form prependId="false" acceptcharset="ISO-8859-1">
-							<table id="dataTable" class="table table-bordered table-condensed table-hover table-striped">
+							<table id="dataTable" class="table table-bordered table-condensed table-hover table-striped sortableTable">
 								<thead>
 									<tr>
-										<th>Data</th>
-										<th>Cliente</th>
-										<th>Valor</th>
-										<th>Situação</th>
+										<th>Data
+											<i class="fa fa-sort"></i>
+				                            <i class="fa fa-sort-asc"></i>
+				                            <i class="fa fa-sort-desc"></i>
+										</th>
+										<th>Cliente
+											<i class="fa fa-sort"></i>
+				                            <i class="fa fa-sort-asc"></i>
+				                            <i class="fa fa-sort-desc"></i>
+										</th>
+										<th>Valor
+											<i class="fa fa-sort"></i>
+				                            <i class="fa fa-sort-asc"></i>
+				                            <i class="fa fa-sort-desc"></i>
+										</th>
+										<th>Situação
+											<i class="fa fa-sort"></i>
+				                            <i class="fa fa-sort-asc"></i>
+				                            <i class="fa fa-sort-desc"></i>
+										</th>
 										<th>Ações</th>
 									</tr>
 								</thead>
@@ -60,6 +76,7 @@
 												<h:outputText value="Confirmado" rendered="#{venda.boleto.statusPagamento == 'CONFIRMADO'}" />
 												<h:outputText value="Pendente" rendered="#{venda.boleto.statusPagamento == 'EM_ANDAMENTO'}" />
 												<h:outputText value="Cancelado" rendered="#{venda.boleto.statusPagamento == 'CANCELADO'}" />
+												<h:outputText value="Pendente" rendered="#{empty venda.boleto.statusPagamento}" />
 											</td>
 											<td>
 												<div class="actions">

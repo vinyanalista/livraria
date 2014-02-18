@@ -110,7 +110,7 @@ public class VendaDAO extends DAO<Venda> implements Serializable {
 		
 		String sql = "SELECT COALESCE(SUM(preco_efetivo * quantidade), 0) FROM itemlivro";
 		sql += " INNER JOIN movimentacao ON movimentacao.id = itemlivro.movimentacao_id";
-		sql += " WHERE tipo = 2 AND data = ";
+		sql += " WHERE tipo = 2 AND data::date = ";
 		
 		DateFormat formatoBD = new SimpleDateFormat("yyyy-MM-dd");
 		DateFormat formatoUsuario = new SimpleDateFormat("dd/MM");

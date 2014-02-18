@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<f:metadata>
+	<f:viewParam name="id" value="#{boletoMB.id}" />
+	<f:viewAction action="#{boletoMB.carregar()}"/>
+</f:metadata>
+<ui:composition template="/WEB-INF/template_cliente.xhtml">
+	<ui:define name="titulo">SIGELI - Impressão de boleto</ui:define>
+	<ui:define name="conteudo">
+		<ul class="breadcrumb">
+			<li><a href="index.jsf">Página inicial</a> <span class="divider">/</span></li>
+			<li class="active">Impressão de boleto</li>
+		</ul>
+		<h3>Impressão de boleto</h3>
+		<hr class="soft" />
+		<h:form id="boleto" prependId="false" acceptcharset="ISO-8859-1">
+			
+			<div id="imprimir">
+				<img src="#{resource['cliente:images/livraria.gif']}" alt="SIGELI" />
+				
+				<h4>Resumo da venda</h4>
+				
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Número do boleto</th>
+							<th>Data da venda</th>
+							<th>Valor total</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<h:outputText value="#{boletoMB.boleto.id}" />
+							</td>
+							<td>
+								<h:outputText value="#{boletoMB.boleto.venda.data}">
+									<f:convertDateTime pattern="dd/MM/yyyy " />
+								</h:outputText>
+							</td>
+							<td>
+								<h:outputText value="#{boletoMB.boleto.venda.valorTotal}">
+									<f:convertNumber locale="pt_BR" type="currency" />
+								</h:outputText>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Cliente</th>
+							<th>CPF</th>
+							<th>RG</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<h:outputText value="#{boletoMB.boleto.venda.cliente.nome}" />
+							</td>
+							<td>
+								<h:outputText value="#{boletoMB.boleto.venda.cliente.cpf}" />
+							</td>
+							<td>
+								<h:outputText value="#{boletoMB.boleto.venda.cliente.rg}" />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<h4>Itens da compra</h4>
+				
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Livro</th>
+							<th>Autor</th>
+							<th>Quantidade</th>
+							<th>Preço</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="#{boletoMB.boleto.venda.itens}" var="item">
+							<tr>
+								<td>
+									<h:outputText value="#{item.livro.titulo}" />
+								</td>
+								<td>
+									<h:outputText value="#{item.livro.autor}" />
+								</td>
+								<td>
+									<h:outputText value="#{item.quantidade}" />
+								</td>
+								<td>
+									<h:outputText value="#{item.livro.preco}">
+										<f:convertNumber locale="pt_BR" type="currency" />
+									</h:outputText>
+								</td>
+								<td>
+									<h:outputText value="#{item.valorTotal}">
+										<f:convertNumber locale="pt_BR" type="currency" />
+									</h:outputText>
+								</td>
+							</tr>
+						</c:forEach>
+						<tr>
+							<td colspan="4" style="text-align: right"><strong>Valor total da compra:</strong></td>
+							<td class="label" style="display: block"><strong>
+								<h:outputText value="#{boletoMB.boleto.venda.valorTotal}">
+									<f:convertNumber locale="pt_BR" type="currency" />
+								</h:outputText>
+							</strong></td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<hr class="soft" />
+				<img id="codigo_de_barras" src="#{resource['cliente:images/codigo_de_barras.png']}" />
+				<br class="clear" />
+			</div>
+			
+			<a href="index.jsf" class="btn btn-large"><i
+				class="icon-arrow-left"></i> Voltar </a>
+			<a href="javascript:window.print();" class="btn btn-large btn-success pull-right">
+				Imprimir <i class="icon-arrow-right"></i>
+			</a>
+		
+		</h:form>
+		<style>
+		#codigo_de_barras {
+			float: right;
+		}
+		
+		#imprimir {
+			margin-bottom: 20px;
+		}
+		
+		@media print {
+			#header .container, #sidebar, ul.breadcrumb, h3, hr.soft, a.btn.btn-large, #footerSection {
+				display: none;
+			}
+			#mainBody {
+				border-top: none;
+			}
+		</style>
+		<script>
+		$(document).ready(function(){
+			window.print();
+		});
+		</script>
+	</ui:define>
+</ui:composition>
+</html>
