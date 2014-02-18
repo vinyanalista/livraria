@@ -5,12 +5,15 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.ufs.livraria.dao.BoletoDAO;
 import br.ufs.livraria.dao.ClienteDAO;
+import br.ufs.livraria.enumeration.MensagemTipo;
 import br.ufs.livraria.modelo.Boleto;
 import br.ufs.livraria.modelo.Cliente;
+import br.ufs.livraria.modelo.Usuario;
 
 @Named
 @RequestScoped
@@ -25,14 +28,11 @@ public class HistoricoClienteMB implements Serializable {
 
 	private Cliente cliente;
 
-	private Integer idCliente;
+	@Inject
+	private MensagensMB mensagensMb;
 
-	public Integer getIdCliente() {
-		return idCliente;
-	}
-
-	public void setIdCliente(Integer idCliente) {
-		this.idCliente = idCliente;
+	public HistoricoClienteMB() {
+		this.cliente = new Cliente();
 	}
 
 	public Cliente getCliente() {
@@ -43,14 +43,18 @@ public class HistoricoClienteMB implements Serializable {
 		this.cliente = cliente;
 	}
 
-	public void carregarCliente() {
-		if (idCliente == null) {
-			cliente = new Cliente();
-		} else {
-			cliente = clienteDao.buscar(idCliente);
-			if (cliente == null)
-				cliente = new Cliente();
+	public void carregarCliente(Usuario usuarioLogado) {
+		if (usuarioLogado != null) {
+			if (usuarioLogado instanceof Cliente) {
+				cliente = (Cliente) usuarioLogado;
+			}
 		}
+	}
+
+	public String redirecionar() {
+		mensagensMb.adicionarMensagem(MensagemTipo.ADVERTENCIA,
+				"Você deve estar logado para ter acesso ao hitórico de compras!");
+		return "/index.jsf?faces-redirect=true";
 	}
 
 	public List<Boleto> getListaDeBoletos() {

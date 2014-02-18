@@ -25,7 +25,7 @@ public class BoletoDAO extends DAO<Boleto> implements Serializable {
 	public List<Boleto> listar(Cliente cliente){
 		return entityManager.createQuery(
 				"SELECT boleto FROM Boleto boleto"
-				+ " WHERE (boleto.cliente.id = :cliente)", Boleto.class)
+				+ " WHERE (boleto.venda.cliente.id = :cliente)", Boleto.class)
 				.setParameter("cliente", cliente.getId())
 				.getResultList();
 	}
@@ -34,7 +34,7 @@ public class BoletoDAO extends DAO<Boleto> implements Serializable {
 		return entityManager.createQuery(
 				"SELECT boleto FROM Boleto boleto"
 				+ " WHERE ((boleto.statusPagamento = :confirmado) AND "
-				+ "(boleto.cliente.id = :cliente))", Boleto.class)
+				+ "(boleto.venda.cliente.id = :cliente))", Boleto.class)
 				.setParameter("confirmado", StatusPagamento.CONFIRMADO)
 				.setParameter("cliente", cliente.getId())
 				.getResultList();
@@ -44,7 +44,7 @@ public class BoletoDAO extends DAO<Boleto> implements Serializable {
 		return entityManager.createQuery(
 				"SELECT boleto FROM Boleto boleto"
 				+ " WHERE ((boleto.statusPagamento = :cancelado) AND "
-				+ "(boleto.cliente.id = :cliente))", Boleto.class)
+				+ "(boleto.venda.cliente.id = :cliente))", Boleto.class)
 				.setParameter("cancelado", StatusPagamento.CANCELADO)
 				.setParameter("cliente", cliente.getId())
 				.getResultList();
@@ -54,7 +54,7 @@ public class BoletoDAO extends DAO<Boleto> implements Serializable {
 		return entityManager.createQuery(
 				"SELECT boleto FROM Boleto boleto"
 				+ " WHERE ((boleto.statusPagamento = :emAndamento) AND "
-				+ "(boleto.cliente.id = :cliente))", Boleto.class)
+				+ "(boleto.venda.cliente.id = :cliente))", Boleto.class)
 				.setParameter("emAndamento", StatusPagamento.EM_ANDAMENTO)
 				.setParameter("cliente", cliente.getId())
 				.getResultList();

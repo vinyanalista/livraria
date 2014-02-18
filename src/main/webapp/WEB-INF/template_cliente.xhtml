@@ -74,9 +74,17 @@
 			<div id="welcomeLine" class="row">
 				<div class="span6">
 				    <h:panelGroup rendered="#{loginInfo.loggedIn}">
-					   Bem-vindo, <a href="#{request.contextPath}/cadastro.jsf?id=#{loginInfo.usuarioLogado.id}"><strong>#{loginInfo.usuarioLogado.nome}</strong></a>! 
+					   Bem-vindo, <strong>#{loginInfo.usuarioLogado.nome}</strong>! 
 					   <h:form style="display: inline">
-                           <h:commandLink action="#{loginMB.logout}" value="Logout" styleClass="btn btn-small" />
+					   <div class="btn-group">
+          					<button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">Opções <span class="caret"></span></button>
+          					<ul class="dropdown-menu">
+            					<li><a href="#{request.contextPath}/cadastro.jsf?id=#{loginInfo.usuarioLogado.id}">Meu Cadastro</a></li>
+            					<li><a href="historico_cliente.jsf">Minhas Compras</a></li>
+            					<li class="divider"></li>
+            					<li><h:commandLink action="#{loginMB.logout}" value="Logout" /></li>
+          					</ul>
+          			   </div>
                        </h:form>
 					</h:panelGroup>
 					<h:panelGroup rendered="#{!loginInfo.loggedIn}">

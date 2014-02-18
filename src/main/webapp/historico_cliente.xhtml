@@ -6,9 +6,13 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
- <f:metadata>
-  	<f:viewParam name="cliente" value="#{historicoClienteMB.idCliente}" />
-	<f:viewAction action="#{historicoClienteMB.carregarCliente}"/>
+<f:metadata>
+  	<h:panelGroup rendered="#{loginInfo.loggedIn}">
+		<f:viewAction action="#{historicoClienteMB.carregarCliente(loginInfo.usuarioLogado)}"/>
+	</h:panelGroup>
+	<h:panelGroup rendered="#{!loginInfo.loggedIn}">
+		<f:viewAction action="#{historicoClienteMB.redirecionar()}"/>
+	</h:panelGroup>
 </f:metadata>
 <ui:composition template="/WEB-INF/template_cliente.xhtml">
 	<ui:define name="titulo">SIGELI - Acesso do Cliente - Histórico</ui:define>

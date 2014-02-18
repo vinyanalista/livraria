@@ -69,7 +69,7 @@ public class VendaDAO extends DAO<Venda> implements Serializable {
 		return entityManager.createQuery(
 				"SELECT boleto.venda FROM Boleto boleto"
 				+ " WHERE ((boleto.statusPagamento = :confirmado) AND "
-				+ "(boleto.cliente.id = :cliente))", Venda.class)
+				+ "(boleto.venda.cliente.id = :cliente))", Venda.class)
 				.setParameter("confirmado", StatusPagamento.CONFIRMADO)
 				.setParameter("cliente", cliente.getId())
 				.getResultList();
@@ -80,7 +80,7 @@ public class VendaDAO extends DAO<Venda> implements Serializable {
 		return entityManager.createQuery(
 				"SELECT boleto.venda FROM Boleto boleto"
 				+ " WHERE ((boleto.statusPagamento = :cancelado) AND "
-				+ "(boleto.cliente.id = :cliente))", Venda.class)
+				+ "(boleto.venda.cliente.id = :cliente))", Venda.class)
 				.setParameter("cancelado", StatusPagamento.CANCELADO)
 				.setParameter("cliente", cliente.getId())
 				.getResultList();
@@ -91,7 +91,7 @@ public class VendaDAO extends DAO<Venda> implements Serializable {
 		return entityManager.createQuery(
 				"SELECT boleto.venda FROM Boleto boleto"
 				+ " WHERE ((boleto.statusPagamento = :emAndamento) AND "
-				+ "(boleto.cliente.id = :cliente))", Venda.class)
+				+ "(boleto.venda.cliente.id = :cliente))", Venda.class)
 				.setParameter("emAndamento", StatusPagamento.EM_ANDAMENTO)
 				.setParameter("cliente", cliente.getId())
 				.getResultList();
