@@ -28,7 +28,7 @@ import br.ufs.livraria.modelo.Venda;
 
 @Named
 @SessionScoped
-public class FinalizarCompraMB implements Serializable {
+public class RealizarVendaMB implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
@@ -108,6 +108,7 @@ public class FinalizarCompraMB implements Serializable {
 			boleto.setVenda(venda);
 			boletoDao.inserir(boleto);
 			carrinhoMB.esvaziar();
+			mensagensMb.adicionarMensagem(MensagemTipo.SUCCESSO, "Sua compra foi realizada com sucesso! Agora imprima e pague o boleto para receber seus livros no conforto da sua residência!");
 			return "boleto.jsf?faces-redirect=true&id=" + boleto.getId();
 		}
 	}

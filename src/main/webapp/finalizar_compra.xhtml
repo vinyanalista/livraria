@@ -7,7 +7,7 @@
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <f:metadata>
-	<f:viewAction action="#{finalizarCompraMB.verificarDisponibilidadeDosLivros()}"/>
+	<f:viewAction action="#{realizarVendaMB.verificarDisponibilidadeDosLivros()}"/>
 </f:metadata>
 <ui:composition template="/WEB-INF/template_cliente.xhtml">
 	<ui:define name="titulo">SIGELI - Finalizar compra</ui:define>
@@ -22,7 +22,7 @@
 		<h:form prependId="false" acceptcharset="ISO-8859-1">
 		
 		<h4>Itens da compra</h4>
-		<div class="alert alert-warning" jsf:rendered="#{finalizarCompraMB.revisarItens}">
+		<div class="alert alert-warning" jsf:rendered="#{realizarVendaMB.revisarItens}">
 			Infelizmente, há livros que não possuem em nosso estoque as quantidades desejadas. Por favor, revise as quantidades dos livros.
 		</div>
 		<table class="table table-bordered">
@@ -36,8 +36,8 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="#{finalizarCompraMB.itens}" var="item">
-					<c:set var="revisarItem" value="#{(finalizarCompraMB.revisarItens) and (item.livro.estoque lt item.quantidade)}"/>
+				<c:forEach items="#{realizarVendaMB.itens}" var="item">
+					<c:set var="revisarItem" value="#{(realizarVendaMB.revisarItens) and (item.livro.estoque lt item.quantidade)}"/>
 					<tr>
 						<td>
 							<img width="60" src="#{request.contextPath}/capa?id=#{item.livro.id}" alt="" />
@@ -50,13 +50,13 @@
 							<div class="input-append" jsf:rendered="#{revisarItem}">
 								<input class="span1" style="max-width: 34px" value="#{item.quantidade}"
 									id="appendedInputButtons" size="16" type="text" readonly="readonly" />
-								<h:commandLink class="btn" action="#{finalizarCompraMB.remover(item.livro)}">
+								<h:commandLink class="btn" action="#{realizarVendaMB.remover(item.livro)}">
 									<i class="icon-minus"></i>
 								</h:commandLink>
-								<h:commandLink class="btn" action="#{finalizarCompraMB.adicionar(item.livro)}">
+								<h:commandLink class="btn" action="#{realizarVendaMB.adicionar(item.livro)}">
 									<i class="icon-plus"></i>
 								</h:commandLink>
-								<h:commandLink class="btn btn-danger btn-remover-todos" action="#{finalizarCompraMB.removerTodos(item.livro)}">
+								<h:commandLink class="btn btn-danger btn-remover-todos" action="#{realizarVendaMB.removerTodos(item.livro)}">
 									<i class="icon-remove icon-white"></i>
 								</h:commandLink>
 							</div>
@@ -83,7 +83,7 @@
 				<tr>
 					<td colspan="4" style="text-align: right"><strong>Valor total da compra:</strong></td>
 					<td class="label label-success" style="display: block"><strong>
-						<h:outputText value="#{finalizarCompraMB.valorTotal}">
+						<h:outputText value="#{realizarVendaMB.valorTotal}">
 							<f:convertNumber locale="pt_BR" type="currency" />
 						</h:outputText>
 					</strong></td>
@@ -105,7 +105,7 @@
 							<div class="controls">
 								<input type="text" jsf:id="logradouro" name="logradouro"
 									placeholder="Logradouro"
-									jsf:value="#{finalizarCompraMB.cliente.endereco.logradouro}" />
+									jsf:value="#{realizarVendaMB.cliente.endereco.logradouro}" />
 							</div>
 						</div>
 						<div class="control-group">
@@ -113,7 +113,7 @@
 							<div class="controls">
 								<input type="text" jsf:id="numero" name="numero"
 									placeholder="Número"
-									jsf:value="#{finalizarCompraMB.cliente.endereco.numero}" />
+									jsf:value="#{realizarVendaMB.cliente.endereco.numero}" />
 							</div>
 						</div>
 						<div class="control-group">
@@ -121,7 +121,7 @@
 							<div class="controls">
 								<input type="text" jsf:id="bairro" name="bairro"
 									placeholder="Bairro"
-									jsf:value="#{finalizarCompraMB.cliente.endereco.bairro}" />
+									jsf:value="#{realizarVendaMB.cliente.endereco.bairro}" />
 							</div>
 						</div>
 						<div class="control-group">
@@ -129,14 +129,14 @@
 							<div class="controls">
 								<input type="text" jsf:id="cidade" name="cidade"
 									placeholder="Cidade"
-									jsf:value="#{finalizarCompraMB.cliente.endereco.cidade}" />
+									jsf:value="#{realizarVendaMB.cliente.endereco.cidade}" />
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label" for="estado">Estado</label>
 							<div class="controls">
-								<h:selectOneMenu id="estado" value="#{finalizarCompraMB.cliente.endereco.estado}">
-									<f:selectItems value="#{finalizarCompraMB.estados}" />
+								<h:selectOneMenu id="estado" value="#{realizarVendaMB.cliente.endereco.estado}">
+									<f:selectItems value="#{realizarVendaMB.estados}" />
 								</h:selectOneMenu>
 							</div>
 						</div>
@@ -145,7 +145,7 @@
 							<div class="controls">
 								<input type="text" jsf:id="cep" name="cep"
 									placeholder="CEP"
-									jsf:value="#{finalizarCompraMB.cliente.endereco.cep}" />
+									jsf:value="#{realizarVendaMB.cliente.endereco.cep}" />
 							</div>
 						</div>
 					</td>
@@ -155,7 +155,7 @@
 
 		<a href="carrinho.jsf" class="btn btn-large"><i
 			class="icon-arrow-left"></i> Voltar ao carrinho </a>
-		<a jsf:action="#{finalizarCompraMB.gerarBoleto()}" class="btn btn-large btn-success pull-right">
+		<a jsf:action="#{realizarVendaMB.gerarBoleto()}" class="btn btn-large btn-success pull-right">
 			Gerar boleto <i class="icon-arrow-right"></i>
 		</a>
 		</h:form>
