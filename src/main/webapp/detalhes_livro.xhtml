@@ -25,42 +25,45 @@
 					<div class="row">			
 						<div class="span9">
 							<div class="row">	  
-									<div id="gallery" class="span3">
-										<a href="#{request.contextPath}/capa?id=#{livroMB.livro.id}" title="#{livroMB.livro.titulo}">
-											<img src="#{request.contextPath}/capa?id=#{livroMB.livro.id}" style="width:80%" alt=""/>
-										</a>					
-									</div>
-									
-									<div class="span6">
-										<h3>
-											<h:outputText value="#{livroMB.livro.titulo}" />
-										</h3>
-										<small>
-											<h:outputText value="#{livroMB.livro.autor}" />
-										</small>
-										<hr class="soft"/>
-										<h4>
-											<h:outputText value="Há #{livroMB.livro.estoque} unidades disponíveis" rendered="#{livroMB.livro.estoque > 0}" />
-											<h:outputText value="Livro em falta no momento" rendered="#{livroMB.livro.estoque == 0}" />
-										</h4>
-										
-										<h:form prependId="false" acceptcharset="ISO-8859-1">
-											<a class="btn" jsf:action="#{carrinhoMB.adicionar(livroMB.livro)}" rendered="#{livroMB.livro.estoque > 0}">Adicionar <i class="icon-shopping-cart"></i></a>
-											<h3>
-												<h:outputText value="#{livroMB.livro.preco}">
-													<f:convertNumber locale="pt_BR" type="currency" />
-												</h:outputText>
-											</h3>
-										</h:form>
-										
-										<hr class="soft"/>
-										<hr class="soft clr"/>
-										<p>
-											<h:outputText value="#{livroMB.livro.sinopse}" />
-										</p>
-										<br class="clr"/>
-									<a href="#" name="detail"></a>
+								<div id="gallery" class="span3">
+									<a href="#{request.contextPath}/capa?id=#{livroMB.livro.id}" title="#{livroMB.livro.titulo}">
+										<img src="#{request.contextPath}/capa?id=#{livroMB.livro.id}" style="width:80%" alt=""/>
+									</a>					
+								</div>
+								
+								<div class="span6">
+									<small>
+										<a href="buscar.jsf?genero=#{livroMB.livro.genero.value}">
+											<h:outputText value="#{livroMB.livro.genero.label}" />
+										</a>
+									</small>
+									<h3>
+										<h:outputText value="#{livroMB.livro.titulo}" />
+									</h3>
+									<h:outputLink value="buscar.jsf">
+										<h:outputText value="#{livro.autor}" />
+									    <f:param name="por" value="#{livro.autor}" />
+									    <f:param name="filtro" value="3" />
+									</h:outputLink>
 									<hr class="soft"/>
+									<h4>
+										<h:outputText value="Há #{livroMB.livro.estoque} unidades disponíveis" rendered="#{livroMB.livro.estoque > 0}" />
+										<h:outputText value="Livro em falta no momento" rendered="#{livroMB.livro.estoque == 0}" />
+									</h4>
+									<form class="form-horizontal qtyFrm" jsf:prependId="false" jsf:acceptcharset="ISO-8859-1">
+										<div class="control-group">
+											<label class="control-label"><span><h:outputText value="#{livroMB.livro.preco}">
+												<f:convertNumber locale="pt_BR" type="currency" />
+											</h:outputText></span></label>
+											<div class="controls">
+												<a class="btn btn-large btn-success pull-right" jsf:action="#{carrinhoMB.adicionar(livroMB.livro)}" jsf:rendered="#{livroMB.livro.estoque > 0}">Adicionar <i class="icon-shopping-cart"></i></a>
+											</div>
+										</div>
+									</form>
+									<hr class="soft"/>
+									<p>
+										<h:outputText value="#{livroMB.livro.sinopse}" />
+									</p>
 								</div>
 									
 								<div class="span9">
