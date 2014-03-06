@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
@@ -19,6 +20,8 @@
 	<h:outputStylesheet library="cliente" name="css/font-awesome.css" />
 	<!-- Google-code-prettify -->
 	<h:outputStylesheet library="js" name="google-code-prettify/prettify.css" />
+	
+	<h:outputStylesheet library="cliente" name="css/comum.css" />
 	<!-- fav and touch icons -->
 	<link rel="shortcut icon" href="#{resource['cliente:images/ico/favicon.ico']}" />
 	<link rel="apple-touch-icon-precomposed" sizes="144x144"
@@ -31,6 +34,7 @@
 		href="#{resource['cliente:images/ico/apple-touch-icon-57-precomposed.png']}" />
 	<!-- <style type="text/css" id="enject"></style> -->
 	<h:outputScript library="javax.faces" name="jsf.js" target="head" />
+	<h:outputScript library="cliente" name="js/comum.js" />
 </h:head>
 <h:body>
 	<div id="header">
@@ -300,6 +304,14 @@
 				</div>
 				<!-- Sidebar end=============================================== -->
 				<div class="span9">
+					<div id="mensagens">
+						<c:forEach items="${mensagensMB.listaDeMensagens}" var="mensagem">
+							<div class="alert ${mensagem.tipo.classe}">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+								<h:outputText value="${mensagem.conteudo}" />
+							</div>
+						</c:forEach>
+					</div>
 					<ui:insert name="conteudo" />
 				</div>
 
